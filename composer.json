@@ -1,0 +1,41 @@
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://wpackagist.org"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "composer/installers": "1.*",
+        "johnpbloch/wordpress": "4.3.*",
+
+        "wpackagist-plugin/akismet": "*",
+        "wpackagist-plugin/better-font-awesome": "*",
+        "wpackagist-plugin/duplicate-post": "*",        
+        "wpackagist-plugin/google-analytics-for-wordpress": "*",
+        "wpackagist-plugin/rest-api": "2.0-beta8",
+
+        "wpackagist-plugin/bj-lazy-load": "*",
+        "wpackagist-plugin/ricg-responsive-images": "*",
+
+        "wpackagist-plugin/siteorigin-panels": "*",
+        "wpackagist-plugin/so-widgets-bundle": "*",
+        "wpackagist-plugin/mailchimp-widget": "*",
+
+        "wpackagist-plugin/wpsolr-search-engine": "*",
+
+        "wpackagist-plugin/wordpress-faq-manager": "*",
+        "wpackagist-plugin/events-manager": "*",
+        "wpackagist-plugin/wp-fullcalendar": "*",
+        "wpackagist-plugin/wp-job-manager": "*"
+    },
+    "extra": {
+        "wordpress-install-dir": "public/wp",
+        "installer-paths": {
+            "public/wp-content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+            "public/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+            "public/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+        }
+    }
+}
