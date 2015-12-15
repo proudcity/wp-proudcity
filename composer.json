@@ -1,30 +1,88 @@
 {
-    "repositories": [
-        {
+    "repositories": {
+        "0": {
             "type": "composer",
             "url": "http://wpackagist.org"
         },
-        {
-            "type": "git",
-            "url": "https://github.com/proudcity/proudpack.git"
+        "proudpack":{
+            "type": "package",
+            "package": {
+                "name": "proudcity/proudpack",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:proudcity/proudpack.git",
+                    "reference": "master"
+                }
+            }
         },
-        {
-            "type": "git",
-            "url": "https://github.com/proudcity/wp-proud-core.git"
+        "wp-proud-core":{
+            "type": "package",
+            "package": {
+                "name": "proudcity/wp-proud-core",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:proudcity/wp-proud-core.git",
+                    "reference": "master"
+                }
+            }
         },
-        {
-            "type": "git",
-            "url": "https://github.com/proudcity/wp-agency.git"
+        "wp-agency":{
+            "type": "package",
+            "package": {
+                "name": "proudcity/wp-agency",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:proudcity/wp-agency.git",
+                    "reference": "master"
+                }
+            }
         },
-        {
-            "type": "git",
-            "url": "https://github.com/proudcity/wp-proud-payment.git"
+        "wp-proud-search":{
+            "type": "package",
+            "package": {
+                "name": "proudcity/wp-proud-search",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:proudcity/wp-proud-search.git",
+                    "reference": "master"
+                }
+            }
         },
-        {
-            "type": "git",
-            "url": "https://github.com/proudcity/wp-proud-theme.git"
+        "wp-proud-payment":{
+            "type": "package",
+            "package": {
+                "name": "proudcity/wp-proud-payment",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:proudcity/wp-proud-payment.git",
+                    "reference": "master"
+                }
+            }
+        },
+        "wp-proud-theme":{
+            "type": "package",
+            "package": {
+                "name": "proudcity/wp-proud-theme",
+                "type": "wordpress-theme",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:proudcity/wp-proud-theme.git",
+                    "reference": "master"
+                }
+            }
         }
-    ],
+    },
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
@@ -47,7 +105,14 @@
         "wpackagist-plugin/wordpress-faq-manager": "*",
         "wpackagist-plugin/events-manager": "*",
         "wpackagist-plugin/wp-fullcalendar": "*",
-        "wpackagist-plugin/wp-job-manager": "*"
+        "wpackagist-plugin/wp-job-manager": "*",
+
+        "proudcity/proudpack": "dev-master",
+        "proudcity/wp-proud-core": "dev-master",
+        "proudcity/wp-agency": "dev-master",
+        "proudcity/wp-proud-search": "dev-master",
+        "proudcity/wp-proud-payment": "dev-master",
+        "proudcity/wp-proud-theme": "dev-master"
     },
     "extra": {
         "wordpress-install-dir": "src",
