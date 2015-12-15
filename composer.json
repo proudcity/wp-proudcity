@@ -1,10 +1,10 @@
 {
-    "repositories": {
-        "0": {
+    "repositories": [
+        {
             "type": "composer",
             "url": "http://wpackagist.org"
         },
-        "proudpack":{
+        {
             "type": "package",
             "package": {
                 "name": "proudcity/proudpack",
@@ -17,7 +17,7 @@
                 }
             }
         },
-        "wp-proud-core":{
+        {
             "type": "package",
             "package": {
                 "name": "proudcity/wp-proud-core",
@@ -30,7 +30,7 @@
                 }
             }
         },
-        "wp-agency":{
+        {
             "type": "package",
             "package": {
                 "name": "proudcity/wp-agency",
@@ -43,7 +43,7 @@
                 }
             }
         },
-        "wp-proud-search":{
+        {
             "type": "package",
             "package": {
                 "name": "proudcity/wp-proud-search",
@@ -56,7 +56,7 @@
                 }
             }
         },
-        "wp-proud-payment":{
+        {
             "type": "package",
             "package": {
                 "name": "proudcity/wp-proud-payment",
@@ -69,7 +69,7 @@
                 }
             }
         },
-        "wp-proud-theme":{
+        {
             "type": "package",
             "package": {
                 "name": "proudcity/wp-proud-theme",
@@ -82,11 +82,11 @@
                 }
             }
         }
-    },
+    ],
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "4.3.*",
+        "johnpbloch/wordpress": "4.4.*",
 
         "wpackagist-plugin/akismet": "*",
         "wpackagist-plugin/better-font-awesome": "*",
