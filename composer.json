@@ -3,6 +3,26 @@
         {
             "type": "composer",
             "url": "http://wpackagist.org"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/proudcity/proudpack.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/proudcity/wp-proud-core.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/proudcity/wp-agency.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/proudcity/wp-proud-payment.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/proudcity/wp-proud-theme.git"
         }
     ],
     "require": {
@@ -24,18 +44,16 @@
         "wpackagist-plugin/mailchimp-widget": "*",
 
         "wpackagist-plugin/wpsolr-search-engine": "*",
-
         "wpackagist-plugin/wordpress-faq-manager": "*",
         "wpackagist-plugin/events-manager": "*",
         "wpackagist-plugin/wp-fullcalendar": "*",
         "wpackagist-plugin/wp-job-manager": "*"
     },
     "extra": {
-        "wordpress-install-dir": "public/wp",
+        "wordpress-install-dir": "src",
         "installer-paths": {
-            "public/wp-content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-            "public/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
-            "public/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+            "src/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+            "src/wp-content/themes/{$name}/": ["type:wordpress-theme"]
         }
     }
 }
