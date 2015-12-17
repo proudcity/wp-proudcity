@@ -3,10 +3,10 @@
 chown www-data:www-data /app -R
 chmod -R 777 /app/wp-content
 
-export DB_HOST=${DB_PORT_3306_TCP_ADDR:-${DB_HOST}}
-export DB_HOST=${DB_1_PORT_3306_TCP_ADDR:-${DB_HOST}}
-export DB_PORT=${DB_PORT_3306_TCP_PORT:-${DB_PORT}}
-export DB_PORT=${DB_1_PORT_3306_TCP_PORT:-${DB_PORT}}
+DB_HOST=${DB_PORT_3306_TCP_ADDR:-${DB_HOST}}
+DB_HOST=${DB_1_PORT_3306_TCP_ADDR:-${DB_HOST}}
+DB_PORT=${DB_PORT_3306_TCP_PORT:-${DB_PORT}}
+DB_PORT=${DB_1_PORT_3306_TCP_PORT:-${DB_PORT}}
 
 if [ "$DB_PASS" = "**ChangeMe**" ] && [ -n "$DB_1_ENV_MYSQL_PASS" ]; then
     DB_PASS="$DB_1_ENV_MYSQL_PASS"
