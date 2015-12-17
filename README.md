@@ -45,7 +45,7 @@ wp option update home "http://wordpress.local"
 
 
 # Docker
-Dockerfile and run.sh are heavily influenced by (CenturyLinkLabs/docker-wordpress)[https://github.com/CenturyLinkLabs/docker-wordpress/blob/master/Dockerfile].
+Dockerfile and run.sh are forked from (tutumcloud/wordpress-stackable)[https://github.com/tutumcloud/wordpress-stackable].
 
 ## Building
 ```
@@ -63,17 +63,17 @@ Variables:
 * DB_DUMP_URL : url to .sql.gz base database dump
 * URL : the url of the site 
 * DB_NAME
-* DB_PASSWORD
+* DB_PASS
 
+We need to create a mysql container and link it first
 ```
-docker run -p 80:8080
-  -e "API_URL: "http://api.getproudcity.com" \
-  -e "DB_DUMP_URL: "http://getproudcity.com/db.sql.gz" \
-  -e "DB_NAME: wordpress \
-  -e "DB_PASSWORD: password \
-  -e "API_PUBLIC: "$API_PUBLIC" \
-  -e "API_SECRET: "$API_SECRET" \
-  -e "URL: "$URL" \
+docker run -d -e MYSQL_PASS="<your_password>" --name dbc -p 3306:3306 tutum/mysql:5.5
+docker run -p 8080:80 \
+  --link dbc:db -e DB_PASS="<your_password>" \
+  -e DB_DUMP_URL="http://getproudcity.com/db.sql.gz" \
+  -e API_PUBLIC:="API_PUBLIC" \
+  -e API_SECRET="API_SECRET" \
+  -e URL="http://localhost:8080" \
   proudcity/wp-proud-composer
 ```
 To ssh into the box
