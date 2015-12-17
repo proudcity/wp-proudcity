@@ -56,7 +56,7 @@ if [[ $DB_CONNECTABLE -eq 0 ]]; then
         # @todo: we'll need this: wp search-replace 'http://example.dev' '${}' --skip-columns=guid
         wp option update home "$URL" --allow-root
         wp option update siteurl "$URL" --allow-root
-        wp proudpack phonehome
+        wp proudpack phonehome --allow-root
         cd ../
         echo "=> Done!"    
     else
