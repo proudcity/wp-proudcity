@@ -71,8 +71,9 @@ docker run -d -e MYSQL_PASS="<your_password>" --name dbc -p 3306:3306 tutum/mysq
 docker run -p 8080:80 \
   --link dbc:db -e DB_PASS="<your_password>" \
   -e DB_DUMP_URL="http://getproudcity.com/db.sql.gz" \
-  -e API_PUBLIC:="API_PUBLIC" \
-  -e API_SECRET="API_SECRET" \
+  -e PROUD_ID="PROUD_ID" \
+  -e PROUD_PUBLIC="PROUD_PUBLIC" \
+  -e PROUD_SECRET="PROUD_SECRET" \
   -e URL="http://localhost:8080" \
   proudcity/wp-proud-composer
 ```
