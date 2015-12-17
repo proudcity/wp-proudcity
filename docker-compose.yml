@@ -3,14 +3,19 @@ wordpress:
   links:
    - db
   ports:
-   - "80:80"
+   - "8080:80"
   environment:
     DB_NAME: wordpress
     DB_USER: admin
-    DB_PASS: "asdf"
+    DB_PASS: "<pass>"
     DB_HOST: "**LinkMe**"
     DB_PORT: "**LinkMe**"
+    PROUD_URL: "http://dev.proudcity.com:4000/rest/v1.1"
+    PROUD_ID: "56727f1d16b99c054df3ab67"
+    PROUD_CLIENT: "56727f1d16b99c054df3ab67"
+    PROUD_SECRET: "1d10c218-23cb-48e2-831e-3d31bf14a820"
+    URL: "http://dev.proudcity.com:8080"
 db:
   image: tutum/mysql:5.5
   environment:
-    MYSQL_PASS: "asdf"
+    MYSQL_PASS: "<pass>"
