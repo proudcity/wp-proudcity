@@ -1,0 +1,16 @@
+wordpress:
+  image: proudcity/wp-proud-composer
+  links:
+   - db
+  ports:
+   - "80:80"
+  environment:
+    DB_NAME: wordpress
+    DB_USER: admin
+    DB_PASS: "asdf"
+    DB_HOST: "**LinkMe**"
+    DB_PORT: "**LinkMe**"
+db:
+  image: tutum/mysql:5.5
+  environment:
+    MYSQL_PASS: "asdf"

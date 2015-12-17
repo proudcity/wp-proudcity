@@ -12,7 +12,7 @@
                 "version": "dev-master",
                 "source": {
                     "type": "git",
-                    "url": "git@github.com:proudcity/proudpack.git",
+                    "url": "https://github.com/proudcity/proudpack.git",
                     "reference": "master"
                 }
             }
@@ -25,7 +25,7 @@
                 "version": "dev-master",
                 "source": {
                     "type": "git",
-                    "url": "git@github.com:proudcity/wp-proud-core.git",
+                    "url": "https://github.com/proudcity/wp-proud-core.git",
                     "reference": "master"
                 }
             }
@@ -38,7 +38,7 @@
                 "version": "dev-master",
                 "source": {
                     "type": "git",
-                    "url": "git@github.com:proudcity/wp-agency.git",
+                    "url": "https://github.com/proudcity/wp-agency.git",
                     "reference": "master"
                 }
             }
@@ -51,7 +51,7 @@
                 "version": "dev-master",
                 "source": {
                     "type": "git",
-                    "url": "git@github.com:proudcity/wp-proud-search.git",
+                    "url": "https://github.com/proudcity/wp-proud-search.git",
                     "reference": "master"
                 }
             }
@@ -64,7 +64,7 @@
                 "version": "dev-master",
                 "source": {
                     "type": "git",
-                    "url": "git@github.com:proudcity/wp-proud-payment.git",
+                    "url": "https://github.com/proudcity/wp-proud-payment.git",
                     "reference": "master"
                 }
             }
@@ -77,7 +77,7 @@
                 "version": "dev-master",
                 "source": {
                     "type": "git",
-                    "url": "git@github.com:proudcity/wp-proud-theme.git",
+                    "url": "https://github.com/proudcity/wp-proud-theme.git",
                     "reference": "master"
                 }
             }
