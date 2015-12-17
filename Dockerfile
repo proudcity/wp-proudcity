@@ -41,7 +41,9 @@ ENV DB_USER admin
 ENV DB_PASS **ChangeMe**
 ENV URL "http://localhost:8080"
 ENV DB_DUMP_URL "http://getproudcity.com/db.sql.gz"
-ENV API_URL "http://api.getproudcity.com"
+ENV PROUD_URL "http://api.getproudcity.com/rest/v1.1"
+ENV PROUD_PUBLIC ""
+ENV PROUD_SECRET ""
 
 EXPOSE 80
 #VOLUME ["/app/wp-content"]

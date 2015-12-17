@@ -82,5 +82,6 @@ define("FS_CHMOD_FILE", 0777);
 
 /* ProudCity settings */
 define('PROUD_URL', getenv('PROUD_URL'));
+define('PROUD_ID', getenv('PROUD_ID'));
 define('PROUD_CLIENT', getenv('PROUD_CLIENT'));
 define('PROUD_SECRET', getenv('PROUD_SECRET'));

@@ -11,5 +11,5 @@ cd src
 # @todo: we'll need this: wp search-replace 'http://example.dev' '${}' --skip-columns=guid
 wp option update home "$URL" --allow-root
 wp option update siteurl "$URL" --allow-root
-# @todo: call custom proudpack wp-cli command
+wp proudpack phonehome
 cd ../
