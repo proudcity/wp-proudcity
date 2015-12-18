@@ -33,12 +33,12 @@
         {
             "type": "package",
             "package": {
-                "name": "proudcity/wp-agency",
+                "name": "proudcity/wp-proud-agency",
                 "type": "wordpress-plugin",
                 "version": "dev-master",
                 "source": {
                     "type": "git",
-                    "url": "https://github.com/proudcity/wp-agency.git",
+                    "url": "https://github.com/proudcity/wp-proud-agency.git",
                     "reference": "master"
                 }
             }
