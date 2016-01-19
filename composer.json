@@ -72,6 +72,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-proud-admin",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-proud-admin.git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
                 "version": "dev-master",
@@ -89,36 +102,32 @@
         "johnpbloch/wordpress": "4.4.*",
 
         "wpackagist-plugin/akismet": "*",
-        "wpackagist-plugin/better-font-awesome": "*",
+        "wpackagist-plugin/taxonomy-terms-order": "*",
         "wpackagist-plugin/duplicate-post": "*",        
-        "wpackagist-plugin/google-analytics-for-wordpress": "*",
-        "wpackagist-plugin/rest-api": "2.0-beta8",
+        "wpackagist-plugin/disable-comments": "*",
+        "wpackagist-plugin/google-analytics-dashboard-for-wp": "*",
+        "wpackagist-plugin/wordpress-seo": "*",
+        "wpackagist-plugin/rest-api": "2.0-beta9",
+        "wpackagist-plugin/wp-api-menus": "2.0-beta9",
 
-        "wpackagist-plugin/bj-lazy-load": "*",
-        "wpackagist-plugin/ricg-responsive-images": "*",
+        "wpackagist-plugin/wr-pagebuilder": "*",
+        "wpackagist-plugin/mailchimp-for-wp": "*",
 
-        "wpackagist-plugin/siteorigin-panels": "*",
-        "wpackagist-plugin/so-widgets-bundle": "*",
-        "wpackagist-plugin/mailchimp-widget": "*",
-
-        "wpackagist-plugin/wpsolr-search-engine": "*",
         "wpackagist-plugin/wordpress-faq-manager": "*",
         "wpackagist-plugin/events-manager": "*",
         "wpackagist-plugin/wp-fullcalendar": "*",
         "wpackagist-plugin/wp-job-manager": "*",
+        "wpackagist-plugin/contact-form-7": "*",
+        "wpackagist-plugin/simple-staff-list": "*",
+        "wpackagist-plugin/wp-job-manager": "*",
+        
 
         "proudcity/proudpack": "dev-master",
         "proudcity/wp-proud-core": "dev-master",
         "proudcity/wp-proud-agency": "dev-master",
         "proudcity/wp-proud-search": "dev-master",
         "proudcity/wp-proud-payment": "dev-master",
+        "proudcity/wp-proud-admin": "dev-master",
         "proudcity/wp-proud-theme": "dev-master"
-    },
-    "extra": {
-        "wordpress-install-dir": "src",
-        "installer-paths": {
-            "src/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
-            "src/wp-content/themes/{$name}/": ["type:wordpress-theme"]
-        }
     }
 }
