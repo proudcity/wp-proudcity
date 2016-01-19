@@ -1,7 +1,7 @@
 ProudCity Wordpress
 ===================
 
-Builds the ProudCity Wordpress distribution.
+Builds the (https://proudcity.com)[ProudCity] Wordpress distribution.
 
 # Composer
 
