@@ -108,7 +108,7 @@
         "wpackagist-plugin/google-analytics-dashboard-for-wp": "*",
         "wpackagist-plugin/wordpress-seo": "*",
         "wpackagist-plugin/rest-api": "2.0-beta9",
-        "wpackagist-plugin/wp-api-menus": "2.0-beta9",
+        "wpackagist-plugin/wp-api-menus": "*",
 
         "wpackagist-plugin/wr-pagebuilder": "*",
         "wpackagist-plugin/mailchimp-for-wp": "*",
@@ -118,9 +118,7 @@
         "wpackagist-plugin/wp-fullcalendar": "*",
         "wpackagist-plugin/wp-job-manager": "*",
         "wpackagist-plugin/contact-form-7": "*",
-        "wpackagist-plugin/simple-staff-list": "*",
-        "wpackagist-plugin/wp-job-manager": "*",
-        
+        "wpackagist-plugin/simple-staff-list": "*",       
 
         "proudcity/proudpack": "dev-master",
         "proudcity/wp-proud-core": "dev-master",
