@@ -1,15 +1,15 @@
 ProudCity Wordpress
 ===================
 
-(ProudCity)[http://proudcity.com] is a Wordpress platform for modern, standards-compliant municipal websites.
+[ProudCity](http://proudcity.com) is a Wordpress platform for modern, standards-compliant municipal websites.
 
 # Contributing
 
-This repo contains a composer make file that will build a complete Wordpress installation.  See (Composer)[#composer] for more details.  Most of the actual code is in our individual Plugin and Theme repos:
+This repo contains a composer make file that will build a complete Wordpress installation.  See [Composer](#composer) for more details.  Most of the actual code is in our individual Plugin and Theme repos:
 
 
 
-All issues should be added to the (wp-proudcity Issue Queue)[https://github.com/proudcity/wp-proudcity/issues]
+All issues should be added to the [wp-proudcity Issue Queue](https://github.com/proudcity/wp-proudcity/issues)
 
 # Composer
 
