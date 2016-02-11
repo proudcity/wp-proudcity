@@ -6,10 +6,27 @@ ProudCity Wordpress
 # Contributing
 
 This repo contains a composer make file that will build a complete Wordpress installation.  See [Composer](#composer) for more details.  Most of the actual code is in our individual Plugin and Theme repos:
+* [wp-proud-theme](https://github.com/proudcity/wp-proud-theme): The ProudCity Wordpress theme built on top of [Bootstrap](http://getbootstrap.com) and [Sage](https://roots.io/sage/).
+* [wp-proud-core](https://github.com/proudcity/wp-proud-core): Core customizations and helper modules. 
+
+
+* [wp-proud-agency](https://github.com/proudcity/wp-proud-agency): Creates an Agency post type. 
+* [wp-proud-document](https://github.com/proudcity/wp-proud-document): Creates a Document post type for file uploads and forms.
+* [wp-proud-](https://github.com/proudcity/wp-proud-):  
+* [wp-proud-](https://github.com/proudcity/wp-proud-):  
+* [wp-proud-](https://github.com/proudcity/wp-proud-):  
+* [wp-proud-](https://github.com/proudcity/wp-proud-):  
+* [wp-proud-](https://github.com/proudcity/wp-proud-):  
+* [wp-proud-](https://github.com/proudcity/wp-proud-):  
 
 
 
-All issues should be added to the [wp-proudcity Issue Queue](https://github.com/proudcity/wp-proudcity/issues)
+* [wp-proud-actions-app](https://github.com/proudcity/wp-proud-actions-app): An interactive, Angular-based 311 interface for FAQ, Payments, Issue reporting and Issue lookup.
+* [wp-proud-map-app](https://github.com/proudcity/wp-proud-map-app): Creates an interactive city services map with [Mapbox](http://mapbox.com).
+
+
+
+All bug reports, feature requests and other issues should be added to the [wp-proudcity Issue Queue](https://github.com/proudcity/wp-proudcity/issues).
 
 # Composer
 
