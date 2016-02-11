@@ -153,13 +153,16 @@
         "composer/installers": "1.*",
         "johnpbloch/wordpress": "4.4.*",
 
+        "wpackagist-plugin/auth0": "*",
+        "wpackagist-plugin/rest-api": "2.0-beta9",
+        "wpackagist-plugin/wp-api-menus": "*",
+
+        "wpackagist-plugin/wp-mail-smtp": "*",
         "wpackagist-plugin/taxonomy-terms-order": "*",
         "wpackagist-plugin/duplicate-post": "*",        
         "wpackagist-plugin/disable-comments": "*",
         "wpackagist-plugin/google-analytics-dashboard-for-wp": "*",
         "wpackagist-plugin/wordpress-seo": "*",
-        "wpackagist-plugin/rest-api": "2.0-beta9",
-        "wpackagist-plugin/wp-api-menus": "*",
         "wpackagist-plugin/mce-table-buttons": "*",
 
         "wpackagist-plugin/wp-inject": "*",
@@ -173,7 +176,7 @@
         "wpackagist-plugin/events-manager": "*",
         "wpackagist-plugin/wp-job-manager": "*",
         "wpackagist-plugin/simple-staff-list": "*",       
-
+        
         "proudcity/proudpack": "dev-master",
         "proudcity/wp-proud-core": "dev-master",
         "proudcity/wp-proud-agency": "dev-master",
