@@ -85,6 +85,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-proud-location",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-proud-location.git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-admin",
                 "type": "wordpress-plugin",
                 "version": "dev-master",
@@ -151,31 +164,33 @@
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "4.4.*",
+        "johnpbloch/wordpress": "4.4.2",
 
-        "wpackagist-plugin/auth0": "*",
-        "wpackagist-plugin/rest-api": "2.0-beta9",
-        "wpackagist-plugin/wp-api-menus": "*",
+        "wpackagist-plugin/auth0": "1.3.6",
+        "wpackagist-plugin/rest-api": "2.0-beta12",
+        "wpackagist-plugin/wp-api-menus": "1.2.1",
 
-        "wpackagist-plugin/wp-mail-smtp": "*",
-        "wpackagist-plugin/taxonomy-terms-order": "*",
-        "wpackagist-plugin/duplicate-post": "*",        
-        "wpackagist-plugin/disable-comments": "*",
-        "wpackagist-plugin/google-analytics-dashboard-for-wp": "*",
-        "wpackagist-plugin/wordpress-seo": "*",
-        "wpackagist-plugin/mce-table-buttons": "*",
+        "wpackagist-plugin/w3-total-cache": "0.9.4.1",
+        "wpackagist-plugin/wpmandrill": "1.33",
+        "wpackagist-plugin/taxonomy-terms-order": "1.4.7",
+        "wpackagist-plugin/duplicate-post": "2.6",        
+        "wpackagist-plugin/disable-comments": "1.4",
+        "wpackagist-plugin/google-analytics-dashboard-for-wp": "4.9.2",
+        "wpackagist-plugin/wordpress-seo": "3.0.7",
+        "wpackagist-plugin/mce-table-buttons": "3.2",
+        "wpackagist-plugin/black-studio-tinymce-widget": "2.2.8",
 
-        "wpackagist-plugin/wp-inject": "*",
-        "wpackagist-plugin/say-what": "*",
-        "wpackagist-plugin/admin-menu-editor": "*",
+        "wpackagist-plugin/wp-inject": "1.13",
+        "wpackagist-plugin/say-what": "1.6",
+        "wpackagist-plugin/admin-menu-editor": "1.5",
 
-        "wpackagist-plugin/siteorigin-panels": "*",
-        "wpackagist-plugin/so-widgets-bundle": "*",
+        "wpackagist-plugin/siteorigin-panels": "2.3.1",
+        "wpackagist-plugin/so-widgets-bundle": "1.5.7",
 
-        "wpackagist-plugin/wordpress-faq-manager": "*",
-        "wpackagist-plugin/events-manager": "*",
-        "wpackagist-plugin/wp-job-manager": "*",
-        "wpackagist-plugin/simple-staff-list": "*",       
+        "wpackagist-plugin/wordpress-faq-manager": "1.331",
+        "wpackagist-plugin/events-manager": "5.6.2",
+        "wpackagist-plugin/wp-job-manager": "1.24.0",
+        "wpackagist-plugin/simple-staff-list": "1.19",       
         
         "proudcity/proudpack": "dev-master",
         "proudcity/wp-proud-core": "dev-master",
@@ -183,6 +198,7 @@
         "proudcity/wp-proud-search": "dev-master",
         "proudcity/wp-proud-payment": "dev-master",
         "proudcity/wp-proud-document": "dev-master",
+        "proudcity/wp-proud-location": "dev-master",
         "proudcity/wp-proud-map-app": "dev-master",
         "proudcity/wp-proud-social-app": "dev-master",
         "proudcity/wp-proud-actions-app": "dev-master",
