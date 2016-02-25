@@ -179,6 +179,9 @@
         "wpackagist-plugin/wordpress-seo": "3.0.7",
         "wpackagist-plugin/mce-table-buttons": "3.2",
         "wpackagist-plugin/black-studio-tinymce-widget": "2.2.8",
+        "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
+        "wpackagist-plugin/safe-redirect-manager": "1.7.8",
+        "wpackagist-plugin/iframe": "4.2",
 
         "wpackagist-plugin/wp-inject": "1.13",
         "wpackagist-plugin/say-what": "1.6",
