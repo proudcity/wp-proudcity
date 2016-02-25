@@ -9,7 +9,7 @@
             "package": {
                 "name": "proudcity/proudpack",
                 "type": "wordpress-plugin",
-                "version": "dev-master",
+                "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/proudpack.git",
@@ -22,7 +22,7 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "dev-master",
+                "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
@@ -35,7 +35,7 @@
             "package": {
                 "name": "proudcity/wp-proud-agency",
                 "type": "wordpress-plugin",
-                "version": "dev-master",
+                "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-agency.git",
@@ -48,7 +48,7 @@
             "package": {
                 "name": "proudcity/wp-proud-search",
                 "type": "wordpress-plugin",
-                "version": "dev-master",
+                "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search.git",
@@ -61,7 +61,7 @@
             "package": {
                 "name": "proudcity/wp-proud-payment",
                 "type": "wordpress-plugin",
-                "version": "dev-master",
+                "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-payment.git",
@@ -74,7 +74,7 @@
             "package": {
                 "name": "proudcity/wp-proud-document",
                 "type": "wordpress-plugin",
-                "version": "dev-master",
+                "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-document.git",
@@ -87,7 +87,7 @@
             "package": {
                 "name": "proudcity/wp-proud-location",
                 "type": "wordpress-plugin",
-                "version": "dev-master",
+                "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-location.git",
@@ -100,7 +100,7 @@
             "package": {
                 "name": "proudcity/wp-proud-admin",
                 "type": "wordpress-plugin",
-                "version": "dev-master",
+                "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-admin.git",
@@ -113,7 +113,7 @@
             "package": {
                 "name": "proudcity/wp-proud-map-app",
                 "type": "wordpress-plugin",
-                "version": "dev-master",
+                "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-map-app.git",
@@ -126,7 +126,7 @@
             "package": {
                 "name": "proudcity/wp-proud-social-app",
                 "type": "wordpress-plugin",
-                "version": "dev-master",
+                "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-social-app.git",
@@ -139,7 +139,7 @@
             "package": {
                 "name": "proudcity/wp-proud-actions-app",
                 "type": "wordpress-plugin",
-                "version": "dev-master",
+                "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-actions-app.git",
@@ -152,7 +152,7 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "dev-master",
+                "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
@@ -195,17 +195,22 @@
         "wpackagist-plugin/wp-job-manager": "1.24.0",
         "wpackagist-plugin/simple-staff-list": "1.19",       
         
-        "proudcity/proudpack": "dev-master",
-        "proudcity/wp-proud-core": "dev-master",
-        "proudcity/wp-proud-agency": "dev-master",
-        "proudcity/wp-proud-search": "dev-master",
-        "proudcity/wp-proud-payment": "dev-master",
-        "proudcity/wp-proud-document": "dev-master",
-        "proudcity/wp-proud-location": "dev-master",
-        "proudcity/wp-proud-map-app": "dev-master",
-        "proudcity/wp-proud-social-app": "dev-master",
-        "proudcity/wp-proud-actions-app": "dev-master",
-        "proudcity/wp-proud-admin": "dev-master",
-        "proudcity/wp-proud-theme": "dev-master"
+        "proudcity/proudpack": "1.0.0",
+        "proudcity/wp-proud-core": "1.0.0",
+        "proudcity/wp-proud-agency": "1.0.0",
+        "proudcity/wp-proud-search": "1.0.0",
+        "proudcity/wp-proud-payment": "1.0.0",
+        "proudcity/wp-proud-document": "1.0.0",
+        "proudcity/wp-proud-location": "1.0.0",
+        "proudcity/wp-proud-map-app": "1.0.0",
+        "proudcity/wp-proud-social-app": "1.0.0",
+        "proudcity/wp-proud-actions-app": "1.0.0",
+        "proudcity/wp-proud-admin": "1.0.0",
+        "proudcity/wp-proud-theme": "1.0.0"
+    },
+    "require-dev": {
+        "wpackagist-plugin/debug-bar": "*",
+        "wpackagist-plugin/debug-bar-slow-actions": "*",
+        "wpackagist-plugin/user-role-editor": "*"
     }
 }
