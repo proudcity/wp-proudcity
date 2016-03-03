@@ -1,4 +1,4 @@
-ProudCity Wordpress
+ProudCity WordPress
 ===================
 
 [ProudCity](https://proudcity.com) is a Wordpress platform for modern, standards-compliant municipal websites. [Find your city's demo](https://proudcity.com/start) or [view an example website](https://example.proudcity.com).
@@ -14,7 +14,7 @@ ProudCity Wordpress
   ```
   git clone https://github.com/proudcity/wp-proudcity.git
   cd wp-proudcity
-  composer install
+  composer install --no-dev
   ```
 3. Copy the contents of `./wordpress` to the `www-root` of a server and [install WordPress as normal](https://codex.wordpress.org/Installing_WordPress#Famous_5-Minute_Install)
 
