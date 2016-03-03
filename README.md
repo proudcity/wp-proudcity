@@ -1,8 +1,7 @@
 ProudCity Wordpress
 ===================
 
-[ProudCity](https://proudcity.com) is a Wordpress platform for modern, standards-compliant municipal websites.  
-[Find your city's demo](https://proudcity.com/start) or [view an example website]([ProudCity](https://example.proudcity.com))
+[ProudCity](https://proudcity.com) is a Wordpress platform for modern, standards-compliant municipal websites. [Find your city's demo](https://proudcity.com/start) or [view an example website](https://example.proudcity.com).
 
 ## 5-minute setup
 1. Install [Composer](https://getcomposer.org) and [WP-CLI](http://wp-cli.org/).
