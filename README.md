@@ -16,7 +16,7 @@ ProudCity Wordpress
   cd wp-proudcity
   composer install
   ```
-3. Copy the code to a server and [install WordPress as normal](https://codex.wordpress.org/Installing_WordPress#Famous_5-Minute_Install)
+3. Copy the contents of `./wordpress` to the `www-root` of a server and [install WordPress as normal](https://codex.wordpress.org/Installing_WordPress#Famous_5-Minute_Install)
 
 4. Install WordPress plugins
   ```
