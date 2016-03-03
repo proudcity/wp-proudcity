@@ -3,7 +3,30 @@ ProudCity Wordpress
 
 [ProudCity](http://proudcity.com) is a Wordpress platform for modern, standards-compliant municipal websites.
 
-# Contributing
+## 5-minute setup
+1. Install [Composer](https://getcomposer.org) and [WP-CLI](http://wp-cli.org/).
+  ```
+  curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+  curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar | chmod +x wp-cli.phar | sudo mv wp-cli.phar /usr/local/bin/wp
+  ```
+
+2. Clone and build code
+  ```
+  git clone https://github.com/proudcity/wp-proudcity.git
+  cd wp-proudcity
+  composer install
+  ```
+3. Copy the code to a server and [install WordPress as normal](https://codex.wordpress.org/Installing_WordPress#Famous_5-Minute_Install)
+
+4. Install WordPress plugins
+  ```
+  wp-plugin activate taxonomy-terms-order disable-comments events-manager google-analytics-dashboard-for-wp iframe mce-table-buttons siteorigin-panels wp-proud-document wp-proud-payment wp-proud-actions-app wp-proud-admin wp-proud-agency wp-proud-core wp-proud-map-app proudpack wp-proud-search wp-proud-social-app safe-redirect-manager simple-staff-list so-widgets-bundle wordpress-faq-manager wp-job-manager rest-api wp-api-menus wordpress-seo 
+  ```
+
+[Watch Getting Started videos](https://proudcity.com/getting-started)
+
+
+## Contributing
 
 This repo contains a composer make file that will build a complete Wordpress installation.  See [Composer](#composer) for more details.  Most of the actual code is in our individual Plugin and Theme repos:
 * [wp-proud-theme](https://github.com/proudcity/wp-proud-theme): The ProudCity Wordpress theme built on top of [Bootstrap](http://getbootstrap.com) and [Sage](https://roots.io/sage/).
@@ -21,9 +44,9 @@ All bug reports, feature requests and other issues should be added to the [wp-pr
 
 Visit [our website](https://proudcity.com/developers) for more information about ProudCity for developers.
 
-# Composer
+## Composer
 
-## Building
+### Building
 
 ```
 composer install
@@ -32,12 +55,12 @@ Wordpress will be in the `./src` dir.
 
 You can automate the management of custom plugins and themes using the bash scripts in ./scripts:
 ```
-cd ./wp-proud-composer
+cd ./wp-proudcity
 bash scripts/cmd.sh "git status"
 ```
 
 
-## Installing
+### Installing
 ```
 wp db drop
 wp db create
@@ -60,10 +83,10 @@ wp option update home "http://wordpress.local"
 ```
 
 
-# Docker
+## Docker
 Dockerfile and run.sh are forked from (tutumcloud/wordpress-stackable)[https://github.com/tutumcloud/wordpress-stackable].
 
-## Building
+### Building
 ```
 docker build -t proudcity/wp-proud-composer .
 docker images
@@ -71,7 +94,7 @@ docker images
 
 
 
-## Running
+### Running
 Variables:
 * API_PUBLIC : proudpack api client (site id)
 * API_SECRET : proudpack api secret
