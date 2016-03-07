@@ -153,6 +153,32 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-proud-seeclickfix",
+                "type": "wordpress-plugin",
+                "version": "1.0.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-proud-seeclickfix.git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "proudcity/wp-proud-romulus",
+                "type": "wordpress-plugin",
+                "version": "1.0.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-proud-romulus.git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
                 "version": "1.0.0",
@@ -209,6 +235,8 @@
         "proudcity/wp-proud-social-app": "1.0.0",
         "proudcity/wp-proud-actions-app": "1.0.0",
         "proudcity/wp-proud-admin": "1.0.0",
+        "proudcity/wp-proud-seeclickfix": "1.0.0",
+        "proudcity/wp-proud-romulus": "1.0.0",
         "proudcity/wp-proud-theme": "1.0.0"
     },
     "require-dev": {
