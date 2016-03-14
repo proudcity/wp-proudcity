@@ -212,7 +212,7 @@
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/safe-redirect-manager": "1.7.8",
         "wpackagist-plugin/iframe": "4.2",
-
+        "wpackagist-plugin/wp-quick-menu": "1.0",
         "wpackagist-plugin/wp-inject": "1.13",
         "wpackagist-plugin/say-what": "1.6",
         "wpackagist-plugin/admin-menu-editor": "1.5",
