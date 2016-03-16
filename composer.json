@@ -215,6 +215,7 @@
         "wpackagist-plugin/wp-inject": "1.13",
         "wpackagist-plugin/say-what": "1.6",
         "wpackagist-plugin/admin-menu-editor": "1.5",
+        "wpackagist-plugin/wp-ses": "0.3.60",
 
         "wpackagist-plugin/siteorigin-panels": "2.3.1",
         "wpackagist-plugin/so-widgets-bundle": "1.5.9",
