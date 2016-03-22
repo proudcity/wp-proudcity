@@ -243,7 +243,8 @@
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
         "wpackagist-plugin/debug-bar-slow-actions": "*",
-        "wpackagist-plugin/user-role-editor": "*"
+        "wpackagist-plugin/user-role-editor": "*",
+        "wpackagist-plugin/debug-bar-console": "*"
     },
     "extra": {
         "installer-paths": {
