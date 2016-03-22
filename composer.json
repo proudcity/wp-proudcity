@@ -25,7 +25,7 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "1.1.6",
+                "version": "1.1.7",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
@@ -129,7 +129,7 @@
             "package": {
                 "name": "proudcity/wp-proud-social-app",
                 "type": "wordpress-plugin",
-                "version": "1.1.0",
+                "version": "1.1.1",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-social-app.git",
@@ -181,7 +181,7 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "1.1.0",
+                "version": "1.1.6",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
@@ -226,19 +226,19 @@
         "wpackagist-plugin/simple-staff-list": "1.19",       
         
         "proudcity/proudpack": "1.1.0",
-        "proudcity/wp-proud-core": "1.1.6",
+        "proudcity/wp-proud-core": "1.1.7",
         "proudcity/wp-proud-agency": "1.1.0",
         "proudcity/wp-proud-search": "1.1.0",
         "proudcity/wp-proud-payment": "1.1.0",
         "proudcity/wp-proud-document": "1.1.0",
         "proudcity/wp-proud-location": "1.1.0",
         "proudcity/wp-proud-map-app": "1.1.0",
-        "proudcity/wp-proud-social-app": "1.1.0",
+        "proudcity/wp-proud-social-app": "1.1.1",
         "proudcity/wp-proud-actions-app": "1.1.0",
         "proudcity/wp-proud-admin": "1.1.0",
         "proudcity/wp-proud-seeclickfix": "1.1.0",
         "proudcity/wp-proud-romulus": "1.1.0",
-        "proudcity/wp-proud-theme": "1.1.0"
+        "proudcity/wp-proud-theme": "1.1.6"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
