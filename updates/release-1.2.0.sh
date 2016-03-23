@@ -359,3 +359,4 @@ wp eval --allow-root "array (
     ),
   ),
 );"
+ wp eval --allow-root "update_option('widget_proudscore_widget', array ( 2 => array ( 'title' => '', ), '_multiwidget' => 1, ) );"
