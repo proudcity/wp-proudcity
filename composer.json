@@ -51,7 +51,7 @@
             "package": {
                 "name": "proudcity/wp-proud-search",
                 "type": "wordpress-plugin",
-                "version": "1.2.0",
+                "version": "1.2.1",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search.git",
@@ -228,7 +228,7 @@
         "proudcity/proudpack": "1.2.0",
         "proudcity/wp-proud-core": "1.2.0",
         "proudcity/wp-proud-agency": "1.2.0",
-        "proudcity/wp-proud-search": "1.2.0",
+        "proudcity/wp-proud-search": "1.2.1",
         "proudcity/wp-proud-payment": "1.2.0",
         "proudcity/wp-proud-document": "1.2.0",
         "proudcity/wp-proud-location": "1.2.0",
