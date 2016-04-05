@@ -1,12 +1,17 @@
 # Updates for the 1.3.0 release
 # Replace Black Studio TinyMCE with Site Origin, update homepage panels
 
-# Replace Black Studio TinyMCE with Site Origin
+# Replace Black Studio TinyMCE with Site Origin  https://github.com/proudcity/wp-proudcity/issues/179
 wp search-replace 'WP_Widget_Black_Studio_TinyMCE' 'SiteOrigin_Widget_Editor_Widget'  --allow-root
 wp plugin deactivate black-studio-tinymce-widget --allow-root
 
+# Set the payment type to link https://github.com/proudcity/wp-proudcity/issues/261
+wp post meta update 198 'type' 'link' --allow-root
+wp post meta update 199 'type' 'link' --allow-root
+wp post meta update 200 'type' 'link' --allow-root
+wp post meta update 3450 'type' 'link' --allow-root
 
-# Update homepage panels
+# Update homepage panels https://github.com/proudcity/wp-proudcity/issues/224
 wp eval "
 update_post_meta( get_option('page_on_front'), 'panels_data',
 array (
