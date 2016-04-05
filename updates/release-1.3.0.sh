@@ -2,12 +2,12 @@
 # Replace Black Studio TinyMCE with Site Origin, update homepage panels
 
 # Replace Black Studio TinyMCE with Site Origin
-dwp search-replace 'WP_Widget_Black_Studio_TinyMCE' 'SiteOrigin_Widget_Editor_Widget'  --allow-root
-dwp plugin deactivate black-studio-tinymce-widget --allow-root
+wp search-replace 'WP_Widget_Black_Studio_TinyMCE' 'SiteOrigin_Widget_Editor_Widget'  --allow-root
+wp plugin deactivate black-studio-tinymce-widget --allow-root
 
 
 # Update homepage panels
-dwp eval "
+wp eval "
 update_post_meta( get_option('page_on_front'), 'panels_data',
 array (
   'widgets' => 
@@ -319,4 +319,4 @@ array (
   ),
 )
 
-);"
+);" --allow-root
