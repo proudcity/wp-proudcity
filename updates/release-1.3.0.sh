@@ -192,7 +192,7 @@ array (
     5 => 
     array (
       'title' => 'Connect',
-      'accounts' => 'custom',
+      'accounts' => 'all',
       'custom' => 
       array (
         'twitter:getproudcity' => 'twitter:getproudcity',
