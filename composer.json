@@ -215,6 +215,8 @@
         "wpackagist-plugin/say-what": "1.6",
         "wpackagist-plugin/admin-menu-editor": "1.5",
         "wpackagist-plugin/wp-ses": "0.4.8",
+        "wpackagist-plugin/edit-flow": "0.8.1",
+        "wpackagist-plugin/wp-sitemap-page": "1.5.6",
 
         "wpackagist-plugin/siteorigin-panels": "2.4.2",
         "wpackagist-plugin/so-widgets-bundle": "1.5.9",
