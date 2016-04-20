@@ -6,5 +6,4 @@ $opt['sidebar-footer'] = array (
   1 => 'gform_widget-2',
   2 => 'proud_social_links-2',
 );
-update_option('sidebar-footer', $opt);
-print_r($opt);
+update_option('sidebars_widgets', $opt);
