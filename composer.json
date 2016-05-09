@@ -25,7 +25,7 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "1.5.0",
+                "version": "1.5.4",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
@@ -227,13 +227,13 @@
         "wpackagist-plugin/simple-staff-list": "1.19",       
         
         "proudcity/proudpack": "1.5.0",
-        "proudcity/wp-proud-core": "1.5.0",
+        "proudcity/wp-proud-core": "1.5.4",
         "proudcity/wp-proud-agency": "1.5.0",
         "proudcity/wp-proud-search": "1.5.0",
         "proudcity/wp-proud-payment": "1.5.0",
         "proudcity/wp-proud-document": "1.5.0",
-        "proudcity/wp-proud-location": "1.5.0",
-        "proudcity/wp-proud-map-app": "1.5.0",
+        "proudcity/wp-proud-location": "1.5.3",
+        "proudcity/wp-proud-map-app": "1.5.3",
         "proudcity/wp-proud-social-app": "1.5.0",
         "proudcity/wp-proud-actions-app": "1.5.0",
         "proudcity/wp-proud-admin": "1.5.0",
