@@ -90,7 +90,7 @@
             "package": {
                 "name": "proudcity/wp-proud-location",
                 "type": "wordpress-plugin",
-                "version": "1.5.0",
+                "version": "1.5.3",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-location.git",
@@ -116,7 +116,7 @@
             "package": {
                 "name": "proudcity/wp-proud-map-app",
                 "type": "wordpress-plugin",
-                "version": "1.5.0",
+                "version": "1.5.3",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-map-app.git",
