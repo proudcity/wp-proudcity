@@ -18,5 +18,5 @@ wp --allow-root plugin install --activate wp-mail-smtp
 
 # Send test email
 wp --allow-root eval "
-wp_mail ( 'jeff@proudcity.com', 'Testing wp_mail', 'Testing wp_mail' );
+wp_mail ( 'jeff@proudcity.com', 'Testing wp_mail ' . get_site_url (), 'Testing wp_mail' );
 "
