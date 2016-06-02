@@ -213,7 +213,7 @@
         "wpackagist-plugin/wp-inject": "1.13",
         "wpackagist-plugin/say-what": "1.7.1",
         "wpackagist-plugin/admin-menu-editor": "1.6.2",
-        "wpackagist-plugin/wp-ses": "0.4.8",
+        "wpackagist-plugin/wp-mail-smtp": "0.9.5",
         "wpackagist-plugin/edit-flow": "0.8.1",
         "wpackagist-plugin/wp-sitemap-page": "1.5.6",
 
