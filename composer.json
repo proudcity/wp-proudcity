@@ -24,7 +24,7 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "1.7.1",
+                "version": "1.7.2",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
@@ -226,7 +226,7 @@
         "wpackagist-plugin/simple-staff-list": "1.19",       
         
         "proudcity/proudpack": "1.7.0",
-        "proudcity/wp-proud-core": "1.7.1",
+        "proudcity/wp-proud-core": "1.7.2",
         "proudcity/wp-proud-agency": "1.7.0",
         "proudcity/wp-proud-search": "1.7.0",
         "proudcity/wp-proud-payment": "1.7.0",
