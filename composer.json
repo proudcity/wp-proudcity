@@ -24,7 +24,7 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "1.8.0",
+                "version": "1.8.1",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
@@ -178,6 +178,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-proud-subsite",
+                "type": "wordpress-plugin",
+                "version": "1.8.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-proud-subsite.git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
                 "version": "1.8.0",
@@ -226,7 +239,7 @@
         "wpackagist-plugin/simple-staff-list": "1.19",       
         
         "proudcity/proudpack": "1.8.0",
-        "proudcity/wp-proud-core": "1.8.0",
+        "proudcity/wp-proud-core": "1.8.1",
         "proudcity/wp-proud-agency": "1.8.0",
         "proudcity/wp-proud-search": "1.8.0",
         "proudcity/wp-proud-payment": "1.8.0",
@@ -238,6 +251,7 @@
         "proudcity/wp-proud-admin": "1.8.0",
         "proudcity/wp-proud-seeclickfix": "1.8.0",
         "proudcity/wp-proud-romulus": "1.8.0",
+        "proudcity/wp-proud-subsite": "1.8.0",
         "proudcity/wp-proud-theme": "1.8.0"
     },
     "require-dev": {
