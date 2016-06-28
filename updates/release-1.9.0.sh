@@ -2,4 +2,4 @@
 # (no manual updates)
 
 PHP=${1}
-# (no automated updates)
+wp --allow-root option set dbem_rsvp_enabled 0
