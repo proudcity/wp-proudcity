@@ -123,4 +123,4 @@ docker exec -t -i VOLUME_NAME bash
 
 ## Notes
 
-Tested with [BrowserStack](https://www.browserstack.com/).  Licensed under [GNU AFFERO GPL](https://github.com/proudcity/wp-proudcity/blob/master/LICENSE.txt).  Made by [ProudCity](https://proudcity.com/)
+Tested with [BrowserStack](https://www.browserstack.com/).  Licensed under [GNU Affero GPL](https://github.com/proudcity/wp-proudcity/blob/master/LICENSE.txt).  Made by [ProudCity](https://proudcity.com/)
