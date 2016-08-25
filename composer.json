@@ -209,7 +209,7 @@
 
         "wpackagist-plugin/auth0": "3.2.4",
         "wpackagist-plugin/wp-jwt-auth": "1.1.2",
-        "wpackagist-plugin/rest-api": "2.0-beta13.1",
+        "wpackagist-plugin/rest-api": "2.0-beta13",
         "wpackagist-plugin/wp-api-menus": "1.3.0",
 
         "wpackagist-plugin/w3-total-cache": "0.9.4.1",
