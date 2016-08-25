@@ -205,7 +205,7 @@
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "4.5.3",
+        "johnpbloch/wordpress": "4.6",
 
         "wpackagist-plugin/auth0": "3.2.4",
         "wpackagist-plugin/wp-jwt-auth": "1.1.2",
