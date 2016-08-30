@@ -263,6 +263,7 @@
         "wpackagist-plugin/events-manager": "5.6.5",
         "wpackagist-plugin/wp-job-manager": "1.25.1",
         "wpackagist-plugin/simple-staff-list": "1.19",
+        "wpackagist-plugin/national-weather-service-alerts": "1.3.2",
         
         "proudcity/proudpack": "1.13.0",
         "proudcity/wp-proud-core": "1.13.0",
