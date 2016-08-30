@@ -204,6 +204,19 @@
         {
             "type": "package",
             "package": {
+                "name": "gravityflow/gravityflow",
+                "type": "wordpress-plugin",
+                "version": "1.14.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/gravityflow/gravityflow.git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
                 "version": "1.13.0",
@@ -249,7 +262,7 @@
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
         "wpackagist-plugin/events-manager": "5.6.5",
         "wpackagist-plugin/wp-job-manager": "1.25.1",
-        "wpackagist-plugin/simple-staff-list": "1.19",       
+        "wpackagist-plugin/simple-staff-list": "1.19",
         
         "proudcity/proudpack": "1.13.0",
         "proudcity/wp-proud-core": "1.13.0",
@@ -266,6 +279,7 @@
         "proudcity/wp-proud-romulus": "1.13.0",
         "proudcity/wp-proud-subsite": "1.13.0",
         "proudcity/romulus-wordpress-form": "1.14.0",
+        "gravityflow/gravityflow": "1.14.0",
         "proudcity/wp-proud-theme": "1.13.0"
     },
     "require-dev": {
