@@ -217,6 +217,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-quick-menu",
+                "type": "wordpress-plugin",
+                "version": "1.14.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-quick-menu.git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
                 "version": "1.14.0",
@@ -248,7 +261,6 @@
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/safe-redirect-manager": "1.7.8",
         "wpackagist-plugin/iframe": "4.3",
-        "wpackagist-plugin/wp-quick-menu": "1.0",
         "wpackagist-plugin/say-what": "1.7.1",
         "wpackagist-plugin/admin-menu-editor": "1.7.2",
         "wpackagist-plugin/wp-mail-smtp": "0.9.5",
@@ -280,6 +292,7 @@
         "proudcity/wp-proud-subsite": "1.14.0",
         "proudcity/romulus-wordpress-form": "1.14.0",
         "gravityflow/gravityflow": "1.14.0",
+        "proudcity/wp-quick-menu": "1.14.0",
         "proudcity/wp-proud-theme": "1.14.0"
     },
     "require-dev": {
