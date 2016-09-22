@@ -15,6 +15,8 @@ ProudCity WordPress
   git clone https://github.com/proudcity/wp-proudcity.git
   cd wp-proudcity
   composer install --no-dev
+  cp wp-config.php wordpress
+  cp .env.example wordpress/.env
   ```
 3. Copy the contents of `./wordpress` to the `www-root` of a server and [install WordPress as normal](https://codex.wordpress.org/Installing_WordPress#Famous_5-Minute_Install)
 
@@ -88,7 +90,7 @@ Dockerfile and run.sh are forked from (tutumcloud/wordpress-stackable)[https://g
 
 ### Building
 ```
-docker build -t proudcity/wp-proud-composer .
+docker build -t proudcity/wp-proudcity .
 docker images
 ```
 
