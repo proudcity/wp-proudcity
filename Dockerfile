@@ -23,28 +23,16 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 # Build Wordpress with Compser
 ADD composer.json .
 RUN composer install
-RUN rm -r /app; ln -s /src /app
+RUN rm -r /app; ln -s /wordpress /app
 
 # Config files
 RUN sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apache2.conf
 RUN a2enmod rewrite
-ADD wp-config.php /src/wp-config.php
-ADD .htaccess /src/.htaccess
-ADD scripts /scripts
-RUN chmod +x /scripts/*.sh
-
-# Expose environment variables
-ENV DB_HOST **LinkMe**
-ENV DB_PORT **LinkMe**
-ENV DB_NAME wordpress
-ENV DB_USER admin
-ENV DB_PASS **ChangeMe**
-ENV URL "http://localhost:8080"
-ENV DB_DUMP_URL "http://getproudcity.com/db.sql.gz"
-ENV PROUD_URL "http://api.getproudcity.com/rest/v1.1"
-ENV PROUD_PUBLIC ""
-ENV PROUD_SECRET ""
+ADD wp-config.php /wordpress/wp-config.php
+ADD .htaccess /wordpress/.htaccess
+ADD bin /bin
+RUN chmod +x /bin/*.sh
 
 EXPOSE 80
 #VOLUME ["/app/wp-content"]
-CMD ["/scripts/docker-run.sh"]
+CMD ["/bin/docker-run.sh"]

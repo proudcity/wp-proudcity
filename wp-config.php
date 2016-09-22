@@ -1,32 +1,36 @@
 <?php
 /**
- * The base configurations of the WordPress.
- *
- * This file has the following configurations: MySQL settings, Table Prefix,
- * Secret Keys, WordPress Language, and ABSPATH. You can find more information
- * by visiting {@link http://codex.wordpress.org/Editing_wp-config.php Editing
- * wp-config.php} Codex page. You can get the MySQL settings from your web host.
- *
- * This file is used by the wp-config.php creation script during the
- * installation. You don't have to use the web site, you can just copy this file
- * to "wp-config.php" and fill in the values.
- *
- * @package WordPress
+ * The base configurations of a Dockerized WordPress.
+ * You can find more information by visiting
+ * {@link http://codex.wordpress.org/Editing_wp-config.php Editing wp-config.php}
  */
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
+
+# Load the .env if present.
+if (file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'.env')) {
+  require 'vendor/autoload.php';
+  $dotenv = new Dotenv\Dotenv(__DIR__);
+  $dotenv->load();
+}
+
+# The name of the database for WordPress.
 define('DB_NAME', getenv('DB_NAME'));
-/** MySQL database username */
+
+# MySQL database username.
 define('DB_USER', getenv('DB_USER'));
-/** MySQL database password */
+
+# MySQL database password.
 define('DB_PASSWORD', getenv('DB_PASS'));
-/** MySQL hostname */
+
+# MySQL hostname.
 define('DB_HOST', getenv('DB_HOST').":".getenv('DB_PORT'));
-/** Database Charset to use in creating database tables. */
-define('DB_CHARSET', 'utf8');
-/** The Database Collate type. Don't change this if in doubt. */
-define('DB_COLLATE', '');
-/**#@+
+
+# Database Charset to use in creating database tables.
+define('DB_CHARSET', getenv('WORDPRESS_DB_CHARSET'));
+
+# The Database Collate type. Don't change this if in doubt.
+define('DB_COLLATE', getenv('WORDPRESS_DB_COLLATE'));
+
+/**
  * Authentication Unique Keys and Salts.
  *
  * Change these to different unique phrases!
@@ -35,22 +39,38 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         '--w,=nO-t>g:EOH>e-ZXs!7x(: W4:}1A2$E?Sn9P>TW-[=:u[nc-eQ<vIi<6|wh');
-define('SECURE_AUTH_KEY',  'PlM~WQ/9-~V:-3&be`nxuaghz@JyN!]SzVr_]lAM2b?QH(d(|`.z_;1jIE4kY&f+');
-define('LOGGED_IN_KEY',    'K]6*uCb-m~>zj5C1krtu:>2VT(WlI/Jl5T~Pov2-`r+Zb5s3i6&aIN$*/+k/~sLN');
-define('NONCE_KEY',        '~; xvP`h^{Pl9zaD#/!f@M21BAk0#sKg>*P+=1LV+FY+;HNE)%Y`4(Xq|&})fCj^');
-define('AUTH_SALT',        'A2|G[jvSLB+z dy S/ S>(lLyzxDvJ8(ps1(F%~x]eRD`UHv(h*IDjye+SYV-a;O');
-define('SECURE_AUTH_SALT', '9cv/Hy~a;qr]4)i*udy-/$non@_:CU0SIdm-L[WH^k_}s:Jq[)HV,Wu8na<_;ef3');
-define('LOGGED_IN_SALT',   '{d*4OCrk9x`|cb-4EBK7=ewJ3D]y%z,7mSEd:8?=eP![zD.O`<Uubt-u%@TA+x T');
-define('NONCE_SALT',       'z6G5thFC]JIW]|ZQIBgZ?zBb^!N#3-Un=)`!Xb/,Yd8[2&}.W{ITu?=PE0oZ,<8^');
-/**#@-*/
+define('AUTH_KEY',         getenv('WORDPRESS_AUTH_KEY'));
+define('SECURE_AUTH_KEY',  getenv('WORDPRESS_SECURE_AUTH_KEY'));
+define('LOGGED_IN_KEY',    getenv('WORDPRESS_LOGGED_IN_KEY'));
+define('NONCE_KEY',        getenv('WORDPRESS_NONCE_KEY'));
+define('AUTH_SALT',        getenv('WORDPRESS_AUTH_SALT'));
+define('SECURE_AUTH_SALT', getenv('WORDPRESS_SECURE_AUTH_SALT'));
+define('LOGGED_IN_SALT',   getenv('WORDPRESS_LOGGED_IN_SALT'));
+define('NONCE_SALT',       getenv('WORDPRESS_NONCE_SALT'));
+
+# Enable Amazon S3 and Cloudfront.
+define('AWS_ACCESS_KEY_ID', getenv('WORDPRESS_AWS_ACCESS_KEY_ID'));
+define('AWS_SECRET_ACCESS_KEY', getenv('WORDPRESS_AWS_SECRET_ACCESS_KEY'));
+
+# Enable WP Cache.
+define('WP_CACHE', getenv('WORDPRESS_WP_CACHE'));
+define('WPCACHEHOME', getenv('WORDPRESS_WPCACHEHOME')); //Added by WP-Cache Manager
+
+# Enable Secure Logins.
+define('FORCE_SSL_LOGIN', getenv('WORDPRESS_FORCE_SSL_LOGIN'));
+define('FORCE_SSL_ADMIN', getenv('WORDPRESS_FORCE_SSL_ADMIN'));
+
+# Use external cron.
+define('DISABLE_WP_CRON', getenv('WORDPRESS_DISABLE_WP_CRON'));
+
 /**
  * WordPress Database Table prefix.
  *
  * You can have multiple installations in one database if you give each a unique
  * prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix  = 'wp_';
+$table_prefix = getenv('WORDPRESS_TABLE_PREFIX');
+
 /**
  * WordPress Localized Language, defaults to English.
  *
@@ -59,7 +79,8 @@ $table_prefix  = 'wp_';
  * de_DE.mo to wp-content/languages and set WPLANG to 'de_DE' to enable German
  * language support.
  */
-define('WPLANG', '');
+define('WPLANG', getenv('WORDPRESS_WPLANG'));
+
 /**
  * For developers: WordPress debugging mode.
  *
@@ -67,21 +88,35 @@ define('WPLANG', '');
  * It is strongly recommended that plugin and theme developers use WP_DEBUG
  * in their development environments.
  */
-define('WP_DEBUG', false);
-/* That's all, stop editing! Happy blogging. */
-/** Absolute path to the WordPress directory. */
-if ( !defined('ABSPATH') )
-  define('ABSPATH', dirname(__FILE__) . '/');
+define('WP_DEBUG', getenv('WORDPRESS_WP_DEBUG'));
+
+# Absolute path to the WordPress directory.
+if (!defined('ABSPATH'))
+  define('ABSPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
+
+# To enable the possibility to update plugins directly from back-end (locally).
+define('FS_METHOD', getenv('WORDPRESS_FS_METHOD'));
+
+# Disable updates of plugins and themes together with plugins and themes editor.
+define('DISALLOW_FILE_MODS', getenv('WORDPRESS_DISALLOW_FILE_MODS'));
+
+# Disable all automatic updates.
+define('AUTOMATIC_UPDATER_DISABLED', getenv('WORDPRESS_AUTOMATIC_UPDATER_DISABLED'));
+
+# How to handle all core updates.
+define('WP_AUTO_UPDATE_CORE', getenv('WORDPRESS_WP_AUTO_UPDATE_CORE'));
+
+# WP Siteurl.
+define('WP_SITEURL', getenv('WORDPRESS_WP_SITEURL'));
+
+# WP Home.
+define('WP_HOME', getenv('WORDPRESS_WP_HOME'));
+
+# Enable Multisite.
+define('WP_ALLOW_MULTISITE', getenv('WORDPRESS_WP_ALLOW_MULTISITE'));
+
+# Uploads directory.
+define('UPLOADS', getenv('WORDPRESS_UPLOADS'));
+
 /** Sets up WordPress vars and included files. */
-require_once(ABSPATH . 'wp-settings.php');
-/** change permisssions for plugin installation */
-define("FS_METHOD","direct");
-define("FS_CHMOD_DIR", 0777);
-define("FS_CHMOD_FILE", 0777);
-
-
-/* ProudCity settings */
-define('PROUD_URL', getenv('PROUD_URL'));
-define('PROUD_ID', getenv('PROUD_ID'));
-define('PROUD_CLIENT', getenv('PROUD_CLIENT'));
-define('PROUD_SECRET', getenv('PROUD_SECRET'));
+require_once(ABSPATH.'wp-settings.php');
