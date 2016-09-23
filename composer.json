@@ -89,7 +89,7 @@
             "package": {
                 "name": "proudcity/wp-proud-location",
                 "type": "wordpress-plugin",
-                "version": "1.15.0",
+                "version": "1.15.5",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-location.git",
@@ -282,7 +282,7 @@
         "proudcity/wp-proud-search": "1.15.0",
         "proudcity/wp-proud-payment": "1.15.0",
         "proudcity/wp-proud-document": "1.15.0",
-        "proudcity/wp-proud-location": "1.15.0",
+        "proudcity/wp-proud-location": "1.15.5",
         "proudcity/wp-proud-issue": "1.15.0",
         "proudcity/wp-proud-map-app": "1.15.0",
         "proudcity/wp-proud-social-app": "1.15.0",
