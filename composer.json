@@ -232,7 +232,7 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "1.15.0",
+                "version": "1.15.4",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
@@ -293,7 +293,7 @@
         "proudcity/romulus-wordpress-form": "1.15.0",
         "gravityflow/gravityflow": "1.15.0",
         "proudcity/wp-quick-menu": "1.15.0",
-        "proudcity/wp-proud-theme": "1.15.0"
+        "proudcity/wp-proud-theme": "1.15.4"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
