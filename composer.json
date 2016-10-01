@@ -24,7 +24,7 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "1.15.7",
+                "version": "1.15.8",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
@@ -50,7 +50,7 @@
             "package": {
                 "name": "proudcity/wp-proud-search",
                 "type": "wordpress-plugin",
-                "version": "1.15.0",
+                "version": "1.15.8",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search.git",
@@ -115,7 +115,7 @@
             "package": {
                 "name": "proudcity/wp-proud-admin",
                 "type": "wordpress-plugin",
-                "version": "1.15.0",
+                "version": "1.15.8",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-admin.git",
@@ -154,7 +154,7 @@
             "package": {
                 "name": "proudcity/wp-proud-actions-app",
                 "type": "wordpress-plugin",
-                "version": "1.15.0",
+                "version": "1.15.8",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-actions-app.git",
@@ -232,7 +232,7 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "1.15.7",
+                "version": "1.15.8",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
@@ -278,23 +278,23 @@
         "wpackagist-plugin/broken-link-checker": "1.11.2",
 
         "proudcity/proudpack": "1.15.0",
-        "proudcity/wp-proud-core": "1.15.7",
+        "proudcity/wp-proud-core": "1.15.8",
         "proudcity/wp-proud-agency": "1.15.0",
-        "proudcity/wp-proud-search": "1.15.0",
+        "proudcity/wp-proud-search": "1.15.8",
         "proudcity/wp-proud-payment": "1.15.0",
         "proudcity/wp-proud-document": "1.15.0",
         "proudcity/wp-proud-location": "1.15.5",
         "proudcity/wp-proud-issue": "1.15.0",
         "proudcity/wp-proud-map-app": "1.15.0",
         "proudcity/wp-proud-social-app": "1.15.0",
-        "proudcity/wp-proud-actions-app": "1.15.0",
-        "proudcity/wp-proud-admin": "1.15.0",
+        "proudcity/wp-proud-actions-app": "1.15.8",
+        "proudcity/wp-proud-admin": "1.15.8",
         "proudcity/wp-proud-seeclickfix": "1.15.0",
         "proudcity/wp-proud-subsite": "1.15.0",
         "proudcity/romulus-wordpress-form": "1.15.0",
         "gravityflow/gravityflow": "1.15.0",
         "proudcity/wp-quick-menu": "1.15.0",
-        "proudcity/wp-proud-theme": "1.15.7"
+        "proudcity/wp-proud-theme": "1.15.8"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
