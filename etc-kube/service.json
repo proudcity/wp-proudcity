@@ -1,0 +1,18 @@
+{
+	"kind": "Service",
+	"apiVersion": "v1",
+	"metadata": {
+		"name": "feidernd"
+	},
+	"spec": {
+		"selector": {
+			"appid": "feidernd"
+		},
+		"ports": [{
+			"protocol": "TCP",
+			"port": 80,
+			"targetPort": 80
+		}],
+		"type": "NodePort"
+	}
+}

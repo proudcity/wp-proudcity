@@ -1,0 +1,192 @@
+{
+	"apiVersion": "extensions/v1beta1",
+	"kind": "Deployment",
+	"metadata": {
+		"name": "feidernd"
+	},
+	"spec": {
+		"replicas": 1,
+		"strategy": {
+			"type": "RollingUpdate",
+			"rollingUpdate": {
+				"maxUnavailable": 0,
+				"maxSurge": 1
+			}
+		},
+		"template": {
+			"metadata": {
+				"labels": {
+					"app": "feidernd",
+					"appid": "feidernd"
+				}
+			},
+			"spec": {
+				"containers": [{
+					"name": "feidernd",
+					"image": "uninettno/rnd-feide-no:build-93",
+					"resources": {
+						"requests": {
+							"cpu": "10m",
+							"memory": "200Mi"
+						},
+						"limits": {
+							"memory": "800Mi"
+						}
+					},
+					"env": [
+            {
+  						"name": "WORDPRESS_DB_HOST",
+  						"valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "dbhost"
+                }
+              }
+  					},
+            {
+  						"name": "WORDPRESS_DB_USER",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "dbuser"
+                }
+              }
+  					},
+            {
+  						"name": "WORDPRESS_DB_PASSWORD",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "dbpassword"
+                }
+              }
+  					},
+            {
+  						"name": "WORDPRESS_DB_NAME",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "dbname"
+                }
+              }
+  					},
+            {
+  						"name": "HOST",
+  						"value": "rnd.feide.no"
+  					},
+            {
+  						"name": "TLS",
+  						"value": "true"
+  					},
+						{
+  						"name": "AUTH_KEY",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "auth-key"
+                }
+              }
+  					},
+						{
+  						"name": "SECURE_AUTH_KEY",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "secure-auth-key"
+                }
+              }
+  					},
+						{
+  						"name": "LOGGED_IN_KEY",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "logged-in-key"
+                }
+              }
+  					},
+						{
+  						"name": "NONCE_KEY",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "nonce-key"
+                }
+              }
+  					},
+						{
+  						"name": "AUTH_SALT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "auth-salt"
+                }
+              }
+  					},
+						{
+  						"name": "SECURE_AUTH_SALT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "secure-auth-salt"
+                }
+              }
+  					},
+						{
+  						"name": "LOGGED_IN_SALT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "logged-in-salt"
+                }
+              }
+  					},
+						{
+  						"name": "NONCE_SALT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "nonce-salt"
+                }
+              }
+  					},
+						{
+							"name": "STATELESS_MEDIA_BUCKET",
+							"valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "stateless-media-bucket"
+                }
+              }
+						},
+						{
+							"name": "STATELESS_MEDIA_SERVICE_ACCOUNT",
+							"valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd",
+                  "key": "stateless-media-account"
+                }
+              }
+						}
+          ],
+					"imagePullPolicy": "Always",
+					"ports": [{
+						"containerPort": 80
+					}],
+					"volumeMounts": [{
+						"name": "feidernd",
+						"mountPath": "/etc/secrets",
+						"readOnly": true
+					}]
+				}],
+				"restartPolicy": "Always",
+				"volumes": [{
+					"name": "feidernd",
+					"secret": {
+						"secretName": "feidernd"
+					}
+				}]
+			}
+		}
+	}
+}

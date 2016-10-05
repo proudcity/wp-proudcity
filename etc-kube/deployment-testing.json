@@ -1,0 +1,238 @@
+{
+	"apiVersion": "extensions/v1beta1",
+	"kind": "Deployment",
+	"metadata": {
+		"name": "feidernd-testing"
+	},
+	"spec": {
+		"replicas": 1,
+		"strategy": {
+			"type": "RollingUpdate",
+			"rollingUpdate": {
+				"maxUnavailable": 0,
+				"maxSurge": 1
+			}
+		},
+		"template": {
+			"metadata": {
+				"labels": {
+					"app": "feidernd-testing",
+					"appid": "feidernd-testing"
+				}
+			},
+			"spec": {
+				"containers": [{
+					"name": "feidernd-testing",
+					"image": "uninettno/rnd-feide-no:build-92",
+					"resources": {
+						"requests": {
+							"cpu": "10m"
+						},
+						"limits": {
+							"cpu": "150m",
+							"memory": "300Mi"
+						}
+					},
+					"env": [
+            {
+  						"name": "WORDPRESS_DB_HOST",
+  						"valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "dbhost"
+                }
+              }
+  					},
+            {
+  						"name": "WORDPRESS_DB_USER",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "dbuser"
+                }
+              }
+  					},
+            {
+  						"name": "WORDPRESS_DB_PASSWORD",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "dbpassword"
+                }
+              }
+  					},
+            {
+  						"name": "WORDPRESS_DB_NAME",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "dbname"
+                }
+              }
+  					},
+            {
+  						"name": "HOST",
+  						"value": "rnd.feide.no"
+  					},
+            {
+  						"name": "TLS",
+  						"value": "true"
+  					},
+            {
+  						"name": "DATAPORTEN_CLIENTID",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "dataporten-clientid"
+                }
+              }
+  					},
+            {
+  						"name": "DATAPORTEN_CLIENTSECRET",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "dataporten-clientsecret"
+                }
+              }
+  					},
+            {
+  						"name": "DATAPORTEN_SCOPES",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "dataporten-scopes"
+                }
+              }
+  					},
+            {
+  						"name": "DATAPORTEN_ROLESETS",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "dataporten-rolesets"
+                }
+              }
+  					},
+            {
+  						"name": "DATAPORTEN_DEFAULT_ROLE_ENABLED",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "dataporten-default-role-enabled"
+                }
+              }
+  					},
+
+						{
+  						"name": "AUTH_KEY",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "auth-key"
+                }
+              }
+  					},
+						{
+  						"name": "SECURE_AUTH_KEY",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "secure-auth-key"
+                }
+              }
+  					},
+						{
+  						"name": "LOGGED_IN_KEY",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "logged-in-key"
+                }
+              }
+  					},
+						{
+  						"name": "NONCE_KEY",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "nonce-key"
+                }
+              }
+  					},
+						{
+  						"name": "AUTH_SALT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "auth-salt"
+                }
+              }
+  					},
+						{
+  						"name": "SECURE_AUTH_SALT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "secure-auth-salt"
+                }
+              }
+  					},
+						{
+  						"name": "LOGGED_IN_SALT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "logged-in-salt"
+                }
+              }
+  					},
+						{
+  						"name": "NONCE_SALT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "nonce-salt"
+                }
+              }
+  					},
+						{
+							"name": "STATELESS_MEDIA_BUCKET",
+							"valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "stateless-media-bucket"
+                }
+              }
+						},
+						{
+							"name": "STATELESS_MEDIA_SERVICE_ACCOUNT",
+							"valueFrom": {
+                "secretKeyRef": {
+                  "name": "feidernd-testing",
+                  "key": "stateless-media-account"
+                }
+              }
+						}
+          ],
+					"imagePullPolicy": "Always",
+					"ports": [{
+						"containerPort": 80
+					}],
+					"volumeMounts": [{
+						"name": "feidernd",
+						"mountPath": "/etc/secrets",
+						"readOnly": true
+					}]
+				}],
+				"restartPolicy": "Always",
+				"volumes": [{
+					"name": "feidernd",
+					"secret": {
+						"secretName": "feidernd-testing"
+					}
+				}]
+			}
+		}
+	}
+}

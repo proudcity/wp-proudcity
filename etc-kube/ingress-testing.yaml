@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: uninett-ingress-testing
+spec:
+  tls:
+  - secretName: ingress-ssl
+  backend:
+    serviceName: feidernd-testing
+    servicePort: 80
+  rules:
+  - host: rnd.feide.no
+    http:
+      paths:
+      - backend:
+          serviceName: feidernd-testing
+          servicePort: 80

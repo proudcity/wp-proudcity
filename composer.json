@@ -303,9 +303,10 @@
         "wpackagist-plugin/debug-bar-console": "*"
     },
     "extra": {
+        "wordpress-install-dir": "wordpress",
         "installer-paths": {
-            "wordpress/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
-            "wordpress/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+            "plugins/{$name}": ["type:wordpress-plugin"],
+            "themes/{$name}": ["type:wordpress-theme"]
         }
     }
 }
