@@ -68,11 +68,11 @@ RUN chmod +x /app/bin/migratedb.sh
 EXPOSE 80
 
 
-RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxLight.woff http://mal.uninett.no/uninett-theme/fonts/colfaxLight.woff
-RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxMedium.woff http://mal.uninett.no/uninett-theme/fonts/colfaxMedium.woff
-RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxRegular.woff http://mal.uninett.no/uninett-theme/fonts/colfaxRegular.woff
-RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxThin.woff http://mal.uninett.no/uninett-theme/fonts/colfaxThin.woff
-RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxRegularItalic.woff http://mal.uninett.no/uninett-theme/fonts/colfaxRegularItalic.woff
+#RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxLight.woff http://mal.uninett.no/uninett-theme/fonts/colfaxLight.woff
+#RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxMedium.woff http://mal.uninett.no/uninett-theme/fonts/colfaxMedium.woff
+#RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxRegular.woff http://mal.uninett.no/uninett-theme/fonts/colfaxRegular.woff
+#RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxThin.woff http://mal.uninett.no/uninett-theme/fonts/colfaxThin.woff
+#RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxRegularItalic.woff http://mal.uninett.no/uninett-theme/fonts/colfaxRegularItalic.woff
 
 # grr, ENTRYPOINT resets CMD now
 ENTRYPOINT ["/entrypoint.sh"]
