@@ -259,6 +259,7 @@
         "wpackagist-plugin/google-analytics-dashboard-for-wp": "4.9.3.2",
         "wpackagist-plugin/wordpress-seo": "3.6.1",
         "wpackagist-plugin/mce-table-buttons": "3.2",
+        "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/safe-redirect-manager": "1.7.8",
         "wpackagist-plugin/iframe": "4.3",
