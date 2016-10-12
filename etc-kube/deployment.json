@@ -2,7 +2,7 @@
 	"apiVersion": "extensions/v1beta1",
 	"kind": "Deployment",
 	"metadata": {
-		"name": "feidernd"
+		"name": "corvallis_or"
 	},
 	"spec": {
 		"replicas": 1,
@@ -16,14 +16,14 @@
 		"template": {
 			"metadata": {
 				"labels": {
-					"app": "feidernd",
-					"appid": "feidernd"
+					"app": "corvallis_or",
+					"appid": "corvallis_or"
 				}
 			},
 			"spec": {
 				"containers": [{
-					"name": "feidernd",
-					"image": "uninettno/rnd-feide-no:build-93",
+					"name": "corvallis_or",
+					"image": "proudcity/wp-proudcity:0.06",
 					"resources": {
 						"requests": {
 							"cpu": "10m",
@@ -38,7 +38,7 @@
   						"name": "WORDPRESS_DB_HOST",
   						"valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "corvallis_or",
                   "key": "dbhost"
                 }
               }
@@ -47,7 +47,7 @@
   						"name": "WORDPRESS_DB_USER",
               "valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "corvallis_or",
                   "key": "dbuser"
                 }
               }
@@ -56,7 +56,7 @@
   						"name": "WORDPRESS_DB_PASSWORD",
               "valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "corvallis_or",
                   "key": "dbpassword"
                 }
               }
@@ -65,87 +65,96 @@
   						"name": "WORDPRESS_DB_NAME",
               "valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "corvallis_or",
                   "key": "dbname"
                 }
               }
   					},
             {
+              "name": "WORDPRESS_DB_PORT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "dbport"
+                }
+              }
+            },
+            {
   						"name": "HOST",
-  						"value": "rnd.feide.no"
+  						"value": "corvallis-or.proudcity.com"
   					},
             {
   						"name": "TLS",
   						"value": "true"
   					},
 						{
-  						"name": "AUTH_KEY",
+  						"name": "WORDPRESS_AUTH_KEY",
               "valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "corvallis_or",
                   "key": "auth-key"
                 }
               }
   					},
 						{
-  						"name": "SECURE_AUTH_KEY",
+  						"name": "WORDPRESS_SECURE_AUTH_KEY",
               "valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "corvallis_or",
                   "key": "secure-auth-key"
                 }
               }
   					},
 						{
-  						"name": "LOGGED_IN_KEY",
+  						"name": "WORDPRESS_LOGGED_IN_KEY",
               "valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "corvallis_or",
                   "key": "logged-in-key"
                 }
               }
   					},
 						{
-  						"name": "NONCE_KEY",
+  						"name": "WORDPRESS_NONCE_KEY",
               "valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "corvallis_or",
                   "key": "nonce-key"
                 }
               }
   					},
 						{
-  						"name": "AUTH_SALT",
+  						"name": "WORDPRESS_AUTH_SALT",
               "valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "corvallis_or",
                   "key": "auth-salt"
                 }
               }
   					},
 						{
-  						"name": "SECURE_AUTH_SALT",
+  						"name": "WORDPRESS_SECURE_AUTH_SALT",
               "valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "corvallis_or",
                   "key": "secure-auth-salt"
                 }
               }
   					},
 						{
-  						"name": "LOGGED_IN_SALT",
+  						"name": "WORDPRESS_LOGGED_IN_SALT",
               "valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "corvallis_or",
                   "key": "logged-in-salt"
                 }
               }
   					},
 						{
-  						"name": "NONCE_SALT",
+  						"name": "WORDPRESS_NONCE_SALT",
               "valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "corvallis_or",
                   "key": "nonce-salt"
                 }
               }
@@ -154,7 +163,7 @@
 							"name": "STATELESS_MEDIA_BUCKET",
 							"valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "proudcity",
                   "key": "stateless-media-bucket"
                 }
               }
@@ -163,7 +172,7 @@
 							"name": "STATELESS_MEDIA_SERVICE_ACCOUNT",
 							"valueFrom": {
                 "secretKeyRef": {
-                  "name": "feidernd",
+                  "name": "proudcity",
                   "key": "stateless-media-account"
                 }
               }
@@ -174,16 +183,16 @@
 						"containerPort": 80
 					}],
 					"volumeMounts": [{
-						"name": "feidernd",
+						"name": "corvallis_or",
 						"mountPath": "/etc/secrets",
 						"readOnly": true
 					}]
 				}],
 				"restartPolicy": "Always",
 				"volumes": [{
-					"name": "feidernd",
+					"name": "corvallis_or",
 					"secret": {
-						"secretName": "feidernd"
+						"secretName": "corvallis_or"
 					}
 				}]
 			}

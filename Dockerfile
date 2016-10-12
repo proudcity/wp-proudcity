@@ -4,7 +4,7 @@ FROM php:7-apache
 RUN a2enmod rewrite expires
 
 # install the PHP extensions we need
-RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev mysql-client unzip git libcurl4-openssl-dev  && rm -rf /var/lib/apt/lists/* \
+RUN apt-get update && apt-get install -y vim libpng12-dev libjpeg-dev mysql-client unzip git libcurl4-openssl-dev  && rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
 	&& docker-php-ext-install gd mysqli opcache curl
 
@@ -20,6 +20,7 @@ RUN { \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 COPY etc/apache-vhost.conf /etc/apache2/sites-enabled/000-default.conf
+COPY etc/php.ini /usr/local/etc/php/php.ini
 
 RUN mkdir -p /app
 COPY composer.json /app/
@@ -29,17 +30,16 @@ WORKDIR /app
 RUN curl -o /tmp/composer.phar http://getcomposer.org/composer.phar \
   && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 RUN composer install
-RUN cp -rT plugins/ wordpress/wp-content/plugins/
 
-RUN curl -o /tmp/markdown.zip https://littoral.michelf.ca/code/php-markdown/php-markdown-extra-1.2.8.zip \
-  	&& unzip /tmp/markdown.zip -d  /app/wordpress/wp-content/plugins \
-  	&& mv  /app/wordpress/wp-content/plugins/PHP\ Markdown\ Extra\ 1.2.8/markdown.php  /app/wordpress/wp-content/plugins/ \
-  	&& rm -rf  /app/wordpress/wp-content/plugins/PHP\ Markdown\ Extra\ 1.2.8/ \
-	&& rm -rf /tmp/markdown.zip
+#RUN curl -o /tmp/markdown.zip https://littoral.michelf.ca/code/php-markdown/php-markdown-extra-1.2.8.zip \
+#  	&& unzip /tmp/markdown.zip -d  /app/wordpress/wp-content/plugins \
+#  	&& mv  /app/wordpress/wp-content/plugins/PHP\ Markdown\ Extra\ 1.2.8/markdown.php  /app/wordpress/wp-content/plugins/ \
+#  	&& rm -rf  /app/wordpress/wp-content/plugins/PHP\ Markdown\ Extra\ 1.2.8/ \
+# && rm -rf /tmp/markdown.zip
 
-# RUN curl -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-# RUN cd /tmp && chmod +x wp-cli.phar \
-#   && mv wp-cli.phar /usr/local/bin/wp
+RUN curl -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN cd /tmp && chmod +x wp-cli.phar \
+  && mv wp-cli.phar /usr/local/bin/wp
 
 # COPY etc/.htaccess_extra .htaccess_extra
 # RUN cat .htaccess_extra >> .htaccess && rm .htaccess_extra && cat .htaccess
@@ -77,3 +77,4 @@ EXPOSE 80
 # grr, ENTRYPOINT resets CMD now
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]
+#CMD apache2 -D FOREGROUND

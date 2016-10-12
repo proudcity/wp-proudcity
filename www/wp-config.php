@@ -20,7 +20,7 @@ define('SAVEQUERIES', true);
  */
 
 
-ini_set('display_errors', '0');
+//ini_set('display_errors', '0');
 
 // $db = getenv("CLEARDB_DATABASE_URL");
 // $secretFile = '/etc/secrets/sql';
@@ -40,8 +40,7 @@ ini_set('display_errors', '0');
 define("DB_NAME", getenv("WORDPRESS_DB_NAME"));
 define("DB_USER", getenv("WORDPRESS_DB_USER"));
 define("DB_PASSWORD", getenv("WORDPRESS_DB_PASSWORD"));
-define("DB_HOST", getenv("WORDPRESS_DB_HOST"));
-
+define("DB_HOST", getenv("WORDPRESS_DB_HOST") . ':' . getenv("WORDPRESS_DB_PORT"));
 
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
@@ -95,26 +94,22 @@ $table_prefix  = 'wp_';
  * de_DE.mo to wp-content/languages and set WPLANG to 'de_DE' to enable German
  * language support.
  */
-define ('WPLANG', 'nb_NO');
+//define ('WPLANG', 'nb_NO');
 
 
-/**
- * For developers: WordPress debugging mode.
- *
- * Change this to true to enable the display of notices during development.
- * It is strongly recommended that plugin and theme developers use WP_DEBUG
- * in their development environments.
- */
-define('WP_DEBUG', true);
+//$url = (getenv('TLS') === 'true' ? 'https' : 'http') . '://' . getenv('HOST');
+//define("WP_SITEURL", $url.'/');
+//define('WP_HOME', $url);
 
 
 
-$url = (getenv('TLS') === 'true' ? 'https' : 'http') . '://' . getenv('HOST');
-define("WP_SITEURL", $url.'/');
-define('WP_HOME', $url);
-
+if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] === 'GoogleHC/1.0') {
+  echo 'OK';
+  exit;
+}
 
 /* Special redirect and handlibg based upon headers.... */
+/*
 $headersArr = apache_request_headers();
 $headers = [];
 foreach ($headersArr as $header => $value) {
@@ -123,10 +118,6 @@ foreach ($headersArr as $header => $value) {
 
 
 
-if (isset($headers["user-agent"]) && $headers["user-agent"] === 'GoogleHC/1.0') {
-  echo 'OK';
-  exit;
-}
 if (getenv('TLS') === 'true' && isset($headers["x-forwarded-proto"]) && $headers["x-forwarded-proto"] === 'http') {
   $redirect = 'https://' . getenv('HOST') . $_SERVER['REQUEST_URI'];
   header('HTTP/1.1 301 Moved Permanently');
@@ -136,7 +127,7 @@ if (getenv('TLS') === 'true' && isset($headers["x-forwarded-proto"]) && $headers
 if (getenv('TLS') === 'true') {
   $_SERVER['HTTPS']='on';
 }
-
+*/
 
 
 /* ------ --- --- -- -- --- -- .... */

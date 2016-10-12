@@ -120,7 +120,33 @@ docker run -p 8080:80 \
 ```
 To ssh into the box
 ```
-docker exec -t -i VOLUME_NAME bash
+docker exec -it `docker ps -aq --filter="name=wpproudcity_wordpress_1"` bash
+```
+
+```
+mysql -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD -h${WORDPRESS_DB_HOST} -P${WORDPRESS_DB_PORT} $WORDPRESS_DB_NAME
+```
+
+
+## Running on Kubernetes
+```
+kubectl create ns production
+kubectl create --namespace production -f etc-kube/secrets.yml
+kubectl create --namespace production -f etc-kube/secrets-beta.yml
+kubectl create --namespace production -f etc-kube/deployment.json
+kubectl create --namespace production -f etc-kube/service.json
+#kubectl create --namespace production -f etc-kube/ingress-ssl.yml
+kubectl create --namespace production -f etc-kube/ingress.yml
+```
+
+
+```
+# Get ingress IP
+kubectl --namespace production get ing
+
+# SSH into pod
+kubectl --namespace production get po
+kubectl --namespace production exec -ti pod_name bash
 ```
 
 ## Notes

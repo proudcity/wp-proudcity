@@ -1,5 +1,8 @@
 vendor
 env.list
-etc-kube/ingress-ssl.yaml
-etc-kube/secrets.yaml
+builds
+etc-kube/ingress-ssl.yml
+etc-kube/secrets.yml
+etc-kube/create.sql
+etc-kube/globals.sh
 etc/ENV

@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: proudcity-dev
+spec:
+  tls:
+  - secretName: tls
+  backend:
+    serviceName: beta
+    servicePort: 80
+  rules:
+  - host: beta.proudcity.com
+    http:
+      paths:
+      - backend:
+          serviceName: beta
+          servicePort: 80
+  - host: corvallis-or.proudcity.com
+    http:
+      paths:
+      - backend:
+          serviceName: corvallis_or
+          servicePort: 80
