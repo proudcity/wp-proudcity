@@ -246,19 +246,19 @@
         "composer/installers": "1.*",
         "johnpbloch/wordpress": "4.6.1",
 
-        "wpackagist-plugin/auth0": "3.2.10",
+        "wpackagist-plugin/auth0": "3.2.13",
         "wpackagist-plugin/wp-jwt-auth": "1.1.2",
-        "wpackagist-plugin/rest-api": "2.0-beta13",
+        "wpackagist-plugin/rest-api": "2.0-beta15",
         "wpackagist-plugin/wp-api-menus": "1.3.1",
 
         "wpackagist-plugin/w3-total-cache": "0.9.5.1",
         "wpackagist-plugin/wp-stateless": "1.9.0",
         "wpackagist-plugin/taxonomy-terms-order": "1.4.8",
         "wpackagist-plugin/intuitive-custom-post-order": "3.0.7",
-        "wpackagist-plugin/duplicate-post": "2.6",        
+        "wpackagist-plugin/duplicate-post": "3.0.2",        
         "wpackagist-plugin/disable-comments": "1.5.2",
         "wpackagist-plugin/google-analytics-dashboard-for-wp": "4.9.3.2",
-        "wpackagist-plugin/wordpress-seo": "3.6.1",
+        "wpackagist-plugin/wordpress-seo": "3.7.0",
         "wpackagist-plugin/mce-table-buttons": "3.2",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
@@ -270,7 +270,7 @@
         "wpackagist-plugin/edit-flow": "0.8.2",
         "wpackagist-plugin/wp-sitemap-page": "1.6",
 
-        "wpackagist-plugin/siteorigin-panels": "2.4.16",
+        "wpackagist-plugin/siteorigin-panels": "2.4.17",
         "wpackagist-plugin/so-widgets-bundle": "1.7.1",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
