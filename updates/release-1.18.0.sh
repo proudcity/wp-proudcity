@@ -3,6 +3,9 @@
 
 PHP=${1}
 
+# Update order of Service Center link
+wp --allow-root eval-file $PHP
+
 # Allow service centger page callbacks
 wp --allow-root rewrite flush
 
