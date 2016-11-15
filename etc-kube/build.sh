@@ -84,6 +84,13 @@ kubectl apply --namespace $NAMESPACE -f $dir/service.json
 # kubectl create --namespace $NAMESPACE -f etc-kube/ingress-ssl.yml
 #kubectl apply --namespace $NAMESPACE -f ingress.yml
 
+# Update ingress
+kubectl --namespace $NAMESPACE get ing --output=json \
+  | jq ".items[0].spec.tls |= .+ [{\"hosts\": [\"${host}\"], \"secretName\": \"${key}-tls\"}]" \
+  | jq ".items[0].spec.rules |= .+ [{ \"host\": \"${host}\", \"http\": { \"paths\": [ { \"path\": \"/*\", \"backend\": { \"serviceName\": \"${key}\", \"servicePort\": 80 } } ] } }]" \
+  > $dir/ingress.json
+kubectl apply --namespace $NAMESPACE -f $dir/ingress.json
+
 echo 'done'
 kubectl --namespace $NAMESPACE get po
 # Clean up
