@@ -23,7 +23,7 @@
 			"spec": {
 				"containers": [{
 					"name": "corvallis_or",
-					"image": "proudcity/wp-proudcity:0.06",
+					"image": "proudcity/wp-proudcity:0.11",
 					"resources": {
 						"requests": {
 							"cpu": "10m",

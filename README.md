@@ -91,7 +91,11 @@ Dockerfile and run.sh are forked from (tutumcloud/wordpress-stackable)[https://g
 ### Building
 ```
 docker build -t proudcity/wp-proudcity .
+docker-compose up # Test image
 docker images
+export IMAGE=
+docker tag $IMAGE proudcity/wp-proudcity:0.10
+docker push proudcity/wp-proudcity:0.10
 ```
 
 
@@ -130,23 +134,51 @@ mysql -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD -h${WORDPRESS_DB_HOST} -P${W
 
 ## Running on Kubernetes
 ```
-kubectl create ns production
-kubectl create --namespace production -f etc-kube/secrets.yml
-kubectl create --namespace production -f etc-kube/secrets-beta.yml
-kubectl create --namespace production -f etc-kube/deployment.json
-kubectl create --namespace production -f etc-kube/service.json
-#kubectl create --namespace production -f etc-kube/ingress-ssl.yml
-kubectl create --namespace production -f etc-kube/ingress.yml
+# Set up system variables
+source etc-kube/globals.sh 
+
+# Set up Kubernetes namespace, SSL, settings secrets
+kubectl create secret generic tls --from-file=~/workspace/ssl/proudcity/localcerts/combined.crt --from-file=~/workspace/ssl/proudcity/localcerts/proudcity.com.key --namespace jenkins
+kubectl create ns $NAMESPACE && kubectl create --namespace $NAMESPACE -f etc-kube/secrets-proudcity.yml
+
+# Automatically build
+bash etc-kube/build.sh kube-san-rafael-ca
+
+# Manual setup
+export ACTION=create # delete, etc
+kubectl $ACTION --namespace $NAMESPACE -f secrets.yml
+kubectl $ACTION --namespace $NAMESPACE -f deployment.json
+kubectl $ACTION --namespace $NAMESPACE -f service.json
+
+# Update ingress (@todo: nodejs?)
+kubectl apply --namespace $NAMESPACE -f etc-kube/ingress.yml
+
+# Set up ingress (kube-lego for Lets Encrypt)
+kubectl apply -f kube-lego/00-namespace.yaml
+kubectl apply -f kube-lego/configmap.yaml
+kubectl apply -f kube-lego/deployment.yaml
 ```
 
 
+### Helpful commands
 ```
 # Get ingress IP
-kubectl --namespace production get ing
+kubectl --namespace $NAMESPACE get ing
 
 # SSH into pod
-kubectl --namespace production get po
-kubectl --namespace production exec -ti pod_name bash
+kubectl --namespace $NAMESPACE get po
+export POD=
+kubectl --namespace $NAMESPACE exec -ti $POD bash
+
+# Get logs
+kubectl logs --namespace $NAMESPACE $POD  --tail=100
+
+# Mysql commands on in docker container
+mysql -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD -h$WORDPRESS_DB_HOST -P$WORDPRESS_DB_PORT
+
+$Mysql commandshost
+mysql -u$MYSQL_USER -p$MYSQL_PASS -h$MYSQL_HOST -P$MYSQL_PORT
+
 ```
 
 ## Notes

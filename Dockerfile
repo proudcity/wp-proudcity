@@ -31,6 +31,11 @@ RUN curl -o /tmp/composer.phar http://getcomposer.org/composer.phar \
   && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 RUN composer install
 
+# Install Gravity Forms
+RUN git clone https://github.com/proudcity/gravityforms.git /app/wordpress/wp-content/plugins/gravityforms
+# @todo: `mv` doesn't work because of a Docker FS bug: https://github.com/docker/docker/issues/4570
+RUN cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins
+
 #RUN curl -o /tmp/markdown.zip https://littoral.michelf.ca/code/php-markdown/php-markdown-extra-1.2.8.zip \
 #  	&& unzip /tmp/markdown.zip -d  /app/wordpress/wp-content/plugins \
 #  	&& mv  /app/wordpress/wp-content/plugins/PHP\ Markdown\ Extra\ 1.2.8/markdown.php  /app/wordpress/wp-content/plugins/ \
@@ -62,7 +67,6 @@ RUN chmod 777 /app/wordpress/wp-content/cache
 
 RUN chmod -R a+rX /app/wordpress
 RUN chown -R www-data:www-data /app/wordpress
-RUN chmod +x /app/bin/migratedb.sh
 
 # VOLUME /app/wordpress/wp-content/cache
 EXPOSE 80

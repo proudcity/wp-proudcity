@@ -1,8 +1,5 @@
-# SSL One-time setup:
-#source etc-kube/globals.sh 
-#kubectl create secret generic tls --from-file=combined.crt --from-file=proudcity.com.key --namespace jenkins
-#kubectl create ns $NAMESPACE && kubectl create --namespace $NAMESPACE -f etc-kube/secrets-proudcity.yml
-
+# Usage
+#bash etc-kube/build.sh san-rafael-ca
 
 # Globals
 thisdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -10,21 +7,14 @@ source $thisdir/globals.sh
 
 echo "NAMESPACE set to $NAMESPACE"
 echo $thisdir
+
 # Arguments
-state=OR
-city="Corn Valley"
-
-# Clean up
-state="${state,,}"
-city="${city,,}"
-
-# Optional arguments?
-glue=""
-key="${city// /}$glue$state"
-key=beta
-glue="-"
+key=${1:beta}
 suffix=".proudcity.com"
-host="${city// /-}$glue$state$suffix"
+host="${key}${suffix}"
+key=${key//-/}
+echo "KEY: ${key}"
+echo "HOST: ${host}"
 
 # Variables setup
 dbname=`echo ${key//-/_} | cut -c 1-16`
@@ -38,14 +28,6 @@ if [ -d $dir ]; then rm -Rf $dir; fi
 cp -r "$thisdir/../etc-kube" $dir
 cd $dir
 
-
-# Mysql setup
-echo "
-CREATE database ${dbname};
-GRANT ALL ON ${dbname}.* TO ${dbname}@'%' IDENTIFIED BY '${dbpass}';
-" > create.sql
-mysql -u${MYSQL_USER} -p${MYSQL_PASS} -h${MYSQL_HOST} -P${MYSQL_PORT} < create.sql
-
 # Create our secrets file
 echo "
 apiVersion: v1
@@ -54,27 +36,48 @@ metadata:
   name: $key
 type: Opaque
 data:
-  dbhost: `base64 <<< $MYSQL_HOST`
-  dbuser: `base64 <<< $dbname`
-  dbpassword: `base64 <<< $dbpass`
-  dbname: `base64 <<< $dbname`
-  dbport: `base64 <<< $MYSQL_PORT`
-  auth-key: `base64 --wrap=0 /dev/urandom |head -c 64`
-  secure-auth-key: `base64 --wrap=0 /dev/urandom |head -c 64`
-  logged-in-key: `base64 --wrap=0 /dev/urandom |head -c 64`
-  nonce-key: `base64 --wrap=0 /dev/urandom |head -c 64`
-  auth-salt: `base64 --wrap=0 /dev/urandom |head -c 64`
-  secure-auth-salt: `base64 --wrap=0 /dev/urandom |head -c 64`
-  logged-in-salt: `base64 --wrap=0 /dev/urandom |head -c 64`
-  nonce-salt: `base64 --wrap=0 /dev/urandom |head -c 64`
+  dbhost: `echo $MYSQL_HOST | base64 -w0`
+  dbuser: `echo $dbname | base64 -w0`
+  dbpassword: `echo $dbpass | base64 -w0`
+  dbname: `echo $dbname | base64 -w0`
+  dbport: `echo $MYSQL_PORT | base64 -w0`
+  auth-key: `echo openssl rand -base64 32 | base64 -w0`
+  secure-auth-key: `echo openssl rand -base64 32 | base64 -w0`
+  logged-in-key: `echo openssl rand -base64 32 | base64 -w0`
+  nonce-key: `echo openssl rand -base64 32 | base64 -w0`
+  auth-salt: `echo openssl rand -base64 32 | base64 -w0`
+  secure-auth-salt: `echo openssl rand -base64 32 | base64 -w0`
+  logged-in-salt: `echo openssl rand -base64 32 | base64 -w0`
+  nonce-salt: `echo openssl rand -base64 32 | base64 -w0`
   gcserviceaccount.json: bm90aGluZw==
 " > $dir/secrets.yml
+
+# Mysql setup
+echo "Downloading database dump ..."
+echo "
+DROP DATABASE IF EXISTS ${dbname} ;
+CREATE DATABASE ${dbname};
+GRANT ALL ON ${dbname}.* TO ${dbname}@'%' IDENTIFIED BY '${dbpass}';
+" > create.sql
+mysql -u${MYSQL_USER} -p${MYSQL_PASS} -h${MYSQL_HOST} -P${MYSQL_PORT} < create.sql
+curl $DATABASE_DUMP | gunzip > $dir/db.sql
+
+# REPLACE!
 # Key (this is the big one)
-sed -i "s/corvallis_or/${key}/g" *
+sed -i "s/corvallis_or/${key}/g" *.yml
+sed -i "s/corvallis_or/${key}/g" *.json
+sed -i "s/corvallis_or/${key}/g" *.sql
 # Domain
 sed -i "s/corvallis-or\.proudcity\.com/${host}/g" *
+sed -i "s/example\.proudcity\.com/${host}/g" *
 
+# Import Mysql db
+echo "Importing Mysql db $dir/db.sql ..."
+mysql -u${MYSQL_USER} -p${MYSQL_PASS} -h${MYSQL_HOST} -P${MYSQL_PORT} ${dbname} < $dir/db.sql
+mysql -u${MYSQL_USER} -p${MYSQL_PASS} -h${MYSQL_HOST} -P${MYSQL_PORT} ${dbname} < $dir/post-import.sql
 
+# Build Kubernetes
+echo "Build Kubernetes ..."
 kubectl apply --namespace $NAMESPACE -f $dir/secrets.yml
 kubectl apply --namespace $NAMESPACE -f $dir/deployment.json
 kubectl apply --namespace $NAMESPACE -f $dir/service.json
@@ -82,6 +85,7 @@ kubectl apply --namespace $NAMESPACE -f $dir/service.json
 #kubectl apply --namespace $NAMESPACE -f ingress.yml
 
 echo 'done'
+kubectl --namespace $NAMESPACE get po
 # Clean up
 #rm secrets.yml
 #rm -r $key
