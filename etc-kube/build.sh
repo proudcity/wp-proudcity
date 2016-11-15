@@ -5,6 +5,9 @@
 thisdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $thisdir/globals.sh
 
+# Make sure mysql is installed.  This will gracefully degrade locally (you won't be sudo).
+apt-get install mysql-client
+
 echo "NAMESPACE set to $NAMESPACE"
 echo $thisdir
 
@@ -22,7 +25,7 @@ dbpass=`date +%s | sha256sum | base64 | head -c 32 ; echo`
 
 # Copy the Kube config
 if [ ! -d ../builds ]; then mkdir ../builds; fi
-dir="$thisdir/../builds/${key}"
+dir="./${thisdir}/../builds/${key}"
 echo "BUILD DIR: ${dir}"
 if [ -d $dir ]; then rm -Rf $dir; fi
 cp -r "$thisdir/../etc-kube" $dir
@@ -84,7 +87,7 @@ kubectl apply --namespace $NAMESPACE -f $dir/service.json
 # kubectl create --namespace $NAMESPACE -f etc-kube/ingress-ssl.yml
 #kubectl apply --namespace $NAMESPACE -f ingress.yml
 
-# Update ingress
+# Update ingress to add new host
 kubectl --namespace $NAMESPACE get ing --output=json \
   | jq ".items[0].spec.tls |= .+ [{\"hosts\": [\"${host}\"], \"secretName\": \"${key}-tls\"}]" \
   | jq ".items[0].spec.rules |= .+ [{ \"host\": \"${host}\", \"http\": { \"paths\": [ { \"path\": \"/*\", \"backend\": { \"serviceName\": \"${key}\", \"servicePort\": 80 } } ] } }]" \
@@ -93,6 +96,7 @@ kubectl apply --namespace $NAMESPACE -f $dir/ingress.json
 
 echo 'done'
 kubectl --namespace $NAMESPACE get po
+kubectl --namespace $NAMESPACE get ing
 # Clean up
 #rm secrets.yml
 #rm -r $key
