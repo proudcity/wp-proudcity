@@ -25,7 +25,7 @@ dbpass=`date +%s | sha256sum | base64 | head -c 32 ; echo`
 
 # Copy the Kube config
 if [ ! -d ../builds ]; then mkdir ../builds; fi
-dir="./${thisdir}/../builds/${key}"
+dir="${thisdir}/../builds/${key}"
 echo "BUILD DIR: ${dir}"
 if [ -d $dir ]; then rm -Rf $dir; fi
 cp -r "$thisdir/../etc-kube" $dir
