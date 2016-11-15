@@ -88,9 +88,14 @@ kubectl apply --namespace $NAMESPACE -f $dir/service.json
 #kubectl apply --namespace $NAMESPACE -f ingress.yml
 
 # Update ingress to add new host
+# @todo: For Lets Encrypt (kube-lego)
+#kubectl --namespace $NAMESPACE get ing --output=json \
+#  | jq ".items[0].spec.tls |= .+ [{\"hosts\": [\"${host}\"], \"secretName\": \"${key}-tls\"}]" \
+#  | jq ".items[0].spec.rules |= .+ [{ \"host\": \"${host}\", \"http\": { \"paths\": [ { \"path\": \"/*\", \"backend\": { \"serviceName\": \"${key}\", \"servicePort\": 80 } } ] } }]" \
+#  > $dir/ingress.json
+# For ProudCity wildcard SSL cert
 kubectl --namespace $NAMESPACE get ing --output=json \
-  | jq ".items[0].spec.tls |= .+ [{\"hosts\": [\"${host}\"], \"secretName\": \"${key}-tls\"}]" \
-  | jq ".items[0].spec.rules |= .+ [{ \"host\": \"${host}\", \"http\": { \"paths\": [ { \"path\": \"/*\", \"backend\": { \"serviceName\": \"${key}\", \"servicePort\": 80 } } ] } }]" \
+  | jq ".items[0].spec.rules |= .+ [{ \"host\": \"${host}\", \"http\": { \"paths\": [ { \"backend\": { \"serviceName\": \"${key}\", \"servicePort\": 80 } } ] } }]" \
   > $dir/ingress.json
 kubectl apply --namespace $NAMESPACE -f $dir/ingress.json
 
