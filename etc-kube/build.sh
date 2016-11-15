@@ -6,7 +6,7 @@ thisdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $thisdir/globals.sh
 
 # Make sure mysql is installed.  This will gracefully degrade locally (you won't be sudo).
-#apt-get update && apt-get install mysql-client -y
+apt-get update && apt-get install mysql-client -y
 
 echo "NAMESPACE set to $NAMESPACE"
 echo $thisdir
