@@ -6,7 +6,7 @@ thisdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $thisdir/globals.sh
 
 # Make sure mysql is installed.  This will gracefully degrade locally (you won't be sudo).
-apt-get update && apt-get install mysql-client -y
+#apt-get update && apt-get install mysql-client -y
 
 echo "NAMESPACE set to $NAMESPACE"
 echo $thisdir
@@ -56,13 +56,13 @@ data:
 " > $dir/secrets.yml
 
 # Mysql setup
-echo "Downloading database dump ..."
 echo "
 DROP DATABASE IF EXISTS ${dbname} ;
 CREATE DATABASE ${dbname};
 GRANT ALL ON ${dbname}.* TO ${dbname}@'%' IDENTIFIED BY '${dbpass}';
 " > create.sql
 mysql -u${MYSQL_USER} -p${MYSQL_PASS} -h${MYSQL_HOST} -P${MYSQL_PORT} < create.sql
+echo "Downloading database dump ..."
 curl $DATABASE_DUMP | gunzip > $dir/db.sql
 
 # REPLACE!
@@ -99,10 +99,10 @@ kubectl apply --namespace $NAMESPACE -f $dir/ingress.json
 #rm -r $key
 
 echo 'Done building, waiting for website to become available'
-until $(curl --output /dev/null --silent --head --fail https://${host}); do
-    echo '.'
-    sleep 5
-done
+#until $(curl --output /dev/null --silent --head --fail https://${host}); do
+#    echo '.'
+#    sleep 5
+#done
 
 kubectl --namespace $NAMESPACE get po
 kubectl --namespace $NAMESPACE get ing
