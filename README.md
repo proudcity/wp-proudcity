@@ -94,8 +94,8 @@ docker build -t proudcity/wp-proudcity .
 docker-compose up # Test image
 docker images
 export IMAGE=
-docker tag $IMAGE proudcity/wp-proudcity:0.10
-docker push proudcity/wp-proudcity:0.10
+docker tag $IMAGE proudcity/wp-proudcity:0.11
+docker push proudcity/wp-proudcity:0.11
 ```
 
 
@@ -138,7 +138,7 @@ mysql -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD -h${WORDPRESS_DB_HOST} -P${W
 source etc-kube/globals.sh 
 
 # Set up Kubernetes namespace, SSL, settings secrets
-kubectl create secret generic tls --from-file=~/workspace/ssl/proudcity/localcerts/combined.crt --from-file=~/workspace/ssl/proudcity/localcerts/proudcity.com.key --namespace jenkins
+kubectl create secret generic proudcity-tls --from-file=/home/jeff/workspace/ssl/proudcity/localcerts/tls.crt --from-file=/home/jeff/workspace/ssl/proudcity/localcerts/tls.key --namespace $NAMESPACE
 kubectl create ns $NAMESPACE && kubectl create --namespace $NAMESPACE -f etc-kube/secrets-proudcity.yml
 
 # Automatically build
@@ -176,8 +176,15 @@ kubectl logs --namespace $NAMESPACE $POD  --tail=100
 # Mysql commands on in docker container
 mysql -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD -h$WORDPRESS_DB_HOST -P$WORDPRESS_DB_PORT
 
-$Mysql commandshost
+# Mysql commands host
 mysql -u$MYSQL_USER -p$MYSQL_PASS -h$MYSQL_HOST -P$MYSQL_PORT
+
+# Login to Jenkins
+kubectl --namespace jenkins exec -ti jenkins-3978681046-gyliw bash
+
+# Look at Kube-Lego (Lets Encrypt) logs
+kubectl logs --namespace kube-lego kube-lego-3701941839-pyjxg  --tail=100
+
 
 ```
 
