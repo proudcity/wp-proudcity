@@ -124,11 +124,11 @@ if (getenv('TLS') === 'true' && isset($headers["x-forwarded-proto"]) && $headers
   header('Location: ' . $redirect);
   exit();
 }
+
+*/
 if (getenv('TLS') === 'true') {
   $_SERVER['HTTPS']='on';
 }
-*/
-
 
 /* ------ --- --- -- -- --- -- .... */
 
