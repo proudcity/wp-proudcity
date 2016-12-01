@@ -1,0 +1,18 @@
+{
+	"kind": "Service",
+	"apiVersion": "v1",
+	"metadata": {
+		"name": "corvallis_or"
+	},
+	"spec": {
+		"selector": {
+			"appid": "corvallis_or"
+		},
+		"ports": [{
+			"protocol": "TCP",
+			"port": 80,
+			"targetPort": 80
+		}],
+		"type": "NodePort"
+	}
+}

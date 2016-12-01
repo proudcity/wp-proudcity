@@ -1,0 +1,201 @@
+{
+	"apiVersion": "extensions/v1beta1",
+	"kind": "Deployment",
+	"metadata": {
+		"name": "corvallis_or"
+	},
+	"spec": {
+		"replicas": 1,
+		"strategy": {
+			"type": "RollingUpdate",
+			"rollingUpdate": {
+				"maxUnavailable": 0,
+				"maxSurge": 1
+			}
+		},
+		"template": {
+			"metadata": {
+				"labels": {
+					"app": "corvallis_or",
+					"appid": "corvallis_or"
+				}
+			},
+			"spec": {
+				"containers": [{
+					"name": "corvallis_or",
+					"image": "proudcity/wp-proudcity:0.11",
+					"resources": {
+						"requests": {
+							"cpu": "10m",
+							"memory": "200Mi"
+						},
+						"limits": {
+							"memory": "800Mi"
+						}
+					},
+					"env": [
+            {
+  						"name": "WORDPRESS_DB_HOST",
+  						"valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "dbhost"
+                }
+              }
+  					},
+            {
+  						"name": "WORDPRESS_DB_USER",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "dbuser"
+                }
+              }
+  					},
+            {
+  						"name": "WORDPRESS_DB_PASSWORD",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "dbpassword"
+                }
+              }
+  					},
+            {
+  						"name": "WORDPRESS_DB_NAME",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "dbname"
+                }
+              }
+  					},
+            {
+              "name": "WORDPRESS_DB_PORT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "dbport"
+                }
+              }
+            },
+            {
+  						"name": "HOST",
+  						"value": "corvallis-or.proudcity.com"
+  					},
+            {
+  						"name": "TLS",
+  						"value": "true"
+  					},
+						{
+  						"name": "WORDPRESS_AUTH_KEY",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "auth-key"
+                }
+              }
+  					},
+						{
+  						"name": "WORDPRESS_SECURE_AUTH_KEY",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "secure-auth-key"
+                }
+              }
+  					},
+						{
+  						"name": "WORDPRESS_LOGGED_IN_KEY",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "logged-in-key"
+                }
+              }
+  					},
+						{
+  						"name": "WORDPRESS_NONCE_KEY",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "nonce-key"
+                }
+              }
+  					},
+						{
+  						"name": "WORDPRESS_AUTH_SALT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "auth-salt"
+                }
+              }
+  					},
+						{
+  						"name": "WORDPRESS_SECURE_AUTH_SALT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "secure-auth-salt"
+                }
+              }
+  					},
+						{
+  						"name": "WORDPRESS_LOGGED_IN_SALT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "logged-in-salt"
+                }
+              }
+  					},
+						{
+  						"name": "WORDPRESS_NONCE_SALT",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "name": "corvallis_or",
+                  "key": "nonce-salt"
+                }
+              }
+  					},
+						{
+							"name": "STATELESS_MEDIA_BUCKET",
+							"valueFrom": {
+                "secretKeyRef": {
+                  "name": "proudcity",
+                  "key": "stateless-media-bucket"
+                }
+              }
+						},
+						{
+							"name": "STATELESS_MEDIA_SERVICE_ACCOUNT",
+							"valueFrom": {
+                "secretKeyRef": {
+                  "name": "proudcity",
+                  "key": "stateless-media-account"
+                }
+              }
+						}
+          ],
+					"imagePullPolicy": "Always",
+					"ports": [{
+						"containerPort": 80
+					}],
+					"volumeMounts": [{
+						"name": "corvallis_or",
+						"mountPath": "/etc/secrets",
+						"readOnly": true
+					}]
+				}],
+				"restartPolicy": "Always",
+				"volumes": [{
+					"name": "corvallis_or",
+					"secret": {
+						"secretName": "corvallis_or"
+					}
+				}]
+			}
+		}
+	}
+}

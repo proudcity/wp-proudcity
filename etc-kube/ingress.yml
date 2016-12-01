@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: proudcity-dev
+  namespace: dev
+spec:
+  rules:
+  - host: kube-san-rafael-ca.proudcity.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kubesanrafaelca
+          servicePort: 80

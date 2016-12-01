@@ -1,0 +1,16 @@
+# BEGIN W3TC Page Cache cache
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+    AddType text/html .html_gzip
+    AddEncoding gzip .html_gzip
+    AddType text/xml .xml_gzip
+    AddEncoding gzip .xml_gzip
+</IfModule>
+<IfModule mod_setenvif.c>
+    SetEnvIfNoCase Request_URI \.html_gzip$ no-gzip
+    SetEnvIfNoCase Request_URI \.xml_gzip$ no-gzip
+</IfModule>
+<IfModule mod_headers.c>
+    Header set Vary "Accept-Encoding, Cookie"
+</IfModule>
+# END W3TC Page Cache cache
