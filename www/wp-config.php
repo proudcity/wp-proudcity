@@ -68,7 +68,7 @@ define( 'NONCE_SALT',       getenv('NONCE_SALT'));
 
 define( 'WP_STATELESS_MEDIA_BUCKET', 			  getenv('STATELESS_MEDIA_BUCKET'));
 define( 'WP_STATELESS_MEDIA_MODE', 				  'cdn');
-define( 'WP_STATELESS_MEDIA_ROOT_DIR',      'files/');
+define( 'WP_STATELESS_MEDIA_ROOT_DIR',      getenv('STATELESS_MEDIA_DIRECTORY'));
 define( 'WP_STATELESS_MEDIA_KEY_FILE_PATH', '/etc/secrets/gcserviceaccount.json');
 //define( 'WP_STATELESS_MEDIA_SERVICE_ACCOUNT', 	getenv('STATELESS_MEDIA_SERVICE_ACCOUNT'));
 
@@ -117,7 +117,7 @@ foreach ($headersArr as $header => $value) {
 }
 
 
-
+*/
 if (getenv('TLS') === 'true' && isset($headers["x-forwarded-proto"]) && $headers["x-forwarded-proto"] === 'http') {
   $redirect = 'https://' . getenv('HOST') . $_SERVER['REQUEST_URI'];
   header('HTTP/1.1 301 Moved Permanently');
@@ -125,7 +125,7 @@ if (getenv('TLS') === 'true' && isset($headers["x-forwarded-proto"]) && $headers
   exit();
 }
 
-*/
+
 if (getenv('TLS') === 'true') {
   $_SERVER['HTTPS']='on';
 }
