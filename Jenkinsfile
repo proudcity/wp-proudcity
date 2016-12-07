@@ -1,7 +1,7 @@
 node {
-  stage 'Running build'
-  sh("source ./etc-kube/globals.sh")
-  sh("./etc-kube/build.sh ${env.SUBDOMAIN}")
+  //stage 'Running build'
+  //sh("source ./etc-kube/globals.sh")
+  //sh("./etc-kube/build.sh ${env.SUBDOMAIN}")
 
   def project = 'proudcity-1184'
   def appName = 'wp-proudcity'
