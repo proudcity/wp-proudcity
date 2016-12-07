@@ -2,10 +2,10 @@ node {
   stage 'Running build'
   sh("source ./etc-kube/globals.sh")
   sh("./etc-kube/build.sh ${env.SUBDOMAIN}")
-  /*
-  def project = 'REPLACE_WITH_YOUR_PROJECT_ID'
-  def appName = 'gceme'
-  def feSvcName = "${appName}-frontend"
+
+  def project = 'proudcity-1184'
+  def appName = 'wp-proudcity'
+  //def feSvcName = "${appName}-frontend"
   def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
   checkout scm
@@ -13,12 +13,13 @@ node {
   stage 'Build image'
   sh("docker build -t ${imageTag} .")
 
-  stage 'Run Go tests'
-  sh("docker run ${imageTag} go test")
+  //stage 'Run Go tests'
+  //sh("docker run ${imageTag} go test")
 
   stage 'Push image to registry'
   sh("gcloud docker push ${imageTag}")
 
+  /*
   stage "Deploy Application"
   switch (env.BRANCH_NAME) {
     // Roll out to staging
