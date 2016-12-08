@@ -253,7 +253,6 @@
 
         "wpackagist-plugin/w3-total-cache": "0.9.5.1",
         "wpackagist-plugin/wp-stateless": "1.9.0",
-        "wpackagist-plugin/taxonomy-terms-order": "1.4.8",
         "wpackagist-plugin/intuitive-custom-post-order": "3.0.7",
         "wpackagist-plugin/duplicate-post": "3.0.3",        
         "wpackagist-plugin/disable-comments": "1.6",
