@@ -36,22 +36,22 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     echo "Adding theme repo: ${s} in `pwd`"
   done
 
-  # Add custom themes, comma separated
+  # Add custom themes, comma separated, fail silently
   if [[ $WORDPRESS_THEMES ]]; then
     cd /app/wordpress/wp-content/themes
     export IFS=","
     for s in $WORDPRESS_THEMES; do
-      git clone "${s}"
+      git clone "${s}"  &> /dev/null
       echo "Adding theme repo: ${s} in `pwd`"
     done
   fi
 
-  # Add custom plugins, comma separated
+  # Add custom plugins, comma separated, fail silently
   if [[ $WORDPRESS_PLUGINS ]]; then
     cd /app/wordpress/wp-content/plugins
     export IFS=","
     for s in $WORDPRESS_PLUGINS; do
-      git clone "${s}"
+      git clone "${s}"  &> /dev/null
       echo "Adding plugin repo: ${s} in `pwd`"
     done
   fi
