@@ -21,23 +21,39 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   git clone https://source.developers.google.com/p/proudcity-1184/r/auth0
 
   # Add custom themes
+  export IFS=";"
+  sentence="one;two;three"
+  for s in $WORDPRESS_THEMES; do
+    git clone "${s}"
+    echo "Adding theme repo: ${s} in `pwd`"
+  done
+
+
+  export IFS=";"
+  sentence="one;two;three"
+  for s in $WORDPRESS_THEMES; do
+    git clone "${s}"
+    echo "Adding theme repo: ${s} in `pwd`"
+  done
+
+  # Add custom themes, comma separated
   if [[ $WORDPRESS_THEMES ]]; then
-    echo $WORDPRESS_THEMES > /tmp/themes
-    cd /app/wordpress/wp-content/plugins
-    while read s; do
+    cd /app/wordpress/wp-content/themes
+    export IFS=","
+    for s in $WORDPRESS_THEMES; do
       git clone "${s}"
-      echo "Adding theme repo: ${s}"
-    done < /tmp/themes
+      echo "Adding theme repo: ${s} in `pwd`"
+    done
   fi
 
-  # Add custom plugins
+  # Add custom plugins, comma separated
   if [[ $WORDPRESS_PLUGINS ]]; then
-    echo $WORDPRESS_PLUGINS > /tmp/plugins
     cd /app/wordpress/wp-content/plugins
-    while read s; do
+    export IFS=","
+    for s in $WORDPRESS_PLUGINS; do
       git clone "${s}"
-      echo "Adding plugin repo: ${s}"
-    done < /tmp/plugins
+      echo "Adding plugin repo: ${s} in `pwd`"
+    done
   fi
 
 fi
