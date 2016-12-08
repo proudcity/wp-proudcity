@@ -32,9 +32,14 @@ RUN curl -o /tmp/composer.phar http://getcomposer.org/composer.phar \
 RUN composer install
 
 # Install Gravity Forms
-RUN git clone https://github.com/proudcity/gravityforms.git /app/wordpress/wp-content/plugins/gravityforms
+RUN git clone https://source.developers.google.com/p/proudcity-1184/r/gravityforms /app/wordpress/wp-content/plugins/
 # @todo: `mv` doesn't work because of a Docker FS bug: https://github.com/docker/docker/issues/4570
-RUN cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins
+RUN cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins && rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
+
+# Install other non-free plugins
+RUN git clone https://source.developers.google.com/p/proudcity-1184/r/e-signature /app/wordpress/wp-content/plugins/ \
+	&& git clone https://source.developers.google.com/p/proudcity-1184/r/e-signature-business-add-ons /app/wordpress/wp-content/plugins/ \
+	&& git clone https://source.developers.google.com/p/proudcity-1184/r/auth0 /app/wordpress/wp-content/plugins/
 
 #RUN curl -o /tmp/markdown.zip https://littoral.michelf.ca/code/php-markdown/php-markdown-extra-1.2.8.zip \
 #  	&& unzip /tmp/markdown.zip -d  /app/wordpress/wp-content/plugins \
