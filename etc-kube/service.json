@@ -2,11 +2,11 @@
 	"kind": "Service",
 	"apiVersion": "v1",
 	"metadata": {
-		"name": "corvallis_or"
+		"name": "sanrafaelca"
 	},
 	"spec": {
 		"selector": {
-			"appid": "corvallis_or"
+			"appid": "sanrafaelca"
 		},
 		"ports": [{
 			"protocol": "TCP",

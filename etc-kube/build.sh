@@ -9,10 +9,11 @@ source $thisdir/globals.sh
 apt-get update && apt-get install mysql-client -y
 
 echo "NAMESPACE set to $NAMESPACE"
-echo $thisdir
+echo "THIS DIRECTORY: $thisdir"
 
 # Arguments
 key=${1:beta}
+deploy=${2:true}
 suffix=".proudcity.com"
 host="${key}${suffix}"
 key=${key//-/}
@@ -24,11 +25,13 @@ dbname=`echo ${key//-/_} | cut -c 1-16`
 dbpass=`date +%s | sha256sum | base64 | head -c 32 ; echo`
 
 # Copy the Kube config
-if [ ! -d ../builds ]; then mkdir ../builds; fi
-dir="${thisdir}/../builds/${key}"
+if [ ! -d builds ]; then mkdir builds; fi
+dir="${thisdir}/builds/${key}"
 echo "BUILD DIR: ${dir}"
 if [ -d $dir ]; then rm -Rf $dir; fi
-cp -r "$thisdir/../etc-kube" $dir
+mkdir $dir
+cd $thisdir
+cp deployment.json post-import.sql service.json $dir
 cd $dir
 
 # Create our secrets file
@@ -39,20 +42,19 @@ metadata:
   name: $key
 type: Opaque
 data:
-  dbhost: `echo $MYSQL_HOST | base64 -w0`
-  dbuser: `echo $dbname | base64 -w0`
-  dbpassword: `echo $dbpass | base64 -w0`
-  dbname: `echo $dbname | base64 -w0`
-  dbport: `echo $MYSQL_PORT | base64 -w0`
-  auth-key: `echo openssl rand -base64 32 | base64 -w0`
-  secure-auth-key: `echo openssl rand -base64 32 | base64 -w0`
-  logged-in-key: `echo openssl rand -base64 32 | base64 -w0`
-  nonce-key: `echo openssl rand -base64 32 | base64 -w0`
-  auth-salt: `echo openssl rand -base64 32 | base64 -w0`
-  secure-auth-salt: `echo openssl rand -base64 32 | base64 -w0`
-  logged-in-salt: `echo openssl rand -base64 32 | base64 -w0`
-  nonce-salt: `echo openssl rand -base64 32 | base64 -w0`
-  gcserviceaccount.json: bm90aGluZw==
+  dbhost: `echo -n $MYSQL_HOST | base64`
+  dbuser: `echo -n $dbname | base64`
+  dbpassword: `echo -n $dbpass | base64`
+  dbname: `echo -n $dbname | base64`
+  dbport: `echo -n $MYSQL_PORT | base64`
+  auth-key: `echo -n openssl rand -base64 32 | base64`
+  secure-auth-key: `echo -n openssl rand -base64 32 | base64`
+  logged-in-key: `echo -n openssl rand -base64 32 | base64`
+  nonce-key: `echo -n openssl rand -base64 32 | base64`
+  auth-salt: `echo -n openssl rand -base64 32 | base64`
+  secure-auth-salt: `echo -n openssl rand -base64 32 | base64`
+  logged-in-salt: `echo -n openssl rand -base64 32 | base64`
+  nonce-salt: `echo -n openssl rand -base64 32 | base64`
 " > $dir/secrets.yml
 
 # Mysql setup
@@ -62,52 +64,60 @@ CREATE DATABASE ${dbname};
 GRANT ALL ON ${dbname}.* TO ${dbname}@'%' IDENTIFIED BY '${dbpass}';
 " > create.sql
 mysql -u${MYSQL_USER} -p${MYSQL_PASS} -h${MYSQL_HOST} -P${MYSQL_PORT} < create.sql
-echo "Downloading database dump ..."
+echo "Downloading database dump from ${DATABASE_DUMP} ..."
 curl $DATABASE_DUMP | gunzip > $dir/db.sql
 
 # REPLACE!
 # Key (this is the big one)
-sed -i "s/corvallis_or/${key}/g" *.yml
-sed -i "s/corvallis_or/${key}/g" *.json
-sed -i "s/corvallis_or/${key}/g" *.sql
+sed -i "s/corvallisor/${key}/g" *.yml
+sed -i "s/corvallisor/${key}/g" *.json
+sed -i "s/example/${key}/g" *.sql
 # Domain
 sed -i "s/corvallis-or\.proudcity\.com/${host}/g" *
 sed -i "s/example\.proudcity\.com/${host}/g" *
 
-# Import Mysql db
-echo "Importing Mysql db $dir/db.sql ..."
-mysql -u${MYSQL_USER} -p${MYSQL_PASS} -h${MYSQL_HOST} -P${MYSQL_PORT} ${dbname} < $dir/db.sql
-mysql -u${MYSQL_USER} -p${MYSQL_PASS} -h${MYSQL_HOST} -P${MYSQL_PORT} ${dbname} < $dir/post-import.sql
+if [ "$deploy" == "true" ]; then
 
-# Build Kubernetes
-echo "Build Kubernetes ..."
-kubectl apply --namespace $NAMESPACE -f $dir/secrets.yml
-kubectl apply --namespace $NAMESPACE -f $dir/deployment.json
-kubectl apply --namespace $NAMESPACE -f $dir/service.json
-# kubectl create --namespace $NAMESPACE -f etc-kube/ingress-ssl.yml
-#kubectl apply --namespace $NAMESPACE -f ingress.yml
+  # Import Mysql db
+  echo "Importing Mysql db $dir/db.sql ..."
+  mysql -u${MYSQL_USER} -p${MYSQL_PASS} -h${MYSQL_HOST} -P${MYSQL_PORT} ${dbname} < $dir/db.sql
+  mysql -u${MYSQL_USER} -p${MYSQL_PASS} -h${MYSQL_HOST} -P${MYSQL_PORT} ${dbname} < $dir/post-import.sql
 
-# Update ingress to add new host
-# @todo: For Lets Encrypt (kube-lego)
-#kubectl --namespace $NAMESPACE get ing --output=json \
-#  | jq ".items[0].spec.tls |= .+ [{\"hosts\": [\"${host}\"], \"secretName\": \"${key}-tls\"}]" \
-#  | jq ".items[0].spec.rules |= .+ [{ \"host\": \"${host}\", \"http\": { \"paths\": [ { \"path\": \"/*\", \"backend\": { \"serviceName\": \"${key}\", \"servicePort\": 80 } } ] } }]" \
-#  > $dir/ingress.json
-# For ProudCity wildcard SSL cert
-kubectl --namespace $NAMESPACE get ing --output=json \
-  | jq ".items[0].spec.rules |= .+ [{ \"host\": \"${host}\", \"http\": { \"paths\": [ { \"backend\": { \"serviceName\": \"${key}\", \"servicePort\": 80 } } ] } }]" \
-  > $dir/ingress.json
-kubectl apply --namespace $NAMESPACE -f $dir/ingress.json
+  # Build Kubernetes
+  echo "Build Kubernetes ..."
+  kubectl apply --namespace $NAMESPACE -f $dir/secrets.yml
+  kubectl apply --namespace $NAMESPACE -f $dir/deployment.json
+  kubectl apply --namespace $NAMESPACE -f $dir/service.json
+  # kubectl create --namespace $NAMESPACE -f etc-kube/ingress-ssl.yml
+  #kubectl apply --namespace $NAMESPACE -f ingress.yml
 
-# Clean up
-#rm secrets.yml
-#rm -r $key
+  # Update ingress to add new host
+  # @todo: For Lets Encrypt (kube-lego)
+  #kubectl --namespace $NAMESPACE get ing --output=json \
+  #  | jq ".items[0].spec.tls |= .+ [{\"hosts\": [\"${host}\"], \"secretName\": \"${key}-tls\"}]" \
+  #  | jq ".items[0].spec.rules |= .+ [{ \"host\": \"${host}\", \"http\": { \"paths\": [ { \"path\": \"/*\", \"backend\": { \"serviceName\": \"${key}\", \"servicePort\": 80 } } ] } }]" \
+  #  > $dir/ingress.json
+  # For ProudCity wildcard SSL cert
+  kubectl --namespace $NAMESPACE get ing --output=json \
+    | jq ".items[0].spec.rules |= .+ [{ \"host\": \"${host}\", \"http\": { \"paths\": [ { \"backend\": { \"serviceName\": \"${key}\", \"servicePort\": 80 } } ] } }]" \
+    > $dir/ingress.json
+  kubectl apply --namespace $NAMESPACE -f $dir/ingress.json
 
-echo 'Done building, waiting for website to become available'
-#until $(curl --output /dev/null --silent --head --fail https://${host}); do
-#    echo '.'
-#    sleep 5
-#done
+  # Clean up
+  #rm secrets.yml
+  #rm -r $key
 
-kubectl --namespace $NAMESPACE get po
-kubectl --namespace $NAMESPACE get ing
+  echo 'Done building, waiting for website to become available'
+  #until $(curl --output /dev/null --silent --head --fail https://${host}); do
+  #    echo '.'
+  #    sleep 5
+  #done
+
+  kubectl --namespace $NAMESPACE get po
+  kubectl --namespace $NAMESPACE get ing
+
+else
+
+  echo "Deploy set to false, skipping kubernetes creation, mysql db import"
+
+fi
