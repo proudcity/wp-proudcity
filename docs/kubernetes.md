@@ -39,8 +39,11 @@ kubectl --namespace $NAMESPACE exec -ti $POD bash
 # Get logs
 kubectl logs --namespace $NAMESPACE $POD  --tail=100
 
+# Force rebuild pod
+kubectl --namespace $NAMESPACE get pod $POD -o=json > /tmp/a.json && kubectl replace --force -f /tmp/a.json
+
 # Rebuild all pods in namespace
-﻿⁠⁠⁠⁠kubectl --namespace $NAMESPACE get pod -o=json >a.json && kubectl replace --force -f a.json
+﻿⁠⁠⁠⁠kubectl --namespace $NAMESPACE get pod -o=json > /tmp/a.json && kubectl replace --force -f /tmp/a.json
 
 # Mysql commands on in docker container
 mysql -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD -h$WORDPRESS_DB_HOST -P$WORDPRESS_DB_PORT
