@@ -1,15 +1,11 @@
-# bash kube-cmd.sh $NAMESPACE beta wp "option get blogname"
-# bash kube-cmd.sh $NAMESPACE example bash "ls wordpress"
+# bash kube-cmd.sh $NAMESPACE beta "wp option get blogname"
+# bash kube-cmd.sh $NAMESPACE example "bash ls wordpress"
 
 namespace=$1
 app=${2}
 cmd=${3}
 
-if [ "$cmd" == "wp"* ]; then
-  fullcmd="$cmd --path=wordpress --allow-root"
-else
-  fullcmd=$cmd
-fi
+fullcmd="${cmd/wp\ /wp\ \-\-path\=wordpress \-\-allow\-root\ }"
 
 pod=$(kubectl --namespace=$namespace get pods --selector=app=$app --output=jsonpath={.items[0].metadata.name})
 
