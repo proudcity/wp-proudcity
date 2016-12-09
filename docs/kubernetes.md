@@ -39,6 +39,14 @@ kubectl --namespace $NAMESPACE exec -ti $POD bash
 # Get logs
 kubectl logs --namespace $NAMESPACE $POD  --tail=100
 
+# Run commands on one pod for an app
+APP=
+bash kube-cmd.sh $NAMESPACE $APP wp "plugin activate auth0"
+bash kube-cmd.sh $NAMESPACE $APP bash "ls wordpress"
+
+# Run commands on on all apps in the namespace
+bash kube-cmd-all.sh $NAMESPACE wp "option get blogname"
+
 # Force rebuild pod
 kubectl --namespace $NAMESPACE get pod $POD -o=json > /tmp/a.json && kubectl replace --force -f /tmp/a.json
 
