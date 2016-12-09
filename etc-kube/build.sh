@@ -85,6 +85,10 @@ if [ "$deploy" == "true" ]; then
 
   # Build Kubernetes
   echo "Build Kubernetes ..."
+  echo $( $dir/secrets.yml )
+  echo $( $dir/deployment.json )
+  echo $( $dir/service.json )
+  echo "-----"
   kubectl apply --namespace $NAMESPACE -f $dir/secrets.yml
   kubectl apply --namespace $NAMESPACE -f $dir/deployment.json
   kubectl apply --namespace $NAMESPACE -f $dir/service.json
