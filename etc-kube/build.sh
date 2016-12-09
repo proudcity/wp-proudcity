@@ -76,6 +76,12 @@ sed -i "s/example/${key}/g" *.sql
 sed -i "s/corvallis-or\.proudcity\.com/${host}/g" *
 sed -i "s/example\.proudcity\.com/${host}/g" *
 
+echo "Kubernetes config files:"
+echo $( $dir/secrets.yml )
+echo $( $dir/deployment.json )
+echo $( $dir/service.json )
+echo "-----"
+
 if [ "$deploy" == "true" ]; then
 
   # Import Mysql db
@@ -85,10 +91,6 @@ if [ "$deploy" == "true" ]; then
 
   # Build Kubernetes
   echo "Build Kubernetes ..."
-  echo $( $dir/secrets.yml )
-  echo $( $dir/deployment.json )
-  echo $( $dir/service.json )
-  echo "-----"
   kubectl apply --namespace $NAMESPACE -f $dir/secrets.yml
   kubectl apply --namespace $NAMESPACE -f $dir/deployment.json
   kubectl apply --namespace $NAMESPACE -f $dir/service.json
@@ -125,3 +127,5 @@ else
   echo "Deploy set to false, skipping kubernetes creation, mysql db import"
 
 fi
+
+echo "APP: $key"
