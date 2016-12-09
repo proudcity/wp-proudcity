@@ -168,15 +168,6 @@
               "value": "corvallisor/uploads/"
             },
             {
-              "name": "STATELESS_MEDIA_BUCKET",
-              "valueFrom": {
-                "secretKeyRef": {
-                  "name": "proudcity",
-                  "key": "stateless-media-bucket"
-                }
-              }
-            },
-            {
               "name": "STATELESS_MEDIA_SERVICE_ACCOUNT",
               "valueFrom": {
                 "secretKeyRef": {
@@ -184,10 +175,6 @@
                   "key": "stateless-media-account"
                 }
               }
-            },
-            {
-              "name": "STATELESS_MEDIA_DIRECTORY",
-              "value": "corvallisor"
             },
             {
               "name": "GOOGLE_GIT_TOKEN",
