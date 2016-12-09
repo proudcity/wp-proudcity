@@ -1,11 +1,11 @@
 vendor
 env.list
-builds
+etc-kube/builds
 etc-kube/ingress-ssl.yml
 etc-kube/secrets.yml
 etc-kube/secrets-proudcity-build.sh
 etc-kube/secrets-proudcity.yml
 etc-kube/create.sql
-etc-kube/globals-dev.sh
+etc-kube/globals-test.sh
 etc-kube/globals-prod.sh
 etc/ENV
