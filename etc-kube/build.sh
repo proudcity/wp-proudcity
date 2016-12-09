@@ -25,7 +25,7 @@ dbname=`echo ${key//-/_} | cut -c 1-16`
 dbpass=`date +%s | sha256sum | base64 | head -c 32 ; echo`
 
 # Copy the Kube config
-if [ ! -d builds ]; then mkdir builds; fi
+if [ ! -d builds ]; then mkdir "${thisdir}/builds"; fi
 dir="${thisdir}/builds/${key}"
 echo "BUILD DIR: ${dir}"
 if [ -d $dir ]; then rm -Rf $dir; fi
