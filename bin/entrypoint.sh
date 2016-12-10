@@ -17,8 +17,6 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   # Install other non-free plugins
   echo "Adding non-free plugins"
   cd /app/wordpress/wp-content/plugins
-  rm -r auth0
-  git clone https://source.developers.google.com/p/proudcity-1184/r/auth0
 
   # Add custom themes, comma separated
   if [[ $WORDPRESS_THEMES ]]; then
