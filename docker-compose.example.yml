@@ -1,0 +1,44 @@
+wordpress:
+  image: proudcity/wp-proudcity
+  tty: true
+#  links:
+#   - db
+  ports:
+   - "8080:80"
+  environment:
+    WORDPRESS_DB_NAME: 
+    WORDPRESS_DB_USER: root
+    WORDPRESS_DB_PASSWORD: 
+    WORDPRESS_DB_HOST: 
+    #WORDPRESS_DB_NAME: wordpress
+    #WORDPRESS_DB_USER: admin
+    #WORDPRESS_DB_PASSWORD: "<pass>"
+    #WORDPRESS_DB_HOST: "**LinkMe**"
+    #WORDPRESS_DB_PORT: "**LinkMe**"
+    WORDPRESS_DB_CHARSET: utf8
+    WORDPRESS_DB_COLLATE:
+    WORDPRESS_AUTH_KEY:
+    WORDPRESS_SECURE_AUTH_KEY:
+    WORDPRESS_LOGGED_IN_KEY:
+    WORDPRESS_NONCE_KEY:
+    WORDPRESS_AUTH_SALT:
+    WORDPRESS_SECURE_AUTH_SALT:
+    WORDPRESS_LOGGED_IN_SALT:
+    WORDPRESS_NONCE_SALT:
+    WORDPRESS_AWS_ACCESS_KEY_ID: MYACCESSKEY
+    WORDPRESS_AWS_SECRET_ACCESS_KEY: MYACCESSKEY
+    WORDPRESS_TABLE_PREFIX: wp_
+    WORDPRESS_WPLANG: en_US
+    WORDPRESS_WP_DEBUG: 
+    WORDPRESS_FS_METHOD: direct
+    WORDPRESS_WP_SITEURL: http://localhost:8080
+    WORDPRESS_WP_HOME: http://localhost:8080
+    PROUD_URL: "http://dev.proudcity.com:4000/rest/v1.1"
+    PROUD_ID: ""
+    PROUD_CLIENT: ""
+    PROUD_SECRET: ""
+    URL: "http://dev.proudcity.com:8080"
+#db:
+#  image: tutum/mysql:5.5
+#  environment:
+#    MYSQL_PASS: "<pass>"

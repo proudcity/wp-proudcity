@@ -3,15 +3,14 @@ ProudCity WordPress
 
 [ProudCity](https://proudcity.com) is a Wordpress platform for modern, standards-compliant municipal websites. [Find your city's demo](https://proudcity.com/start) or [view an example website](https://example.proudcity.com).
 
-[Watch Getting Started videos](https://proudcity.com/getting-started)
+Documentation sections
 
+* Overview
+* [Installing](installing.md)
+* [Developing](developing.md)
+* [Docker](docker.md)
+* [Kubernetes](kubernetes.md)
 
-Documentation
-
-* [Installing](docs/install.md)
-* [Developing](docs/develop.md)
-* [Docker](docs/docker.md)
-* [Kubernetes](docs/kubernetes.md)
 
 ## Contributing
 
