@@ -24,7 +24,7 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "1.20.6",
+                "version": "1.20.8",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
@@ -50,7 +50,7 @@
             "package": {
                 "name": "proudcity/wp-proud-search",
                 "type": "wordpress-plugin",
-                "version": "1.20.6",
+                "version": "1.20.7",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search.git",
@@ -63,7 +63,7 @@
             "package": {
                 "name": "proudcity/wp-proud-search-elastic",
                 "type": "wordpress-plugin",
-                "version": "1.20.6",
+                "version": "1.20.7",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search-elastic.git",
@@ -167,7 +167,7 @@
             "package": {
                 "name": "proudcity/wp-proud-actions-app",
                 "type": "wordpress-plugin",
-                "version": "1.20.5",
+                "version": "1.20.8",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-actions-app.git",
@@ -296,17 +296,17 @@
         "wpackagist-plugin/elasticpress": "2.1.2",
 
         "proudcity/proudpack": "1.20.0",
-        "proudcity/wp-proud-core": "1.20.6",
+        "proudcity/wp-proud-core": "1.20.8",
         "proudcity/wp-proud-agency": "1.20.0",
-        "proudcity/wp-proud-search": "1.20.6",
-        "proudcity/wp-proud-search-elastic": "1.20.6",
+        "proudcity/wp-proud-search": "1.20.7",
+        "proudcity/wp-proud-search-elastic": "1.20.7",
         "proudcity/wp-proud-payment": "1.20.0",
         "proudcity/wp-proud-document": "1.20.0",
         "proudcity/wp-proud-location": "1.20.4",
         "proudcity/wp-proud-issue": "1.20.0",
         "proudcity/wp-proud-map-app": "1.20.0",
         "proudcity/wp-proud-social-app": "1.20.0",
-        "proudcity/wp-proud-actions-app": "1.20.5",
+        "proudcity/wp-proud-actions-app": "1.20.8",
         "proudcity/wp-proud-admin": "1.20.5",
         "proudcity/wp-proud-seeclickfix": "1.20.0",
         "proudcity/wp-proud-subsite": "1.20.6",
