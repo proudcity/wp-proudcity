@@ -129,7 +129,7 @@
             "package": {
                 "name": "proudcity/wp-proud-admin",
                 "type": "wordpress-plugin",
-                "version": "1.20.5",
+                "version": "1.20.9",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-admin.git",
@@ -308,7 +308,7 @@
         "proudcity/wp-proud-map-app": "1.20.0",
         "proudcity/wp-proud-social-app": "1.20.0",
         "proudcity/wp-proud-actions-app": "1.20.8",
-        "proudcity/wp-proud-admin": "1.20.5",
+        "proudcity/wp-proud-admin": "1.20.9",
         "proudcity/wp-proud-seeclickfix": "1.20.0",
         "proudcity/wp-proud-subsite": "1.20.6",
         "proudcity/romulus-wordpress-form": "1.20.0",
