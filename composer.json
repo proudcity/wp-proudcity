@@ -259,7 +259,7 @@
         "composer/installers": "1.*",
         "johnpbloch/wordpress": "4.6.1",
 
-        "wpackagist-plugin/auth0": "3.2.13",
+        "wpackagist-plugin/auth0": "3.2.14",
         "wpackagist-plugin/wp-jwt-auth": "1.1.2",
         "wpackagist-plugin/rest-api": "2.0-beta15",
         "wpackagist-plugin/wp-api-menus": "1.3.1",
