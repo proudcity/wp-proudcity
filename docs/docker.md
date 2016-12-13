@@ -37,6 +37,8 @@ docker run -p 8080:80 \
 ```
 To ssh into the box
 ```
+CONTAINER=
+docker exec -it $CONTAINER bash
 docker exec -it `docker ps -aq --filter="name=wpproudcity_wordpress_1"` bash
 ```
 
