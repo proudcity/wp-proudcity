@@ -136,7 +136,7 @@ foreach ($headersArr as $header => $value) {
 
 
 */
-if (getenv('TLS') === 'true' && isset($headers["x-forwarded-proto"]) && $headers["x-forwarded-proto"] === 'http') {
+if (getenv('TLS') === 'true' && isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] === 'http') {
   $redirect = 'https://' . getenv('HOST') . $_SERVER['REQUEST_URI'];
   header('HTTP/1.1 301 Moved Permanently');
   header('Location: ' . $redirect);
