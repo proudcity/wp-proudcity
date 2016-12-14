@@ -66,11 +66,29 @@ define( 'LOGGED_IN_SALT',   getenv('LOGGED_IN_SALT'));
 define( 'NONCE_SALT',       getenv('NONCE_SALT'));
 
 
-define( 'WP_STATELESS_MEDIA_BUCKET', 			  getenv('STATELESS_MEDIA_BUCKET'));
-define( 'WP_STATELESS_MEDIA_MODE', 				  'cdn');
-define( 'WP_STATELESS_MEDIA_ROOT_DIR',      getenv('STATELESS_MEDIA_DIRECTORY'));
-define( 'WP_STATELESS_MEDIA_KEY_FILE_PATH', '/etc/secrets/gcserviceaccount.json');
+// wp-stateless
+define( 'WP_STATELESS_MEDIA_BUCKET', getenv('STATELESS_MEDIA_BUCKET'));
+define( 'WP_STATELESS_MEDIA_MODE', 'cdn');
+define( 'WP_STATELESS_MEDIA_ROOT_DIR', getenv('STATELESS_MEDIA_DIRECTORY'));
+define( 'WP_STATELESS_MEDIA_KEY_FILE_PATH', getenv('STATELESS_MEDIA_GOOGLE_KEY'));
+define( 'WP_STATELESS_MEDIA_REWRITE_BODY_CONTENT_URL', 1);
+
+//define( 'WP_STATELESS_MEDIA_KEY_FILE_PATH', '/etc/secrets/gcserviceaccount.json');
 //define( 'WP_STATELESS_MEDIA_SERVICE_ACCOUNT', 	getenv('STATELESS_MEDIA_SERVICE_ACCOUNT'));
+
+
+// wp-mail-smtp settings
+define('WPMS_ON', true);
+define('WPMS_MAIL_FROM', 'notify@proudcity.com');
+define('WPMS_MAIL_FROM_NAME', 'ProudCity');
+define('WPMS_MAILER', 'smtp'); // Possible values 'smtp', 'mail', or 'sendmail'
+define('WPMS_SET_RETURN_PATH', 'false'); // Sets $phpmailer->Sender if true
+define('WPMS_SMTP_PORT', 25); // The SMTP server port number
+define('WPMS_SSL', 'tls'); // Possible values '', 'ssl', 'tls' - note TLS is not STARTTLS
+define('WPMS_SMTP_AUTH', true); // True turns on SMTP authentication, false turns it off
+define('WPMS_SMTP_HOST', getenv('SMTP_HOST')); // The SMTP mail host
+define('WPMS_SMTP_USER', getenv('SMTP_USER')); // SMTP authentication username, only used if WPMS_SMTP_AUTH is true
+define('WPMS_SMTP_PASS', getenv('SMTP_PASS')); // SMTP authentication password, only used if WPMS_SMTP_AUTH is true
 
 
 
