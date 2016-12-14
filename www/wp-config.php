@@ -126,16 +126,6 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] === 'Googl
   exit;
 }
 
-/* Special redirect and handlibg based upon headers.... */
-/*
-$headersArr = apache_request_headers();
-$headers = [];
-foreach ($headersArr as $header => $value) {
-    $headers[strtolower($header)] = $value;
-}
-
-
-*/
 if (getenv('TLS') === 'true' && isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] === 'http') {
   $redirect = 'https://' . getenv('HOST') . $_SERVER['REQUEST_URI'];
   header('HTTP/1.1 301 Moved Permanently');
