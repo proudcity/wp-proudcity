@@ -284,7 +284,7 @@
         "wpackagist-plugin/duplicate-post": "3.0.3",        
         "wpackagist-plugin/disable-comments": "1.6",
         "wpackagist-plugin/google-analytics-dashboard-for-wp": "4.9.4",
-        "wpackagist-plugin/wordpress-seo": "3.9",
+        "wpackagist-plugin/wordpress-seo": "4.0",
         "wpackagist-plugin/mce-table-buttons": "3.2",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
@@ -296,7 +296,7 @@
         "wpackagist-plugin/edit-flow": "0.8.2",
         "wpackagist-plugin/wp-sitemap-page": "1.6",
 
-        "wpackagist-plugin/siteorigin-panels": "dev-trunk",
+        "wpackagist-plugin/siteorigin-panels": "2.4.20",
         "wpackagist-plugin/so-widgets-bundle": "1.7.2",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
