@@ -296,7 +296,7 @@
         "wpackagist-plugin/edit-flow": "0.8.2",
         "wpackagist-plugin/wp-sitemap-page": "1.6",
 
-        "wpackagist-plugin/siteorigin-panels": "2.4.20",
+        "wpackagist-plugin/siteorigin-panels": "dev-trunk",
         "wpackagist-plugin/so-widgets-bundle": "1.7.2",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
