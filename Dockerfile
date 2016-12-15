@@ -2,7 +2,7 @@ FROM php:7-apache
 
 # install the PHP extensions we need
 RUN apt-get update \
-	&& apt-get install -y --no-install-recommends vim libpng12-dev libjpeg-dev mysql-client unzip git libcurl4-openssl-dev libmcrypt-dev imagemagick-dev \
+	&& apt-get install -y --no-install-recommends vim libpng12-dev libjpeg-dev mysql-client unzip git libcurl4-openssl-dev libmcrypt-dev imagemagick \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& pecl install imagick-3.4.1 \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
