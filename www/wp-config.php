@@ -72,6 +72,8 @@ define( 'WP_STATELESS_MEDIA_MODE', 'cdn');
 define( 'WP_STATELESS_MEDIA_ROOT_DIR', getenv('STATELESS_MEDIA_DIRECTORY'));
 define( 'WP_STATELESS_MEDIA_KEY_FILE_PATH', getenv('STATELESS_MEDIA_GOOGLE_KEY'));
 define( 'WP_STATELESS_MEDIA_REWRITE_BODY_CONTENT_URL', 1);
+// For ProudCity, to fix issues related to migration
+define( 'PROUD_WP_STATELESS_FORCE', getenv('PROUD_WP_STATELESS_FORCE'));
 
 //define( 'WP_STATELESS_MEDIA_KEY_FILE_PATH', '/etc/secrets/gcserviceaccount.json');
 //define( 'WP_STATELESS_MEDIA_SERVICE_ACCOUNT', 	getenv('STATELESS_MEDIA_SERVICE_ACCOUNT'));
