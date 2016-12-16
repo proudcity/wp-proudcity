@@ -85,7 +85,7 @@ define('WPMS_MAIL_FROM', 'notify@proudcity.com');
 define('WPMS_MAIL_FROM_NAME', 'ProudCity');
 define('WPMS_MAILER', 'smtp'); // Possible values 'smtp', 'mail', or 'sendmail'
 define('WPMS_SET_RETURN_PATH', 'false'); // Sets $phpmailer->Sender if true
-define('WPMS_SMTP_PORT', 25); // The SMTP server port number
+define('WPMS_SMTP_PORT', 2587); // The SMTP server port number
 define('WPMS_SSL', 'tls'); // Possible values '', 'ssl', 'tls' - note TLS is not STARTTLS
 define('WPMS_SMTP_AUTH', true); // True turns on SMTP authentication, false turns it off
 define('WPMS_SMTP_HOST', getenv('SMTP_HOST')); // The SMTP mail host
