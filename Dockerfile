@@ -1,5 +1,7 @@
 FROM php:5.6-apache
 
+PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-128M}
+
 # install the PHP extensions we need
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends vim libpng12-dev libjpeg-dev mysql-client unzip git libcurl4-openssl-dev libmcrypt-dev \
