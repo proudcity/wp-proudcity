@@ -1,7 +1,7 @@
 <?php
 
-define('WP_CACHE', true);
-define('WP_DEBUG', false);
+define('WP_CACHE', getenv("WP_CACHE"));
+define('WP_DEBUG', getenv("WP_DEBUG"));
 define('SAVEQUERIES', true);
 
 /**
