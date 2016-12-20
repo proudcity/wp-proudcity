@@ -3,3 +3,4 @@ env.list
 etc/ENV
 etc-kube
 docker-compose.yml
+composer.lock
