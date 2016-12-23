@@ -271,7 +271,7 @@
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "4.6.1",
+        "johnpbloch/wordpress": "4.7",
 
         "wpackagist-plugin/auth0": "3.2.14",
         "wpackagist-plugin/wp-jwt-auth": "1.1.2",
@@ -312,7 +312,7 @@
         "proudcity/wp-stateless": "1.21.0",
 
         "proudcity/proudpack": "1.21.0",
-        "proudcity/wp-proud-core": "1.21.0",
+        "proudcity/wp-proud-core": "1.21.8",
         "proudcity/wp-proud-agency": "1.21.5",
         "proudcity/wp-proud-search": "1.21.0",
         "proudcity/wp-proud-search-elastic": "1.21.0",
