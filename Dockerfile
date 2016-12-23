@@ -1,5 +1,7 @@
 FROM php:7.0-apache
 
+RUN export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"128M"}
+
 # install the PHP extensions we need
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends vim libpng12-dev libjpeg-dev mysql-client unzip git libcurl4-openssl-dev libmcrypt-dev \
@@ -29,7 +31,7 @@ WORKDIR /app
 
 RUN curl -o /tmp/composer.phar http://getcomposer.org/composer.phar \
   && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
-RUN composer install
+RUN php -dmemory_limit=128M /usr/local/bin/composer install
 
 #RUN curl -o /tmp/markdown.zip https://littoral.michelf.ca/code/php-markdown/php-markdown-extra-1.2.8.zip \
 #  	&& unzip /tmp/markdown.zip -d  /app/wordpress/wp-content/plugins \
