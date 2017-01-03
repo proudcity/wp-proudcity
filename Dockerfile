@@ -27,7 +27,7 @@ COPY composer.json /app/
 WORKDIR /app
 
 
-RUN curl -o /tmp/composer.phar http://getcomposer.org/composer.phar \
+RUN curl -o /tmp/composer.phar https://getcomposer.org/download/1.3.0/composer.phar \
   && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 RUN composer install
 
