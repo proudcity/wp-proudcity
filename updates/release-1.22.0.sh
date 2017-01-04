@@ -8,4 +8,4 @@ PHP=${1}
 
 # google_api_key didn't get properly set in all instances previously
 wp plugin uninstall --deactivate rest-api --allow-root
-wp plugin install rest-filter --allow-root
+wp plugin activate rest-filter --allow-root
