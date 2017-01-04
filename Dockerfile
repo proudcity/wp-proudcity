@@ -50,6 +50,7 @@ RUN cd /tmp && chmod +x wp-cli.phar \
 #### --- Configure entrypoint ---
 COPY bin/entrypoint.sh /entrypoint.sh
 COPY bin /app/bin/
+COPY updates /app/updates/
 COPY www/ /app/wordpress
 
 RUN chmod 755 /app/wordpress/wp-content
