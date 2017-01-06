@@ -27,7 +27,7 @@ COPY composer.json /app/
 WORKDIR /app
 
 
-RUN curl -o /tmp/composer.phar http://getcomposer.org/composer.phar \
+RUN curl -o /tmp/composer.phar https://getcomposer.org/download/1.3.0/composer.phar \
   && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 RUN php -dmemory_limit=128M /usr/local/bin/composer install
 
@@ -50,6 +50,7 @@ RUN cd /tmp && chmod +x wp-cli.phar \
 #### --- Configure entrypoint ---
 COPY bin/entrypoint.sh /entrypoint.sh
 COPY bin /app/bin/
+COPY updates /app/updates/
 COPY www/ /app/wordpress
 
 RUN chmod 755 /app/wordpress/wp-content
