@@ -305,7 +305,7 @@
         "wpackagist-plugin/rest-api": "2.0-beta15",
         "wpackagist-plugin/wp-api-menus": "1.3.1",
 
-        "wpackagist-plugin/w3-total-cache": "0.9.5.e36c114fc972b84936c4133169b334bea7fecf09",
+        "szepeviktor/w3-total-cache": "0.9.5.e36c114fc972b84936c4133169b334bea7fecf09",
         
         "wpackagist-plugin/intuitive-custom-post-order": "3.0.7",
         "wpackagist-plugin/duplicate-post": "3.0.3",        
