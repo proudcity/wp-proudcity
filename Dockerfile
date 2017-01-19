@@ -29,7 +29,7 @@ WORKDIR /app
 
 RUN curl -o /tmp/composer.phar https://getcomposer.org/download/1.3.0/composer.phar \
   && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
-RUN composer install
+RUN php -dmemory_limit=128M /usr/local/bin/composer install
 
 #RUN curl -o /tmp/markdown.zip https://littoral.michelf.ca/code/php-markdown/php-markdown-extra-1.2.8.zip \
 #  	&& unzip /tmp/markdown.zip -d  /app/wordpress/wp-content/plugins \

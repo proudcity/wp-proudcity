@@ -10,6 +10,19 @@
         {
             "type": "package",
             "package": {
+                "name": "szepeviktor/w3-total-cache-fixed",
+                "type": "wordpress-plugin",
+                "version": "0.9.4.6",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/szepeviktor/w3-total-cache-fixed.git",
+                    "reference": "0.9.4.6"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "WP-API/rest-filter",
                 "type": "wordpress-plugin",
                 "version": "1.0",
@@ -38,7 +51,7 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "1.22.1",
+                "version": "1.21.8",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
@@ -259,7 +272,7 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "1.22.1",
+                "version": "1.21.4",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
@@ -291,7 +304,8 @@
         "WP-API/rest-filter": "1.0",
         "wpackagist-plugin/wp-api-menus": "1.3.1",
 
-        "wpackagist-plugin/w3-total-cache": "0.9.5.1",
+        "wpackagist-plugin/w3-total-cache": "0.9.5.2",
+        "szepeviktor/w3-total-cache-fixed": "0.9.4.6",
         
         "wpackagist-plugin/intuitive-custom-post-order": "3.0.7",
         "wpackagist-plugin/duplicate-post": "3.0.3",        
