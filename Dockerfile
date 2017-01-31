@@ -10,12 +10,9 @@ RUN apt-get update \
 
 # install phpredis extension
 # From http://stackoverflow.com/questions/31369867/how-to-install-php-redis-extension-using-the-official-php-docker-image-approach
-ENV PHPREDIS_VERSION 2.2.7
-RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
-    && tar xfz /tmp/redis.tar.gz \
-    && rm -r /tmp/redis.tar.gz \
-    && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis \
-    && docker-php-ext-install redis
+RUN pecl install -o -f redis \
+	&&  rm -rf /tmp/pear \
+	&&  echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
