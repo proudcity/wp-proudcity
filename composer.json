@@ -306,6 +306,11 @@
 
         "wpackagist-plugin/w3-total-cache": "0.9.5.2",
         "szepeviktor/w3-total-cache-fixed": "0.9.4.6",
+        "wpackagist-plugin/autoptimize": "2.1.0",
+        "wpackagist-plugin/comet-cache": "161221",
+        "wpackagist-plugin/cache-enabler": "1.2.0",
+        "wpackagist-plugin/wp-super-cache": "1.4.8",
+
         
         "wpackagist-plugin/intuitive-custom-post-order": "3.0.7",
         "wpackagist-plugin/duplicate-post": "3.0.3",        
