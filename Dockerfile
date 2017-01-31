@@ -5,7 +5,7 @@ RUN apt-get update \
 	&& apt-get install -y --no-install-recommends vim libpng12-dev libjpeg-dev mysql-client unzip git libcurl4-openssl-dev libmcrypt-dev \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-	&& docker-php-ext-install gd mysqli opcache curl mcrypt \
+	&& docker-php-ext-install gd mysqli opcache curl mcrypt redis \
 	&& a2enmod rewrite expires
 
 # set recommended PHP.ini settings

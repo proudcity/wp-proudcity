@@ -1,6 +1,5 @@
 <?php
 
-define('WP_CACHE', getenv("WP_CACHE"));
 define('WP_DEBUG', getenv("WP_DEBUG"));
 define('SAVEQUERIES', true);
 
@@ -91,6 +90,16 @@ define('WPMS_SMTP_AUTH', true); // True turns on SMTP authentication, false turn
 define('WPMS_SMTP_HOST', getenv('SMTP_HOST')); // The SMTP mail host
 define('WPMS_SMTP_USER', getenv('SMTP_USER')); // SMTP authentication username, only used if WPMS_SMTP_AUTH is true
 define('WPMS_SMTP_PASS', getenv('SMTP_PASS')); // SMTP authentication password, only used if WPMS_SMTP_AUTH is true
+
+
+// Varnish settings
+define('WP_CACHE', getenv("WP_CACHE"));
+define('WP_REDIS_BACKEND_HOST', getenv("WP_REDIS_BACKEND_HOST"));
+define('WP_CACHE_KEY_SALT', getenv("HOST"));
+//WP_REDIS_BACKEND_PORT
+//WP_REDIS_BACKEND_AUTH
+//WP_REDIS_BACKEND_D
+//WP_REDIS_SERIALIZER
 
 
 
