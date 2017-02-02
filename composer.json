@@ -323,7 +323,7 @@
         "wpackagist-plugin/wp-sitemap-page": "1.6",
 
         "wpackagist-plugin/siteorigin-panels": "2.4.23",
-        "wpackagist-plugin/so-widgets-bundle": "1.8",
+        "wpackagist-plugin/so-widgets-bundle": "",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
         "wpackagist-plugin/events-manager": "5.6.6.1",
