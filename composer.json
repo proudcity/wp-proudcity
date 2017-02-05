@@ -77,7 +77,7 @@
             "package": {
                 "name": "proudcity/wp-proud-agency",
                 "type": "wordpress-plugin",
-                "version": "1.24.4",
+                "version": "1.24.5",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-agency.git",
@@ -365,7 +365,7 @@
 
         "proudcity/proudpack": "1.24.0",
         "proudcity/wp-proud-core": "1.24.2",
-        "proudcity/wp-proud-agency": "1.24.4",
+        "proudcity/wp-proud-agency": "1.24.5",
         "proudcity/wp-proud-search": "1.24.0",
         "proudcity/wp-proud-search-elastic": "1.24.0",
         "proudcity/wp-proud-payment": "1.24.0",
