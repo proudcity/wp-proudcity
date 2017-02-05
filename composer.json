@@ -64,7 +64,7 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "1.24.0",
+                "version": "1.24.2",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
@@ -77,7 +77,7 @@
             "package": {
                 "name": "proudcity/wp-proud-agency",
                 "type": "wordpress-plugin",
-                "version": "1.24.1",
+                "version": "1.24.2",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-agency.git",
@@ -244,6 +244,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-proud-dashboard",
+                "type": "wordpress-plugin",
+                "version": "1.24.2",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-proud-dashboard.git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/romulus-wordpress-form",
                 "type": "wordpress-plugin",
                 "version": "1.24.0",
@@ -351,8 +364,8 @@
         "proudcity/wp-stateless": "1.24.0",
 
         "proudcity/proudpack": "1.24.0",
-        "proudcity/wp-proud-core": "1.24.0",
-        "proudcity/wp-proud-agency": "1.24.1",
+        "proudcity/wp-proud-core": "1.24.2",
+        "proudcity/wp-proud-agency": "1.24.2",
         "proudcity/wp-proud-search": "1.24.0",
         "proudcity/wp-proud-search-elastic": "1.24.0",
         "proudcity/wp-proud-payment": "1.24.0",
@@ -364,6 +377,7 @@
         "proudcity/wp-proud-actions-app": "1.24.2",
         "proudcity/wp-proud-admin": "1.24.0",
         "proudcity/wp-proud-seeclickfix": "1.24.0",
+        "proudcity/wp-proud-dashboard": "1.24.2",
         "proudcity/wp-proud-subsite": "1.24.0",
         "proudcity/romulus-wordpress-form": "1.24.0",
         "gravityflow/gravityflow": "1.24.0",
