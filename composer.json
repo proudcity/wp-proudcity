@@ -207,7 +207,7 @@
             "package": {
                 "name": "proudcity/wp-proud-actions-app",
                 "type": "wordpress-plugin",
-                "version": "1.24.2",
+                "version": "1.24.3",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-actions-app.git",
@@ -374,7 +374,7 @@
         "proudcity/wp-proud-issue": "1.24.0",
         "proudcity/wp-proud-map-app": "1.24.0",
         "proudcity/wp-proud-social-app": "1.24.0",
-        "proudcity/wp-proud-actions-app": "1.24.2",
+        "proudcity/wp-proud-actions-app": "1.24.3",
         "proudcity/wp-proud-admin": "1.24.0",
         "proudcity/wp-proud-seeclickfix": "1.24.0",
         "proudcity/wp-proud-dashboard": "1.24.2",
