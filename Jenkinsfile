@@ -8,6 +8,10 @@ node {
   //def feSvcName = "${appName}-frontend"
   def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
+  // @todo: get name from tag
+  echo 'TAGNAME'
+  sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
+
   checkout scm
 
   stage 'Build image'
