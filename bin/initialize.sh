@@ -15,7 +15,7 @@ bash $thisdir/change-url.sh "$URL"
 
 cd /app/wordpress
 wp core update-db --allow-root
-wp option update proud_stage $STAGE --allow-root
+#wp option update proud_stage $STAGE --allow-root
 wp option delete google_analytics_key --allow-root
 wp user delete demo@proudcity.com --reassign=admin --allow-root
 echo "truncate table wp_rg_form_view;" | wp db cli --allow-root
