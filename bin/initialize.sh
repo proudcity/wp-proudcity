@@ -24,7 +24,8 @@ if  [[ !  -z  $ACCOUNT_EMAIL  ]]; then
   wp user create  $ACCOUNT_EMAIL $ACCOUNT_EMAIL --send-email=0 --role=editor --allow-root
 fi
 
+# Get blogname, location, images, service center settings from ProudCity City API.
 if  [[ !  -z  $LOCATION  ]]; then
-  wp option update blogname "$LOCATION" --allow-root
-  # @todo: use string to lookup api...
+  wp plugin activate wp-proud-dashboard
+  wp proudcity phonehome "$LOCATION" --allow-root
 fi
