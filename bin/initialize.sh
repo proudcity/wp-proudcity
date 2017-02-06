@@ -26,6 +26,6 @@ fi
 
 # Get blogname, location, images, service center settings from ProudCity City API.
 if  [[ !  -z  $LOCATION  ]]; then
-  wp plugin activate wp-proud-dashboard
+  wp plugin activate wp-proud-dashboard --allow-root
   wp proudcity phonehome "$LOCATION" --allow-root
 fi
