@@ -310,7 +310,7 @@
         "wpackagist-plugin/cache-enabler": "1.2.0",
         "wpackagist-plugin/wp-super-cache": "1.4.8",
 
-        "wpackagist-plugin/wp-stateless": "1.24.0",
+        "wpackagist-plugin/wp-stateless": "1.9.0",
 
         "wpackagist-plugin/intuitive-custom-post-order": "3.0.7",
         "wpackagist-plugin/duplicate-post": "3.0.3",        
