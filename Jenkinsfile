@@ -3,6 +3,8 @@ node {
   //sh("source ./etc-kube/globals.sh")
   //sh("./etc-kube/build.sh ${env.SUBDOMAIN}")
 
+  slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+
   def project = 'proudcity-1184'
   def appName = 'wp-proudcity'
   //def feSvcName = "${appName}-frontend"
@@ -22,6 +24,8 @@ node {
 
   stage 'Push image to registry'
   sh("gcloud docker push ${imageTag}")
+
+  slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 
   /*
   stage "Deploy Application"
