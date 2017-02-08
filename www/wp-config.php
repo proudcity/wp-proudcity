@@ -94,6 +94,7 @@ define('WPMS_SMTP_PASS', getenv('SMTP_PASS')); // SMTP authentication password, 
 
 // Varnish settings
 define('WP_CACHE', getenv("WP_CACHE"));
+// @todo: these were from old dedicated script and are no longer needed... remove?
 define('WP_REDIS_BACKEND_HOST', getenv("WP_REDIS_BACKEND_HOST"));
 define('WP_REDIS_BACKEND_AUTH', getenv("WP_REDIS_BACKEND_AUTH"));
 define('WP_CACHE_KEY_SALT', getenv("HOST"));
