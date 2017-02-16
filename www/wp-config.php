@@ -1,6 +1,5 @@
 <?php
 
-define('WP_CACHE', getenv("WP_CACHE"));
 define('WP_DEBUG', getenv("WP_DEBUG"));
 define('SAVEQUERIES', true);
 
@@ -70,13 +69,13 @@ define( 'NONCE_SALT',       getenv('NONCE_SALT'));
 define( 'WP_STATELESS_MEDIA_BUCKET', getenv('STATELESS_MEDIA_BUCKET'));
 define( 'WP_STATELESS_MEDIA_MODE', 'cdn');
 define( 'WP_STATELESS_MEDIA_ROOT_DIR', getenv('STATELESS_MEDIA_DIRECTORY'));
-define( 'WP_STATELESS_MEDIA_KEY_FILE_PATH', getenv('STATELESS_MEDIA_GOOGLE_KEY'));
+//efine( 'WP_STATELESS_MEDIA_KEY_FILE_PATH', getenv('STATELESS_MEDIA_GOOGLE_KEY'));
 define( 'WP_STATELESS_MEDIA_REWRITE_BODY_CONTENT_URL', 1);
 // For ProudCity, to fix issues related to migration
 define( 'PROUD_WP_STATELESS_FORCE', getenv('PROUD_WP_STATELESS_FORCE'));
 
-//define( 'WP_STATELESS_MEDIA_KEY_FILE_PATH', '/etc/secrets/gcserviceaccount.json');
-//define( 'WP_STATELESS_MEDIA_SERVICE_ACCOUNT', 	getenv('STATELESS_MEDIA_SERVICE_ACCOUNT'));
+define( 'WP_STATELESS_MEDIA_KEY_FILE_PATH', getenv('STATELESS_MEDIA_KEY_FILE_PATH'));
+//define( 'WP_STATELESS_MEDIA_SERVICE_ACCOUNT', 	getenv('STATELESS_MEDIA_SERVICE_ACCOUNT')); // @todo: this is only referenced in readme, not in the actual wp-stateless code
 
 
 // wp-mail-smtp settings
@@ -91,6 +90,17 @@ define('WPMS_SMTP_AUTH', true); // True turns on SMTP authentication, false turn
 define('WPMS_SMTP_HOST', getenv('SMTP_HOST')); // The SMTP mail host
 define('WPMS_SMTP_USER', getenv('SMTP_USER')); // SMTP authentication username, only used if WPMS_SMTP_AUTH is true
 define('WPMS_SMTP_PASS', getenv('SMTP_PASS')); // SMTP authentication password, only used if WPMS_SMTP_AUTH is true
+
+
+// Varnish settings
+define('WP_CACHE', getenv("WP_CACHE"));
+// @todo: these were from old dedicated script and are no longer needed... remove?
+define('WP_REDIS_BACKEND_HOST', getenv("WP_REDIS_BACKEND_HOST"));
+define('WP_REDIS_BACKEND_AUTH', getenv("WP_REDIS_BACKEND_AUTH"));
+define('WP_CACHE_KEY_SALT', getenv("HOST"));
+//WP_REDIS_BACKEND_PORT
+//WP_REDIS_BACKEND_D
+//WP_REDIS_SERIALIZER
 
 
 

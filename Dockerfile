@@ -8,6 +8,12 @@ RUN apt-get update \
 	&& docker-php-ext-install gd mysqli opcache curl mcrypt \
 	&& a2enmod rewrite expires
 
+# install phpredis extension
+# From http://stackoverflow.com/questions/31369867/how-to-install-php-redis-extension-using-the-official-php-docker-image-approach
+RUN pecl install -o -f redis \
+	&&  rm -rf /tmp/pear \
+	&&  echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
+
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
 RUN { \
@@ -66,13 +72,6 @@ RUN chown -R www-data:www-data /app/wordpress
 
 # VOLUME /app/wordpress/wp-content/cache
 EXPOSE 80
-
-
-#RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxLight.woff http://mal.uninett.no/uninett-theme/fonts/colfaxLight.woff
-#RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxMedium.woff http://mal.uninett.no/uninett-theme/fonts/colfaxMedium.woff
-#RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxRegular.woff http://mal.uninett.no/uninett-theme/fonts/colfaxRegular.woff
-#RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxThin.woff http://mal.uninett.no/uninett-theme/fonts/colfaxThin.woff
-#RUN curl -o /app/wordpress/wp-content/themes/feidernd/fonts/colfaxRegularItalic.woff http://mal.uninett.no/uninett-theme/fonts/colfaxRegularItalic.woff
 
 # grr, ENTRYPOINT resets CMD now
 ENTRYPOINT ["/entrypoint.sh"]
