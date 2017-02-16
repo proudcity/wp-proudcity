@@ -15,7 +15,6 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
 
   echo "Adding JoomUnited plugins"
-  git clone https://source.developers.google.com/p/proudcity-1184/r/wp-speed-of-light /app/wordpress/wp-content/plugins/wp-speed-of-light
   git clone https://source.developers.google.com/p/proudcity-1184/r/wp-media-folder /app/wordpress/wp-content/plugins/wp-media-folder
 
   # Install other non-free plugins
