@@ -23,19 +23,6 @@
         {
             "type": "package",
             "package": {
-                "name": "proudcity/auth0",
-                "type": "wordpress-plugin",
-                "version": "3.2.14",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/proudcity/auth0.git",
-                    "reference": "master"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "proudcity/proudpack",
                 "type": "wordpress-plugin",
                 "version": "1.25.0",
@@ -299,7 +286,7 @@
         "composer/installers": "1.*",
         "johnpbloch/wordpress": "4.7.2",
 
-        "proudcity/auth0": "3.2.14",
+        "wpackagist-plugin/auth0": "3.2.18",
         "wpackagist-plugin/wp-jwt-auth": "1.1.2",
         "WP-API/rest-filter": "1.0",
         "wpackagist-plugin/wp-api-menus": "1.3.1",
@@ -310,7 +297,7 @@
         "wpackagist-plugin/intuitive-custom-post-order": "3.0.7",
         "wpackagist-plugin/duplicate-post": "3.1.2",        
         "wpackagist-plugin/disable-comments": "1.6",
-        "wpackagist-plugin/wordpress-seo": "4.3",
+        "wpackagist-plugin/wordpress-seo": "4.4",
         "wpackagist-plugin/mce-table-buttons": "3.2",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
@@ -322,7 +309,7 @@
         "wpackagist-plugin/edit-flow": "0.8.2",
         "wpackagist-plugin/wp-sitemap-page": "1.6",
 
-        "wpackagist-plugin/siteorigin-panels": "2.4.24",
+        "wpackagist-plugin/siteorigin-panels": "2.4.25",
         "wpackagist-plugin/so-widgets-bundle": "1.8.1",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
@@ -333,7 +320,7 @@
         "wpackagist-plugin/national-weather-service-alerts": "1.3.4",
         "wpackagist-plugin/broken-link-checker": "1.11.2",
 
-        "wpackagist-plugin/elasticpress": "2.1.2",
+        "wpackagist-plugin/elasticpress": "2.2",
 
 
         "proudcity/proudpack": "1.25.0",
