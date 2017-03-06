@@ -43,6 +43,16 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     done
   fi
 
+  # Add wordpress.org plugins, comma separated
+  if [[ $WORDPRESSORG_PLUGINS ]]; then
+    # cd /app/wordpress/wp-content/plugins
+    export IFS=","
+    for s in $WORDPRESSORG_PLUGINS; do
+      cmd="wget http://downloads.wordpress.org/plugin/${s}.zip && unzip ${s}.zip && rm ${s}.zip"
+      eval $cmd
+      echo "Adding WP.org plugin: ${s} in `pwd`"
+    done
+  fi
 fi
 
 exec "$@"
