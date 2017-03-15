@@ -30,8 +30,6 @@ COPY etc/php.ini /usr/local/etc/php/php.ini
 
 RUN mkdir -p /app
 COPY composer.json /app/
-WORKDIR /app
-
 
 RUN curl -o /tmp/composer.phar https://getcomposer.org/download/1.3.0/composer.phar \
   && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
@@ -51,7 +49,7 @@ RUN cd /tmp && chmod +x wp-cli.phar \
 # RUN cat .htaccess_extra >> .htaccess && rm .htaccess_extra && cat .htaccess
 # RUN cat /entrypoint.sh
 
-
+WORKDIR /app/wordpress
 
 #### --- Configure entrypoint ---
 COPY bin/entrypoint.sh /entrypoint.sh

@@ -53,6 +53,19 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
       echo "Adding WP.org plugin: ${s} in `pwd`"
     done
   fi
+
+  # Add domain redirects to .htaccess as CSV (from, to) with newlines between each redirect
+  if [[ $REDIRECTS ]]; then
+    export IFS=","
+    filename=/app/wordpress/.htaccess
+    echo "RewriteEngine On" > $filename
+    while read from to; do
+      echo "RewriteCond %{HTTP_HOST} ^${from}$ [NC]" >> $filename
+      echo "RewriteRule ^(.*)$ ${to} [R=301,L]" >> $filename
+      echo "Adding redirect from ${from} to ${to}"
+    done < /tmp/redirects.csv
+  fi
+
 fi
 
 exec "$@"
