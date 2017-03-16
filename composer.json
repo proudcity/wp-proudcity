@@ -259,7 +259,7 @@
             "package": {
                 "name": "gravityflow/gravityflow",
                 "type": "wordpress-plugin",
-                "version": "master",
+                "version": "1.27.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/gravityflow/gravityflow.git",
@@ -321,7 +321,7 @@
         "wpackagist-plugin/broken-link-checker": "1.11.2",
 
         "wpackagist-plugin/elasticpress": "2.2",
-        "gravityflow/gravityflow": "master",
+        "gravityflow/gravityflow": "1.27.0",
 
         "proudcity/proudpack": "1.27.0",
         "proudcity/wp-proud-core": "1.27.0",
