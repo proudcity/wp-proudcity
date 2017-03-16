@@ -63,7 +63,7 @@ return array (
     5 => '^\s*alter\b',
     6 => '^\s*show\b',
     7 => '^\s*set\b',
-    8 => '\bautoload\s+=\s+'yes'',
+    8 => "\bautoload\s+=\s+'yes'",
     9 => '\bsql_calc_found_rows\b',
     10 => '\bfound_rows\(\)',
   ),
