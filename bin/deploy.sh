@@ -1,6 +1,5 @@
 RELEASE=${1}
 
-cd wordpress
 bash /app/updates/release-${RELEASE}.sh
 wp core update-db --allow-root
 wp w3-total-cache flush minify --allow-root
