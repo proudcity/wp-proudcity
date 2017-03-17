@@ -6,7 +6,7 @@ PHP=${1}
 echo "Update auth0 welcome note"
 wp option get wp_auth0_settings --format=json --allow-root | php -r '
 $var = json_decode( fgets(STDIN) );
-$var->form_title = "Welcome to ProudCity1";
+$var->form_title = "Welcome to ProudCity";
 $var->icon_url = "https://my.proudcity.com/images/IconBlack.png";
 print json_encode($var);
 ' | wp option set wp_auth0_settings --format=json --allow-root
