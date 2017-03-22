@@ -59,7 +59,13 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     export IFS=","
     echo "${REDIRECTS}" > /tmp/redirects.csv
     filename=/app/wordpress/.htaccess
-    echo "RewriteEngine On" > $filename
+    cat $filename
+    echo "RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.php [L]" > $filename
     while read from to; do
       echo "RewriteCond %{HTTP_HOST} ^${from}$ [NC]" >> $filename
       echo "RewriteRule ^(.*)$ ${to} [R=301,L]" >> $filename
