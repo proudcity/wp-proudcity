@@ -62,7 +62,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   RewriteRule ^index\.php$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.php [L]" > $filename
+  RewriteRule . /index.php [L]" > $htaccess
 
   # Add domain redirects to .htaccess as CSV (from, to) with newlines between each redirect
   if [[ $REDIRECTS ]]; then
