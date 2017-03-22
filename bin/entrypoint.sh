@@ -54,23 +54,31 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     done
   fi
 
+
+  # Add .htaccess
+  htaccess=/app/wordpress/.htaccess
+  echo "RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.php$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.php [L]" > $filename
+
   # Add domain redirects to .htaccess as CSV (from, to) with newlines between each redirect
   if [[ $REDIRECTS ]]; then
     export IFS=","
     echo "${REDIRECTS}" > /tmp/redirects.csv
-    filename=/app/wordpress/.htaccess
-    cat $filename
-    echo "RewriteEngine On
-    RewriteBase /
-    RewriteRule ^index\.php$ - [L]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule . /index.php [L]" > $filename
     while read from to; do
-      echo "RewriteCond %{HTTP_HOST} ^${from}$ [NC]" >> $filename
-      echo "RewriteRule ^(.*)$ ${to} [R=301,L]" >> $filename
+      echo "RewriteCond %{HTTP_HOST} ^${from}$ [NC]" >> $htaccess
+      echo "RewriteRule ^(.*)$ ${to} [R=301,L]" >> $htaccess
       echo "Adding redirect from ${from} to ${to}"
     done < /tmp/redirects.csv
+  fi
+
+  if [$TLS == "true" ]; then
+    echo 'Adding TLS REDIRECT .htaccess rule'
+    echo "RewriteCond %{HTTP_HOST} ^${HOST}\.com [NC]"  >> $htaccess
+    echo "RewriteRule ^(.*)$ https://${HOST}/$1 [R,L]"  >> $htaccess
   fi
 
 fi
