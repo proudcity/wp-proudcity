@@ -127,10 +127,9 @@ $table_prefix  = 'wp_';
 //define ('WPLANG', 'nb_NO');
 
 
-//$url = (getenv('TLS') === 'true' ? 'https' : 'http') . '://' . getenv('HOST');
-//define("WP_SITEURL", $url.'/');
-//define('WP_HOME', $url);
-
+$url = (getenv('TLS') === 'true' ? 'https' : 'http') . '://' . getenv('HOST');
+define("WP_SITEURL", $url.'/');
+define('WP_HOME', $url);
 
 
 if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] === 'GoogleHC/1.0') {
