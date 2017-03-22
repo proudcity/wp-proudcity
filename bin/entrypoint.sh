@@ -57,6 +57,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   # Add domain redirects to .htaccess as CSV (from, to) with newlines between each redirect
   if [[ $REDIRECTS ]]; then
     export IFS=","
+    echo "${REDIRECTS}" > /tmp/redirects.csv
     filename=/app/wordpress/.htaccess
     echo "RewriteEngine On" > $filename
     while read from to; do
