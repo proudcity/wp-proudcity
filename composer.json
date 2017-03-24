@@ -25,7 +25,7 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "1.27.0",
+                "version": "1.27.3",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
@@ -272,7 +272,7 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "1.27.0",
+                "version": "1.27.4",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
@@ -324,7 +324,7 @@
         "gravityflow/gravityflow": "1.27.0",
 
         "proudcity/proudpack": "1.27.0",
-        "proudcity/wp-proud-core": "1.27.0",
+        "proudcity/wp-proud-core": "1.27.3",
         "proudcity/wp-proud-agency": "1.27.0",
         "proudcity/wp-proud-search": "1.27.0",
         "proudcity/wp-proud-search-elastic": "1.27.0",
@@ -341,7 +341,7 @@
         "proudcity/wp-proud-subsite": "1.27.0",
         "proudcity/romulus-wordpress-form": "1.27.0",
         "proudcity/wp-quick-menu": "1.27.0",
-        "proudcity/wp-proud-theme": "1.27.0"
+        "proudcity/wp-proud-theme": "1.27.4"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
