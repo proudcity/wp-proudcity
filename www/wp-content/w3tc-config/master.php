@@ -11,7 +11,7 @@ return array (
   'cluster.messagebus.sns.topic_arn' => '',
   'dbcache.configuration_overloaded' => false,
   'dbcache.debug' => '0',
-  'dbcache.enabled' => '1',
+  'dbcache.enabled' => '0',
   'dbcache.engine' => 'redis',
   'dbcache.file.gc' => '3600',
   'dbcache.file.locking' => false,
