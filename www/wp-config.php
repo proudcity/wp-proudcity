@@ -137,17 +137,19 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] === 'Googl
   exit;
 }
 
-if (getenv('TLS') === 'true' && isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] === 'http') {
-  $redirect = 'https://' . getenv('HOST') . $_SERVER['REQUEST_URI'];
-  header('HTTP/1.1 301 Moved Permanently');
-  header('Location: ' . $redirect);
-  exit();
+if (getenv('TLS') === 'true'){
+    $_SERVER['HTTPS'] = 'on';
+    if (
+        isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] === 'http' ||
+        $_SERVER['HTTP_HOST'] != getenv('HOST')
+    ) {
+        $redirect = 'https://' . getenv('HOST') . $_SERVER['REQUEST_URI'];
+        header('HTTP/1.1 301 Moved Permanently');
+        header('Location: ' . $redirect);
+        exit();
+    }
 }
 
-
-if (getenv('TLS') === 'true') {
-  $_SERVER['HTTPS']='on';
-}
 
 /* ------ --- --- -- -- --- -- .... */
 
