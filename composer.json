@@ -321,6 +321,7 @@
         "wpackagist-plugin/wp-mail-smtp": "0.10.1",
         "wpackagist-plugin/edit-flow": "0.8.2",
         "wpackagist-plugin/wp-sitemap-page": "1.6",
+        "wpackagist-plugin/google-sitemap-generator": "4.0.8",
 
         "wpackagist-plugin/siteorigin-panels": "2.4.25",
         "wpackagist-plugin/so-widgets-bundle": "1.8.2",
