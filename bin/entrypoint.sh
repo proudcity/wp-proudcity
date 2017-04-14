@@ -67,11 +67,11 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     done < /tmp/redirects.csv
   fi
 
-  if [$TLS == "true" ]; then
-    echo 'Adding TLS REDIRECT .htaccess rule'
-    echo "RewriteCond %{HTTP_HOST} ^${HOST}\.com [NC]"  >> $htaccess
-    echo "RewriteRule ^(.*)$ https://${HOST}/$1 [R,L]"  >> $htaccess
-  fi
+  #if [$TLS == "true" ]; then
+  #  echo 'Adding TLS REDIRECT .htaccess rule'
+  #  echo "RewriteCond %{HTTP_HOST} ^${HOST}\.com [NC]"  >> $htaccess
+  #  echo "RewriteRule ^(.*)$ https://${HOST}/$1 [R,L]"  >> $htaccess
+  #fi
 
 fi
 
