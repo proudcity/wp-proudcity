@@ -16,7 +16,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/proudpack.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -29,7 +29,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -42,7 +42,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-agency.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -55,7 +55,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -68,7 +68,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search-elastic.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -81,7 +81,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-payment.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -94,7 +94,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-document.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -107,7 +107,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-location.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -120,7 +120,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-issue.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -133,7 +133,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-admin.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -146,7 +146,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-map-app.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -159,7 +159,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-social-app.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -172,7 +172,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-actions-app.git",
-                    "reference": "master"
+                    "reference": "1.29.3"
                 }
             }
         },
@@ -185,7 +185,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-seeclickfix.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -198,7 +198,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-subsite.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -211,7 +211,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-dashboard.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -224,7 +224,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/romulus-wordpress-form.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -237,7 +237,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-quick-menu.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -250,7 +250,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-auth0.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         },
@@ -289,7 +289,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
-                    "reference": "master"
+                    "reference": "1.29.0"
                 }
             }
         }
