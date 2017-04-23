@@ -218,19 +218,6 @@
         {
             "type": "package",
             "package": {
-                "name": "proudcity/romulus-wordpress-form",
-                "type": "wordpress-plugin",
-                "version": "1.29.0",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/proudcity/romulus-wordpress-form.git",
-                    "reference": "1.29.0"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "proudcity/wp-quick-menu",
                 "type": "wordpress-plugin",
                 "version": "1.29.0",
@@ -339,7 +326,6 @@
         "proudcity/wp-proud-seeclickfix": "1.29.0",
         "proudcity/wp-proud-dashboard": "1.29.0",
         "proudcity/wp-proud-subsite": "1.29.0",
-        "proudcity/romulus-wordpress-form": "1.29.0",
         "proudcity/wp-quick-menu": "1.29.0",
         "proudcity/wp-proud-theme": "1.29.0"
     },
