@@ -25,11 +25,11 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "1.29.5",
+                "version": "1.29.7",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
-                    "reference": "1.29.5"
+                    "reference": "1.29.7"
                 }
             }
         },
@@ -311,7 +311,7 @@
         "wpackagist-plugin/elasticpress": "2.2.1",
 
         "proudcity/proudpack": "1.29.0",
-        "proudcity/wp-proud-core": "1.29.5",
+        "proudcity/wp-proud-core": "1.29.7",
         "proudcity/wp-proud-agency": "1.29.0",
         "proudcity/wp-proud-search": "1.29.0",
         "proudcity/wp-proud-search-elastic": "1.29.0",
