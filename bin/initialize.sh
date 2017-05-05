@@ -2,7 +2,7 @@
 # Usage
 #bash initialize.sh $URL $ACCOUNT_EMAIL $LOCATION $STAGE[test|live|example]
 #bash initialize.sh www.cityofsanrafel.org
-#bash initialize.sh oakland-ca.proudcity.com  jeffrey.m.lyon@gmail.com Oakland CA
+#bash initialize.sh pueblo-co.proudcity.com  hsmith@pueblo.us "Pueblo/CO"
 
 thisdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
