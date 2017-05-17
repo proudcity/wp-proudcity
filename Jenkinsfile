@@ -21,7 +21,7 @@ node {
     //sh("docker run ${imageTag} go test")
 
     stage 'Push image to registry'
-    sh("gcloud docker push ${imageTag}")
+    sh("gcloud docker -- push ${imageTag}")
 
     slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 
