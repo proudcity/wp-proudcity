@@ -284,7 +284,7 @@
         "wpackagist-plugin/intuitive-custom-post-order": "3.0.8",
         "wpackagist-plugin/duplicate-post": "3.2",
         "wpackagist-plugin/disable-comments": "1.6",
-        "wpackagist-plugin/wordpress-seo": "4.7",
+        "wpackagist-plugin/wordpress-seo": "4.7.1",
         "wpackagist-plugin/mce-table-buttons": "3.2",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
@@ -297,11 +297,11 @@
         "wpackagist-plugin/wp-sitemap-page": "1.6",
         "wpackagist-plugin/google-sitemap-generator": "4.0.8",
 
-        "wpackagist-plugin/siteorigin-panels": "2.5.2",
-        "wpackagist-plugin/so-widgets-bundle": "1.8.5",
+        "wpackagist-plugin/siteorigin-panels": "2.5.3",
+        "wpackagist-plugin/so-widgets-bundle": "1.8.6",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
-        "wpackagist-plugin/events-manager": "5.6.6.1",
+        "wpackagist-plugin/events-manager": "5.7.2",
         "wpackagist-plugin/wp-fullcalendar": "1.2",
         "wpackagist-plugin/wp-job-manager": "1.25.3",
         "wpackagist-plugin/simple-staff-list": "1.19",
