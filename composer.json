@@ -263,7 +263,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
-                    "reference": "1.32.0"
+                    "reference": "1.32.1"
                 }
             }
         }
@@ -327,7 +327,7 @@
         "proudcity/wp-proud-dashboard": "1.32.0",
         "proudcity/wp-proud-subsite": "1.32.0",
         "proudcity/wp-quick-menu": "1.32.0",
-        "proudcity/wp-proud-theme": "1.32.0"
+        "proudcity/wp-proud-theme": "1.32.1"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
