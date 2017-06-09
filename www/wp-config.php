@@ -34,6 +34,8 @@ define('SAVEQUERIES', true);
 //     // error_log("We got data from /etc/secrets/wpsecrets");
 // }
 
+// Support legacy sites without an explicit APP env variable.
+define("APP", (getenv('APP') ? getenv('APP') : getenv('WORDPRESS_DB_NAME')));
 
 // $url = parse_url($db);
 define("DB_NAME", trim(getenv("WORDPRESS_DB_NAME")));
