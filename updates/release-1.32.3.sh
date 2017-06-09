@@ -5,3 +5,6 @@ PHP=${1}
 
 # Update the menus for the new dashboard
 wp --allow-root eval-file $PHP
+
+wp plugin activate wp-proud-dashboard --allow-root
+wp proudcity apiplugins --allow-root
