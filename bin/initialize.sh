@@ -1,8 +1,8 @@
 # Scrubs and configures a site after cloning
 # Usage
 #bash initialize.sh $URL $WIPE_PRIVATE[true|false] $LOCATION $STAGE[test|live|example]
-#bash initialize.sh false www.cityofsanrafel.org
-#bash initialize.sh true pueblo-co.proudcity.com  "Pueblo/CO"
+#bash initialize.sh www.cityofsanrafel.org false
+#bash initialize.sh pueblo-co.proudcity.com  true "Pueblo/CO"
 
 thisdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -14,7 +14,6 @@ STAGE=${4:test}
 echo "-------------"
 echo "Running initialize.sh with parameters"
 echo "URL: $URL"
-echo "ACCOUNT_EMAIL: $URL"
 echo "WIPE_PRIVATE: $WIPE_PRIVATE"
 echo "LOCATION: $URL"
 echo "STAGE: $STAGE"
