@@ -207,11 +207,11 @@
             "package": {
                 "name": "proudcity/wp-proud-dashboard",
                 "type": "wordpress-plugin",
-                "version": "1.32.4",
+                "version": "1.32.5",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-dashboard.git",
-                    "reference": "1.32.4"
+                    "reference": "1.32.5"
                 }
             }
         },
@@ -324,7 +324,7 @@
         "proudcity/wp-proud-actions-app": "1.32.0",
         "proudcity/wp-proud-admin": "1.32.3",
         "proudcity/wp-proud-seeclickfix": "1.32.0",
-        "proudcity/wp-proud-dashboard": "1.32.4",
+        "proudcity/wp-proud-dashboard": "1.32.5",
         "proudcity/wp-proud-subsite": "1.32.0",
         "proudcity/wp-quick-menu": "1.32.0",
         "proudcity/wp-proud-theme": "1.32.1"
