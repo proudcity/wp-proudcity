@@ -274,9 +274,7 @@
         "johnpbloch/wordpress": "4.8",
 
         "proudcity/auth0": "1.33.0",
-        "wpackagist-plugin/wp-jwt-auth": "1.1.2",
         "WP-API/rest-filter": "1.0",
-        "wpackagist-plugin/wp-api-menus": "1.3.1",
 
         "wpackagist-plugin/w3-total-cache": "0.9.5.4",
         "wpackagist-plugin/wp-stateless": "1.9.0",
@@ -310,7 +308,6 @@
 
         "wpackagist-plugin/elasticpress": "2.3",
 
-        "proudcity/proudpack": "1.33.0",
         "proudcity/wp-proud-core": "1.33.0",
         "proudcity/wp-proud-agency": "1.33.0",
         "proudcity/wp-proud-search": "1.33.0",
