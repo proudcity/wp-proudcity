@@ -104,6 +104,13 @@ define('WP_CACHE_KEY_SALT', getenv("HOST"));
 //WP_REDIS_BACKEND_D
 //WP_REDIS_SERIALIZER
 
+// Elasticpress / search settings
+if ( getenv( 'ELASTICSEARCH_HOST' ) ) {
+  define( 'EP_HOST', 'http://' . getenv('ELASTICSEARCH_HOST'). ':9200' );
+}
+if ( getenv( 'ELASTICSEARCH_DOCS_HOST' ) ) {
+  define('EP_HELPER_HOST', 'http://' . getenv( 'ELASTICSEARCH_DOCS_HOST' ) . '/send-attachments');
+}
 
 
 //define('JETPACK_DEV_DEBUG', false);
