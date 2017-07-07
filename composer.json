@@ -10,13 +10,13 @@
         {
             "type": "package",
             "package": {
-                "name": "proudcity/proudpack",
+                "name": "proudcity/auth0",
                 "type": "wordpress-plugin",
-                "version": "1.34.0",
+                "version": "1.34.3",
                 "source": {
                     "type": "git",
-                    "url": "https://github.com/proudcity/proudpack.git",
-                    "reference": "1.34.0"
+                    "url": "https://github.com/proudcity/wp-auth0.git",
+                    "reference": "1.34.3"
                 }
             }
         },
@@ -260,7 +260,7 @@
         "composer/installers": "1.*",
         "johnpbloch/wordpress": "4.8",
 
-        "wpackagist-plugin/auth0": "3.2.22",
+        "proudcity/auth0": "1.34.3",
         "WP-API/rest-filter": "1.0",
         "wpackagist-plugin/wp-jwt-auth": "1.1.2",
 
