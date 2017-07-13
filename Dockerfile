@@ -6,7 +6,9 @@ RUN apt-get update \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
 	&& docker-php-ext-install gd mysqli opcache curl mcrypt \
-	&& a2enmod rewrite expires
+	&& a2enmod rewrite expires \
+	# Add sudo in order to run wp-cli as the www-data user
+	&& sud
 
 # install phpredis extension
 # From http://stackoverflow.com/questions/31369867/how-to-install-php-redis-extension-using-the-official-php-docker-image-approach
@@ -42,9 +44,23 @@ RUN php -dmemory_limit=128M /usr/local/bin/composer install
 #  	&& rm -rf  /app/wordpress/wp-content/plugins/PHP\ Markdown\ Extra\ 1.2.8/ \
 # && rm -rf /tmp/markdown.zip
 
-RUN curl -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-RUN cd /tmp && chmod +x wp-cli.phar \
-  && mv wp-cli.phar /usr/local/bin/wp
+# Add wp-cli with wrapper to run as www-data user
+RUN curl -o /bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+COPY bin/wp-wrapper.sh /bin/wp
+RUN chmod +x /bin/wp-cli.phar /bin/wp
+
+# Add sudo in order to run wp-cli as the www-data user
+RUN apt-get update && apt-get install -y sudo mysql-client less unzip git libcurl4-openssl-dev libmcrypt-dev php7.0-mcrypt
+
+# Add WP-CLI
+RUN curl -o /bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+COPY wp-su.sh /bin/wp
+RUN chmod +x /bin/wp-cli.phar /bin/wp
+
+# Cleanup
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 
 # COPY etc/.htaccess_extra .htaccess_extra
 # RUN cat .htaccess_extra >> .htaccess && rm .htaccess_extra && cat .htaccess
