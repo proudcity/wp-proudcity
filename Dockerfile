@@ -8,7 +8,7 @@ RUN apt-get update \
 	&& docker-php-ext-install gd mysqli opcache curl mcrypt \
 	&& a2enmod rewrite expires \
 	# Add sudo in order to run wp-cli as the www-data user
-	&& sud
+	&& sudo
 
 # install phpredis extension
 # From http://stackoverflow.com/questions/31369867/how-to-install-php-redis-extension-using-the-official-php-docker-image-approach
