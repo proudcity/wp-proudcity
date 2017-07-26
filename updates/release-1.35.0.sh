@@ -8,3 +8,6 @@ $var = json_decode( fgets(STDIN) );
 $var->delete_remote = "true";
 print json_encode($var);
 ' | wp option set sm --format=json --allow-root
+
+# Enable gravityforms WGAC
+wp plugin activate gravity-forms-wcag-20-form-fields --allow-root
