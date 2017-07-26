@@ -1,4 +1,4 @@
-# Updates for the 1.34.5 Hotfix release
+# Updates for the 1.35.0 Release
 
 PHP=${1}
 
