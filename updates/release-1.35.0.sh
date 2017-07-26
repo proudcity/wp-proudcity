@@ -14,4 +14,4 @@ wp plugin activate gravity-forms-wcag-20-form-fields --allow-root
 
 
 echo "Running gravityforms update php script"
-wp --allow-root eval-file $PHP
+wp --allow-root eval-file /app/updates/release-1.35.0.php
