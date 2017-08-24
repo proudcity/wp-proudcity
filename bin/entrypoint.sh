@@ -73,6 +73,10 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   #  echo "RewriteRule ^(.*)$ https://${HOST}/$1 [R,L]"  >> $htaccess
   #fi
 
+  # Set up php.ini config defaults
+  export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"128M"}
+  export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"100M"}
+
 fi
 
 exec "$@"
