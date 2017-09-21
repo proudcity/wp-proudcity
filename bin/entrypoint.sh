@@ -75,7 +75,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
 
   # Set up php.ini config defaults
   export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"128M"}
-  export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"100M"}
+  export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 
 fi
 
