@@ -32,7 +32,7 @@ RUN mkdir -p /app
 COPY composer.json /app/
 WORKDIR /app
 
-RUN curl -o /tmp/composer.phar https://getcomposer.org/download/1.3.0/composer.phar \
+RUN curl -k -o /tmp/composer.phar https://getcomposer.org/download/1.3.0/composer.phar \
   && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 RUN php -dmemory_limit=128M /usr/local/bin/composer install
 
