@@ -53,11 +53,8 @@ class Pc extends Bin {
             return $this->pcHelp();
         }
 
-        if ($this->group === 'build' || $this->group === 'watch') {
-            return $this->gulp($this->action);
-        }
-        elseif ($this->group === 'aws' && $this->action !== 'configure' && $this->action !== 'mongo') {
-            return $this->aws();
+        if (in_array($this->group, ['watch', 'publish'])) {
+            return $this->{$this->group}();
         }
 
         $method = $this->group . $this->action;
@@ -278,11 +275,13 @@ class Pc extends Bin {
      *
      * @param $handle
      */
-    public function watch($handle = null) {
+    public function watch() {
+
+        $handle = $this->action;
 
         chdir($this->dir . '../');
         $cmds = [
-            'proudcity-dashboard' => 'cp -f proudcity-dashboard/app/index.dev.html proudcity-dashboard/app/index.html && grunt --gruntfile=proudcity-dashboard/Gruntfile.js',
+            'proudcity-dashboard' => 'rm proudcity-dashboard/app/index.html && cp -f proudcity-dashboard/app/index.dev.html proudcity-dashboard/app/index.html && grunt --gruntfile=proudcity-dashboard/Gruntfile.js',
             'proudcity-api'       => 'swagger project start proudcity-api-swagger',
             'service-center'      => 'grunt --gruntfile=service-center/Gruntfile.js',
             //'wp-proud-theme'      => 'grunt --gruntfile=service-center/Gruntfile.js',
@@ -305,17 +304,20 @@ class Pc extends Bin {
      *
      * @param $handle
      */
-    public function publish($handle) {
+    public function publish() {
+
+        $handle = $this->action;
+
         chdir($this->dir . '../');
         $cmds = [
-            'proudcity-dashboard' => 'cp -f proudcity-dashboard/app/index.prod.html proudcity-dashboard/app/index.html && grunt publish --gruntfile=proudcity-dashboard/Gruntfile.js && firebase deploy',
+            'proudcity-dashboard' => 'cd proudcity-dashboard && rm app/index.html && cp -f app/index.prod.html app/index.html && grunt publish --gruntfile=Gruntfile.js && firebase deploy',
             'service-center'      => 'grunt publish --gruntfile=service-center/Gruntfile.js && firebase use beta && firebase deploy && echo "To push to production run:\n  firebase use default && firebase deploy"',
             //'wp-proud-theme'      => 'grunt --gruntfile=service-center/Gruntfile.js',
             //'proudcity-patterns'      => 'grunt --gruntfile=service-center/Gruntfile.js',
         ];
 
-        if (empty($handle) || empty($cmds[$handle])) {
-            error('You must specify a handle. Options:'."\r".implode( "\r", array_keys($cmds)) );
+        if (empty($handle)) {
+            $this->error('You must specify a handle. Options:'."\r".implode( "\r", array_keys($cmds)) );
             die();
         }
 

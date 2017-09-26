@@ -12,4 +12,4 @@ echo "CHANGING URL:"
 echo "OLD: $OLD_URL"
 echo "NEW: $URL"
 
-wp search-replace $OLD_URL $URL --allow-root
+wp search-replace $(wp option get siteurl --allow-root)/wp-content/uploads/ https://storage.googleapis.com/proudcity/${STATELESS_MEDIA_DIRECTORY} --allow-root
