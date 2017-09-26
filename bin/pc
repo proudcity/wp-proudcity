@@ -1,0 +1,518 @@
+#!/usr/bin/php
+<?php
+
+/**
+ * Class Pc
+ * //@package Bin
+ */
+class Pc extends Bin {
+
+    private $group;
+    private $action;
+    private $arg1;
+    private $dir;
+    private $prodMongo;
+
+    /**
+     * EcsDeploy constructor
+     */
+    public function __construct() {
+        parent::__construct();
+
+        /**
+         * Get service to call from first argument
+         */
+        $this->group = $this->getArg(1);
+
+        /**
+         * Get action to call from second argument
+         */
+        $this->action = $this->getArg(2);
+
+        /**
+         * Get an argument for the method
+         */
+        $this->arg1 = $this->getArg(3);
+
+        /**
+         * This is used so `pc` can be called from any dir.
+         */
+        $this->dir = __DIR__ . '/../';
+
+    }
+
+
+    /**
+     * Main entrypoint for script execution
+     *
+     * @return void
+     */
+    public function run() {
+
+        if (empty($this->group)) {
+            return $this->pcHelp();
+        }
+
+        if ($this->group === 'build' || $this->group === 'watch') {
+            return $this->gulp($this->action);
+        }
+        elseif ($this->group === 'aws' && $this->action !== 'configure' && $this->action !== 'mongo') {
+            return $this->aws();
+        }
+
+        $method = $this->group . $this->action;
+        if (method_exists($this, $method)) {
+            return $this->{$method}();
+        }
+
+        // Error time
+        $this->err($this->group);
+    }
+
+    /**
+     * Helper function prints an array of help commands
+     *
+     * @param $options
+     * @param string $mask
+     */
+    private function help($options, $mask = "  %-15s %-70s\n") {
+
+        foreach ($options as $line) {
+            echo vsprintf($mask, $line);
+        }
+    }
+
+    /**
+     * Helper function prints the error message for an invalid command.
+     *
+     * @param string $method
+     */
+    private function err($method) {
+
+        $this->printLine();
+        $this->printLine("pc $this->group $this->action is not a valid command :(", red);
+        $this->printLine();
+        if (method_exists($this, $method)) {
+            $this->action = null;
+            return $this->{$method}();
+        }
+        else {
+            return $this->pcHelp();
+        }
+    }
+
+
+    /**
+     * Dipclay a list of commands if this is run without any arguments
+     */
+    public function pcHelp() {
+        $this->printLine('Available commands:');
+        $this->help([
+            ['pc dev <action>', 'Start/stop Docker. Connect to Docker.'],
+            ['pc watch <handle|all>', 'Grunt watch. Handles: proudcity-dashboard, wp-proud-theme, wp-proud-admin'],
+            ['pc publish <handle> [push]', 'Grunt publish. When push is `true`, publish to firebase-hosting'],
+            ['pc platform <action>', 'Interact with your site hosted on the ProudCity Platform'],
+        ], "  %-30s %-50s\n");
+        $this->printLine();
+        $this->printLine('Enter the top-level commands with no arguments for more details (ex `pc dev`).');
+    }
+
+
+    /**
+     * Action: pc dev
+     *
+     * List dev commands.
+     */
+    public function dev() {
+
+        $this->printLine('Available commands:');
+        $this->help([
+            ['pc dev start', 'Start Docker'],
+            ['pc dev stop', 'Stop Docker'],
+            ['pc dev status', 'Get list of running Docker containers'],
+            ['pc dev logs', 'View the last 1000 logs from the Docker container'],
+            ['pc dev ssh', 'SSH into the Docker container'],
+            ['pc dev wp', 'Run wp-cli command'],
+            ['pc dev db', 'Connect to the MySQL database'],
+            ['pc dev install', 'Runs composer install'],
+            ['pc dev update', 'Runs composer update'],
+            ['pc dev docs', 'Open the ProudCity Developer Docs in your browser'],
+            ['pc dev repo [plugin]', 'Open the ProudCity Github repo in your browser. Optionally accepts a plugin name to view.'],
+        ]);
+    }
+
+    /**
+     * Action: pc dev up
+     */
+    public function devUp() {
+
+        $file = !empty($this->arg1) ? $this->arg1 : $this->dir . 'docker-compose.yml';
+        passthru("docker-compose -f $file up -d");
+
+        sleep(3);
+        if (empty(shell_exec('docker ps -q --filter="name=wpproudcity_wordpress_1"'))) {
+            $this->printLine("There was a problem with Apache. We are attempting to restart.", 'yellow');
+            $this->devStatus();
+            $this->devRestart();
+        }
+    }
+
+    /**
+     * Alias for: pc dev up
+     */
+    public function devStart() {
+
+        return $this->devUp();
+    }
+
+    /**
+     * Action: pc dev stop
+     */
+    public function devStop() {
+
+        $file = !empty($this->arg1) ? $this->arg1 : $this->dir . 'docker-compose.yml';
+        passthru("docker-compose -f $file stop");
+    }
+
+    /**
+     * Alias for: pc dev up
+     */
+    public function devDown() {
+
+        return $this->devStop();
+    }
+
+    /**
+     * Action: pc dev restart
+     */
+    public function devRestart() {
+
+        $this->devUp();
+        return $this->devStop();
+    }
+
+    /**
+     * Action: pc dev status
+     */
+    public function devStatus() {
+
+        passthru('docker ps');
+    }
+
+    /**
+     * Action: pc dev logs
+     */
+    public function devLogs() {
+
+        $cmd = 'docker logs $(docker ps -aq --filter="name=wpproudcity_wordpress_1") --tail 1000';
+        passthru($cmd);
+        $this->printLine("Command: $cmd", 'blue');
+    }
+
+    /**
+     * Action: pc dev ssh
+     */
+    public function devSsh() {
+
+        $cmd = 'docker exec -it $(docker ps -aq --filter="name=wpproudcity_wordpress_1") bash';
+        $this->printLine("Running command: $cmd", 'blue');
+        passthru($cmd);
+    }
+
+    /**
+     * Action: pc dev db
+     */
+    public function devDb() {
+
+        passthru('docker exec -it $(docker ps -aq --filter="name=wpproudcity_wordpress_1") mysql -uwordpress -pwordpress wordpress');
+    }
+
+    /**
+     * Action: pc dev wp
+     */
+    public function devWp() {
+        $args = $_SERVER['argv'];
+        $args = array_slice($args, 3);
+        passthru('docker exec -it $(docker ps -aq --filter="name=wpproudcity_wordpress_1") wp --allow-root ' . implode(' ', $args));
+    }
+
+    /**
+     * Action: pc dev install
+     */
+    public function devInstall() {
+
+        chdir($this->dir);
+        passthru('composer clearcache && composer install -y');
+    }
+
+    /**
+     * Action: pc dev update
+     */
+    public function devUpdate() {
+
+        chdir($this->dir);
+        passthru('composer clearcache && composer update');
+    }
+
+    /**
+     * Action: pc dev docs
+     */
+    public function devDocs() {
+
+        passthru("open 'https://github.com/proudcity/wp-proudcity/blob/master/README.md'");
+    }
+
+
+    /**
+     * Action: pc dev repo
+     */
+    public function devRepo() {
+
+        passthru("open 'https://github.com/proudcity/wp-proudcity/'");
+    }
+
+
+    /**
+     * Action: sp dev watch [handle]
+     * Wrapper for gulp command.
+     *
+     * @param $handle
+     */
+    public function watch($handle = null) {
+
+        chdir($this->dir . '../');
+        $cmds = [
+            'proudcity-dashboard' => 'cp -f proudcity-dashboard/app/index.dev.html proudcity-dashboard/app/index.html && grunt --gruntfile=proudcity-dashboard/Gruntfile.js',
+            'proudcity-api'       => 'swagger project start proudcity-api-swagger',
+            'service-center'      => 'grunt --gruntfile=service-center/Gruntfile.js',
+            //'wp-proud-theme'      => 'grunt --gruntfile=service-center/Gruntfile.js',
+            //'proudcity-patterns'      => 'grunt --gruntfile=service-center/Gruntfile.js',
+        ];
+        if (empty($handle)) {
+            $cmd = "echo 'You must set the token in proudcity-dashboard/app/index.html' && echo '****' && echo " . $cmds['proudcity-dashboard'] . ' & ' . $cmds['proudcity-api'] .' & wait';
+        }
+        else {
+          $cmd = $cmds[$handle];
+        }
+
+        $this->printLine("Running command: $cmd", 'blue');
+        passthru($cmd);
+    }
+
+    /**
+     * Action: sp dev publish <handle>
+     * Wrapper for gulp command.
+     *
+     * @param $handle
+     */
+    public function publish($handle) {
+        chdir($this->dir . '../');
+        $cmds = [
+            'proudcity-dashboard' => 'cp -f proudcity-dashboard/app/index.prod.html proudcity-dashboard/app/index.html && grunt publish --gruntfile=proudcity-dashboard/Gruntfile.js && firebase deploy',
+            'service-center'      => 'grunt publish --gruntfile=service-center/Gruntfile.js && firebase use beta && firebase deploy && echo "To push to production run:\n  firebase use default && firebase deploy"',
+            //'wp-proud-theme'      => 'grunt --gruntfile=service-center/Gruntfile.js',
+            //'proudcity-patterns'      => 'grunt --gruntfile=service-center/Gruntfile.js',
+        ];
+
+        if (empty($handle) || empty($cmds[$handle])) {
+            error('You must specify a handle. Options:'."\r".implode( "\r", array_keys($cmds)) );
+            die();
+        }
+
+        // Assume this is a Custom theme
+        if (empty($cmds[$handle])) {
+            // @todo Custom theme
+        }
+
+        $cmd = $cmds[$handle];
+        $this->printLine("Running command: $cmd", 'blue');
+        $this->printLine("Be sure to commit your changes to git!", 'yellow');
+        passthru($cmd);
+    }
+
+    /**
+     * Action: pc kube
+     *
+     * Wraps Kubernetes helpers
+     */
+    public function kube() {
+
+        $cmd = str_replace('pc kube', '', $_SERVER['argv']);
+        passthru('pc-kube ' . $cmd);
+    }
+
+}
+
+$Pc = new Pc();
+
+$Pc->run();
+
+
+
+
+/**
+ * Abstract class for shell scripts
+ *
+ * Class Shell
+ * @package Bin
+ */
+abstract class Bin
+{
+    /**
+     * Associative array of input arguments
+     *
+     * @var array
+     */
+    protected $args = [];
+
+    /**
+     * Absolute path of bin directory
+     *
+     * @var string
+     */
+    protected $binPath;
+
+    /**
+     * Current \DateTime in GMT
+     *
+     * @var DateTime
+     */
+    protected $currentDateTime;
+
+    /**
+     * Current app handle
+     *
+     * @var string
+     */
+    protected $appHandle;
+
+    /**
+     * Shell constructor; initializes shell script, parses input arguments, loads standard properties, etc.
+     */
+    public function __construct()
+    {
+        $this->validate();
+
+        $this->args = $_SERVER['argv'];
+
+        $this->parseArgs();
+        $this->showHelp();
+        //$this->appHandle       = Config::get('app_handle');
+        //$this->currentDateTime = new DateTime();
+    }
+
+    /**
+     * Retrieve argument value by key, false otherwise
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function getArg($name)
+    {
+        if (isset($this->args[$name])) return $this->args[$name];
+
+        return false;
+    }
+
+    /**
+     * Returns usage help message (text for -h flag)
+     *
+     * @return string
+     */
+    protected function usageHelp()
+    {
+        return '';
+    }
+
+    /**
+     * Prints string output to the terminal; setting $color to "red" or "green" will colorize
+     * the string for bash shells
+     *
+     * @param $string
+     * @param string $color
+     */
+    public function printLine($string = '', $color = '')
+    {
+        if ($color == 'red') $string = "\e[91m" . $string . "\033[0m";
+        if ($color == 'green') $string = "\e[92m" . $string . "\033[0m";
+        if ($color == 'yellow') $string = "\e[33m" . $string . "\033[0m";
+        if ($color == 'blue') $string = "\e[96m" . $string . "\033[0m";
+
+        print $string . PHP_EOL;
+    }
+
+    /**
+     * Prints an error message and kills the script
+     *
+     * @param $string
+     */
+    public function error($string)
+    {
+        $this->printLine('[ERROR] ' . $string, 'red');
+
+        die();
+    }
+
+    /**
+     * Kill if executed via the web
+     *
+     * @return void
+     */
+    private function validate()
+    {
+        if (isset($_SERVER['REQUEST_METHOD'])) {
+            die();
+        }
+    }
+
+    /**
+     * Parse input arguments; single argument per hyphen, for example:
+     *
+     * php bin/filename.php -a "value of a" -b "value of b" -c "value of c"
+     *
+     * @return $this
+     */
+    protected function parseArgs()
+    {
+        $current = null;
+        foreach ($_SERVER['argv'] as $arg) {
+            $match = array();
+            if (preg_match('#^--([\w\d_-]{1,})$#', $arg, $match) || preg_match('#^-([\w\d_]{1,})$#', $arg, $match)) {
+                $current              = $match[1];
+                $this->args[$current] = true;
+            } else {
+                if ($current) {
+                    $this->args[$current] = $arg;
+                } else if (preg_match('#^([\w\d_]{1,})$#', $arg, $match)) {
+                    $this->args[$match[1]] = true;
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get absolute path of bin directory
+     *
+     * @return string
+     */
+    protected function getBinPath()
+    {
+        if (is_null($this->binPath)) {
+            $this->binPath = dirname(dirname(dirname(__FILE__))) . '/bin/';
+        }
+
+        return $this->binPath;
+    }
+
+    /**
+     * Dipclays help message if a help flag is set
+     */
+    protected function showHelp()
+    {
+        if (isset($this->args['h']) || isset($this->args['help'])) {
+            die($this->usageHelp() . PHP_EOL);
+        }
+    }
+}
