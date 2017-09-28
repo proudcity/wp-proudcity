@@ -160,6 +160,22 @@ if (getenv('TLS') === 'true'){
 }
 
 
+
+// Do we need to put this behind an HTTP-auth wall?
+if (getenv("AUTH_REQUIRED")) {
+    $user = getenv("AUTH_USERNAME");
+    $pass = getenv("AUTH_PASSWORD");
+
+    if ($user != $_SERVER['PHP_AUTH_USER'] || $pass != $_SERVER['PHP_AUTH_PW']) {
+        header('WWW-Authenticate: Basic realm="ProudCity Realm"');
+        header('HTTP/1.0 401 Unauthorized');
+        echo 'This <a href="https://proudcity.com">ProudCity</a> website is invite only!';
+        exit;
+    }
+
+}
+
+
 /* ------ --- --- -- -- --- -- .... */
 
 

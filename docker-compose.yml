@@ -11,6 +11,9 @@ services:
     ports:
       - "8000:80"
     environment:
+      AUTH_REQUIRED: 1
+      AUTH_USERNAME: a
+      AUTH_PASSWORD: b
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
