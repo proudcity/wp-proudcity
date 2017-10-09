@@ -162,7 +162,7 @@ if (getenv('TLS') === 'true'){
 
 
 // Do we need to put this behind an HTTP-auth wall?
-if (getenv("AUTH_REQUIRED")) {
+if (getenv("AUTH_REQUIRED") && php_sapi_name() !== "cli") {
     $user = getenv("AUTH_USERNAME");
     $pass = getenv("AUTH_PASSWORD");
 
