@@ -270,7 +270,7 @@
         "wpackagist-plugin/intuitive-custom-post-order": "3.1.0",
         "wpackagist-plugin/duplicate-post": "3.2",
         "wpackagist-plugin/disable-comments": "1.7",
-        "wpackagist-plugin/wordpress-seo": "5.5.1",
+        "wpackagist-plugin/wordpress-seo": "5.6.1",
         "wpackagist-plugin/mce-table-buttons": "3.2",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
@@ -285,7 +285,7 @@
         "wpackagist-plugin/google-sitemap-generator": "4.0.9",
 
         "wpackagist-plugin/siteorigin-panels": "2.5.13",
-        "wpackagist-plugin/so-widgets-bundle": "1.9.10",
+        "wpackagist-plugin/so-widgets-bundle": "1.10.1",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
         "wpackagist-plugin/events-manager": "5.7.3",
