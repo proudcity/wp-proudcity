@@ -6,20 +6,21 @@ services:
       - db
     image: gcr.io/proudcity-1184/wp-proudcity:master-39e21f565a2f80fd80ebecd991ae7b46308f3a88
     volumes:
-      - wordpress:/app/wordpress
+      - wp-proudcity-sync:/var/www/html:nocopy # nocopy is important
+      #- ./wordpress:/app/wordpress
     tty: true
     ports:
       - "8000:80"
     environment:
-      AUTH_REQUIRED: 1
-      AUTH_USERNAME: a
-      AUTH_PASSWORD: b
+      AUTH_REQUIRED:
+      AUTH_USERNAME:
+      AUTH_PASSWORD:
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_HOST: db
       #WORDPRESS_DB_PORT: "**LinkMe**"
-      HOST: http://localhost:8080
+      HOST: localhost:8000
       APP: beta
       WORDPRESS_AUTH_KEY:
       WORDPRESS_SECURE_AUTH_KEY:
@@ -33,7 +34,6 @@ services:
       STATELESS_MEDIA_BUCKET:
       STATELESS_MEDIA_DIRECTORY:
       PHP_MEMORY_LIMIT: 256M
-      GOOGLE_GIT_TOKEN:
       SMTP_HOST:
       SMTP_PASS:
       SMTP_USER:
@@ -42,11 +42,12 @@ services:
       ELASTICSEARCH_DOCS_HOST:
       ELASTICSEARCH_HOST:
       UPLOAD_MAX_FILESIZE: 25M
-      # WORDPRESS_PLUGINS:  # not used in development
-      # WORDPRESS_THEMES:  # not used in development
+      GOOGLE_GIT_TOKEN: # set this to download private repos and $WORDPRESS_PLUGINS in entrypoint.sh
+      #WORDPRESSORG_PLUGINS:  # These plugins (csv of slugs) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
+      #WORDPRESS_PLUGINS:  # These plugins (git repo) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
+      #WORDPRESS_THEMES:  # These themes (git repo) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
       WP_CACHE: 0
       WP_DEBUG: 0
-
   db:
     image: mariadb
     environment:
@@ -58,4 +59,5 @@ services:
         - 3306:3306
 
 volumes:
-    wordpress:
+  wp-proudcity-sync:
+    external: true

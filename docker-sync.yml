@@ -1,0 +1,9 @@
+version: "2"
+
+options:
+  verbose: true
+syncs:
+ wp-proudcity-sync: # tip: add -sync and you keep consistent names as a convention
+    src: './wordpress'
+    # sync_strategy: 'native_osx' # not needed, this is the default now
+    sync_excludes: ['Gemfile.lock', 'Gemfile', 'config.rb', '.sass-cache/', 'sass/', 'sass-cache/', 'composer.json' , 'bower.json', 'package.json', 'Gruntfile*', 'bower_components/', 'node_modules/', '.gitignore', '.git/', '*.coffee', '*.scss', '*.sass']
