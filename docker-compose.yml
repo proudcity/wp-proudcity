@@ -6,7 +6,7 @@ services:
       - db
     image: gcr.io/proudcity-1184/wp-proudcity:master-39e21f565a2f80fd80ebecd991ae7b46308f3a88
     volumes:
-      - wp-proudcity-sync:/var/www/html:nocopy # nocopy is important
+      - wp-proudcity-sync:/app/wordpress:nocopy # nocopy is important
       #- ./wordpress:/app/wordpress
     tty: true
     ports:
@@ -42,10 +42,10 @@ services:
       ELASTICSEARCH_DOCS_HOST:
       ELASTICSEARCH_HOST:
       UPLOAD_MAX_FILESIZE: 25M
-      GOOGLE_GIT_TOKEN: # set this to download private repos and $WORDPRESS_PLUGINS in entrypoint.sh
-      #WORDPRESSORG_PLUGINS:  # These plugins (csv of slugs) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
-      #WORDPRESS_PLUGINS:  # These plugins (git repo) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
-      #WORDPRESS_THEMES:  # These themes (git repo) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
+      # GOOGLE_GIT_TOKEN: # set this to download private repos and $WORDPRESS_PLUGINS in entrypoint.sh
+      # WORDPRESSORG_PLUGINS:  # These plugins (csv of slugs) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
+      # WORDPRESS_PLUGINS:  # These plugins (git repo) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
+      # WORDPRESS_THEMES:  # These themes (git repo) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
       WP_CACHE: 0
       WP_DEBUG: 0
   db:
