@@ -4,7 +4,7 @@ set -e
 # Clone private repos
 if [[ $GOOGLE_GIT_TOKEN ]]; then
 
-  # Add gcloud 
+  # Add gcloud
   echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >> $HOME/.netrc
 
   # Install Gravity Forms
@@ -73,10 +73,10 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   #  echo "RewriteRule ^(.*)$ https://${HOST}/$1 [R,L]"  >> $htaccess
   #fi
 
-  # Set up php.ini config defaults
-  export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"128M"}
-  export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
-
 fi
+
+# Set up php.ini config defaults
+export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"128M"}
+export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 
 exec "$@"
