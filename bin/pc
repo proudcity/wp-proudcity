@@ -1,6 +1,7 @@
 #!/usr/bin/php
 <?php
 
+
 /**
  * Class Pc
  * //@package Bin
@@ -53,7 +54,7 @@ class Pc extends Bin {
             return $this->pcHelp();
         }
 
-        if (in_array($this->group, ['watch', 'publish'])) {
+        if (in_array($this->group, ['watch', 'publish', 'kube'])) {
             return $this->{$this->group}();
         }
 
@@ -129,10 +130,12 @@ class Pc extends Bin {
             ['pc dev status', 'Get list of running Docker containers'],
             ['pc dev logs', 'View the last 1000 logs from the Docker container'],
             ['pc dev ssh', 'SSH into the Docker container'],
+            ['pc dev cmd', 'Run a command in every git repo'],
             ['pc dev wp', 'Run wp-cli command'],
             ['pc dev db', 'Connect to the MySQL database'],
             ['pc dev install', 'Runs composer install'],
             ['pc dev update', 'Runs composer update'],
+            ['pc dev import <file>', 'Imports sql <file> in ./wordpress/ dir'],
             ['pc dev docs', 'Open the ProudCity Developer Docs in your browser'],
             ['pc dev repo [plugin]', 'Open the ProudCity Github repo in your browser. Optionally accepts a plugin name to view.'],
         ]);
@@ -147,11 +150,8 @@ class Pc extends Bin {
         passthru("docker-compose -f $file up -d");
 
         sleep(3);
-        if (empty(shell_exec('docker ps -q --filter="name=wpproudcity_wordpress_1"'))) {
-            $this->printLine("There was a problem with Apache. We are attempting to restart.", 'yellow');
-            $this->devStatus();
-            $this->devRestart();
-        }
+        $this->devStatus();
+
     }
 
     /**
@@ -184,8 +184,9 @@ class Pc extends Bin {
      */
     public function devRestart() {
 
-        $this->devUp();
-        return $this->devStop();
+        $this->devStop();
+        return $this->devUp();
+
     }
 
     /**
@@ -212,7 +213,7 @@ class Pc extends Bin {
     public function devSsh() {
 
         $cmd = 'docker exec -it $(docker ps -aq --filter="name=wpproudcity_wordpress_1") bash';
-        $this->printLine("Running command: $cmd", 'blue');
+        $this->printLine("$cmd", 'blue');
         passthru($cmd);
     }
 
@@ -222,6 +223,26 @@ class Pc extends Bin {
     public function devDb() {
 
         passthru('docker exec -it $(docker ps -aq --filter="name=wpproudcity_wordpress_1") mysql -uwordpress -pwordpress wordpress');
+    }
+
+    /**
+     * Action: pc dev cmd
+     */
+    public function devCmd() {
+        chdir($this->dir . '/wordpress');
+        $args = $_SERVER['argv'];
+        $args = array_slice($args, 3);
+        passthru('cmd="'. implode(' ', $args) .'"
+            dir=`pwd`
+            echo $cmd
+            cd $dir;
+            echo $dir;
+            for d in $dir/wp-content/plugins/* ; do (if [ -d $d/.git ]; then echo $d; cd $d; $cmd; echo;echo "--";echo; fi;); done
+            for d in $dir/wp-content/themes/* ; do (if [ -d $d/.git ]; then echo $d; cd $d; $cmd; echo;echo "--";echo; fi;); done
+            if [[ -f "${dir}/wp-content/themes/wp-proud-theme/bower_components/proudcity-patterns" ]]; then
+                cd $dir/wp-content/themes/wp-proud-theme/bower_components/proudcity-patterns; $cmd
+            fi
+        ');
     }
 
     /**
@@ -239,7 +260,12 @@ class Pc extends Bin {
     public function devInstall() {
 
         chdir($this->dir);
-        passthru('composer clearcache && composer install -y');
+        passthru('
+            composer clearcache && composer install -n
+            ./bin/pc dev cmd git checkout master
+            cp www/wp-config.php wordpress
+        ');
+        $this->printLine("In docker-compose.yml, set your GOOGLE_GIT_TOKEN, add additional WordPress plugins to WORDPRESSORG_PLUGINS, and run `pc dev up`.  Then unset GOOGLE_GIT_TOKEN to avoid future errors.");
     }
 
     /**
@@ -249,6 +275,18 @@ class Pc extends Bin {
 
         chdir($this->dir);
         passthru('composer clearcache && composer update');
+    }
+
+    /**
+     * Action: pc dev update
+     */
+    public function devImport() {
+
+        //$this->pc('dev wp db import ' . $this->arg1);
+        $newurl = 'http://localhost:8000';
+        $oldurl = trim($this->pc('dev wp option get siteurl', true));
+        $this->pc('dev wp search-replace "'. $oldurl .'" "'. $newurl .'"');
+        $this->pc('dev wp plugin uninstall --deactivate w3-total-cache');
     }
 
     /**
@@ -266,6 +304,22 @@ class Pc extends Bin {
     public function devRepo() {
 
         passthru("open 'https://github.com/proudcity/wp-proudcity/'");
+    }
+
+    /**
+     * Helper function  calls this script
+     */
+    public function pc($rawCmd, $return = false) {
+
+        $cmd = $this->dir . '/bin/pc ' . $rawCmd;
+        if ($return) {
+            return shell_exec($cmd);
+        }
+        else {
+          $this->printLine("pc $rawCmd", 'blue');
+          passthru($cmd);
+        }
+
     }
 
 
@@ -294,7 +348,7 @@ class Pc extends Bin {
           $cmd = $cmds[$handle];
         }
 
-        $this->printLine("Running command: $cmd", 'blue');
+        $this->printLine("$cmd", 'blue');
         passthru($cmd);
     }
 
@@ -327,7 +381,7 @@ class Pc extends Bin {
         }
 
         $cmd = $cmds[$handle];
-        $this->printLine("Running command: $cmd", 'blue');
+        $this->printLine("$cmd", 'blue');
         $this->printLine("Be sure to commit your changes to git!", 'yellow');
         passthru($cmd);
     }
@@ -338,9 +392,15 @@ class Pc extends Bin {
      * Wraps Kubernetes helpers
      */
     public function kube() {
-
-        $cmd = str_replace('pc kube', '', $_SERVER['argv']);
-        passthru('pc-kube ' . $cmd);
+        $kube = getenv('PC_KUBERNETES');
+        if (empty($kube)) {
+          return;
+        }
+        $_SERVER['argv'][0] = 'pc';
+        $cmd = implode(' ', $_SERVER['argv']);
+        $cmd = str_replace('pc kube', 'php ' . $kube, $cmd);
+        $this->printLine("$cmd", 'blue');
+        passthru($cmd);
     }
 
 }
@@ -348,6 +408,8 @@ class Pc extends Bin {
 $Pc = new Pc();
 
 $Pc->run();
+
+
 
 
 
