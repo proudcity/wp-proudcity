@@ -282,7 +282,8 @@ class Pc extends Bin {
      */
     public function devImport() {
 
-        //$this->pc('dev wp db import ' . $this->arg1);
+        $this->printLine('Importing ' . $this->arg1, 'yellow');
+        $this->pc('dev wp db import ' . $this->arg1);
         $newurl = 'http://localhost:8000';
         $oldurl = trim($this->pc('dev wp option get siteurl', true));
         $this->pc('dev wp search-replace "'. $oldurl .'" "'. $newurl .'"');
