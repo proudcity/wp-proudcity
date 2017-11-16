@@ -232,7 +232,8 @@ class Pc extends Bin {
         chdir($this->dir . '/wordpress');
         $args = $_SERVER['argv'];
         $args = array_slice($args, 3);
-        passthru('cmd="'. implode(' ', $args) .'"
+        $cmd = implode(' ', $args);
+        passthru('cmd="'. $cmd .'"
             dir=`pwd`
             echo $cmd
             cd $dir;
