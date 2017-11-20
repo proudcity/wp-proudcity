@@ -288,7 +288,7 @@ class Pc extends Bin {
         $newurl = 'http://localhost:8000';
         $oldurl = trim($this->pc('dev wp option get siteurl', true));
         $this->pc('dev wp search-replace "'. $oldurl .'" "'. $newurl .'"');
-        $this->pc('dev wp plugin uninstall --deactivate w3-total-cache');
+        $this->pc('dev wp plugin uninstall --deactivate w3-total-cache elasticpress');
     }
 
     /**
