@@ -18,22 +18,6 @@ define('SAVEQUERIES', true);
  * @package WordPress
  */
 
-
-//ini_set('display_errors', '0');
-
-// $db = getenv("CLEARDB_DATABASE_URL");
-// $secretFile = '/etc/secrets/sql';
-// if (file_exists($secretFile)) {
-//     $db = file_get_contents($secretFile);
-// }
-
-// $wpSecrets = [];
-// $wpSecretFile = '/etc/secrets/wpsecrets';
-// if (file_exists($wpSecretFile)) {
-//     $wpSecrets = json_decode(file_get_contents($wpSecretFile), true);
-//     // error_log("We got data from /etc/secrets/wpsecrets");
-// }
-
 // Support legacy sites without an explicit APP env variable.
 define("APP", (getenv('APP') ? getenv('APP') : getenv('WORDPRESS_DB_NAME')));
 
@@ -42,21 +26,11 @@ define("DB_NAME", trim(getenv("WORDPRESS_DB_NAME")));
 define("DB_USER", trim(getenv("WORDPRESS_DB_USER")));
 define("DB_PASSWORD", trim(getenv("WORDPRESS_DB_PASSWORD")));
 define("DB_HOST", trim(getenv("WORDPRESS_DB_HOST")) . ':' . trim(getenv("WORDPRESS_DB_PORT")));
-
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
-/**#@+
- * Authentication Unique Keys and Salts.
- *
- * Change these to different unique phrases!
- * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
- * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
- *
- * @since 2.6.0
- */
-
-
+// Auth keys and salts
+// https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service
 define( 'AUTH_KEY',         getenv('AUTH_KEY'));
 define( 'SECURE_AUTH_KEY',  getenv('SECURE_AUTH_KEY'));
 define( 'LOGGED_IN_KEY',    getenv('LOGGED_IN_KEY'));
@@ -66,6 +40,13 @@ define( 'SECURE_AUTH_SALT', getenv('SECURE_AUTH_SALT'));
 define( 'LOGGED_IN_SALT',   getenv('LOGGED_IN_SALT'));
 define( 'NONCE_SALT',       getenv('NONCE_SALT'));
 
+// Set the cookie lifetime, default to 14 days
+if ( !empty(getenv("COOKIE_LIFETIME")) ) {
+    define( 'COOKIE_LIFETIME', getenv("COOKIE_LIFETIME") );
+}
+else {
+    define( 'COOKIE_LIFETIME', 1209600 ); // Default: 14 days
+}
 
 // wp-stateless
 define( 'WP_STATELESS_MEDIA_BUCKET', getenv('STATELESS_MEDIA_BUCKET'));
@@ -79,7 +60,6 @@ define( 'PROUD_WP_STATELESS_FORCE', getenv('PROUD_WP_STATELESS_FORCE'));
 define( 'WP_STATELESS_MEDIA_KEY_FILE_PATH', getenv('STATELESS_MEDIA_KEY_FILE_PATH'));
 //define( 'WP_STATELESS_MEDIA_SERVICE_ACCOUNT', 	getenv('STATELESS_MEDIA_SERVICE_ACCOUNT')); // @todo: this is only referenced in readme, not in the actual wp-stateless code
 
-
 // wp-mail-smtp settings
 define('WPMS_ON', true);
 define('WPMS_MAIL_FROM', 'notify@proudcity.com');
@@ -92,7 +72,6 @@ define('WPMS_SMTP_AUTH', true); // True turns on SMTP authentication, false turn
 define('WPMS_SMTP_HOST', getenv('SMTP_HOST')); // The SMTP mail host
 define('WPMS_SMTP_USER', getenv('SMTP_USER')); // SMTP authentication username, only used if WPMS_SMTP_AUTH is true
 define('WPMS_SMTP_PASS', getenv('SMTP_PASS')); // SMTP authentication password, only used if WPMS_SMTP_AUTH is true
-
 
 // Varnish settings
 define('WP_CACHE', getenv("WP_CACHE"));
@@ -112,10 +91,6 @@ if ( getenv( 'ELASTICSEARCH_DOCS_HOST' ) ) {
   define('EP_HELPER_HOST', 'http://' . getenv( 'ELASTICSEARCH_DOCS_HOST' ) . '/send-attachments');
 }
 
-
-//define('JETPACK_DEV_DEBUG', false);
-
-/**#@-*/
 
 /**
  * WordPress Database Table prefix.
@@ -160,27 +135,4 @@ if (getenv('TLS') === 'true'){
 }
 
 
-/* ------ --- --- -- -- --- -- .... */
-
-
-
-//  echo "\nWP_HOME " . WP_HOME ;
-// * Point both directory and URLs to content/ instead of the default wp-content/ *
-// if ( ! defined( 'WP_CONTENT_DIR' ) ) {
-//     define( 'WP_CONTENT_DIR', __DIR__ . '/content' );
-// }
-// if ( ! defined( 'WP_CONTENT_URL' ) ) {
-//     define( 'WP_CONTENT_URL', WP_HOME . '/content' );
-// }
-//  echo "\nWP_CONTENT_DIR " . WP_CONTENT_DIR;
-//  echo "\nWP_CONTENT_URL " . WP_CONTENT_URL;
-// echo "\nABSPATH " . ABSPATH;
-
-/* That's all, stop editing! Happy blogging. */
-
-/** Absolute path to the WordPress directory. */
-// if ( !defined('ABSPATH') )
-//    define('ABSPATH', dirname(__FILE__) . '/');
-
-/** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
