@@ -58,7 +58,7 @@ COPY bin /app/bin/
 COPY updates /app/updates/
 COPY www/ /app/wordpress
 
-RUN chmod +x /app/bin/
+RUN chmod -R +x /app/bin
 RUN chmod 755 /app/wordpress/wp-content
 
 RUN mkdir /app/wordpress/wp-content/uploads
