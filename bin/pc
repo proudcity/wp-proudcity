@@ -401,7 +401,7 @@ class Pc extends Bin {
         $_SERVER['argv'][0] = 'pc';
         $cmd = implode(' ', $_SERVER['argv']);
         $cmd = str_replace('pc kube', 'php ' . $kube, $cmd);
-        $this->printLine("$cmd", 'blue');
+        //$this->printLine("$cmd", 'blue');
         passthru($cmd);
     }
 
