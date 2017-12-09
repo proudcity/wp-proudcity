@@ -45,7 +45,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
 
   # Add wordpress.org plugins, comma separated
   if [[ $WORDPRESSORG_PLUGINS ]]; then
-    # cd /app/wordpress/wp-content/plugins
+    cd /app/wordpress/wp-content/plugins
     export IFS=","
     for s in $WORDPRESSORG_PLUGINS; do
       cmd="curl -O -L http://downloads.wordpress.org/plugin/${s}.zip && unzip ${s}.zip && rm ${s}.zip"
