@@ -1,4 +1,4 @@
-# Developing
+# Developing ProudCity WordPress
 
 ## The pc-cli
 
