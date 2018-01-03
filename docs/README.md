@@ -11,7 +11,7 @@ Documentation sections
 * [Docker](docker.md)
 
 
-## Contributing
+## Structure
 
 This repo contains a composer make file that will build a complete Wordpress installation.  See [Composer](#composer) for more details.  Most of the actual code is in our individual Plugin and Theme repos:
 * [wp-proud-theme](https://github.com/proudcity/wp-proud-theme): The ProudCity Wordpress theme built on top of [Bootstrap](http://getbootstrap.com) and [Sage](https://roots.io/sage/).
