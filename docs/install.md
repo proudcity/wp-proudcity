@@ -15,7 +15,9 @@
   ```
 3. Copy the contents of `./wordpress` to the `www-root` of a server and [install WordPress as normal](https://codex.wordpress.org/Installing_WordPress#Famous_5-Minute_Install)
 
-4. Install WordPress plugins (list last updated 1/1/2018)
+4. Install WordPress plugins 
+
+#### Wordpress Plugins (list last updated 1/1/2018)
   ```
   # Third Party
   wp plugin activate --allow-root \
