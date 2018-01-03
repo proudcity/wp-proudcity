@@ -6,10 +6,9 @@ ProudCity WordPress
 Documentation sections
 
 * Overview
-* [Installing](installing.md)
-* [Developing](developing.md)
+* [Installing](install.md)
+* [Developing](develop.md)
 * [Docker](docker.md)
-* [Kubernetes](kubernetes.md)
 
 
 ## Contributing
