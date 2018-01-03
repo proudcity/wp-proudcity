@@ -11,11 +11,43 @@
   cd wp-proudcity
   composer install --no-dev
   cp wp-config.php wordpress
-  cp .env.example wordpress/.env
+  # Edit your wp-config.php values
   ```
 3. Copy the contents of `./wordpress` to the `www-root` of a server and [install WordPress as normal](https://codex.wordpress.org/Installing_WordPress#Famous_5-Minute_Install)
 
-4. Install WordPress plugins
+4. Install WordPress plugins (list last updated 1/1/2018)
   ```
-  wp-plugin activate taxonomy-terms-order disable-comments events-manager google-analytics-dashboard-for-wp iframe mce-table-buttons siteorigin-panels wp-proud-document wp-proud-payment wp-proud-actions-app wp-proud-admin wp-proud-agency wp-proud-core wp-proud-map-app proudpack wp-proud-search wp-proud-social-app safe-redirect-manager simple-staff-list so-widgets-bundle wordpress-faq-manager wp-job-manager rest-api wp-api-menus wordpress-seo 
-  ``
+  # Third Party
+  wp plugin activate --allow-root \
+    admin-menu-editor \
+    intuitive-custom-post-order \
+    disable-comments \
+    events-manager \
+    iframe \
+    mce-table-buttons \
+    siteorigin-panels \
+    safe-redirect-manager \
+    simple-staff-list \
+    so-widgets-bundle \
+    wordpress-faq-manager \
+    wp-job-manager \
+    wordpress-seo \
+    wp-quick-menu \
+    say-what                    
+
+  # ProudCity
+  wp plugin activate --allow-root \
+    wp-proud-core \
+    wp-proud-actions-app \
+    wp-proud-admin \
+    wp-proud-agency \
+    wp-proud-dashboard \
+    wp-proud-directory \
+    wp-proud-document \
+    wp-proud-issue \
+    wp-proud-location \
+    wp-proud-map-app \
+    wp-proud-payment \
+    wp-proud-search
+  ```
+  These commands require [wp-cli](http://wp-cli.org/).
