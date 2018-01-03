@@ -17,7 +17,8 @@
 
 4. Install WordPress plugins 
 
-#### Wordpress Plugins (list last updated 1/1/2018)
+#### WordPress Plugins
+(list last updated 1/1/2018)
   ```
   # Third Party
   wp plugin activate --allow-root \
