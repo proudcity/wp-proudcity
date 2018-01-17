@@ -1,6 +1,6 @@
 # Installing ProudCity Wordpress
 
-1 Install [Composer](https://getcomposer.org) and [WP-CLI](http://wp-cli.org/).
+1. Install [Composer](https://getcomposer.org) and [WP-CLI](http://wp-cli.org/).
   ```
   curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
   curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar | chmod +x wp-cli.phar | sudo mv wp-cli.phar /usr/local/bin/wp
