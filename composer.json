@@ -15,7 +15,7 @@
                 "version": "1.47.0",
                 "source": {
                     "type": "git",
-                    "url": "https://github.com/proudcity/wp-auth0.git",
+                    "url": "https://github.com/proudcity/wp-auth0-legacy.git",
                     "reference": "1.47.0"
                 }
             }
@@ -267,10 +267,10 @@
         "wpackagist-plugin/w3-total-cache": "0.9.6",
         "wpackagist-plugin/wp-stateless": "2.1.1",
 
-        "wpackagist-plugin/intuitive-custom-post-order": "3.1.0",
+        "wpackagist-plugin/intuitive-custom-post-order": "3.1.1",
         "wpackagist-plugin/duplicate-post": "3.2.1",
         "wpackagist-plugin/disable-comments": "1.7.1",
-        "wpackagist-plugin/wordpress-seo": "6.1.1",
+        "wpackagist-plugin/wordpress-seo": "6.2",
         "wpackagist-plugin/mce-table-buttons": "3.2",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
@@ -279,12 +279,12 @@
         "wpackagist-plugin/iframe": "4.3",
         "wpackagist-plugin/say-what": "1.9.1",
         "wpackagist-plugin/admin-menu-editor": "1.8.1",
-        "wpackagist-plugin/wp-mail-smtp": "1.2.2",
+        "wpackagist-plugin/wp-mail-smtp": "1.2.4",
         "wpackagist-plugin/edit-flow": "0.8.2",
         "wpackagist-plugin/wp-sitemap-page": "1.6",
         "wpackagist-plugin/google-sitemap-generator": "4.0.9",
 
-        "wpackagist-plugin/siteorigin-panels": "2.6.0",
+        "wpackagist-plugin/siteorigin-panels": "2.6.2",
         "wpackagist-plugin/so-widgets-bundle": "1.11.3",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
@@ -296,7 +296,7 @@
         "wpackagist-plugin/broken-link-checker": "1.11.5",
         "wpackagist-plugin/popup-maker": "1.6.6",
 
-        "wpackagist-plugin/elasticpress": "2.4",
+        "wpackagist-plugin/elasticpress": "2.4.1",
 
         "proudcity/wp-proud-core": "1.47.0",
         "proudcity/wp-proud-agency": "1.47.0",
