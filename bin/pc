@@ -339,14 +339,15 @@ class Pc extends Bin {
 
         chdir($this->dir . '../');
         $cmds = [
-            'proudcity-dashboard' => 'rm proudcity-dashboard/app/index.html && cp -f proudcity-dashboard/app/index.dev.html proudcity-dashboard/app/index.html && grunt --gruntfile=proudcity-dashboard/Gruntfile.js',
+            'proudcity-dashboard' => 'grunt --gruntfile=proudcity-dashboard/Gruntfile.js', //'rm proudcity-dashboard/app/index.html && cp -f proudcity-dashboard/app/index.dev.html proudcity-dashboard/app/index.html && grunt --gruntfile=proudcity-dashboard/Gruntfile.js',
             'proudcity-api'       => 'swagger project start proudcity-api-swagger',
             'service-center'      => 'grunt --gruntfile=service-center/Gruntfile.js',
             //'wp-proud-theme'      => 'grunt --gruntfile=service-center/Gruntfile.js',
             //'proudcity-patterns'      => 'grunt --gruntfile=service-center/Gruntfile.js',
         ];
         if (empty($handle)) {
-            $cmd = "echo 'You must set the token in proudcity-dashboard/app/index.html' && echo '****' && echo " . $cmds['proudcity-dashboard'] . ' & ' . $cmds['proudcity-api'] .' & wait';
+            //$cmd = "echo 'You must set the token in proudcity-dashboard/app/index.html' && echo '****' && echo " .
+            $cmd = $cmds['proudcity-api'] . ' & ' . $cmds['proudcity-dashboard'] .' & wait';
         }
         else {
           $cmd = $cmds[$handle];
