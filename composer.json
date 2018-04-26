@@ -264,13 +264,13 @@
         "WP-API/rest-filter": "1.0",
         "wpackagist-plugin/wp-jwt-auth": "1.1.3",
 
-        "wpackagist-plugin/w3-total-cache": "0.9.6",
+        "wpackagist-plugin/w3-total-cache": "0.9.7",
         "wpackagist-plugin/wp-stateless": "2.1.4",
 
         "wpackagist-plugin/intuitive-custom-post-order": "3.1.1",
-        "wpackagist-plugin/duplicate-post": "3.2.1",
+        "wpackagist-plugin/duplicate-post": "3.2.2",
         "wpackagist-plugin/disable-comments": "1.7.1",
-        "wpackagist-plugin/wordpress-seo": "7.2",
+        "wpackagist-plugin/wordpress-seo": "7.3",
         "wpackagist-plugin/mce-table-buttons": "3.2",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
@@ -284,19 +284,19 @@
         "wpackagist-plugin/wp-sitemap-page": "1.6.1",
         "wpackagist-plugin/google-sitemap-generator": "4.0.9",
 
-        "wpackagist-plugin/siteorigin-panels": "2.6.4",
-        "wpackagist-plugin/so-widgets-bundle": "1.11.7",
+        "wpackagist-plugin/siteorigin-panels": "2.6.6",
+        "wpackagist-plugin/so-widgets-bundle": "1.11.8",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
         "wpackagist-plugin/events-manager": "5.9.2",
         "wpackagist-plugin/wp-fullcalendar": "1.2",
         "wpackagist-plugin/wp-job-manager": "1.30.2",
-        "wpackagist-plugin/simple-staff-list": "2.0.2",
+        "wpackagist-plugin/simple-staff-list": "2.0.3",
         "wpackagist-plugin/national-weather-service-alerts": "1.3.5",
         "wpackagist-plugin/broken-link-checker": "1.11.5",
-        "wpackagist-plugin/popup-maker": "1.7.14",
+        "wpackagist-plugin/popup-maker": "1.7.16",
 
-        "wpackagist-plugin/elasticpress": "2.4.2",
+        "wpackagist-plugin/elasticpress": "2.5",
 
         "proudcity/wp-proud-core": "1.53.0",
         "proudcity/wp-proud-agency": "1.53.0",
