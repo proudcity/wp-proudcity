@@ -14,14 +14,6 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins
   rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
 
-  # Add support for Business directory plugin (for ELGL)
-  if [ -d "/app/wordpress/wp-content/plugins/business-directory" ]; then
-    echo "Adding Business Directory Plugin"
-    # @todo: `mv` doesn't work because of a Docker FS bug: https://github.com/docker/docker/issues/4570
-    cp -r /app/wordpress/wp-content/plugins/business-directory/* /app/wordpress/wp-content/plugins
-    rm -r /app/wordpress/wp-content/plugins/business-directory
-  fi
-
   echo "Adding JoomUnited plugins"
   git clone https://source.developers.google.com/p/proudcity-1184/r/wp-media-folder /app/wordpress/wp-content/plugins/wp-media-folder
 
@@ -62,6 +54,13 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     done
   fi
 
+  # Add support for Business directory plugin (for ELGL)
+  if [ -d "/app/wordpress/wp-content/plugins/business-directory" ]; then
+    echo "Adding Business Directory Plugin"
+    # @todo: `mv` doesn't work because of a Docker FS bug: https://github.com/docker/docker/issues/4570
+    cp -r /app/wordpress/wp-content/plugins/business-directory/* /app/wordpress/wp-content/plugins
+    rm -r /app/wordpress/wp-content/plugins/business-directory
+  fi
 
   htaccess=/app/wordpress/.htaccess
   # Add domain redirects to .htaccess as CSV (from, to) with newlines between each redirect
