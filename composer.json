@@ -283,6 +283,7 @@
         "wpackagist-plugin/edit-flow": "0.8.2",
         "wpackagist-plugin/wp-sitemap-page": "1.6.1",
         "wpackagist-plugin/google-sitemap-generator": "4.0.9",
+        "wpackagist-plugin/default-featured-image": "1.6.1",
 
         "wpackagist-plugin/siteorigin-panels": "2.7.3",
         "wpackagist-plugin/so-widgets-bundle": "1.12.1",
