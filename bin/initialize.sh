@@ -2,7 +2,7 @@
 # Usage
 #bash initialize.sh $URL $WIPE_PRIVATE[true|false] $LOCATION $STAGE[test|live|example]
 #bash initialize.sh www.cityofsanrafel.org false
-#bash initialize.sh pueblo-co.proudcity.com  true "Pueblo/CO"
+#bash initialize.sh granger-ia.proudcity.com  true IA/Granger
 
 thisdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
