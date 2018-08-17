@@ -12,7 +12,7 @@
             "package": {
                 "name": "proudcity/auth0",
                 "type": "wordpress-plugin",
-                "version": "1.60.0",
+                "version": "1.49.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-auth0-legacy.git",
