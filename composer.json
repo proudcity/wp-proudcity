@@ -127,6 +127,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-proud-meeting",
+                "type": "wordpress-plugin",
+                "version": "1.62.1",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-proud-meeting.git",
+                    "reference": "1.62.1"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-admin",
                 "type": "wordpress-plugin",
                 "version": "1.62.0",
@@ -299,7 +312,7 @@
 
         "wpackagist-plugin/elasticpress": "2.6.1",
 
-        "proudcity/wp-proud-core": "1.62.0",
+        "proudcity/wp-proud-core": "1.62.1",
         "proudcity/wp-proud-agency": "1.62.0",
         "proudcity/wp-proud-search": "1.62.0",
         "proudcity/wp-proud-search-elastic": "1.62.0",
@@ -307,6 +320,7 @@
         "proudcity/wp-proud-document": "1.62.0",
         "proudcity/wp-proud-location": "1.62.0",
         "proudcity/wp-proud-issue": "1.62.0",
+        "proudcity/wp-proud-meeting": "1.62.1",
         "proudcity/wp-proud-map-app": "1.62.0",
         "proudcity/wp-proud-social-app": "1.62.0",
         "proudcity/wp-proud-actions-app": "1.62.0",
@@ -315,7 +329,7 @@
         "proudcity/wp-proud-dashboard": "1.62.0",
         "proudcity/wp-proud-subsite": "1.62.0",
         "proudcity/wp-quick-menu": "1.62.0",
-        "proudcity/wp-proud-theme": "1.62.0"
+        "proudcity/wp-proud-theme": "1.62.1"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
