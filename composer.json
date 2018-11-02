@@ -282,7 +282,7 @@
         "wpackagist-plugin/intuitive-custom-post-order": "3.1.1",
         "wpackagist-plugin/duplicate-post": "3.2.2",
         "wpackagist-plugin/disable-comments": "1.8.0",
-        "wpackagist-plugin/wordpress-seo": "9.0.3",
+        "wpackagist-plugin/wordpress-seo": "8.4",
         "wpackagist-plugin/mce-table-buttons": "3.3",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
@@ -309,7 +309,7 @@
         "wpackagist-plugin/popup-maker": "1.7.30",
         "wpackagist-plugin/duplicate-post": "3.2.2",
         "wpackagist-plugin/post-expirator": "2.3.1.1",
-        
+
         "wpackagist-plugin/elasticpress": "2.6.1",
 
         "proudcity/wp-proud-core": "1.64.0",
