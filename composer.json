@@ -329,7 +329,7 @@
         "proudcity/wp-proud-dashboard": "1.64.0",
         "proudcity/wp-proud-subsite": "1.64.0",
         "proudcity/wp-quick-menu": "1.64.0",
-        "proudcity/wp-proud-theme": "1.64.0"
+        "proudcity/wp-proud-theme": "1.64.2"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
