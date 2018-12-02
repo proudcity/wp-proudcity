@@ -86,4 +86,10 @@ fi
 export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"128M"}
 export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 
+# Set up session configuration
+if [[ $REDIS_SESSION == "true" ]]; then
+  export SESSION_SAVE_HANDLER=redis
+  export SESSION_SAVE_PATH=${WORDPRESS_DB_NAME}redis:6379
+fi
+
 exec "$@"
