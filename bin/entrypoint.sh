@@ -92,7 +92,6 @@ if [[ $REDIS_SESSION == "true" ]]; then
   export SESSION_SAVE_PATH=${WORDPRESS_DB_NAME}redis:6379
 else
   export SESSION_SAVE_HANDLER=files
-  export SESSION_SAVE_PATH="N;/path"
 fi
 
 exec "$@"
