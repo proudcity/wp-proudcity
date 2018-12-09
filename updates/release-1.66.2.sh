@@ -2,5 +2,4 @@
 
 PHP=${1}
 
-echo "wp --allow-root option delete wp_proud_service_center_path"
-wp --allow-root option delete wp_proud_service_center_path
+php bin/w3-total-cache-config.php
