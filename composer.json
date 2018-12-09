@@ -271,7 +271,7 @@
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "5.0.x-dev",
+        "johnpbloch/wordpress": "5.0",
 
         "proudcity/auth0": "1.49.0",
         "WP-API/rest-filter": "1.0",
@@ -280,7 +280,6 @@
         "wpackagist-plugin/wp-stateless": "2.1.9",
 
         "wpackagist-plugin/intuitive-custom-post-order": "3.1.1",
-        "wpackagist-plugin/duplicate-post": "3.2.2",
         "wpackagist-plugin/disable-comments": "1.8.0",
         "wpackagist-plugin/wordpress-seo": "8.4",
         "wpackagist-plugin/mce-table-buttons": "3.3",
