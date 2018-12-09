@@ -93,5 +93,7 @@ if [[ $REDIS_SESSION == "1" ]]; then
   echo "session.save_path = ${WORDPRESS_DB_NAME}redis:6379" >> $redisfile
 fi
 
+# Copy of w3-total-cache configuration
+php /app/bin/w3-total-cache-config.php
+
 exec "$@"
-/Users/jefflyon/Workspace/proudcity/wp-proudcity/bin/entrypoint.sh

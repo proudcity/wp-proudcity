@@ -7,7 +7,7 @@ w3tc config for ProudCity
 To enable and configure w3-total-cache
 ```
 wp --allow-root plugin activate w3-total-cache
-php bin/w3-total-cache-config.php
+php /app/bin/w3-total-cache-config.php
 ```
 
 To build this:
