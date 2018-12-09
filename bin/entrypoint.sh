@@ -89,8 +89,9 @@ export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 # Set up redis session configuration
 if [[ $REDIS_SESSION == "true" ]]; then
   redisfile=/usr/local/etc/php/conf.d/redissessions.ini
-  echo "export SESSION_SAVE_HANDLER=redis" > $redisfile
-  echo "export SESSION_SAVE_PATH=${WORDPRESS_DB_NAME}redis:6379" >> $redisfile
+  echo "session.save_handler = redis" > $redisfile
+  echo "session.save_path = ${WORDPRESS_DB_NAME}redis:6379" >> $redisfile
 fi
 
 exec "$@"
+/Users/jefflyon/Workspace/proudcity/wp-proudcity/bin/entrypoint.sh
