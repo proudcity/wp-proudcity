@@ -803,7 +803,7 @@ $config = array (
 
 
 $tmpFile = '/tmp/w3tc.json';
-echo "Writing w3-total-cache configuration file to $tmpfile" . PHP_EOL;
+echo "Writing w3-total-cache configuration file to $tmpFile" . PHP_EOL;
 file_put_contents($tmpFile, json_encode($config));
 chdir('/app/wordpress');
 
