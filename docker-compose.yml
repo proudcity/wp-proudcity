@@ -2,9 +2,10 @@ version: '2'
 
 services:
   wordpress:
+    container_name: wpproudcity_wordpress_1
     depends_on:
       - db
-    image: gcr.io/proudcity-1184/wp-proudcity:master-f4b8e4ed9fb100b8eca5c96167186b6e4b52eb94
+    image: gcr.io/proudcity-1184/wp-proudcity:master-9820155e2396fec5c1828329f489b4f6a3e755db
     volumes:
       #- wp-proudcity-sync:/app/wordpress:nocopy # nocopy is important
       - ./wordpress:/app/wordpress
@@ -37,6 +38,7 @@ services:
       STATELESS_MEDIA_KEY_FILE_PATH:
       STATELESS_MEDIA_BUCKET:
       STATELESS_MEDIA_DIRECTORY:
+      REDIS_SESSION: "false"
       PHP_MEMORY_LIMIT: 256M
       SMTP_HOST:
       SMTP_PASS:

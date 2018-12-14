@@ -271,7 +271,7 @@
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "4.9.8",
+        "johnpbloch/wordpress": "5.0",
 
         "proudcity/auth0": "1.49.0",
         "WP-API/rest-filter": "1.0",
@@ -281,7 +281,6 @@
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",
 
         "wpackagist-plugin/intuitive-custom-post-order": "3.1.1",
-        "wpackagist-plugin/duplicate-post": "3.2.2",
         "wpackagist-plugin/disable-comments": "1.8.0",
         "wpackagist-plugin/wordpress-seo": "8.4",
         "wpackagist-plugin/mce-table-buttons": "3.3",
@@ -298,6 +297,7 @@
         "wpackagist-plugin/google-sitemap-generator": "4.0.9",
         "wpackagist-plugin/default-featured-image": "1.6.1",
 
+        "wpackagist-plugin/classic-editor": "1.2",
         "wpackagist-plugin/siteorigin-panels": "2.9.2",
         "wpackagist-plugin/so-widgets-bundle": "1.13.3",
 

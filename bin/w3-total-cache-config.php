@@ -1,7 +1,27 @@
+#!/usr/bin/php
 <?php
+/**
+w3tc config for ProudCity
+=========================
+
+To enable and configure w3-total-cache
+```
+wp --allow-root plugin activate w3-total-cache
+php /app/bin/w3-total-cache-config.php
+```
+
+To build this:
+1. Export config as json from /wp-admin/admin.php?page=w3tc_general
+2. Convert to php array http://php.fnlist.com/php/json_decode
+3. Search for `'betaredis`, replace with `$key.'redis`
+4. Paste as `$config` below
+
+**/
+
+
 $key = getenv('WORDPRESS_DB_NAME');
 
-return array (
+$config = array (
   'version' => '0.9.5.2',
   'cluster.messagebus.debug' => false,
   'cluster.messagebus.enabled' => false,
@@ -780,3 +800,15 @@ return array (
     'engine' => '',
   ),
 );
+
+
+$tmpFile = '/tmp/w3tc.json';
+echo "Writing w3-total-cache configuration file to $tmpFile" . PHP_EOL;
+file_put_contents($tmpFile, json_encode($config));
+chdir('/app/wordpress');
+
+//echo "Enabling w3-total-cache" . PHP_EOL;
+//shell_exec("wp --allow-root plugin activate w3-total-cache");
+
+echo "Importing w3-total-cache configuration" . PHP_EOL;
+shell_exec("wp --allow-root total-cache import $tmpFile");
