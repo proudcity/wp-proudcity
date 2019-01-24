@@ -347,6 +347,8 @@ class Pc extends Bin {
         ];
         if (empty($handle)) {
             //$cmd = "echo 'You must set the token in proudcity-dashboard/app/index.html' && echo '****' && echo " .
+            $this->printLine("Replacing index.html with index.dev.html", 'yellow');
+            passthru('rm proudcity-dashboard/app/index.html && cp -f proudcity-dashboard/app/index.dev.html proudcity-dashboard/app/index.html');
             $cmd = $cmds['proudcity-api'] . ' & ' . $cmds['proudcity-dashboard'] .' & wait';
         }
         else {
@@ -370,7 +372,7 @@ class Pc extends Bin {
         chdir($this->dir . '../');
         $cmds = [
             'proudcity-dashboard' => 'cd proudcity-dashboard && rm app/index.html && cp -f app/index.prod.html app/index.html && grunt publish --gruntfile=Gruntfile.js && firebase deploy',
-            'service-center'      => 'grunt publish --gruntfile=service-center/Gruntfile.js && firebase use beta && firebase deploy && echo "To push to production run:\n  firebase use default && firebase deploy"',
+            'service-center'      => 'cd service-center && grunt publish --gruntfile=Gruntfile.js && firebase use beta && firebase deploy && echo "To push to production run:\n  cd service-center && firebase use default && firebase deploy"',
             //'wp-proud-theme'      => 'grunt --gruntfile=service-center/Gruntfile.js',
             //'proudcity-patterns'      => 'grunt --gruntfile=service-center/Gruntfile.js',
         ];
@@ -404,7 +406,7 @@ class Pc extends Bin {
         $_SERVER['argv'][0] = 'pc';
         $cmd = implode(' ', $_SERVER['argv']);
         $cmd = str_replace('pc kube', 'php ' . $kube, $cmd);
-        $this->printLine("$cmd", 'blue');
+        //$this->printLine("$cmd", 'blue');
         passthru($cmd);
     }
 
