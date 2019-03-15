@@ -307,9 +307,9 @@
         "wpackagist-plugin/wp-job-manager": "1.32.2",
         "wpackagist-plugin/simple-staff-list": "2.1.1",
         "wpackagist-plugin/broken-link-checker": "1.11.5",
-        "wpackagist-plugin/popup-maker": "1.8.2",
+        "wpackagist-plugin/popup-maker": "1.8.3",
         "wpackagist-plugin/duplicate-post": "3.2.2",
-        "wpackagist-plugin/post-expirator": "2.8.3",
+        "wpackagist-plugin/post-expirator": "2.3.1.1",
 
         "wpackagist-plugin/elasticpress": "2.8.1",
 
