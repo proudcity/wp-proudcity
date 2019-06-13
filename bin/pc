@@ -114,7 +114,7 @@ class Pc extends Bin {
         $this->printLine();
         $this->printLine('Enter the top-level commands with no arguments for more details (ex `pc dev`).');
         $this->printLine();
-        $this->printLine('<handle> options: proudcity-dashboard, service-center. Leave blank to run dashboard+rest api locally.');
+        $this->printLine('<handle> options: proudcity-dashboard, service-center, proudcity-api. Leave blank to run dashboard+rest api locally.');
     }
 
 
