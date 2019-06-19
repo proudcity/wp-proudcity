@@ -128,7 +128,7 @@ if (getenv('TLS') === 'true'){
         ( !empty($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] != getenv('HOST') )
     ) {
         $redirect = 'https://' . getenv('HOST') . $_SERVER['REQUEST_URI'];
-        header('HTTP/1.1 301 Moved Permanently');
+        header('HTTP/1.1 302 Moved Temporarily');
         header('Location: ' . $redirect);
         exit();
     }
