@@ -1,7 +1,7 @@
 # Changes the URL for a WordPress site.
 # Usage
 #bash change-url.sh $URL
-#bash change-url.sh www.cityofsanrafael.org
+#bash change-url.sh https://www.cityofsanrafael.org
 
 cd /app/wordpress
 
