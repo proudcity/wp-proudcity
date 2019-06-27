@@ -138,6 +138,7 @@ class Pc extends Bin {
             ['pc dev install', 'Runs composer install'],
             ['pc dev update', 'Runs composer update'],
             ['pc dev import <file>', 'Imports sql <file> in ./wordpress/ dir'],
+            ['pc dev importmamp <file>', 'Imports sql <file> in a MAMP environment'],
             ['pc dev docs', 'Open the ProudCity Developer Docs in your browser'],
             ['pc dev repo [plugin]', 'Open the ProudCity Github repo in your browser. Optionally accepts a plugin name to view.'],
         ]);
@@ -281,19 +282,38 @@ class Pc extends Bin {
     }
 
     /**
-     * Action: pc dev update
+     * Action: pc dev import
      */
     public function devImport() {
 
         $this->printLine('Importing ' . $this->arg1, 'yellow');
         $this->pc('dev wp db import ' . $this->arg1);
-        $newurl = 'http://localhost:8000';
+        $newurl = 'http://localhost:8888';
         $oldurl = trim($this->pc('dev wp option get siteurl', true));
         $this->pc('dev wp search-replace "'. $oldurl .'" "'. $newurl .'"');
         $this->pc('dev wp plugin uninstall --deactivate w3-total-cache elasticpress');
     }
 
-    /**
+
+  /**
+   * Action: pc dev import-mamp
+   */
+  public function devImportMamp() {
+    if (!empty($this->arg1)) {
+        $this->printLine('Importing ' . $this->arg1, 'yellow');
+        passthru('wp db import ' . $this->arg1);
+    }
+
+    $newurl = 'http://localhost:8888';
+    $oldurl = trim(shell_exec('wp option get siteurl'));
+    passthru('wp search-replace "'. $oldurl .'" "'. $newurl .'"');
+    passthru('wp plugin uninstall --deactivate w3-total-cache elasticpress');
+    passthru('wp user update 1 --user_pass=test');
+    passthru('open http://localhost:8888/wp-admin');
+  }
+
+
+  /**
      * Action: pc dev docs
      */
     public function devDocs() {
