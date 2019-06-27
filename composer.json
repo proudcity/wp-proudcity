@@ -282,7 +282,7 @@
 
         "wpackagist-plugin/intuitive-custom-post-order": "3.1.2",
         "wpackagist-plugin/disable-comments": "1.9.0",
-        "wpackagist-plugin/wordpress-seo": "11.4",
+        "wpackagist-plugin/wordpress-seo": "11.5",
         "wpackagist-plugin/mce-table-buttons": "3.3",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
@@ -304,7 +304,7 @@
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
         "wpackagist-plugin/events-manager": "5.9.5",
         "wpackagist-plugin/wp-fullcalendar": "1.2",
-        "wpackagist-plugin/wp-job-manager": "1.33.1",
+        "wpackagist-plugin/wp-job-manager": "1.33.2",
         "wpackagist-plugin/simple-staff-list": "2.2.0",
         "wpackagist-plugin/broken-link-checker": "1.11.8",
         "wpackagist-plugin/popup-maker": "1.8.6",
