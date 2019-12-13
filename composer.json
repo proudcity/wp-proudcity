@@ -276,7 +276,7 @@
         "proudcity/auth0": "1.49.0",
         "WP-API/rest-filter": "1.0",
 
-        "wpackagist-plugin/w3-total-cache": "0.10.1",
+        "wpackagist-plugin/w3-total-cache": "0.11.0",
         "wpackagist-plugin/wp-stateless": "2.2.7",
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",
 
@@ -287,7 +287,7 @@
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
-        "wpackagist-plugin/safe-redirect-manager": "1.9.2",
+        "wpackagist-plugin/safe-redirect-manager": "1.9.3",
         "wpackagist-plugin/iframe": "4.4",
         "wpackagist-plugin/say-what": "1.9.1",
         "wpackagist-plugin/admin-menu-editor": "1.9.1",
@@ -298,7 +298,7 @@
         "wpackagist-plugin/default-featured-image": "1.6.1",
 
         "wpackagist-plugin/classic-editor": "1.5",
-        "wpackagist-plugin/siteorigin-panels": "2.10.12",
+        "wpackagist-plugin/siteorigin-panels": "2.10.13",
         "wpackagist-plugin/so-widgets-bundle": "1.15.8",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
