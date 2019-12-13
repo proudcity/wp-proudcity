@@ -271,18 +271,18 @@
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "5.2.4",
+        "johnpbloch/wordpress": "5.3.1",
 
         "proudcity/auth0": "1.49.0",
         "WP-API/rest-filter": "1.0",
 
         "wpackagist-plugin/w3-total-cache": "0.11.0",
-        "wpackagist-plugin/wp-stateless": "2.2.7",
+        "wpackagist-plugin/wp-stateless": "2.3.1",
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",
 
         "wpackagist-plugin/intuitive-custom-post-order": "3.1.2",
         "wpackagist-plugin/disable-comments": "1.10.2",
-        "wpackagist-plugin/wordpress-seo": "12.4",
+        "wpackagist-plugin/wordpress-seo": "12.7.1",
         "wpackagist-plugin/mce-table-buttons": "3.3",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
@@ -291,7 +291,7 @@
         "wpackagist-plugin/iframe": "4.4",
         "wpackagist-plugin/say-what": "1.9.1",
         "wpackagist-plugin/admin-menu-editor": "1.9.1",
-        "wpackagist-plugin/wp-mail-smtp": "1.7.0",
+        "wpackagist-plugin/wp-mail-smtp": "1.8.0",
         "wpackagist-plugin/edit-flow": "0.9",
         "wpackagist-plugin/wp-sitemap-page": "1.6.2",
         "wpackagist-plugin/google-sitemap-generator": "4.1.0",
