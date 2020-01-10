@@ -25,11 +25,11 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "1.83.1",
+                "version": "1.83.4",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
-                    "reference": "1.83.1"
+                    "reference": "1.83.4"
                 }
             }
         },
@@ -51,11 +51,11 @@
             "package": {
                 "name": "proudcity/wp-proud-search",
                 "type": "wordpress-plugin",
-                "version": "1.83.0",
+                "version": "1.83.2",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search.git",
-                    "reference": "1.83.0"
+                    "reference": "1.83.2"
                 }
             }
         },
@@ -259,11 +259,11 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "1.83.0",
+                "version": "1.83.3",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
-                    "reference": "1.83.0"
+                    "reference": "1.83.3"
                 }
             }
         }
@@ -313,9 +313,9 @@
 
         "wpackagist-plugin/elasticpress": "2.8.2",
 
-        "proudcity/wp-proud-core": "1.83.1",
+        "proudcity/wp-proud-core": "1.83.4",
         "proudcity/wp-proud-agency": "1.83.0",
-        "proudcity/wp-proud-search": "1.83.0",
+        "proudcity/wp-proud-search": "1.83.2",
         "proudcity/wp-proud-search-elastic": "1.83.0",
         "proudcity/wp-proud-payment": "1.83.0",
         "proudcity/wp-proud-document": "1.83.0",
@@ -330,7 +330,7 @@
         "proudcity/wp-proud-dashboard": "1.83.0",
         "proudcity/wp-proud-subsite": "1.83.0",
         "proudcity/wp-quick-menu": "1.83.0",
-        "proudcity/wp-proud-theme": "1.83.0"
+        "proudcity/wp-proud-theme": "1.83.3"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
