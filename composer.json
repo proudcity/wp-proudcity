@@ -271,7 +271,7 @@
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "5.3.1",
+        "johnpbloch/wordpress": "5.3.2",
 
         "proudcity/auth0": "1.49.0",
         "WP-API/rest-filter": "1.0",
