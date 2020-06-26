@@ -276,13 +276,13 @@
         "proudcity/auth0": "1.49.0",
         "WP-API/rest-filter": "1.0",
 
-        "wpackagist-plugin/w3-total-cache": "0.14.1",
+        "wpackagist-plugin/w3-total-cache": "0.14.2",
         "wpackagist-plugin/wp-stateless": "2.3.2",
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",
 
         "wpackagist-plugin/intuitive-custom-post-order": "3.1.2",
         "wpackagist-plugin/disable-comments": "1.10.2",
-        "wpackagist-plugin/wordpress-seo": "14.3",
+        "wpackagist-plugin/wordpress-seo": "14.4.1",
         "wpackagist-plugin/mce-table-buttons": "3.3",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
@@ -295,7 +295,7 @@
         "wpackagist-plugin/edit-flow": "0.9.6",
         "wpackagist-plugin/wp-sitemap-page": "1.6.2",
         "wpackagist-plugin/google-sitemap-generator": "4.1.0",
-        "wpackagist-plugin/default-featured-image": "1.6.2",
+        "wpackagist-plugin/default-featured-image": "1.6.3",
 
         "wpackagist-plugin/classic-editor": "1.5",
         "wpackagist-plugin/siteorigin-panels": "2.11.0",
