@@ -11,7 +11,6 @@ $posts = [
 	341 =>'bza-meeting',
 	339 =>'planning-commission',
 	//3577 =>'citizen-police-academy',
-
 ];
 
 foreach ($posts as $id => $name) {
