@@ -19,6 +19,9 @@ To build this:
 **/
 
 
+
+
+
 $key = getenv('WORDPRESS_DB_NAME');
 
 $config = array (
@@ -789,6 +792,7 @@ $config = array (
   array (
     'newrelic' => 'w3-total-cache/Extension_NewRelic_Plugin.php',
     'fragmentcache' => 'w3-total-cache/Extension_FragmentCache_Plugin.php',
+    'cloudflare' => 'w3-total-cache\/Extension_CloudFlare_Plugin.php',
   ),
   'extensions.active_frontend' => 
   array (
@@ -801,6 +805,10 @@ $config = array (
   ),
 );
 
+// If Cloudflare is active, add that plugin
+if (!empty(getenv('CLOUDFLARE'))) {
+    $config['extensions.active_frontend'] = array ('cloudflare' => '*');
+}
 
 $tmpFile = '/tmp/w3tc.json';
 echo "Writing w3-total-cache configuration file to $tmpFile" . PHP_EOL;
