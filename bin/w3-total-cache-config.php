@@ -802,12 +802,21 @@ $config = array (
   'fragmentcache' => 
   array (
     'engine' => '',
-  ),
+  )
 );
 
 // If Cloudflare is active, add that plugin
-if (!empty(getenv('CLOUDFLARE'))) {
+if (!empty(getenv('CLOUDFLARE_KEY'))) {
     $config['extensions.active_frontend'] = array ('cloudflare' => '*');
+    $config['cloudflare'] = [
+        'email' => getenv('CLOUDFLARE_EMAIL'),
+        'key' => getenv('CLOUDFLARE_KEY'),
+        'zone_id' => getenv('CLOUDFLARE_ZONE_ID'),
+        'zone_name' => getenv('HOST'),
+        'widget_interval' => '-30',
+        'widget_cache_mins' => '5',
+        'pagecache' => '1',
+    ];
 }
 
 $tmpFile = '/tmp/w3tc.json';
