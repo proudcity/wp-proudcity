@@ -816,7 +816,7 @@ if (!empty(getenv('CLOUDFLARE_KEY'))) {
         'widget_cache_mins' => '5',
         'pagecache' => '1',
     ];
-    $config['extensions.active'] = 'w3-total-cache/Extension_CloudFlare_Plugin.php';
+    $config['extensions.active']['cloudflare'] = 'w3-total-cache/Extension_CloudFlare_Plugin.php';
 }
 
 $tmpFile = '/tmp/w3tc.json';
