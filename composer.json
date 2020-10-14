@@ -277,7 +277,7 @@
         "WP-API/rest-filter": "1.0",
 
         "wpackagist-plugin/w3-total-cache": "0.15.0",
-        "wpackagist-plugin/wp-stateless": "3.0.3",
+        "wpackagist-plugin/wp-stateless": "3.0.4",
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",
         "wpackagist-plugin/enable-jquery-migrate-helper": "1.0.1",
         
