@@ -53,6 +53,9 @@ define( 'WP_STATELESS_MEDIA_BUCKET', getenv('STATELESS_MEDIA_BUCKET'));
 define( 'WP_STATELESS_MEDIA_MODE', 'ephemeral');
 define( 'WP_STATELESS_MEDIA_ROOT_DIR', getenv('STATELESS_MEDIA_DIRECTORY') . '/%date_year/date_month%/');
 define( 'WP_STATELESS_MEDIA_REWRITE_BODY_CONTENT_URL', 1);
+define( 'WP_STATELESS_COMPATIBILITY_GF', 1);
+define( 'WP_STATELESS_COMPATIBILITY_SOCSS', 1);
+
 // For ProudCity, to fix issues related to migration
 define( 'PROUD_WP_STATELESS_FORCE', getenv('PROUD_WP_STATELESS_FORCE'));
 
