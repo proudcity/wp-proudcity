@@ -276,7 +276,7 @@
         "proudcity/auth0": "1.49.0",
         "WP-API/rest-filter": "1.0",
 
-        "wpackagist-plugin/w3-total-cache": "2.0.1",
+        "wpackagist-plugin/w3-total-cache": "2.1.0",
         "wpackagist-plugin/wp-stateless": "3.1.1",
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",
         "wpackagist-plugin/enable-jquery-migrate-helper": "1.3.0",
