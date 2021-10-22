@@ -819,6 +819,12 @@ if (!empty(getenv('CLOUDFLARE_KEY'))) {
     $config['extensions.active']['cloudflare'] = 'w3-total-cache/Extension_CloudFlare_Plugin.php';
 }
 
+// wp-fullcalendar doesn't like JS minification, so we switch it to just "combine"
+$activePlugins = shell_exec('wp --allow-root plugin list --status=active');
+if (strpos($activePlugins, 'wp-fullcalendar') !== false) {
+    $config['minify.js.method'] = 'combine';
+}
+
 $tmpFile = '/tmp/w3tc.json';
 echo "Writing w3-total-cache configuration file to $tmpFile" . PHP_EOL;
 file_put_contents($tmpFile, json_encode($config));
