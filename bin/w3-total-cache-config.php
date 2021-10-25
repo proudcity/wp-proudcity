@@ -368,11 +368,11 @@ $config = array (
   ),
   'minify.reject.files.js' => 
   array (
-    "wp-includes\/js\/jquery\/ui\/core.min.js",
-    "wp-includes\/js\/jquery\/ui\/menu.min.js",
-    "wp-includes\/js\/jquery\/ui\/selectmenu.min.js",
-    "wp-includes\/js\/jquery\/ui\/tooltip.min.js",
-    "wp-content\/plugins\/wp-fullcalendar\/includes\/js\/main.js"
+    "wp-includes/js/query/ui/core.min.js",
+    "wp-includes/js/query/ui/menu.min.js",
+    "wp-includes/js/query/ui/selectmenu.min.js",
+    "wp-includes/js/query/ui/tooltip.min.js",
+    "wp-content/plugins/wp-fullcalendar/includes/s/main.js"
   ),
   'minify.reject.files.css' => 
   array (
