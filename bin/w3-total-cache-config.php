@@ -368,7 +368,11 @@ $config = array (
   ),
   'minify.reject.files.js' => 
   array (
-    0 => '',
+    "wp-includes\/js\/jquery\/ui\/core.min.js",
+    "wp-includes\/js\/jquery\/ui\/menu.min.js",
+    "wp-includes\/js\/jquery\/ui\/selectmenu.min.js",
+    "wp-includes\/js\/jquery\/ui\/tooltip.min.js",
+    "wp-content\/plugins\/wp-fullcalendar\/includes\/js\/main.js"
   ),
   'minify.reject.files.css' => 
   array (
@@ -824,6 +828,9 @@ $activePlugins = shell_exec('wp --allow-root plugin list --status=active');
 if (strpos($activePlugins, 'wp-fullcalendar') !== false) {
     $config['minify.js.method'] = 'combine';
 }
+
+// Both combine + minify
+$config['minify.js.method'] = 'both';
 
 $tmpFile = '/tmp/w3tc.json';
 echo "Writing w3-total-cache configuration file to $tmpFile" . PHP_EOL;
