@@ -372,7 +372,7 @@ $config = array (
     "wp-includes/js/query/ui/menu.min.js",
     "wp-includes/js/query/ui/selectmenu.min.js",
     "wp-includes/js/query/ui/tooltip.min.js",
-    "wp-content/plugins/wp-fullcalendar/includes/s/main.js"
+    "wp-content/plugins/wp-fullcalendar/includes/js/main.js"
   ),
   'minify.reject.files.css' => 
   array (
