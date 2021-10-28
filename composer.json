@@ -303,7 +303,7 @@
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
         "wpackagist-plugin/events-manager":  "5.12",
-        "wpackagist-plugin/wp-fullcalendar": "1.2",
+        "wpackagist-plugin/wp-fullcalendar": "1.4.1",
         "wpackagist-plugin/wp-job-manager": "1.35.2",
         "wpackagist-plugin/simple-staff-list": "2.2.1",
         "wpackagist-plugin/broken-link-checker": "1.11.15",
