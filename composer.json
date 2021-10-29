@@ -314,7 +314,7 @@
 
         "wpackagist-plugin/elasticpress": "2.8.2",              
 
-        "proudcity/wp-proud-core": "1.115.0",
+        "proudcity/wp-proud-core": "1.115.1",
         "proudcity/wp-proud-agency": "1.115.0",
         "proudcity/wp-proud-search": "1.115.0",
         "proudcity/wp-proud-search-elastic": "1.115.0",
@@ -331,7 +331,7 @@
         "proudcity/wp-proud-dashboard": "1.115.0",
         "proudcity/wp-proud-subsite": "1.115.0",
         "proudcity/wp-quick-menu": "1.115.0",
-        "proudcity/wp-proud-theme": "1.115.0"
+        "proudcity/wp-proud-theme": "1.115.1"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
