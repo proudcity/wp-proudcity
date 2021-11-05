@@ -64,11 +64,11 @@
             "package": {
                 "name": "proudcity/wp-proud-search-elastic",
                 "type": "wordpress-plugin",
-                "version": "1.116.0",
+                "version": "1.116.2",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search-elastic.git",
-                    "reference": "1.116.0"
+                    "reference": "1.116.2"
                 }
             }
         },
@@ -317,7 +317,7 @@
         "proudcity/wp-proud-core": "1.116.0",
         "proudcity/wp-proud-agency": "1.116.0",
         "proudcity/wp-proud-search": "1.116.0",
-        "proudcity/wp-proud-search-elastic": "1.116.0",
+        "proudcity/wp-proud-search-elastic": "1.116.2",
         "proudcity/wp-proud-payment": "1.116.0",
         "proudcity/wp-proud-document": "1.116.0",
         "proudcity/wp-proud-location": "1.116.0",
