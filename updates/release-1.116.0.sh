@@ -1,7 +1,7 @@
-# Updates for the 1.115.0 release
-# Fix w3tc JS minify wp-fullcalendar incompatibility
+# Updates for the 1.116.0 release
+# Uninstall Jquery Migrate (no longer needed for wp-fullcalendar)
 
 PHP=${1}
 
-# Uninstall 
+# Uninstall Jquery Migrate (no longer needed for wp-fullcalendar)
 wp plugin deactivate --uninstall enable-jquery-migrate-helper --allow-root
