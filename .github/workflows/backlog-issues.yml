@@ -3,7 +3,6 @@ name: Backlog new issues
 on:
   issues:
     types:
-      - reopened
       - opened
 
 jobs:
