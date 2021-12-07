@@ -5,17 +5,17 @@ set -e
 if [[ $GOOGLE_GIT_TOKEN ]]; then
 
   # Add gcloud
-  echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >> $HOME/.netrc
+  echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >> "$HOME"/.netrc
 
   # Install Gravity Forms
   echo "Adding Gravity Forms"
-  git clone https://source.developers.google.com/p/proudcity-1184/r/gravityforms /app/wordpress/wp-content/plugins/gravityforms
+  #git clone https://source.developers.google.com/p/proudcity-1184/r/gravityforms /app/wordpress/wp-content/plugins/gravityforms
   # @todo: `mv` doesn't work because of a Docker FS bug: https://github.com/docker/docker/issues/4570
-  cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins
-  rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
+  #cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins
+  #rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
 
   echo "Adding JoomUnited plugins"
-  git clone https://source.developers.google.com/p/proudcity-1184/r/wp-media-folder /app/wordpress/wp-content/plugins/wp-media-folder
+  #git clone https://source.developers.google.com/p/proudcity-1184/r/wp-media-folder /app/wordpress/wp-content/plugins/wp-media-folder
 
   # Install other non-free plugins
   echo "Adding non-free plugins"
@@ -27,8 +27,8 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     export IFS=","
     for s in $WORDPRESS_THEMES; do
       cmd="git clone ${s}"
-      eval $cmd
-      echo "Adding theme repo: ${s} in `pwd`"
+      #eval $cmd
+      echo "Adding theme repo: ${s} in $(pwd)"
     done
   fi
 
@@ -38,8 +38,8 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     export IFS=","
     for s in $WORDPRESS_PLUGINS; do
       cmd="git clone ${s}"
-      eval $cmd
-      echo "Adding plugin repo: ${s} in `pwd`"
+      #eval $cmd
+      echo "Adding plugin repo: ${s} in $(pwd)"
     done
   fi
 
@@ -49,8 +49,8 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     export IFS=","
     for s in $WORDPRESSORG_PLUGINS; do
       cmd="curl -O -L http://downloads.wordpress.org/plugin/${s}.zip && unzip ${s}.zip && rm ${s}.zip"
-      eval $cmd
-      echo "Adding WP.org plugin: ${s} in `pwd`"
+      eval "$cmd"
+      echo "Adding WP.org plugin: ${s} in $(pwd)"
     done
   fi
 
