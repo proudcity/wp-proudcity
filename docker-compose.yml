@@ -5,7 +5,7 @@ services:
     container_name: wpproudcity_wordpress_1
     depends_on:
       - db
-    image: gcr.io/proudcity-1184/wp-proudcity:master-9820155e2396fec5c1828329f489b4f6a3e755db
+    image: gcr.io/proudcity-1184/wp-proudcity:master-73e8c4ea20c9c7e52325d8ad659f209932fc155e
     volumes:
       #- wp-proudcity-sync:/app/wordpress:nocopy # nocopy is important
       - ./wordpress:/app/wordpress
