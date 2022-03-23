@@ -218,6 +218,19 @@
         {
             "type": "package",
             "package": {
+                "name": "curtismchale/staff-list-plugin",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/curtismchale/Staff-List-Plugin",
+                    "reference": "dev-master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-dashboard",
                 "type": "wordpress-plugin",
                 "version": "1.121.0",
@@ -306,7 +319,7 @@
         "wpackagist-plugin/events-manager":  "5.12.1",
         "wpackagist-plugin/wp-fullcalendar": "1.4.1",
         "wpackagist-plugin/wp-job-manager": "1.35.3",
-        "wpackagist-plugin/simple-staff-list": "2.2.1",
+        "curtismchale/staff-list-plugin": "dev-master",
         "wpackagist-plugin/broken-link-checker": "1.11.16",
         "wpackagist-plugin/popup-maker": "1.16.4",
         "wpackagist-plugin/duplicate-post": "4.4",
