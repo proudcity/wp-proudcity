@@ -224,7 +224,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/curtismchale/Staff-List-Plugin",
-                    "reference": "dev-master"
+                    "reference": "3f00b73e8e8847c77b96af07989eb2d5ad099f32"
                 }
             }
         },
