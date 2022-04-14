@@ -218,6 +218,32 @@
         {
             "type": "package",
             "package": {
+                "name": "curtismchale/google-sitemap-generator",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/curtismchale/google-sitemap-generator",
+                    "reference": "8dc72e24b385b6e90a9da3d4dcd5aee13bbdc9ef"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "curtismchale/mce-table-buttons",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/curtismchale/mce-table-buttons",
+                    "reference": "e6bbd40863c14d20d5400982af0c54aa293e8ffd"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "curtismchale/staff-list-plugin",
                 "type": "wordpress-plugin",
                 "version": "dev-master",
@@ -296,7 +322,6 @@
         "wpackagist-plugin/intuitive-custom-post-order": "3.1.3",
         "wpackagist-plugin/disable-comments": "2.3.3",
         "wpackagist-plugin/wordpress-seo": "18.3",
-        "wpackagist-plugin/mce-table-buttons": "3.3.1",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
@@ -307,7 +332,6 @@
         "wpackagist-plugin/wp-mail-smtp": "3.3.0",
         "wpackagist-plugin/edit-flow": "0.9.6",
         "wpackagist-plugin/wp-sitemap-page": "1.9.1",
-        "wpackagist-plugin/google-sitemap-generator": "4.1.1",
         "wpackagist-plugin/default-featured-image": "1.7.1",
 
         "wpackagist-plugin/classic-editor": "1.6.2",
@@ -315,11 +339,14 @@
         "wpackagist-plugin/siteorigin-panels": "2.16.5",
         "wpackagist-plugin/so-widgets-bundle": "1.31.0",
 
+        "curtismchale/staff-list-plugin": "dev-master",
+        "curtismchale/mce-table-buttons": "dev-master",
+        "curtismchale/google-sitemap-generator": "dev-master",
+
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
         "wpackagist-plugin/events-manager":  "5.12.1",
         "wpackagist-plugin/wp-fullcalendar": "1.4.1",
         "wpackagist-plugin/wp-job-manager": "1.35.3",
-        "curtismchale/staff-list-plugin": "dev-master",
         "wpackagist-plugin/broken-link-checker": "1.11.16",
         "wpackagist-plugin/popup-maker": "1.16.4",
         "wpackagist-plugin/wp-sweep": "1.1.5",
