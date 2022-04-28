@@ -14,7 +14,7 @@ wp option update font-awesome '{
   "apiToken": true,
   "dataVersion": 4,
   "version": "6.x"
-}'
+}' --allow-root
 
 # Setting Basic Icons Transient
 wp transient set fa_basic_icons_trans '[
