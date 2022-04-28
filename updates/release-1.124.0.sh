@@ -1,5 +1,5 @@
 # making sure MCE Table Buttons is active
-wp plugin activate mce-table-buttons --allow-roo
+wp plugin activate mce-table-buttons --allow-root
 
 # Installing Font Awesome Plugin
 wp plugin activate font-awesome --allow-root
