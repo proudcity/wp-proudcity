@@ -218,26 +218,13 @@
         {
             "type": "package",
             "package": {
-                "name": "curtismchale/google-sitemap-generator",
+                "name": "proudcity/mce-table-buttons",
                 "type": "wordpress-plugin",
                 "version": "dev-master",
                 "source": {
                     "type": "git",
-                    "url": "https://github.com/curtismchale/google-sitemap-generator",
-                    "reference": "8dc72e24b385b6e90a9da3d4dcd5aee13bbdc9ef"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "curtismchale/mce-table-buttons",
-                "type": "wordpress-plugin",
-                "version": "dev-master",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/curtismchale/mce-table-buttons",
-                    "reference": "e6bbd40863c14d20d5400982af0c54aa293e8ffd"
+                    "url": "https://github.com/proudcity/mce-table-buttons",
+                    "reference": "5230027cd5417d8372594f7d150d63195e39325e"
                 }
             }
         },
@@ -340,7 +327,6 @@
         "wpackagist-plugin/so-widgets-bundle": "1.31.0",
 
         "curtismchale/staff-list-plugin": "dev-master",
-        "curtismchale/mce-table-buttons": "dev-master",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
         "wpackagist-plugin/events-manager":  "5.12.1",
@@ -356,6 +342,8 @@
 
         "wpackagist-plugin/elasticpress": "2.8.2",              
 
+
+        "proudcity/mce-table-buttons": "dev-master",
         "proudcity/wp-proud-core": "1.123.0",
         "proudcity/wp-proud-agency": "1.123.0",
         "proudcity/wp-proud-search": "1.123.0",
