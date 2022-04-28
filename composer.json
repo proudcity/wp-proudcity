@@ -341,7 +341,6 @@
 
         "curtismchale/staff-list-plugin": "dev-master",
         "curtismchale/mce-table-buttons": "dev-master",
-        "curtismchale/google-sitemap-generator": "dev-master",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
         "wpackagist-plugin/events-manager":  "5.12.1",
