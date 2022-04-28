@@ -5,7 +5,7 @@ wp plugin activate mce-table-buttons --allow-roo
 wp plugin activate font-awesome --allow-root
 
 # Setting the Pro Icon List
-wp set transient fa_pro_icons_trans '[
+wp transient set fa_pro_icons_trans '[
   "fa-solid fa-message-text",
   "fa-regular fa-message-text",
   "fa-light fa-message-text",
@@ -8770,7 +8770,7 @@ wp set transient fa_pro_icons_trans '[
 ]' 2629746 --allow-root
 
 # Setting Basic Icons Transient
-wp set transient fa_basic_icons_trans '[
+wp transient set fa_basic_icons_trans '[
   "fa-solid fa-turn-up",
   "fa-brands fa-steam-symbol",
   "fa-solid fa-hand-holding-medical",
