@@ -4,18 +4,6 @@ wp plugin activate mce-table-buttons --allow-root
 # Installing Font Awesome Plugin
 wp plugin activate font-awesome --allow-root
 
-# Set Font Awesome Options
-wp option update font-awesome '{
-  "usePro": false,
-  "compat": true,
-  "technology": "webfont",
-  "pseudoElements": true,
-  "kitToken": "3ff3201305",
-  "apiToken": true,
-  "dataVersion": 4,
-  "version": "6.x"
-}' --allow-root
-
 # Setting Basic Icons Transient
 wp transient set fa_basic_icons_trans '[
   "fa-solid fa-turn-up",
@@ -1769,7 +1757,7 @@ wp transient set fa_basic_icons_trans '[
 ]' 2629746 --allow-root
 
 # Setting Basic Icon Option
-wp option add fa_basic_icons '[
+wp option update fa_basic_icons '[
   "fa-solid fa-turn-up",
   "fa-brands fa-steam-symbol",
   "fa-solid fa-hand-holding-medical",
@@ -3519,3 +3507,15 @@ wp option add fa_basic_icons '[
   "fa-brands fa-monero",
   "fa-solid fa-fill-drip"
 ]' --allow-root
+
+# Set Font Awesome Options
+wp option update font-awesome '{
+  "usePro": false,
+  "compat": true,
+  "technology": "webfont",
+  "pseudoElements": true,
+  "kitToken": "3ff3201305",
+  "apiToken": true,
+  "dataVersion": 4,
+  "version": "6.x"
+}' --allow-root
