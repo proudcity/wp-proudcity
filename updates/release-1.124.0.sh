@@ -5,7 +5,7 @@ wp plugin activate mce-table-buttons --allow-root
 wp plugin activate font-awesome --allow-root
 
 # Set Font Awesome Options
-wp option update font-awesome '{
+wp option add font-awesome '{
   "usePro": false,
   "compat": true,
   "technology": "webfont",
