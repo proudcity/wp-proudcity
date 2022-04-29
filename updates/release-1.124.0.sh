@@ -1,8 +1,9 @@
+# Clearing old FA option and plugin
+wp option delete font-awesome --allow-root
+wp plugin deactivate font-awesome --allow-root
+
 # making sure MCE Table Buttons is active
 wp plugin activate mce-table-buttons --allow-root
-
-# Installing Font Awesome Plugin
-wp plugin activate font-awesome --allow-root
 
 # Setting Basic Icons Transient
 wp transient set fa_basic_icons_trans '[
@@ -3514,8 +3515,11 @@ wp option update font-awesome '{
   "compat": true,
   "technology": "webfont",
   "pseudoElements": true,
-  "kitToken": "3ff3201305",
+  "kitToken": null,
   "apiToken": true,
   "dataVersion": 4,
-  "version": "6.x"
-}' --allow-root
+  "version": "6.0.0"
+}' --format=json --allow-root
+
+# Installing Font Awesome Plugin
+wp plugin activate font-awesome --allow-root
