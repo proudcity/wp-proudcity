@@ -17,6 +17,10 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   echo "Adding JoomUnited plugins"
   git clone https://source.developers.google.com/p/proudcity-1184/r/wp-media-folder /app/wordpress/wp-content/plugins/wp-media-folder
 
+  echo "Adding wp-rocket plugins"
+  git clone https://source.developers.google.com/p/proudcity-1184/r/wp-rocket /app/wordpress/wp-content/plugins/wp-rocket
+  git clone https://source.developers.google.com/p/proudcity-1184/r/wp-rocket-cache-rest-api /app/wordpress/wp-content/plugins/wp-rocket-cache-rest-api
+
   # Install other non-free plugins
   echo "Adding non-free plugins"
   cd /app/wordpress/wp-content/plugins
@@ -93,7 +97,7 @@ if [[ $REDIS_SESSION == "1" ]]; then
   echo "session.save_path = ${WORDPRESS_DB_NAME}redis:6379" >> $redisfile
 fi
 
-# Copy of w3-total-cache configuration
-php /app/bin/w3-total-cache-config.php
+# Ensure that we have the latest wp-rocket con
+wp rocket import --allow-root /app/bin/wp-rocket.json
 
 exec "$@"
