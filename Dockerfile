@@ -47,8 +47,8 @@ RUN php -dmemory_limit=128M /usr/local/bin/composer install
 
 RUN curl -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN cd /tmp && chmod +x wp-cli.phar \
-  && mv wp-cli.phar /usr/local/bin/wp \
-  && wp package install wp-media/wp-rocket-cli:trunk --allow-root
+  && mv wp-cli.phar /usr/local/bin/wp
+RUN wp package install wp-media/wp-rocket-cli:trunk --allow-root
 
 # COPY etc/.htaccess_extra .htaccess_extra
 # RUN cat .htaccess_extra >> .htaccess && rm .htaccess_extra && cat .htaccess
