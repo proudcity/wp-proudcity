@@ -25,11 +25,11 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "1.125.0",
+                "version": "1.125.1",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
-                    "reference": "1.125.0"
+                    "reference": "1.125.1"
                 }
             }
         },
@@ -142,11 +142,11 @@
             "package": {
                 "name": "proudcity/wp-proud-admin",
                 "type": "wordpress-plugin",
-                "version": "1.125.0",
+                "version": "1.125.1",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-admin.git",
-                    "reference": "1.125.0"
+                    "reference": "1.125.1"
                 }
             }
         },
@@ -298,11 +298,11 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "1.125.0",
+                "version": "1.125.1",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
-                    "reference": "1.125.0"
+                    "reference": "1.125.1"
                 }
             }
         }
@@ -358,7 +358,7 @@
 
 
         "proudcity/mce-table-buttons": "dev-master",
-        "proudcity/wp-proud-core": "1.125.0",
+        "proudcity/wp-proud-core": "1.125.1",
         "proudcity/wp-proud-agency": "1.125.0",
         "proudcity/wp-proud-search": "1.125.0",
         "proudcity/wp-proud-search-elastic": "1.125.0",
@@ -370,12 +370,12 @@
         "proudcity/wp-proud-map-app": "1.125.0",
         "proudcity/wp-proud-social-app": "1.125.0",
         "proudcity/wp-proud-actions-app": "1.125.0",
-        "proudcity/wp-proud-admin": "1.125.0",
+        "proudcity/wp-proud-admin": "1.125.1",
         "proudcity/wp-proud-seeclickfix": "1.125.0",
         "proudcity/wp-proud-dashboard": "1.125.0",
         "proudcity/wp-proud-subsite": "1.125.0",
         "proudcity/wp-quick-menu": "1.125.0",
-        "proudcity/wp-proud-theme": "1.125.0"
+        "proudcity/wp-proud-theme": "1.125.1"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
