@@ -4,6 +4,9 @@ set -e
 # Clone private repos
 if [[ $GOOGLE_GIT_TOKEN ]]; then
 
+  # Fail silently if a git repo fails to clone
+  set +e
+
   # Add gcloud
   echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >> $HOME/.netrc
 
@@ -41,7 +44,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     cd /app/wordpress/wp-content/plugins
     export IFS=","
     for s in $WORDPRESS_PLUGINS; do
-      cmd="{git clone ${s} && } || { }"
+      cmd="git clone ${s}"
       eval $cmd
       echo "Adding plugin repo: ${s} in `pwd`"
     done
@@ -57,6 +60,9 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
       echo "Adding WP.org plugin: ${s} in `pwd`"
     done
   fi
+
+  # Turn off silent failures
+  set -e
 
   # Add support for Business directory plugin (for ELGL)
   if [ -d "/app/wordpress/wp-content/plugins/business-directory" ]; then
