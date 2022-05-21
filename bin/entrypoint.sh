@@ -25,23 +25,23 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   echo "Adding non-free plugins"
   cd /app/wordpress/wp-content/plugins
 
-  # Add custom themes, comma separated
+  # Add custom themes, comma separated. Ensure that we fail silently.
   if [[ $WORDPRESS_THEMES ]]; then
     cd /app/wordpress/wp-content/themes
     export IFS=","
     for s in $WORDPRESS_THEMES; do
-      cmd="git clone ${s}"
+      cmd="{git clone ${s} && } || { }"
       eval $cmd
       echo "Adding theme repo: ${s} in `pwd`"
     done
   fi
 
-  # Add custom plugins, comma separated
+  # Add custom plugins, comma separated. Ensure that we fail silently.
   if [[ $WORDPRESS_PLUGINS ]]; then
     cd /app/wordpress/wp-content/plugins
     export IFS=","
     for s in $WORDPRESS_PLUGINS; do
-      cmd="git clone ${s}"
+      cmd="{git clone ${s} && } || { }"
       eval $cmd
       echo "Adding plugin repo: ${s} in `pwd`"
     done
