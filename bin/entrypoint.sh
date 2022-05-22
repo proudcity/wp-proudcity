@@ -61,9 +61,6 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     done
   fi
 
-  # Turn off silent failures
-  set -e
-
   # Add support for Business directory plugin (for ELGL)
   if [ -d "/app/wordpress/wp-content/plugins/business-directory" ]; then
     echo "Adding Business Directory Plugin"
