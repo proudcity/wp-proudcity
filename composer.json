@@ -244,19 +244,6 @@
         {
             "type": "package",
             "package": {
-                "name": "curtismchale/staff-list-plugin",
-                "type": "wordpress-plugin",
-                "version": "dev-master",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/curtismchale/Staff-List-Plugin",
-                    "reference": "1a454cd628e9b5324ec7a037619d937473373f68"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "proudcity/wp-proud-dashboard",
                 "type": "wordpress-plugin",
                 "version": "1.125.0",
@@ -340,7 +327,7 @@
         "wpackagist-plugin/siteorigin-panels": "2.16.5",
         "wpackagist-plugin/so-widgets-bundle": "1.31.0",
 
-        "curtismchale/staff-list-plugin": "dev-master",
+        "wpackagist-plugin/simple-staff-list": "2.2.2",
 
         "wpackagist-plugin/wordpress-faq-manager": "1.331",
         "wpackagist-plugin/events-manager":  "5.12.1",
