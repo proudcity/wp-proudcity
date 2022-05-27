@@ -33,7 +33,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     cd /app/wordpress/wp-content/themes
     export IFS=","
     for s in $WORDPRESS_THEMES; do
-      cmd="{git clone ${s} && } || { }"
+      cmd="git clone ${s}"
       eval $cmd
       echo "Adding theme repo: ${s} in `pwd`"
     done
