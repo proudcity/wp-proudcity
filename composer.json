@@ -257,6 +257,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-stateless",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-stateless",
+                    "reference": "8d86bb53ee64dcd21be957307f172b144ed21b55"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "wp-api/rest-filter",
                 "type": "wordpress-plugin",
                 "version": "1.0",
@@ -288,8 +301,6 @@
 
         "proudcity/auth0": "1.49.0",
         "wp-api/rest-filter": "1.0",
-
-        "wpackagist-plugin/wp-stateless": "3.2.2",
 
         "wpackagist-plugin/w3-total-cache": "2.2.1",
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",
@@ -330,7 +341,7 @@
 
         "wpackagist-plugin/elasticpress": "2.8.2",
 
-
+        "proudcity/wp-stateless": "dev-master",
         "proudcity/mce-table-buttons": "dev-master",
         "proudcity/wp-proud-core": "1.127.0",
         "proudcity/wp-proud-agency": "1.127.0",
