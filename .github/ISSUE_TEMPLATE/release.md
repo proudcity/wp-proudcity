@@ -3,7 +3,7 @@ name: Release
 about: Release issue template
 title: 'RELEASE '
 labels: release
-assignees: aschmoe, jlyon
+assignees: curtismchale
 
 ---
 
