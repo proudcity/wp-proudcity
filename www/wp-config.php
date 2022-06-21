@@ -115,6 +115,18 @@ $table_prefix  = 'wp_';
  */
 //define ('WPLANG', 'nb_NO');
 
+/**
+ * Defines the environment type for WordPress. This lets us run different
+ * settings on different sites.
+ *
+ * https://make.wordpress.org/core/2020/08/27/wordpress-environment-types/
+ */
+$environment_type = 'production';
+if ( ! empty( getenv( 'ENV_TYPE' ) ) ){
+    $environment_type = getenv( 'ENV_TYPE' );
+}
+define( 'WP_ENVIRONMENT_TYPE', (string) $environment_type );
+
 
 $url = (getenv('TLS') === 'true' ? 'https' : 'http') . '://' . getenv('HOST');
 define("WP_SITEURL", $url.'/');
