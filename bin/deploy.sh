@@ -9,5 +9,6 @@ echo "Clearing transient options in wp_options"
 wp --allow-root db query "DELETE from wp_options where option_name like '%transient%';"
 
 wp core update-db --allow-root
+wp rocket clean --confirm --allow-root
 wp rewrite flush --allow-root
 wp cache flush --allow-root
