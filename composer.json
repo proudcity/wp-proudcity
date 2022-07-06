@@ -10,19 +10,6 @@
         {
             "type": "package",
             "package": {
-                "name": "proudcity/auth0",
-                "type": "wordpress-plugin",
-                "version": "1.49.0",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/proudcity/wp-auth0-legacy.git",
-                    "reference": "1.49.0"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
                 "version": "1.128.1",
@@ -286,11 +273,11 @@
         "composer/installers": "1.*",
         "johnpbloch/wordpress": "6.0.0",
 
-        "proudcity/auth0": "1.49.0",
         "wp-api/rest-filter": "1.0",
 
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",
 
+        "wpackagist-plugin/auth0": "4.3.1",
         "wpackagist-plugin/intuitive-custom-post-order": "3.1.3",
         "wpackagist-plugin/disable-comments": "2.3.6",
         "wpackagist-plugin/wordpress-seo": "19.2",
