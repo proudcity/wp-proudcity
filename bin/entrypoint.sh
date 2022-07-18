@@ -24,6 +24,12 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   git clone https://source.developers.google.com/p/proudcity-1184/r/wp-rocket /app/wordpress/wp-content/plugins/wp-rocket
   git clone https://source.developers.google.com/p/proudcity-1184/r/wp-rocket-cache-rest-api /app/wordpress/wp-content/plugins/wp-rocket-cache-rest-api
 
+  if [[ ! -f /app/wordpress/wp-content/plugins/wp-rocket ]]
+  then
+      echo "wp-rocket does not exist. Preventing instance from initializing."
+      exit 1;
+  fi
+
   # Install other non-free plugins
   echo "Adding non-free plugins"
   cd /app/wordpress/wp-content/plugins
