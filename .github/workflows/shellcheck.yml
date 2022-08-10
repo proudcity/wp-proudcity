@@ -2,7 +2,9 @@
 
 name: CI
 on:
-  - commit
+  push:
+    branches:
+      - master
 jobs:
   sh-checker:
     runs-on: ubuntu-latest
