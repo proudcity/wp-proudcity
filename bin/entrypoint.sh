@@ -10,6 +10,17 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   # Add gcloud
   echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >> $HOME/.netrc
 
+  # make sure repositories are available
+  echo "Making sure Google repositories are available."
+  wget -q https://source.developers.google.com/
+  while [ $? -ne 0 ]
+  do
+    echo "Google repository NOT available."
+    wget -q https://source.developers.google.com/
+  done
+
+  echo "Google repositories are available."
+
   # Install Gravity Forms
   echo "Adding Gravity Forms"
   git clone https://source.developers.google.com/p/proudcity-1184/r/gravityforms /app/wordpress/wp-content/plugins/gravityforms
