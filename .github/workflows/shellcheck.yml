@@ -18,3 +18,4 @@ jobs:
         with:
           # including the folders we want
           path: "updates/*.sh"
+          severity: "info"
