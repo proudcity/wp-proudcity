@@ -6,16 +6,17 @@ on:
     branches:
       - master
       
-
 jobs:
-  lint:
+  sh-checker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-      - name: Run ShellCheck
-        uses: azohra/shell-linter@latest
+      - uses: actions/checkout@v3
+      - name: Run the sh-checker
+        uses: luizm/action-sh-checker@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHELLCHECK_OPTS: -e SC1004 # exclude some shellcheck warnings.
+          SHFMT_OPTS: -s # arguments to shfmt.
         with:
-          # including the folders we want
-          path: "updates/*.sh"
-          severity: "info"
+          sh_checker_comment: false
+          sh_checker_exclude: "^bin/*.sh"
