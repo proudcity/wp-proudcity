@@ -10,6 +10,13 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   # Add gcloud
   echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >> $HOME/.netrc
 
+  # making sure google repositories exist
+  until $( curl --output /dev/null --silent --head --fail https://source.developers.google.com ); do
+    echo 'Google repository not available'
+    sleep 5
+  done
+
+  echo 'Google repository available'
 
   # Install Gravity Forms
   echo "Adding Gravity Forms"
