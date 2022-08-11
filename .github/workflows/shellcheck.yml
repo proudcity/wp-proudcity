@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - master
-      
+
 jobs:
   sh-checker:
     runs-on: ubuntu-latest
@@ -19,4 +19,4 @@ jobs:
           SHFMT_OPTS: -s # arguments to shfmt.
         with:
           sh_checker_comment: false
-          sh_checker_exclude: "^bin/*.sh"
+          sh_checker_exclude: "^bin/*.sh ^old-release-files/*.sh"
