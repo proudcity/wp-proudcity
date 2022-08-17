@@ -283,19 +283,6 @@
         {
             "type": "package",
             "package": {
-                "name": "proudcity/wp-media-folder",
-                "type": "wordpress-plugin",
-                "version": "5.4.6",
-                "source": {
-                    "type": "git",
-                    "url": "git@github.com:proudcity/wp-media-folder",
-                    "reference": "5.4.6"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
                 "version": "1.130.0",
@@ -313,7 +300,6 @@
         "johnpbloch/wordpress": "6.0.0",
 
         "wp-media/wp-rocket": "3.11.5",
-        "proudcity/wp-media-folder": "5.4.6",
 
         "proudcity/auth0": "1.149.0",
         "wp-api/rest-filter": "1.0",
