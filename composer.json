@@ -270,19 +270,6 @@
         {
             "type": "package",
             "package": {
-                "name": "wp-media/wp-rocket",
-                "type": "wordpress-plugin",
-                "version": "3.10.10.1",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/wp-media/wp-rocket",
-                    "reference": "3.10.10.1"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
                 "version": "1.130.0",
@@ -298,8 +285,6 @@
         "php": ">=5.4",
         "composer/installers": "1.*",
         "johnpbloch/wordpress": "6.0.0",
-
-        "wp-media/wp-rocket": "3.10.10.1",
 
         "proudcity/auth0": "1.149.0",
         "wp-api/rest-filter": "1.0",
