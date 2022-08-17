@@ -5,7 +5,7 @@ set -e
 if [[ $GITHUB_SSH_KEY ]]; then
 
   ssh-keyscan -t rsa github.com >> $HOME/.ssh/known_hosts
-  echo ${GITHUB_SSH_KEY} >> $HOME/.ssh/id_github.pub
+  echo "${GITHUB_SSH_KEY}" >> $HOME/.ssh/id_github
 
 fi
 
