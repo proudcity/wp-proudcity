@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+# setting deploy ssh key so we can access github private repositories
+if [[ $GITHUB_SSH_KEY ]]; then
+
+  ssh-keyscan -t rsa github.com >> $HOME/.ssh/known_hosts
+  echo $GITHUB_SSH_KEY >> $HOME/.ssh/id_github.pub
+
+fi
+
 # Clone private repos
 if [[ $GOOGLE_GIT_TOKEN ]]; then
 
