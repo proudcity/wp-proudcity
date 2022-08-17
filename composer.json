@@ -288,7 +288,7 @@
                 "version": "5.4.6",
                 "source": {
                     "type": "git",
-                    "url": "git@github.com/proudcity/wp-media-folder",
+                    "url": "git@github.com:proudcity/wp-media-folder",
                     "reference": "5.4.6"
                 }
             }
