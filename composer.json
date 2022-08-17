@@ -272,11 +272,11 @@
             "package": {
                 "name": "wp-media/wp-rocket",
                 "type": "wordpress-plugin",
-                "version": "3.11.5",
+                "version": "3.10.10.1",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/wp-media/wp-rocket",
-                    "reference": "3.11.5"
+                    "reference": "3.10.10.1"
                 }
             }
         },
@@ -299,7 +299,7 @@
         "composer/installers": "1.*",
         "johnpbloch/wordpress": "6.0.0",
 
-        "wp-media/wp-rocket": "3.11.5",
+        "wp-media/wp-rocket": "3.10.10.1",
 
         "proudcity/auth0": "1.149.0",
         "wp-api/rest-filter": "1.0",
