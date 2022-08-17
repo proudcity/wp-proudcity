@@ -37,6 +37,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   git clone git@github.com:proudcity/wp-media-folder.git /app/wordpress/wp-content/plugins/wp-media-folder
 
   echo "Adding wp-rocket plugins"
+  git clone https://source.developers.google.com/p/proudcity-1184/r/wp-rocket /app/wordpress/wp-content/plugins/wp-rocket
   git clone https://source.developers.google.com/p/proudcity-1184/r/wp-rocket-cache-rest-api /app/wordpress/wp-content/plugins/wp-rocket-cache-rest-api
 
   # Install other non-free plugins
