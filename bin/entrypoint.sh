@@ -8,6 +8,8 @@ apt-get install -y openssh-client
 if [[ $GITHUB_SSH_KEY ]]; then
 
   echo "Installing SSH key"
+  mkdir $HOME/.ssh/
+  touch $HOME/.ssh/known_hosts
   ssh-keyscan -t rsa github.com >> $HOME/.ssh/known_hosts
   echo "${GITHUB_SSH_KEY}" >> $HOME/.ssh/id_github
 
