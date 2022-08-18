@@ -7,9 +7,14 @@ apt-get install -y openssh-client
 # setting deploy ssh key so we can access github private repositories
 if [[ $GITHUB_SSH_KEY ]]; then
 
+  echo "Installing SSH key"
   ssh-keyscan -t rsa github.com >> $HOME/.ssh/known_hosts
   echo "${GITHUB_SSH_KEY}" >> $HOME/.ssh/id_github
 
+fi
+
+if [[ ! $GITHUB_SSH_KEY ]]; then
+  echo 'no ssh key'
 fi
 
 # Clone private repos
