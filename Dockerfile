@@ -11,7 +11,7 @@ RUN apt-get update \
 
 RUN pecl install mcrypt-1.0.4
 
-RUN apt-get install -y openssh-client
+RUN apt-get install -y openssh-server
 
 # install phpredis extension
 # From http://stackoverflow.com/questions/31369867/how-to-install-php-redis-extension-using-the-official-php-docker-image-approach
