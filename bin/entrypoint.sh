@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+apt-get install -y openssh-client
+
 # setting deploy ssh key so we can access github private repositories
 if [[ $GITHUB_SSH_KEY ]]; then
 
