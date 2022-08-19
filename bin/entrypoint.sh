@@ -1,24 +1,6 @@
 #!/bin/bash
 set -e
 
-apt-get update
-apt-get install -y openssh-client
-
-# setting deploy ssh key so we can access github private repositories
-if [[ $GITHUB_SSH_KEY ]]; then
-
-  echo "Installing SSH key"
-  mkdir $HOME/.ssh/
-  touch $HOME/.ssh/known_hosts
-  ssh-keyscan -t rsa github.com >> $HOME/.ssh/known_hosts
-  echo "${GITHUB_SSH_KEY}" >> $HOME/.ssh/id_github
-
-fi
-
-if [[ ! $GITHUB_SSH_KEY ]]; then
-  echo 'no ssh key'
-fi
-
 # Clone private repos
 if [[ $GOOGLE_GIT_TOKEN ]]; then
 
@@ -44,7 +26,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
 
   echo "Adding JoomUnited plugins"
-  git clone git@github.com:proudcity/wp-media-folder.git /app/wordpress/wp-content/plugins/wp-media-folder
+  git clone https://source.developers.google.com/p/proudcity-1184/r/wp-media-folder /app/wordpress/wp-content/plugins/wp-media-folder
 
   echo "Adding wp-rocket plugins"
   git clone https://source.developers.google.com/p/proudcity-1184/r/wp-rocket /app/wordpress/wp-content/plugins/wp-rocket
