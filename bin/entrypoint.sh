@@ -19,14 +19,14 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   echo 'Google repository available'
 
   # Install Gravity Forms
-  echo "Adding Gravity Forms"
-  git clone https://source.developers.google.com/p/proudcity-1184/r/gravityforms /app/wordpress/wp-content/plugins/gravityforms
+  echo "Exploding Gravity Forms"
+  #git clone https://source.developers.google.com/p/proudcity-1184/r/gravityforms /app/wordpress/wp-content/plugins/gravityforms
   # @todo: `mv` doesn't work because of a Docker FS bug: https://github.com/docker/docker/issues/4570
   cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins
   rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
 
-  echo "Adding JoomUnited plugins"
-  git clone https://source.developers.google.com/p/proudcity-1184/r/wp-media-folder /app/wordpress/wp-content/plugins/wp-media-folder
+  #echo "Adding JoomUnited plugins"
+  #git clone https://source.developers.google.com/p/proudcity-1184/r/wp-media-folder /app/wordpress/wp-content/plugins/wp-media-folder
 
   echo "Adding wp-rocket plugins"
   git clone https://source.developers.google.com/p/proudcity-1184/r/wp-rocket /app/wordpress/wp-content/plugins/wp-rocket

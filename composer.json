@@ -13,6 +13,32 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/gravityforms",
+                "type": "wordpress-plugin",
+                "version": "1.149.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/gravityforms.git",
+                    "reference": "1.49.0"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "proudcity/wp-media-folder",
+                "type": "wordpress-plugin",
+                "version": "1.149.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-media-folder.git",
+                    "reference": "1.49.0"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/auth0",
                 "type": "wordpress-plugin",
                 "version": "1.149.0",
