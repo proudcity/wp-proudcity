@@ -1,0 +1,28 @@
+# Access the id_github file from Secret Manager, and setup SSH
+steps:
+- name: 'gcr.io/cloud-builders/git'
+  secretEnv: ['SSH_KEY']
+  entrypoint: 'bash'
+  args:
+  - -c
+  - |
+    echo "$$SSH_KEY" >> /root/.ssh/id_rsa
+    chmod 400 /root/.ssh/id_rsa
+    cp etc/known_hosts.github /root/.ssh/known_hosts
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+# Clone the repository
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/proudcity-1184/wp-proudcity', '.']
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+images: ['gcr.io/proudcity-1184/wp-proudcity']
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/694192538187/secrets/github-ssh-key/versions/latest
+    env: 'SSH_KEY'
