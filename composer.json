@@ -146,7 +146,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-admin.git",
-                        "reference": "1.131.0",
+                        "reference": "1.131.0"
                 }
             }
         },
