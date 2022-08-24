@@ -24,4 +24,4 @@ jobs:
           SLACK_CHANNEL: dev-alert
           SLACK_TITLE: FAILURE
           SLACK_MESSAGE: '.sh File Validation failed'
-          SLACK_WEBHOOK: ${{ SLACK_DEV_ALERT_HOOK }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_DEV_ALERT_HOOK }}
