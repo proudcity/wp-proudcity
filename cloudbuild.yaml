@@ -15,12 +15,12 @@ steps:
 
 # Clone the repository
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/proudcity-1184/wp-proudcity', '.']
+  args: ['build', '-t', 'gcr.io/proudcity-1184/wp-proudcity:$BRANCH_NAME-$COMMIT_SHA', '.']
   volumes:
   - name: 'ssh'
     path: /root/.ssh
 
-images: ['gcr.io/proudcity-1184/wp-proudcity']
+images: ['gcr.io/proudcity-1184/wp-proudcity:$BRANCH_NAME-$COMMIT_SHA']
 
 availableSecrets:
   secretManager:
