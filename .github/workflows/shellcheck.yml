@@ -8,12 +8,20 @@ on:
 
 jobs:
   shellcheck:
-    name: Shellcheck
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@master
-        with:
-          ignore_paths: bin old-release-files
-          severity: error
+    - name: Shellcheck
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Run ShellCheck
+          uses: ludeeus/action-shellcheck@master
+          with:
+            ignore_paths: bin old-release-files
+            severity: error
+    - name: Slack Notification
+      if: {{ $failure() }}
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_CHANNEL: dev-alert
+        SLACK_TITLE: FAILURE
+        SLACK_MESSAGE: '.sh File Validation failed'
+        SLACK_WEBHOOK: ${{ SLACK_DEV_ALERT_HOOK }}
