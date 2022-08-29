@@ -31,7 +31,7 @@ RUN { \
 COPY etc/apache-vhost.conf /etc/apache2/sites-enabled/000-default.conf
 COPY etc/php.ini /usr/local/etc/php/php.ini
 
-RUN mkdir -p /app
+RUN mkdir -p /app && ls /root/.ssh
 COPY composer.json /app/
 WORKDIR /app
 
