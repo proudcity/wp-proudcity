@@ -1,5 +1,9 @@
 {
     "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "johnpbloch/wordpress-core-installer": true
+        }
 
     },
     "repositories": [
@@ -272,11 +276,11 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "1.131.0",
+                "version": "laravel-mix",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
-                    "reference": "1.131.0"
+                    "reference": "laravel-mix"
                 }
             }
         }
@@ -350,7 +354,7 @@
         "proudcity/wp-proud-seeclickfix": "1.131.0",
         "proudcity/wp-proud-dashboard": "1.131.0",
         "proudcity/wp-proud-subsite": "1.131.0",
-        "proudcity/wp-proud-theme": "1.131.0"
+        "proudcity/wp-proud-theme": "laravel-mix"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
