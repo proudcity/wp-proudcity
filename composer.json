@@ -4,7 +4,6 @@
             "composer/installers": true,
             "johnpbloch/wordpress-core-installer": true
         }
-
     },
     "repositories": [
         {
@@ -276,7 +275,7 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "laravel-mix",
+                "version": "dev-master",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
