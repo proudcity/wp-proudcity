@@ -275,11 +275,11 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "dev-master",
+                "version": "dev-laravel-mix",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
-                    "reference": "dev-laravel-mix"
+                    "reference": "f77a91364065cb583df307d16ac257aff45f03c9"
                 }
             }
         }
