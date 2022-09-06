@@ -1,5 +1,11 @@
 FROM php:7.4-apache
 
+# Add Github private repo key
+RUN mkdir -p /root/.ssh \
+	&& echo "$SSH_KEY" >> /root/.ssh/id_rsa \
+    && chmod 400 /root/.ssh/id_rsa
+COPY etc/known_hosts.github /root/.ssh/known_hosts
+
 # install the PHP extensions we need
 RUN apt-get update \
     && apt-get -y upgrade \
@@ -10,6 +16,10 @@ RUN apt-get update \
 	&& a2enmod rewrite expires
 
 RUN pecl install mcrypt-1.0.4
+
+RUN echo "$SSH_KEY" && cat /root/.ssh/id_rsa
+RUN ls /root/.ssh
+RUN git clone --no-checkout 'git@github.com:/proudcity/gravityforms.git' 'wordpress/wp-content/plugins/gravityforms/'
 
 # install phpredis extension
 # From http://stackoverflow.com/questions/31369867/how-to-install-php-redis-extension-using-the-official-php-docker-image-approach
@@ -31,7 +41,7 @@ RUN { \
 COPY etc/apache-vhost.conf /etc/apache2/sites-enabled/000-default.conf
 COPY etc/php.ini /usr/local/etc/php/php.ini
 
-RUN mkdir -p /app && ls /root/.ssh
+RUN mkdir -p /app
 COPY composer.json /app/
 WORKDIR /app
 
