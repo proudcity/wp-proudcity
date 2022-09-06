@@ -17,8 +17,8 @@
                 "type": "wordpress-plugin",
                 "version": "1.149.0",
                 "source": {
-                    "type": "vcs",
-                    "url": "git@github.com:proudcity/wp-media-folder.git",
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/wp-media-folder.git",
                     "reference": "1.149.0"
                 }
             }
@@ -30,8 +30,8 @@
                 "type": "wordpress-plugin",
                 "version": "1.149.0",
                 "source": {
-                    "type": "vcs",
-                    "url": "git@github.com:proudcity/gravityforms.git",
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/gravityforms.git",
                     "reference": "1.149.0"
                 }
             }
@@ -43,8 +43,8 @@
                 "type": "wordpress-plugin",
                 "version": "1.149.0",
                 "source": {
-                    "type": "vcs",
-                    "url": "git@github.com:proudcity/wp-rocket.git",
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/wp-rocket.git",
                     "reference": "1.149.0"
                 }
             }
@@ -56,8 +56,8 @@
                 "type": "wordpress-plugin",
                 "version": "1.149.0",
                 "source": {
-                    "type": "vcs",
-                    "url": "git@github.com:proudcity/wp-rocket-cache-rest-api.git",
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/wp-rocket-cache-rest-api.git",
                     "reference": "1.149.0"
                 }
             }
