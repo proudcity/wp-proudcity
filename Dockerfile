@@ -2,7 +2,7 @@ FROM php:7.4-apache
 
 # Add Github private repo key
 RUN mkdir -p /root/.ssh \
-	&& echo "$SSH_KEY" >> /root/.ssh/id_rsa \
+	&& echo "$$SSH_KEY" >> /root/.ssh/id_rsa \
     && chmod 400 /root/.ssh/id_rsa
 COPY etc/known_hosts.github /root/.ssh/known_hosts
 
@@ -17,7 +17,7 @@ RUN apt-get update \
 
 RUN pecl install mcrypt-1.0.4
 
-RUN echo "$SSH_KEY" && cat /root/.ssh/id_rsa
+RUN echo "$$SSH_KEY" && cat /root/.ssh/id_rsa
 RUN ls /root/.ssh
 RUN git clone --no-checkout 'git@github.com:/proudcity/gravityforms.git' 'wordpress/wp-content/plugins/gravityforms/'
 
