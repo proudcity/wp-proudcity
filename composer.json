@@ -353,7 +353,7 @@
         "proudcity/wp-proud-seeclickfix": "1.132.0",
         "proudcity/wp-proud-dashboard": "1.132.0",
         "proudcity/wp-proud-subsite": "1.132.0",
-        "proudcity/wp-proud-theme": "1.132.0"
+        "proudcity/wp-proud-theme": "1.132.1"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
