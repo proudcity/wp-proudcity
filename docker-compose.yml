@@ -39,7 +39,7 @@ services:
       STATELESS_MEDIA_BUCKET:
       STATELESS_MEDIA_DIRECTORY:
       STATELESS_MEDIA_CACHE_BUSTING: "1" # defaults to false
-      REDIS_SESSION: "false"
+      REDIS_SESSION: "false" # no longer supported
       PHP_MEMORY_LIMIT: 256M
       SMTP_HOST:
       SMTP_PASS:
