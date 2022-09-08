@@ -1,25 +1,23 @@
 FROM php:7.4-apache
 
 # Add Github private repo key
+ARG SSH_KEY
 RUN mkdir -p /root/.ssh \
-	&& echo "$$SSH_KEY" >> /root/.ssh/id_rsa \
+	&& echo "${SSH_KEY}aaa" >> /root/.ssh/id_rsa \
     && chmod 400 /root/.ssh/id_rsa
 COPY etc/known_hosts.github /root/.ssh/known_hosts
+RUN ls /root/.ssh && cat /root/.ssh/id_rsa
 
 # install the PHP extensions we need
 RUN apt-get update \
     && apt-get -y upgrade \
-	&& apt-get install -y --no-install-recommends vim libpng-dev libjpeg-dev mariadb-client unzip git libcurl4-openssl-dev libmcrypt-dev \
+	&& apt-get install -y --no-install-recommends vim libpng-dev libjpeg-dev mariadb-client unzip openssh-client git libcurl4-openssl-dev libmcrypt-dev \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-jpeg \
 	&& docker-php-ext-install gd mysqli opcache \
 	&& a2enmod rewrite expires
 
 RUN pecl install mcrypt-1.0.4
-
-RUN echo "$$SSH_KEY" && cat /root/.ssh/id_rsa
-RUN ls /root/.ssh
-RUN git clone --no-checkout 'git@github.com:/proudcity/gravityforms.git' 'wordpress/wp-content/plugins/gravityforms/'
 
 # install phpredis extension
 # From http://stackoverflow.com/questions/31369867/how-to-install-php-redis-extension-using-the-official-php-docker-image-approach
