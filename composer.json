@@ -279,7 +279,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
-                    "reference": "1.130.0"
+                    "reference": "be51ab87948d93628a1a117133b3cf8c6890c393"
                 }
             }
         }
