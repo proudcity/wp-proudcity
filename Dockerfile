@@ -1,9 +1,17 @@
 FROM php:7.4-apache
 
+# Add Github private repo key
+ARG SSH_KEY
+RUN mkdir -p /root/.ssh \
+	&& echo "${SSH_KEY}aaa" >> /root/.ssh/id_rsa \
+    && chmod 400 /root/.ssh/id_rsa
+COPY etc/known_hosts.github /root/.ssh/known_hosts
+RUN ls /root/.ssh && cat /root/.ssh/id_rsa
+
 # install the PHP extensions we need
 RUN apt-get update \
     && apt-get -y upgrade \
-	&& apt-get install -y --no-install-recommends vim libpng-dev libjpeg-dev mariadb-client unzip git libcurl4-openssl-dev libmcrypt-dev \
+	&& apt-get install -y --no-install-recommends vim libpng-dev libjpeg-dev mariadb-client unzip openssh-client git libcurl4-openssl-dev libmcrypt-dev \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-jpeg \
 	&& docker-php-ext-install gd mysqli opcache \
@@ -35,12 +43,16 @@ RUN mkdir -p /app
 COPY composer.json /app/
 WORKDIR /app
 
+# Install composer.json file
 RUN curl -k -o /tmp/composer.phar https://getcomposer.org/download/1.3.0/composer.phar \
   && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 RUN php -dmemory_limit=128M /usr/local/bin/composer install
 
+# Explode out the gravityforms plugins in modules/*
+RUN   cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins && rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
+
 #RUN curl -o /tmp/markdown.zip https://littoral.michelf.ca/code/php-markdown/php-markdown-extra-1.2.8.zip \
-#  	&& unzip /tmp/markdown.zip -d  /app/wordpress/wp-content/plugins \
+#  	&& unzip /tmp/ markdown.zip -d  /app/wordpress/wp-content/plugins \
 #  	&& mv  /app/wordpress/wp-content/plugins/PHP\ Markdown\ Extra\ 1.2.8/markdown.php  /app/wordpress/wp-content/plugins/ \
 #  	&& rm -rf  /app/wordpress/wp-content/plugins/PHP\ Markdown\ Extra\ 1.2.8/ \
 # && rm -rf /tmp/markdown.zip

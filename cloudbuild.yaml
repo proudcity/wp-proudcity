@@ -1,0 +1,20 @@
+# Access the id_github file from Secret Manager, and setup SSH
+steps:
+
+# Run docker build with our Github SSH key gcloud secret
+# Relevant docs:
+#  https://medium.com/google-cloud/using-cloud-build-with-a-multi-stage-docker-build-file-and-a-private-repo-82d15da3461a
+#  https://stackoverflow.com/questions/65302542/how-do-i-use-google-secrets-manager-to-create-a-docker-arg-in-google-cloud-build/65302992#65302992
+- name: 'gcr.io/cloud-builders/docker'
+  secretEnv: ['SSH_KEY']
+  entrypoint: 'bash'
+  args:
+    - "-c"
+    - |
+      docker build --build-arg SSH_KEY="$$SSH_KEY" -t gcr.io/proudcity-1184/wp-proudcity:$BRANCH_NAME-$COMMIT_SHA .
+images: ['gcr.io/proudcity-1184/wp-proudcity:$BRANCH_NAME-$COMMIT_SHA']
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/694192538187/secrets/github-ssh-key/versions/latest
+    env: 'SSH_KEY'

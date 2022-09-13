@@ -13,6 +13,58 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-media-folder",
+                "type": "wordpress-plugin",
+                "version": "1.149.0",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/wp-media-folder.git",
+                    "reference": "1.149.0"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "proudcity/gravityforms",
+                "type": "wordpress-plugin",
+                "version": "1.149.0",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/gravityforms.git",
+                    "reference": "1.149.0"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "proudcity/wp-rocket",
+                "type": "wordpress-plugin",
+                "version": "1.149.0",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/wp-rocket.git",
+                    "reference": "1.149.0"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "proudcity/wp-rocket-cache-rest-api",
+                "type": "wordpress-plugin",
+                "version": "1.149.0",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/wp-rocket-cache-rest-api.git",
+                    "reference": "1.149.0"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/auth0",
                 "type": "wordpress-plugin",
                 "version": "1.149.0",
@@ -290,6 +342,11 @@
         "johnpbloch/wordpress": "6.0.2",
 
         "proudcity/auth0": "1.149.0",
+        "proudcity/gravityforms": "1.149.0",
+        "proudcity/wp-media-folder": "1.149.0",
+        "proudcity/wp-rocket": "1.149.0",
+        "proudcity/wp-rocket-cache-rest-api": "1.149.0",
+
         "wp-api/rest-filter": "1.0",
 
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",

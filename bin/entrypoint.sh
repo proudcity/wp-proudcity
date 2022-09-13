@@ -11,26 +11,26 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >> $HOME/.netrc
 
   # making sure google repositories exist
-  until $( curl --output /dev/null --silent --head --fail https://source.developers.google.com ); do
-    echo 'Google repository not available'
-    sleep 5
-  done
+  #until $( curl --output /dev/null --silent --head --fail https://source.developers.google.com ); do
+  #  echo 'Google repository not available'
+  #  sleep 5
+  #done
 
-  echo 'Google repository available'
+  #echo 'Google repository available'
 
   # Install Gravity Forms
-  echo "Adding Gravity Forms"
-  git clone https://source.developers.google.com/p/proudcity-1184/r/gravityforms /app/wordpress/wp-content/plugins/gravityforms
+  #echo "Exploding Gravity Forms"
+  #git clone https://source.developers.google.com/p/proudcity-1184/r/gravityforms /app/wordpress/wp-content/plugins/gravityforms
   # @todo: `mv` doesn't work because of a Docker FS bug: https://github.com/docker/docker/issues/4570
-  cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins
-  rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
+  #cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins
+  #rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
 
-  echo "Adding JoomUnited plugins"
-  git clone https://source.developers.google.com/p/proudcity-1184/r/wp-media-folder /app/wordpress/wp-content/plugins/wp-media-folder
+  #echo "Adding JoomUnited plugins"
+  #git clone https://source.developers.google.com/p/proudcity-1184/r/wp-media-folder /app/wordpress/wp-content/plugins/wp-media-folder
 
-  echo "Adding wp-rocket plugins"
-  git clone https://source.developers.google.com/p/proudcity-1184/r/wp-rocket /app/wordpress/wp-content/plugins/wp-rocket
-  git clone https://source.developers.google.com/p/proudcity-1184/r/wp-rocket-cache-rest-api /app/wordpress/wp-content/plugins/wp-rocket-cache-rest-api
+  #echo "Adding wp-rocket plugins"
+  #git clone https://source.developers.google.com/p/proudcity-1184/r/wp-rocket /app/wordpress/wp-content/plugins/wp-rocket
+  #git clone https://source.developers.google.com/p/proudcity-1184/r/wp-rocket-cache-rest-api /app/wordpress/wp-content/plugins/wp-rocket-cache-rest-api
 
   # Install other non-free plugins
   echo "Adding non-free plugins"
@@ -102,11 +102,12 @@ export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"128M"}
 export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 
 # Set up redis session configuration
-if [[ $REDIS_SESSION == "1" ]]; then
-  redisfile=/usr/local/etc/php/conf.d/redissessions.ini
-  echo "session.save_handler = redis" > $redisfile
-  echo "session.save_path = ${WORDPRESS_DB_NAME}redis:6379" >> $redisfile
-fi
+# Note: Sep 2022: we no longer do anything with REDIS
+# if [[ $REDIS_SESSION == "1" ]]; then
+#   redisfile=/usr/local/etc/php/conf.d/redissessions.ini
+#   echo "session.save_handler = redis" > $redisfile
+#   echo "session.save_path = ${WORDPRESS_DB_NAME}redis:6379" >> $redisfile
+# fi
 
 # Ensure that we have the latest wp-rocket con
 wp rocket import --allow-root /app/bin/wp-rocket.json
