@@ -2,8 +2,8 @@
 name: QA release
 about: Quality assurance release checklist.
 title: 'QA: Release [NUMBER]'
-labels: ''
-assignees: curtismchale, lukefretwell, kevindherman
+labels: qa
+assignees: curtismchale, kevindherman, lukefretwell
 
 ---
 
