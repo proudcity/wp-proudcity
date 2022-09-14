@@ -327,11 +327,11 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "1.132.4",
+                "version": "1.131.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
-                    "reference": "c23e774a395404a1a12aa445412535989ce09fdf"
+                    "reference": "1.131.0"
                 }
             }
         }
@@ -410,7 +410,7 @@
         "proudcity/wp-proud-seeclickfix": "1.132.0",
         "proudcity/wp-proud-dashboard": "1.132.0",
         "proudcity/wp-proud-subsite": "1.132.0",
-        "proudcity/wp-proud-theme": "1.132.4"
+        "proudcity/wp-proud-theme": "1.131.0"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
