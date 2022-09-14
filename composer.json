@@ -410,7 +410,7 @@
         "proudcity/wp-proud-seeclickfix": "1.132.0",
         "proudcity/wp-proud-dashboard": "1.132.0",
         "proudcity/wp-proud-subsite": "1.132.0",
-        "proudcity/wp-proud-theme": "1.131.0"
+        "proudcity/wp-proud-theme": "1.132.3"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
