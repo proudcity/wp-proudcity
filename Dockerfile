@@ -3,7 +3,7 @@ FROM php:7.4-apache
 # Add Github private repo key
 ARG SSH_KEY
 RUN mkdir -p /root/.ssh \
-	&& echo "${SSH_KEY}aaa" >> /root/.ssh/id_rsa \
+	&& echo "${SSH_KEY}" >> /root/.ssh/id_rsa \
     && chmod 400 /root/.ssh/id_rsa
 COPY etc/known_hosts.github /root/.ssh/known_hosts
 RUN ls /root/.ssh && cat /root/.ssh/id_rsa
