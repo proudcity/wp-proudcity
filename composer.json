@@ -260,6 +260,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-proud-ip-block",
+                "type": "wordpress-plugin",
+                "version": "2022.11.08.1334",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-proud-ip-block.git",
+                    "reference": "2022.11.08.1334"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-subsite",
                 "type": "wordpress-plugin",
                 "version": "1.134.0",
@@ -411,7 +424,8 @@
         "proudcity/wp-proud-seeclickfix": "1.134.0",
         "proudcity/wp-proud-dashboard": "1.134.0",
         "proudcity/wp-proud-subsite": "1.134.0",
-        "proudcity/wp-proud-theme": "2022.10.26.1334"
+        "proudcity/wp-proud-theme": "2022.10.26.1334",
+        "proudcity/wp-proud-ip-block": "2022.11.08.1334"
     },
     "require-dev": {
         "wpackagist-plugin/debug-bar": "*",
