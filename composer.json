@@ -352,7 +352,7 @@
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "6.0.2",
+        "johnpbloch/wordpress": "6.1",
 
         "proudcity/auth0": "1.149.0",
         "proudcity/gravityforms": "1.149.0",
