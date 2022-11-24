@@ -15,11 +15,11 @@
             "package": {
                 "name": "proudcity/wp-media-folder",
                 "type": "wordpress-plugin",
-                "version": "5.4.8",
+                "version": "5.5.1",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/wp-media-folder.git",
-                    "reference": "5.4.8"
+                    "reference": "5.5.1"
                 }
             }
         },
@@ -356,7 +356,7 @@
 
         "proudcity/auth0": "1.149.0",
         "proudcity/gravityforms": "1.149.0",
-        "proudcity/wp-media-folder": "5.4.8",
+        "proudcity/wp-media-folder": "5.5.1",
         "proudcity/wp-rocket": "3.12.1.1",
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
 
@@ -384,7 +384,7 @@
 
         "wpackagist-plugin/classic-editor": "1.6.2",
         "wpackagist-plugin/classic-widgets": "0.3",
-        "wpackagist-plugin/siteorigin-panels": "2.18.4",
+        "wpackagist-plugin/siteorigin-panels": "2.19.0",
         "wpackagist-plugin/so-widgets-bundle": "1.44.0",
 
         "wpackagist-plugin/simple-staff-list": "2.2.2",
@@ -393,8 +393,8 @@
         "wpackagist-plugin/events-manager":  "6.1.4",
         "wpackagist-plugin/wp-fullcalendar": "1.4.1",
         "wpackagist-plugin/wp-job-manager": "1.38.1",
-        "wpackagist-plugin/broken-link-checker": "1.11.20",
-        "wpackagist-plugin/popup-maker": "1.16.14",
+        "wpackagist-plugin/broken-link-checker": "1.11.21",
+        "wpackagist-plugin/popup-maker": "1.17.0",
         "wpackagist-plugin/wp-sweep": "1.1.5",
         "wpackagist-plugin/duplicate-post": "4.5",
         "wpackagist-plugin/post-expirator": "2.8.0",
