@@ -44,7 +44,7 @@ COPY composer.json /app/
 WORKDIR /app
 
 # Install composer.json file
-RUN curl -k -o /tmp/composer.phar https://getcomposer.org/download/1.3.0/composer.phar \
+RUN curl -k -o /tmp/composer.phar https://getcomposer.org/download/2.4.4/composer.phar \
   && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 RUN php -dmemory_limit=128M /usr/local/bin/composer install
 
