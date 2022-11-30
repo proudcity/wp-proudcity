@@ -18,7 +18,7 @@
                 "version": "dev-master",
                 "source": {
                     "type": "git",
-                    "url": "git@github.com:/curtismchale/wordpress-faq-manager.git",
+                    "url": "https://github.com/curtismchale/wordpress-faq-manager",
                     "reference": "19d815737846426bbd664f610488133cdf933640"
                 }
             }
