@@ -415,7 +415,7 @@
 
         "wpackagist-plugin/simple-staff-list": "2.2.2",
 
-        "curtismchale/wordpress-faq-manager": "2.0.0",
+        "curtismchale/wordpress-faq-manager": "dev-master",
         "wpackagist-plugin/events-manager":  "6.1.4",
         "wpackagist-plugin/wp-fullcalendar": "1.4.1",
         "wpackagist-plugin/wp-job-manager": "1.38.1",
