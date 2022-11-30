@@ -325,6 +325,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-stateless",
+                "type": "wordpress-plugin",
+                "version": "2022.11.30.1040",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-stateless.git",
+                    "reference": "2022.11.30.1040"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/proudcity-quick-menu",
                 "type": "wordpress-plugin",
                 "version": "2022.11.30.0903",
@@ -416,7 +429,7 @@
 
         "wpackagist-plugin/elasticpress": "2.8.2",
 
-        "wpackagist-plugin/wp-stateless": "3.2.2",
+        "proudcity/wp-stateless": "2022.11.30.1040",
 
         "proudcity/proudcity-quick-menu": "2022.11.30.0903",
 
