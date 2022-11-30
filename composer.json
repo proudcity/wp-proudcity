@@ -15,7 +15,7 @@
             "package": {
                 "name": "curtismchale/wordpress-faq-manager",
                 "type": "wordpress-plugin",
-                "version": "19d815737846426bbd664f610488133cdf933640",
+                "version": "dev-master",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/curtismchale/wordpress-faq-manager.git",
