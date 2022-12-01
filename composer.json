@@ -13,12 +13,12 @@
         {
             "type": "package",
             "package": {
-                "name": "proudcity/wordpress-faq-manager",
+                "name": "curtismchale/wordpress-faq-manager",
                 "type": "wordpress-plugin",
                 "version": "dev-master",
                 "source": {
                     "type": "git",
-                    "url": "git@github.com:/proudcity/wordpress-faq-manager.git",
+                    "url": "https://github.com/curtismchale/wordpress-faq-manager.git",
                     "reference": "19d815737846426bbd664f610488133cdf933640"
                 }
             }
@@ -415,7 +415,7 @@
 
         "wpackagist-plugin/simple-staff-list": "2.2.2",
 
-        "proudcity/wordpress-faq-manager": "dev-master",
+        "curtismchale/wordpress-faq-manager": "dev-master",
         "wpackagist-plugin/events-manager":  "6.1.4",
         "wpackagist-plugin/wp-fullcalendar": "1.4.1",
         "wpackagist-plugin/wp-job-manager": "1.38.1",
