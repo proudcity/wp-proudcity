@@ -412,7 +412,7 @@
         "wpackagist-plugin/post-expirator": "2.8.0",
         "wpackagist-plugin/enable-jquery-migrate-helper": "1.3.0",
         "wpackagist-plugin/font-awesome": "4.3.1",
-        "wpackagist/wordpress-faq-manager": "2.0.0",
+        "wpackagist-plugin/wordpress-faq-manager": "2.0.0",
 
         "wpackagist-plugin/elasticpress": "2.8.2",
 
