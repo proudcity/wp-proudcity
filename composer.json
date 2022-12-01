@@ -13,19 +13,6 @@
         {
             "type": "package",
             "package": {
-                "name": "curtismchale/wordpress-faq-manager",
-                "type": "wordpress-plugin",
-                "version": "dev-master",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/curtismchale/wordpress-faq-manager",
-                    "reference": "19d815737846426bbd664f610488133cdf933640"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "proudcity/wp-media-folder",
                 "type": "wordpress-plugin",
                 "version": "5.5.1",
@@ -425,13 +412,13 @@
         "wpackagist-plugin/post-expirator": "2.8.0",
         "wpackagist-plugin/enable-jquery-migrate-helper": "1.3.0",
         "wpackagist-plugin/font-awesome": "4.3.1",
+        "wpackagist/wordpress-faq-manager": "2.0.0",
 
         "wpackagist-plugin/elasticpress": "2.8.2",
 
         "proudcity/wp-stateless": "2022.11.30.1040",
 
 
-        "curtismchale/wordpress-faq-manager": "dev-master",
         "proudcity/mce-table-buttons": "dev-master",
 
         "proudcity/proudcity-quick-menu": "2022.11.30.0903",
