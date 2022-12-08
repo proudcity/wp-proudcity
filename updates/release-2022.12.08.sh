@@ -17,7 +17,7 @@ wp transient delete fa_basic_icons_trans --allow-root
 
 # Setting Basic Icon Option
 wp option update fa_basic_icons '[
--solid fa-0",
+  "fa-solid fa-0",
   "fa-solid fa-1",
   "fa-solid fa-2",
   "fa-solid fa-3",
