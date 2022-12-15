@@ -49,7 +49,7 @@ RUN curl -k -o /tmp/composer.phar https://getcomposer.org/download/2.4.4/compose
 RUN php -dmemory_limit=128M /usr/local/bin/composer install
 
 # Explode out the gravityforms plugins in modules/*
-RUN   cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins && rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
+#RUN   cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins && rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
 
 #RUN curl -o /tmp/markdown.zip https://littoral.michelf.ca/code/php-markdown/php-markdown-extra-1.2.8.zip \
 #  	&& unzip /tmp/ markdown.zip -d  /app/wordpress/wp-content/plugins \
