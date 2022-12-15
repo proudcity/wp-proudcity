@@ -78,19 +78,6 @@
         {
             "type": "package",
             "package": {
-                "name": "proudcity/gravityformspaypalpaymentspro",
-                "type": "wordpress-plugin",
-                "version": "2.7",
-                "source": {
-                    "type": "git",
-                    "url": "git@github.com:/proudcity/gravityformspaypalpaymentspro.git",
-                    "reference": "2.7"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "proudcity/gravityformsmailchimp",
                 "type": "wordpress-plugin",
                 "version": "5.1",
@@ -453,7 +440,6 @@
 
         "proudcity/gravityforms": "2.6.8.1",
 		"proudcity/gravityformsmailchimp": "5.1",
-		"proudcity/gravityformspaypalpaymentspro": "2.7",
 		"proudcity/gravityformssignature": "4.3",
 		"proudcity/gravityformsstripe": "4.2.1",
 		"proudcity/gravityformssurvey": "3.7",
