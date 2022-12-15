@@ -26,13 +26,91 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/gravityformssignature",
+                "type": "wordpress-plugin",
+                "version": "4.3",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/gravityformssignature.git",
+                    "reference": "4.3"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "proudcity/gravityformssurvey",
+                "type": "wordpress-plugin",
+                "version": "3.7",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/gravityformssurvey.git",
+                    "reference": "3.7"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "proudcity/gravityformszapier",
+                "type": "wordpress-plugin",
+                "version": "4.2",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/gravityformszapier.git",
+                    "reference": "4.2"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "proudcity/gravityformsstripe",
+                "type": "wordpress-plugin",
+                "version": "4.2.1",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/gravityformsstripe.git",
+                    "reference": "4.2.1"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "proudcity/gravityformspaypalpaymentspro",
+                "type": "wordpress-plugin",
+                "version": "2.7",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/gravityformspaypalpaymentspro.git",
+                    "reference": "2.7"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "proudcity/gravityformsmailchimp",
+                "type": "wordpress-plugin",
+                "version": "5.1",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/gravityformsmailchimp.git",
+                    "reference": "5.1"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/gravityforms",
                 "type": "wordpress-plugin",
-                "version": "1.149.0",
+                "version": "2.6.8.1",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityforms.git",
-                    "reference": "1.149.0"
+                    "reference": "2.6.8.1"
                 }
             }
         },
@@ -368,10 +446,18 @@
         "johnpbloch/wordpress": "6.1.1",
 
         "proudcity/auth0": "1.149.0",
-        "proudcity/gravityforms": "1.149.0",
         "proudcity/wp-media-folder": "5.5.1",
         "proudcity/wp-rocket": "3.12.1.1",
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
+
+
+        "proudcity/gravityforms": "2.6.8.1",
+		"proudcity/gravityformsmailchimp": "5.1",
+		"proudcity/gravityformspaypalpaymentspro": "2.7",
+		"proudcity/gravityformssignature": "4.3",
+		"proudcity/gravityformsstripe": "4.2.1",
+		"proudcity/gravityformssurvey": "3.7",
+		"proudcity/gravityformssurvey": "4.2",
 
         "wp-api/rest-filter": "1.0",
 
