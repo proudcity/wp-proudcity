@@ -351,6 +351,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-fullcalendar",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-fullcalendar",
+                    "reference": "e1d098ece2f490a0dda0de58924d86a27e9e0239"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/mce-table-buttons",
                 "type": "wordpress-plugin",
                 "version": "dev-master",
@@ -474,7 +487,6 @@
         "wpackagist-plugin/simple-staff-list": "2.2.2",
 
         "wpackagist-plugin/events-manager":  "6.2.1",
-        "wpackagist-plugin/wp-fullcalendar": "1.4.1",
         "wpackagist-plugin/wp-job-manager": "1.39.0",
         "wpackagist-plugin/broken-link-checker": "1.11.21",
         "wpackagist-plugin/popup-maker": "1.17.1",
@@ -492,6 +504,8 @@
 
         "proudcity/mce-table-buttons": "dev-master",
 
+
+        "proudcity/wp-fullcalendar": "dev-master",
         "proudcity/proudcity-quick-menu": "2022.11.30.0903",
         "proudcity/wp-proud-core": "2023.01.04.1314",
         "proudcity/wp-proud-agency": "1.134.0",
