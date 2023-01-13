@@ -1,14 +1,15 @@
 ---
 name: Bug report (customer)
 about: Create a bug report to help us improve.
-title: "[BUG] - [TICKET NUMBER]"
+title: "[BUG]"
 labels: bug, customer
 assignees: ''
 
 ---
 
-**Ticket**
-[LINK TO TICKET]
+**Source**
+
+* [LINK TO TICKET]
 
 **Describe the bug**
 A clear and concise description of what the bug is.
