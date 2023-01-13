@@ -1,14 +1,14 @@
 ---
-name: Bug report
+name: Bug report (non-customer)
 about: Create a report to help us improve
-title: ''
+title: "[BUG]"
 labels: bug
 assignees: ''
 
 ---
 
 **Source**
-The source of the issue (ex: Customer: #CustomerName#).
+The source of the issue.
 
 **Describe the bug**
 A clear and concise description of what the bug is.
