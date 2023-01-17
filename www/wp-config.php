@@ -3,6 +3,9 @@
 define('WP_DEBUG', getenv("WP_DEBUG"));
 define('SAVEQUERIES', true);
 
+// limiting post revisions
+define( 'WP_POST_REVISIONS', 20 );
+
 /**
  * The base configurations of the WordPress.
  *
