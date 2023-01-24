@@ -15,11 +15,11 @@
             "package": {
                 "name": "proudcity/wp-media-folder",
                 "type": "wordpress-plugin",
-                "version": "5.5.1",
+                "version": "5.5.2",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/wp-media-folder.git",
-                    "reference": "5.5.1"
+                    "reference": "5.5.2"
                 }
             }
         },
@@ -433,7 +433,7 @@
         "johnpbloch/wordpress": "6.1.1",
 
         "proudcity/auth0": "1.149.0",
-        "proudcity/wp-media-folder": "5.5.1",
+        "proudcity/wp-media-folder": "5.5.2",
         "proudcity/wp-rocket": "3.12.4",
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
 
