@@ -351,6 +351,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/intuitive-custom-post-order",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/intuitive-custom-post-order",
+                    "reference": "6ce8730751765e5e63ea9678680def0896028623"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/mce-table-buttons",
                 "type": "wordpress-plugin",
                 "version": "dev-master",
@@ -444,6 +457,7 @@
 		"proudcity/gravityformsstripe": "4.3",
 		"proudcity/gravityformssurvey": "3.8",
 		"proudcity/gravityformszapier": "4.2",
+		"proudcity/intuitive-custom-post-order": "dev-master",
 
         "wp-api/rest-filter": "1.0",
 
@@ -451,7 +465,6 @@
 
         "wpackagist-plugin/user-switching": "1.7.0",
 
-        "wpackagist-plugin/post-types-order": "1.9.9.2",
         "wpackagist-plugin/disable-comments": "2.4.3",
         "wpackagist-plugin/wordpress-seo": "20.0",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
