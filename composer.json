@@ -106,11 +106,11 @@
             "package": {
                 "name": "proudcity/wp-rocket",
                 "type": "wordpress-plugin",
-                "version": "3.12.4",
+                "version": "3.12.5.3",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/wp-rocket.git",
-                    "reference": "3.12.4"
+                    "reference": "3.12.5.3"
                 }
             }
         },
@@ -434,7 +434,7 @@
 
         "proudcity/auth0": "1.149.0",
         "proudcity/wp-media-folder": "5.5.2",
-        "proudcity/wp-rocket": "3.12.4",
+        "proudcity/wp-rocket": "3.12.5.3",
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
 
 
@@ -452,7 +452,7 @@
         "wpackagist-plugin/user-switching": "1.7.0",
 
         "wpackagist-plugin/disable-comments": "2.4.3",
-        "wpackagist-plugin/wordpress-seo": "20.0",
+        "wpackagist-plugin/wordpress-seo": "20.1",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
@@ -468,7 +468,7 @@
         "wpackagist-plugin/classic-editor": "1.6.2",
         "wpackagist-plugin/classic-widgets": "0.3",
         "wpackagist-plugin/siteorigin-panels": "2.20.4",
-        "wpackagist-plugin/so-widgets-bundle": "1.46.2",
+        "wpackagist-plugin/so-widgets-bundle": "1.46.5",
 
         "wpackagist-plugin/simple-staff-list": "2.2.3",
 
