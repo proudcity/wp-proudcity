@@ -15,11 +15,11 @@
             "package": {
                 "name": "proudcity/wp-media-folder",
                 "type": "wordpress-plugin",
-                "version": "5.5.3",
+                "version": "5.5.4",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/wp-media-folder.git",
-                    "reference": "5.5.3"
+                    "reference": "5.5.4"
                 }
             }
         },
@@ -80,11 +80,11 @@
             "package": {
                 "name": "proudcity/gravityformsmailchimp",
                 "type": "wordpress-plugin",
-                "version": "5.1",
+                "version": "5.2",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityformsmailchimp.git",
-                    "reference": "5.1"
+                    "reference": "5.2"
                 }
             }
         },
@@ -446,13 +446,13 @@
         "johnpbloch/wordpress": "6.1.1",
 
         "proudcity/auth0": "1.149.0",
-        "proudcity/wp-media-folder": "5.5.3",
+        "proudcity/wp-media-folder": "5.5.4",
         "proudcity/wp-rocket": "3.12.5.3",
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
 
 
-        "proudcity/gravityforms": "2.6.9",
-		"proudcity/gravityformsmailchimp": "5.1",
+		"proudcity/gravityforms": "2.7.1",
+		"proudcity/gravityformsmailchimp": "5.2",
 		"proudcity/gravityformssignature": "4.3",
 		"proudcity/gravityformsstripe": "4.3",
 		"proudcity/gravityformssurvey": "3.8",
@@ -488,7 +488,7 @@
         "wpackagist-plugin/events-manager":  "6.3",
         "wpackagist-plugin/wp-job-manager": "1.39.0",
         "wpackagist-plugin/broken-link-checker": "1.11.21",
-        "wpackagist-plugin/popup-maker": "1.17.1",
+        "wpackagist-plugin/popup-maker": "1.18.0",
         "wpackagist-plugin/wp-sweep": "1.1.5",
         "wpackagist-plugin/duplicate-post": "4.5",
         "wpackagist-plugin/post-expirator": "2.8.3",
