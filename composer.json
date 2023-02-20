@@ -93,11 +93,11 @@
             "package": {
                 "name": "proudcity/gravityforms",
                 "type": "wordpress-plugin",
-                "version": "2.6.9",
+                "version": "2.7.1.1",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityforms.git",
-                    "reference": "2.6.9"
+                    "reference": "2.7.1.1"
                 }
             }
         },
@@ -451,7 +451,7 @@
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
 
 
-		"proudcity/gravityforms": "2.7.1",
+		"proudcity/gravityforms": "2.7.1.1",
 		"proudcity/gravityformsmailchimp": "5.2",
 		"proudcity/gravityformssignature": "4.3",
 		"proudcity/gravityformsstripe": "4.3",
