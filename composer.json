@@ -474,7 +474,7 @@
 
         "wpackagist-plugin/events-manager":  "6.3",
         "wpackagist-plugin/wp-job-manager": "1.39.0",
-        "wpackagist-plugin/broken-link-checker": "2.0.0",
+        "wpackagist-plugin/broken-link-checker": "1.11.21",
         "wpackagist-plugin/popup-maker": "1.18.0",
         "wpackagist-plugin/wp-sweep": "1.1.5",
         "wpackagist-plugin/duplicate-post": "4.5",
