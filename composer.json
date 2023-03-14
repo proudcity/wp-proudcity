@@ -97,7 +97,7 @@
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityforms.git",
-                    "reference": "2.7.1.1"
+                    "reference": "2.7.2"
                 }
             }
         },
@@ -438,7 +438,7 @@
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
 
 
-		"proudcity/gravityforms": "2.7.1.1",
+		"proudcity/gravityforms": "2.7.2",
 		"proudcity/gravityformsmailchimp": "5.2.0",
 		"proudcity/gravityformssignature": "4.3",
 		"proudcity/gravityformsstripe": "4.3",
