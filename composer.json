@@ -477,6 +477,7 @@
         "wpackagist-plugin/edit-flow": "0.9.7",
         "wpackagist-plugin/wp-sitemap-page": "1.9.2",
         "wpackagist-plugin/default-featured-image": "1.7.2.1",
+        "wpackagist-plugin/google-site-kit": "1.96.0",
 
         "wpackagist-plugin/classic-editor": "1.6.2",
         "wpackagist-plugin/classic-widgets": "0.3",
