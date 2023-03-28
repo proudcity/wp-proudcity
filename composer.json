@@ -383,7 +383,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-analytics.git",
-                    "reference": "dev-master"
+                    "reference": "1239988752b92c0e34ced94089ac1e91e05d679f"
                 }
             }
         },
