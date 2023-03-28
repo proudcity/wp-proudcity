@@ -382,7 +382,8 @@
                 "version": "dev-master",
                 "source": {
                     "type": "git",
-                    "url": "https://github.com/proudcity/wp-proud-analytics.git"
+                    "url": "https://github.com/proudcity/wp-proud-analytics.git",
+                    "reference": "dev-master"
                 }
             }
         },
