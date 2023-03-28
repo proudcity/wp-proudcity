@@ -266,7 +266,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-admin.git",
-                        "reference": "2005.2023.03.22.1252"
+                        "reference": "2005.2023.03.22.1242"
                 }
             }
         },
@@ -371,6 +371,19 @@
                     "type": "git",
                     "url": "https://github.com/proudcity/mce-table-buttons",
                     "reference": "5230027cd5417d8372594f7d150d63195e39325e"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "proudcity/wp-proud-analytics",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-proud-analytics.git",
+                    "reference": "dev-master"
                 }
             }
         },
@@ -504,6 +517,7 @@
 
         "proudcity/mce-table-buttons": "dev-master",
 
+        "proudcity/wp-proud-analytics": "dev-master",
 
         "wpackagist-plugin/wp-fullcalendar": "1.5",
         "proudcity/intuitive-custom-post-order": "dev-master",
