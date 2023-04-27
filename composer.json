@@ -366,11 +366,11 @@
             "package": {
                 "name": "proudcity/wp-proud-analytics",
                 "type": "wordpress-plugin",
-                "version": "2005.2023.04.27.0617",
+                "version": "2005.2023.04.27.1013",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-analytics.git",
-                    "reference": "2005.2023.04.27.0617"
+                    "reference": "2005.2023.04.27.1013"
                 }
             }
         },
@@ -504,7 +504,7 @@
 
         "proudcity/mce-table-buttons": "dev-master",
 
-        "proudcity/wp-proud-analytics": "2005.2023.04.27.0617",
+        "proudcity/wp-proud-analytics": "2005.2023.04.27.1013",
 
         "wpackagist-plugin/wp-fullcalendar": "1.5",
         "wpackagist-plugin/intuitive-custom-post-order": "3.1.4.1",
