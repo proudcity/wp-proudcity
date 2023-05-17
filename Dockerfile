@@ -14,7 +14,7 @@ RUN apt-get update \
 	&& apt-get install -y --no-install-recommends vim libpng-dev libjpeg-dev mariadb-client unzip openssh-client git libcurl4-openssl-dev libmcrypt-dev \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-jpeg \
-	&& docker-php-ext-install gd mysqli opcache \
+	&& docker-php-ext-install gd mysqli opcache bcmath \
 	&& a2enmod rewrite expires
 
 RUN pecl install mcrypt-1.0.4
