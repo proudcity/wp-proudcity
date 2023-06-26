@@ -1,7 +1,8 @@
 <?php
 
-define('WP_DEBUG', getenv("WP_DEBUG"));
-define('SAVEQUERIES', false);
+define('WP_DEBUG', 		getenv( "WP_DEBUG") );
+define( 'WP_DEBUG_LOG', getenv( "WP_DEBUG" ) );
+define('SAVEQUERIES', 	getenv( "WP_DEBUG" ) );
 
 /**
  * The base configurations of the WordPress.
