@@ -26,6 +26,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/broken-link-checker",
+                "type": "wordpress-plugin",
+                "version": "1.11.21",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/broken-link-checker.git",
+                    "reference": "1.11.21"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/gravityformssignature",
                 "type": "wordpress-plugin",
                 "version": "4.3",
@@ -262,11 +275,11 @@
             "package": {
                 "name": "proudcity/wp-proud-admin",
                 "type": "wordpress-plugin",
-               "version": "2023.06.22.1329",
+                "version": "2023.07.07.1147",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-admin.git",
-                        "reference": "2023.06.22.1329"
+                        "reference": "2023.07.07.1147"
                 }
             }
         },
@@ -434,6 +447,7 @@
 
         "proudcity/auth0": "1.149.0",
         "proudcity/wp-media-folder": "5.5.11",
+        "proudcity/broken-link-checker": "1.11.21",
         "proudcity/wp-rocket": "3.13.2",
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
 
@@ -475,7 +489,6 @@
 
         "wpackagist-plugin/events-manager":  "6.4.2",
         "wpackagist-plugin/wp-job-manager": "1.40.2",
-        "wpackagist-plugin/broken-link-checker": "1.11.21",
         "wpackagist-plugin/popup-maker": "1.18.2",
         "wpackagist-plugin/wp-sweep": "1.1.8",
         "wpackagist-plugin/duplicate-post": "4.5",
@@ -508,7 +521,7 @@
         "proudcity/wp-proud-map-app": "1.134.0",
         "proudcity/wp-proud-social-app": "1.134.0",
         "proudcity/wp-proud-actions-app": "2023.05.09.1307",
-        "proudcity/wp-proud-admin": "2023.06.22.1329",
+        "proudcity/wp-proud-admin": "2023.07.07.1147",
         "proudcity/wp-proud-seeclickfix": "1.134.0",
         "proudcity/wp-proud-dashboard": "1.134.0",
         "proudcity/wp-proud-subsite": "1.134.0",
