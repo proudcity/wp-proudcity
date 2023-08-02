@@ -91,7 +91,7 @@ function proud_plugins_not_active(){
 		// need to
 		$emailed = get_transient( 'proud_admin_notified' );
 
-		$slack_key = get_option( 'proud_slack_key' );
+		$slack_key = getenv( 'PROUD_SLACK_KEY' );
 
 		if ( false == $emailed ){
 
