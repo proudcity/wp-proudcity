@@ -91,9 +91,11 @@ function proud_plugins_not_active(){
 		// need to
 		$emailed = get_transient( 'proud_admin_notified' );
 
+		$slack_key = get_option( 'proud_slack_key' );
+
 		if ( false == $emailed ){
 
-            $curl = curl_init( 'https://hooks.slack.com/services/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' );
+            $curl = curl_init( $slack_key );
 
             $m = 'Gravity Forms or WP Media Folder is not active on ' . get_bloginfo( 'name' ) .'! Link: ' . site_url();
 
