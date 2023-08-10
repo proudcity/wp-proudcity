@@ -110,6 +110,7 @@ export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 # fi
 
 # Ensure that we have the latest wp-rocket con
+echo "Importing WP Rocket configuration"
 wp rocket import --allow-root /app/bin/wp-rocket.json
 
 exec "$@"
