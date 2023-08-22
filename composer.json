@@ -169,6 +169,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/simple-staff-list",
+                "type": "wordpress-plugin",
+                "version": "2.2.4",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/simple-staff-list.git",
+                    "reference": "2.2.4"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-agency",
                 "type": "wordpress-plugin",
                 "version": "1.134.0",
@@ -485,7 +498,7 @@
         "wpackagist-plugin/siteorigin-panels": "2.25.2",
         "wpackagist-plugin/so-widgets-bundle": "1.54.0",
 
-        "wpackagist-plugin/simple-staff-list": "2.2.3",
+        "proudcity/simple-staff-list": "2.2.4",
 
         "wpackagist-plugin/events-manager":  "6.4.5.1",
         "wpackagist-plugin/wp-job-manager": "1.41.0",
