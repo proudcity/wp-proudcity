@@ -52,6 +52,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-proud-admin-menu",
+                "type": "wordpress-plugin",
+                "version": "2023.09.07.0718",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/wp-proud-admin-menu.git",
+                    "reference": "2023.09.07.0718"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/gravityformssurvey",
                 "type": "wordpress-plugin",
                 "version": "3.8",
@@ -534,6 +547,7 @@
         "proudcity/wp-proud-social-app": "1.134.0",
         "proudcity/wp-proud-actions-app": "2023.08.30.0940",
         "proudcity/wp-proud-admin": "2023.09.06.1040",
+        "proudcity/wp-proud-admin-menu": "2023.09.07.0718",
         "proudcity/wp-proud-seeclickfix": "1.134.0",
         "proudcity/wp-proud-dashboard": "1.134.0",
         "proudcity/wp-proud-subsite": "1.134.0",
