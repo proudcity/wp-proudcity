@@ -86,6 +86,15 @@ define('WP_CACHE_KEY_SALT', getenv("HOST"));
 //WP_REDIS_BACKEND_D
 //WP_REDIS_SERIALIZER
 
+// Sets up our Redis configuration
+// The WP plugin is required: https://en-ca.wordpress.org/plugins/redis-cache/
+if ( getenv( 'WP_REDIS_HOST' ) ){
+	define( 'WP_REDIS_PREFIX', getenv('HOST') );
+	define( 'WP_REDIS_HOST', getenv('WP_REDIS_HOST') );
+	define( 'WP_REDIS_TIMEOUT', 1 );
+	define( 'WP_REDIS_READ_TIMEOUT', 1 );
+}
+
 // Elasticpress / search settings
 if ( getenv( 'ELASTICSEARCH_HOST' ) ) {
   define( 'EP_HOST', 'http://' . getenv('ELASTICSEARCH_HOST'). ':9200' );
