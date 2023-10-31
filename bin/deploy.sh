@@ -12,3 +12,7 @@ wp core update-db --allow-root
 wp rocket clean --confirm --allow-root
 wp rewrite flush --allow-root
 wp cache flush --allow-root
+
+# enable redis requires the Redis Cache plugin to be active
+echo "Enabling Redis"
+wp redis enable --allow-root
