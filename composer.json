@@ -521,6 +521,7 @@
         "wpackagist-plugin/post-expirator": "3.1.1",
         "wpackagist-plugin/font-awesome": "4.4.0",
         "wpackagist-plugin/wordpress-faq-manager": "2.0.2",
+        "wpackagist-plugin/redis-cache": "2.4.4",
 
         "wpackagist-plugin/elasticpress": "2.8.2",
 
