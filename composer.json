@@ -498,7 +498,7 @@
         "wpackagist-plugin/so-widgets-bundle": "1.56.0",
         "wpackagist-plugin/gtranslate": "3.0.4",
 
-        "wpackagist/simple-staff-list": "2.2.5",
+        "wpackagist-plugin/simple-staff-list": "2.2.5",
 
         "wpackagist-plugin/events-manager":  "6.4.6.1",
         "wpackagist-plugin/wp-job-manager": "1.42.0",
