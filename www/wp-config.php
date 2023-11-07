@@ -93,6 +93,7 @@ if ( getenv( 'WP_REDIS_HOST' ) ){
 	define( 'WP_REDIS_HOST', getenv('WP_REDIS_HOST') );
 	define( 'WP_REDIS_TIMEOUT', 1 );
 	define( 'WP_REDIS_READ_TIMEOUT', 1 );
+	define( 'WP_REDIS_DATABASE', getenv( 'WP_REDIS_DATABASE' ) ); // two sites shouldn't share the same value here
 }
 
 // Elasticpress / search settings

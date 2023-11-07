@@ -15,11 +15,11 @@
             "package": {
                 "name": "proudcity/wp-media-folder",
                 "type": "wordpress-plugin",
-                "version": "5.6.4",
+                "version": "5.7.1",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/wp-media-folder.git",
-                    "reference": "5.6.4"
+                    "reference": "5.7.1"
                 }
             }
         },
@@ -119,11 +119,11 @@
             "package": {
                 "name": "proudcity/gravityforms",
                 "type": "wordpress-plugin",
-                "version": "2.7.15",
+                "version": "2.7.16",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityforms.git",
-                    "reference": "2.7.15"
+                    "reference": "2.7.16"
                 }
             }
         },
@@ -176,19 +176,6 @@
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
                     "reference": "2023.10.24.1222"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "proudcity/simple-staff-list",
-                "type": "wordpress-plugin",
-                "version": "2.2.4",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/proudcity/simple-staff-list.git",
-                    "reference": "2.2.4"
                 }
             }
         },
@@ -469,16 +456,16 @@
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "6.3.1",
+        "johnpbloch/wordpress": "6.3.2",
 
         "proudcity/auth0": "1.149.0",
-        "proudcity/wp-media-folder": "5.6.4",
+        "proudcity/wp-media-folder": "5.7.1",
         "proudcity/broken-link-checker": "1.11.21",
         "proudcity/wp-rocket": "3.13.2",
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
 
 
-		"proudcity/gravityforms": "2.7.15",
+		"proudcity/gravityforms": "2.7.16",
 		"proudcity/gravityformsmailchimp": "5.2.0",
 		"proudcity/gravityformssignature": "4.3",
 		"proudcity/gravityformsstripe": "5.2.0",
@@ -492,12 +479,12 @@
         "wpackagist-plugin/user-switching": "1.7.0",
 
         "wpackagist-plugin/disable-comments": "2.4.5",
-        "wpackagist-plugin/wordpress-seo": "21.4",
+        "wpackagist-plugin/wordpress-seo": "21.5",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
         "wpackagist-plugin/safe-redirect-manager": "2.1.0",
-        "wpackagist-plugin/iframe": "4.7",
+        "wpackagist-plugin/iframe": "4.8",
         "wpackagist-plugin/say-what": "2.1.5",
         "wpackagist-plugin/wp-mail-smtp": "3.9.0",
         "wpackagist-plugin/edit-flow": "0.9.7",
@@ -508,12 +495,12 @@
         "wpackagist-plugin/classic-editor": "1.6.3",
         "wpackagist-plugin/classic-widgets": "0.3",
         "wpackagist-plugin/siteorigin-panels": "2.26.1",
-        "wpackagist-plugin/so-widgets-bundle": "1.55.1",
+        "wpackagist-plugin/so-widgets-bundle": "1.56.0",
         "wpackagist-plugin/gtranslate": "3.0.4",
 
-        "proudcity/simple-staff-list": "2.2.4",
+        "wpackagist/simple-staff-list": "2.2.5",
 
-        "wpackagist-plugin/events-manager":  "6.4.5.1",
+        "wpackagist-plugin/events-manager":  "6.4.6.1",
         "wpackagist-plugin/wp-job-manager": "1.42.0",
         "wpackagist-plugin/popup-maker": "1.18.2",
         "wpackagist-plugin/wp-sweep": "1.1.8",
@@ -521,6 +508,7 @@
         "wpackagist-plugin/post-expirator": "3.1.1",
         "wpackagist-plugin/font-awesome": "4.4.0",
         "wpackagist-plugin/wordpress-faq-manager": "2.0.2",
+        "wpackagist-plugin/redis-cache": "2.4.4",
 
         "wpackagist-plugin/elasticpress": "2.8.2",
 
