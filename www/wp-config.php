@@ -91,8 +91,8 @@ define('WP_CACHE_KEY_SALT', getenv("HOST"));
 if ( getenv( 'WP_REDIS_HOST' ) ){
 	define( 'WP_REDIS_PREFIX', getenv('HOST') );
 	define( 'WP_REDIS_HOST', getenv('WP_REDIS_HOST') );
-	define( 'WP_REDIS_TIMEOUT', 1 );
-	define( 'WP_REDIS_READ_TIMEOUT', 1 );
+	define( 'WP_REDIS_TIMEOUT', 2 );
+	define( 'WP_REDIS_READ_TIMEOUT', 2 );
 	define( 'WP_REDIS_DATABASE', getenv( 'WP_REDIS_DATABASE' ) ); // two sites shouldn't share the same value here
 }
 
