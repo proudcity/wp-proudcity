@@ -171,11 +171,11 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "2023.10.24.1222",
+                "version": "2023.11.29.1325",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
-                    "reference": "2023.10.24.1222"
+                    "reference": "2023.11.29.1325"
                 }
             }
         },
@@ -249,11 +249,11 @@
             "package": {
                 "name": "proudcity/wp-proud-location",
                 "type": "wordpress-plugin",
-                "version": "2023.08.30.0723",
+                "version": "2023.11.28.1151",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-location.git",
-                    "reference": "2023.08.30.0723"
+                    "reference": "2023.11.28.1151"
                 }
             }
         },
@@ -275,11 +275,11 @@
             "package": {
                 "name": "proudcity/wp-proud-meeting",
                 "type": "wordpress-plugin",
-                "version": "2023.08.30.0732",
+                "version": "2023.11.28.1036",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-meeting.git",
-                    "reference": "2023.08.30.0732"
+                    "reference": "2023.11.28.1036"
                 }
             }
         },
@@ -288,11 +288,11 @@
             "package": {
                 "name": "proudcity/wp-proud-admin",
                 "type": "wordpress-plugin",
-                "version": "2023.11.23.0930",
+                "version": "2023.11.29.1333",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-admin.git",
-					"reference": "2023.11.23.0930"
+					"reference": "2023.11.29.1333"
                 }
             }
         },
@@ -405,11 +405,11 @@
             "package": {
                 "name": "proudcity/wp-proud-dashboard",
                 "type": "wordpress-plugin",
-                "version": "1.134.0",
+                "version": "2023.11.28.1147",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-dashboard.git",
-                    "reference": "1.134.0"
+                    "reference": "2023.11.28.1147"
                 }
             }
         },
@@ -522,22 +522,22 @@
         "wpackagist-plugin/wp-fullcalendar": "1.5",
         "wpackagist-plugin/intuitive-custom-post-order": "3.1.4.1",
         "proudcity/proudcity-quick-menu": "2023.09.26.1052",
-        "proudcity/wp-proud-core": "2023.10.24.1222",
+        "proudcity/wp-proud-core": "2023.11.29.1325",
         "proudcity/wp-proud-agency": "1.134.0",
         "proudcity/wp-proud-search": "2023.11.15.1138",
         "proudcity/wp-proud-search-elastic": "1.134.0",
         "proudcity/wp-proud-payment": "1.134.0",
         "proudcity/wp-proud-document": "2023.08.30.0725",
-        "proudcity/wp-proud-location": "2023.08.30.0723",
+        "proudcity/wp-proud-location": "2023.11.28.1151",
         "proudcity/wp-proud-issue": "2023.08.30.0736",
-        "proudcity/wp-proud-meeting": "2023.08.30.0732",
+        "proudcity/wp-proud-meeting": "2023.11.28.1036",
         "proudcity/wp-proud-map-app": "1.134.0",
         "proudcity/wp-proud-social-app": "1.134.0",
         "proudcity/wp-proud-actions-app": "2023.08.30.0940",
-        "proudcity/wp-proud-admin": "2023.11.23.0930",
+        "proudcity/wp-proud-admin": "2023.11.29.1333",
         "proudcity/wp-proud-admin-menu": "2023.09.19.0715",
         "proudcity/wp-proud-seeclickfix": "1.134.0",
-        "proudcity/wp-proud-dashboard": "1.134.0",
+        "proudcity/wp-proud-dashboard": "2023.11.28.1147",
         "proudcity/wp-proud-subsite": "1.134.0",
         "proudcity/wp-proud-theme": "2023.10.03.1210",
         "proudcity/wp-proud-ip-block": "2022.11.08.1334"
