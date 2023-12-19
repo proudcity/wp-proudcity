@@ -39,6 +39,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/events-manager",
+                "type": "wordpress-plugin",
+                "version": "2023.12.19.1124",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/events-manager.git",
+                    "reference": "2023.12.19.1124"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/intuitive-custom-post-order",
                 "type": "wordpress-plugin",
                 "version": "2023.12.15.0923",
@@ -513,7 +526,7 @@
 
         "wpackagist-plugin/simple-staff-list": "2.2.5",
 
-        "wpackagist-plugin/events-manager":  "6.4.6.4",
+        "proudcity/events-manager":  "2023.12.19.1124",
         "wpackagist-plugin/wp-job-manager": "2.1.1",
         "wpackagist-plugin/popup-maker": "1.18.2",
         "wpackagist-plugin/wp-sweep": "1.1.8",
