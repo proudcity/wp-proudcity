@@ -5,9 +5,22 @@ services:
     container_name: wpproudcity_wordpress_1
     depends_on:
       - db
-    image: gcr.io/proudcity-1184/wp-proudcity:master-73e8c4ea20c9c7e52325d8ad659f209932fc155e
+      # Uncomment for elasticsearch
+      - elasticsearch
+      # - elasticdocapi
+    # Uncomment for elasticsearch
+    links:
+      - 'elasticsearch:elasticsearchdocs.elasticsearch'
+    #   - 'elasticdocapi:docsapi.elasticsearch'
+    command: ['apache2-foreground']
+    entrypoint: /app/bin/entrypoint.sh
+    image: gcr.io/proudcity-1184/wp-proudcity:staging-4d359a863c029f44f59649b0b28846747f081441
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     volumes:
       #- wp-proudcity-sync:/app/wordpress:nocopy # nocopy is important
+      - ./bin:/app/bin
       - ./wordpress:/app/wordpress
       # Exclude node_modules dirs for better performance
       - ./node_modules:/app/wordpress/wp-content/plugins/wp-proud-admin/node_modules
@@ -15,7 +28,11 @@ services:
       - ./node_modules:/app/wordpress/wp-content/themes/wp-proud-theme-intranet/node_modules
     tty: true
     ports:
-      - "8000:80"
+      - '8000:80'
+    # Uncomment for elasticsearch
+    networks:
+      - default
+      - es-net
     environment:
       AUTH_REQUIRED:
       AUTH_USERNAME:
@@ -38,29 +55,37 @@ services:
       STATELESS_MEDIA_KEY_FILE_PATH:
       STATELESS_MEDIA_BUCKET:
       STATELESS_MEDIA_DIRECTORY:
-      STATELESS_MEDIA_CACHE_BUSTING: "1" # defaults to false
-      REDIS_SESSION: "false" # no longer supported
-      PHP_MEMORY_LIMIT: 256M
+      STATELESS_MEDIA_CACHE_BUSTING: '1' # defaults to false
+      REDIS_SESSION: 'false' # no longer supported
+      # @TODO set back to 256
+      PHP_MEMORY_LIMIT: 2048M
       SMTP_HOST:
       SMTP_PASS:
       SMTP_USER:
       BLOCK_LOGIN:
       WP_REDIS_BACKEND_HOST:
       WP_REDIS_BACKEND_AUTH:
+      # Uncomment for elasticsearch
+      # ELASTICSEARCH_HOST:
+      ELASTICSEARCH_HOST: 'elasticsearchdocs.elasticsearch'
+      # Uncomment for elasticsearch
       ELASTICSEARCH_DOCS_HOST:
-      ELASTICSEARCH_HOST:
+      # ELASTICSEARCH_DOCS_HOST: 'docsapi.elasticsearch'
       UPLOAD_MAX_FILESIZE: 25M
       # GOOGLE_GIT_TOKEN: # set this to download private repos and $WORDPRESS_PLUGINS in entrypoint.sh
       # WORDPRESSORG_PLUGINS:  # These plugins (csv of slugs) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
       # WORDPRESS_PLUGINS:  # These plugins (git repo) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
       # WORDPRESS_THEMES:  # These themes (git repo) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
-            #WORDPRESS_PLUGINS: "https://source.developers.google.com/p/proudcity-1184/r/wp-proud-sr-ca-widgets,https://github.com/SenecaSystems/romulus-wordpress-form.git,https://github.com/proudcity/wp-proud-directory.git"
-            #WORDPRESSORG_PLUGINS: "buddypress,bp-default-data,buddypress-edit-activity,bbpress,buddydrive"
-            #WORDPRESS_THEMES: "https://source.developers.google.com/p/proudcity-1184/r/wp-proud-sr-ca-theme"
+      # WORDPRESS_PLUGINS: "https://source.developers.google.com/p/proudcity-1184/r/wp-proud-sr-ca-widgets,https://github.com/SenecaSystems/romulus-wordpress-form.git,https://github.com/proudcity/wp-proud-directory.git"
+      # WORDPRESSORG_PLUGINS: "buddypress,bp-default-data,buddypress-edit-activity,bbpress,buddydrive"
+      # WORDPRESS_THEMES: "https://source.developers.google.com/p/proudcity-1184/r/wp-proud-sr-ca-theme"
       WP_CACHE: 0
-      WP_DEBUG: 0
+      # @TODO set back to 0
+      WP_DEBUG: 1
   db:
     image: mariadb
+    networks:
+      - default
     environment:
       MYSQL_ROOT_PASSWORD: wordpress
       MYSQL_DATABASE: wordpress
@@ -68,6 +93,65 @@ services:
       MYSQL_PASSWORD: wordpress
     ports:
       - 3306:3306
+  # # Uncomment for elasticsearch
+  # redis:
+  #   image: redis
+  #   restart: always
+  #   networks:
+  #     - es-net
+  #   ports:
+  #     - 6379:6379
+  # # Uncomment for elasticsearch
+  # elasticdocapi:
+  #   build: ./proud-elastic-doc-api
+  #   restart: always
+  #   ports:
+  #     - 8085:80
+  #   depends_on:
+  #     - redis
+  #   links:
+  #     - 'redis:elasticdocsapiredis.elasticsearch'
+  #     - 'elasticsearch:elasticsearchdocs.elasticsearch'
+  #   networks:
+  #     - es-net
+  #   environment:
+  #     PORT: 80
+  #     ELASTIC: 'elasticsearchdocs.elasticsearch'
+  #     REDIS: 'elasticdocsapiredis.elasticsearch'
+  #     REDISPORT: 6379
+  # # Uncomment for elasticsearch
+  elasticsearch:
+    container_name: elasticsearch
+    build: ./services/docker-elasticsearch-new
+    # image: gcr.io/proudcity-1184/docker-elasticsearch-kubernetes:5.3.2
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=es-docker-cluster
+      # - discovery.seed_hosts=es02,es03
+      - cluster.initial_master_nodes=elasticsearch
+      - bootstrap.memory_lock=true
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - es-net
+
+# Uncomment for elasticsearch
+networks:
+  default:
+    driver: bridge
+  es-net:
+    driver: bridge
+
+volumes:
+  data01:
+    driver: local
 #volumes:
 #  wp-proudcity-sync:
 #    external: true
