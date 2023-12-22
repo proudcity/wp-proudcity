@@ -536,7 +536,7 @@
     "wpackagist-plugin/font-awesome": "4.5.0",
     "wpackagist-plugin/wordpress-faq-manager": "2.0.2",
     "wpackagist-plugin/redis-cache": "2.5.3",
-    "wpackagist-plugin/elasticpress": "2.8.2",
+    "wpackagist-plugin/elasticpress": "^5.0.1",
     "wpackagist-plugin/wp-stateless": "4.0.4",
     "wpackagist-plugin/fix-alt-text": "1.9.0",
     "proudcity/mce-table-buttons": "dev-master",
