@@ -15,11 +15,11 @@
             "package": {
                 "name": "proudcity/wp-media-folder",
                 "type": "wordpress-plugin",
-                "version": "5.7.4",
+                "version": "5.8.0",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/wp-media-folder.git",
-                    "reference": "5.7.4"
+                    "reference": "5.8.0"
                 }
             }
         },
@@ -145,11 +145,11 @@
             "package": {
                 "name": "proudcity/gravityforms",
                 "type": "wordpress-plugin",
-                "version": "2.8.0",
+                "version": "2.8.1",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityforms.git",
-                    "reference": "2.8.0"
+                    "reference": "2.8.1"
                 }
             }
         },
@@ -485,13 +485,13 @@
         "johnpbloch/wordpress": "6.4.2",
 
         "proudcity/auth0": "1.149.0",
-        "proudcity/wp-media-folder": "5.7.4",
+        "proudcity/wp-media-folder": "5.8.0",
         "proudcity/broken-link-checker": "1.11.21",
         "proudcity/wp-rocket": "3.13.2",
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
 
 
-		"proudcity/gravityforms": "2.8.0",
+		"proudcity/gravityforms": "2.8.1",
 		"proudcity/gravityformsmailchimp": "5.2.0",
 		"proudcity/gravityformssignature": "4.3",
 		"proudcity/gravityformsstripe": "5.4.0",
@@ -505,22 +505,22 @@
         "wpackagist-plugin/user-switching": "1.7.2",
 
         "wpackagist-plugin/disable-comments": "2.4.5",
-        "wpackagist-plugin/wordpress-seo": "21.7",
+        "wpackagist-plugin/wordpress-seo": "21.8",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
-        "wpackagist-plugin/safe-redirect-manager": "2.1.0",
+        "wpackagist-plugin/safe-redirect-manager": "2.1.1",
         "wpackagist-plugin/iframe": "4.9",
         "wpackagist-plugin/say-what": "2.1.6",
         "wpackagist-plugin/wp-mail-smtp": "3.11.0",
         "wpackagist-plugin/edit-flow": "0.9.7",
         "wpackagist-plugin/wp-sitemap-page": "1.9.3",
         "wpackagist-plugin/default-featured-image": "1.7.3",
-        "wpackagist-plugin/google-site-kit": "1.115.0",
+        "wpackagist-plugin/google-site-kit": "1.116.0",
 
         "wpackagist-plugin/classic-editor": "1.6.3",
         "wpackagist-plugin/classic-widgets": "0.3",
-        "wpackagist-plugin/siteorigin-panels": "2.28.0",
+        "wpackagist-plugin/siteorigin-panels": "2.29.3",
         "wpackagist-plugin/so-widgets-bundle": "1.57.0",
         "wpackagist-plugin/gtranslate": "3.0.5",
 
@@ -531,14 +531,14 @@
         "wpackagist-plugin/popup-maker": "1.18.2",
         "wpackagist-plugin/wp-sweep": "1.1.8",
         "wpackagist-plugin/duplicate-post": "4.5",
-        "wpackagist-plugin/post-expirator": "3.1.5",
+        "wpackagist-plugin/post-expirator": "3.1.7",
         "wpackagist-plugin/font-awesome": "4.4.0",
         "wpackagist-plugin/wordpress-faq-manager": "2.0.2",
         "wpackagist-plugin/redis-cache": "2.5.0",
 
         "wpackagist-plugin/elasticpress": "2.8.2",
 
-        "wpackagist-plugin/wp-stateless": "3.2.5",
+        "wpackagist-plugin/wp-stateless": "3.3.0",
 
 
         "proudcity/mce-table-buttons": "dev-master",
