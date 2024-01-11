@@ -4,7 +4,7 @@
 
 <p>Refresh your browser and this should resolve. If the problem persists please get in touch with support.</p>
 
-<p id="countdown"></p>
+<p>The browser will refresh in <span id="countdown"></span></p>
 
 <script type="text/javascript">
 (function countdown(remaining) {
