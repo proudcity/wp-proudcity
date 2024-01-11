@@ -8,7 +8,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   set +e
 
   # Add gcloud
-  echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >> $HOME/.netrc
+  echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >> "$HOME"/.netrc
 
   # making sure google repositories exist
   #until $( curl --output /dev/null --silent --head --fail https://source.developers.google.com ); do
@@ -42,8 +42,8 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     export IFS=","
     for s in $WORDPRESS_THEMES; do
       cmd="git clone ${s}"
-      eval $cmd
-      echo "Adding theme repo: ${s} in `pwd`"
+      eval "$cmd"
+      echo "Adding theme repo: ${s} in $(pwd)"
     done
   fi
 
@@ -53,8 +53,8 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     export IFS=","
     for s in $WORDPRESS_PLUGINS; do
       cmd="git clone ${s}"
-      eval $cmd
-      echo "Adding plugin repo: ${s} in `pwd`"
+      eval "$cmd"
+      echo "Adding plugin repo: ${s} in $(pwd)"
     done
   fi
 
@@ -64,8 +64,8 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     export IFS=","
     for s in $WORDPRESSORG_PLUGINS; do
       cmd="curl -O -L http://downloads.wordpress.org/plugin/${s}.zip && unzip ${s}.zip && rm ${s}.zip"
-      eval $cmd
-      echo "Adding WP.org plugin: ${s} in `pwd`"
+      eval "$cmd"
+      echo "Adding WP.org plugin: ${s} in $(pwd)"
     done
   fi
 
@@ -135,10 +135,22 @@ export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 
 # Ensure that we have the latest wp-rocket con
 echo "Importing WP Rocket configuration"
-wp rocket import --allow-root /app/bin/wp-rocket.json
+# wp rocket import --allow-root /app/bin/wp-rocket.json
 
 # enable redis requires the Redis Cache plugin to be active
 echo "Enabling Redis"
-wp redis enable --allow-root
+# wp redis enable --allow-root
 
 exec "$@"
+
+# #!/bin/sh
+# # set -e
+
+# # first arg is `-f` or `--some-option`
+# if [ "${1#-}" != "$1" ]; then
+# 	set -- apache2-foreground "$@"
+# fi
+
+# # exec "$@"
+# cd /app/wordpress
+# apache2-foreground
