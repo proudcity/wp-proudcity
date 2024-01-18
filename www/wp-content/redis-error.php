@@ -19,7 +19,7 @@
 	$slack_key = getenv( 'PROUD_SLACK_KEY' );
 	$url = $_SERVER['HTTP_HOST'];
 
-	$message_concent = 'Redis issue on ' . $url . ' at' . time( 'L F d Y G:H' );
+	$message_content = 'Redis issue on ' . $url . ' at' . date( 'F d Y G:H:s e' );
 
 	$curl = curl_init( $slack_key );
 
