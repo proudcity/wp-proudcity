@@ -6,6 +6,14 @@
 
 <p>The browser will refresh in <span id="countdown"></span></p>
 
+<?php
+echo 'site url ' . site_url();
+
+echo 'server ';
+print_r(
+	$_SERVER;
+);
+?>
 <script type="text/javascript">
 (function countdown(remaining) {
     if(remaining <= 0)
