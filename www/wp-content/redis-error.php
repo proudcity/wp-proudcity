@@ -6,14 +6,6 @@
 
 <p>The browser will refresh in <span id="countdown"></span></p>
 
-<?php
-echo 'site url ' . site_url();
-
-echo 'server ';
-print_r(
-	$_SERVER;
-);
-?>
 <script type="text/javascript">
 (function countdown(remaining) {
     if(remaining <= 0)
@@ -23,4 +15,20 @@ print_r(
 })(5); // 5 seconds
 </script>
 
+<?php
+	$slack_key = getenv( 'PROUD_SLACK_KEY' );
+	$url = $_SERVER['HTTP_HOST'];
 
+	$message_concent = 'Redis issue on ' . $url . ' at' . time( 'L F d Y G:H' );
+
+	$curl = curl_init( $slack_key );
+
+	$message = array( 'payload' => json_encode( array( 'text' => $message_content ) ) );
+
+	curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, false );
+	curl_setopt( $curl, CURLOPT_POST, true );
+	curl_setopt( $curl, CURLOPT_POSTFIELDS, $message );
+
+	$result = curl_exec( $curl );
+	curl_close( $curl );
+?>
