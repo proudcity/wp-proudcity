@@ -93,11 +93,11 @@
             "package": {
                 "name": "proudcity/gravityformssurvey",
                 "type": "wordpress-plugin",
-                "version": "3.9",
+                "version": "4.0.0",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityformssurvey.git",
-                    "reference": "3.9"
+                    "reference": "4.0.0"
                 }
             }
         },
@@ -145,11 +145,11 @@
             "package": {
                 "name": "proudcity/gravityforms",
                 "type": "wordpress-plugin",
-                "version": "2.8.1",
+                "version": "2.8.2",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityforms.git",
-                    "reference": "2.8.1"
+                    "reference": "2.8.2"
                 }
             }
         },
@@ -223,11 +223,11 @@
             "package": {
                 "name": "proudcity/wp-proud-search",
                 "type": "wordpress-plugin",
-                "version": "2023.11.15.1138",
+                "version": "2024.01.21.0000",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search.git",
-                    "reference": "2023.11.15.1138"
+                    "reference": "2024.01.21.0000"
                 }
             }
         },
@@ -491,11 +491,11 @@
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
 
 
-		"proudcity/gravityforms": "2.8.1",
+		"proudcity/gravityforms": "2.8.2",
 		"proudcity/gravityformsmailchimp": "5.2.0",
 		"proudcity/gravityformssignature": "4.3",
 		"proudcity/gravityformsstripe": "5.4.0",
-		"proudcity/gravityformssurvey": "3.9",
+		"proudcity/gravityformssurvey": "4.0.0",
 		"proudcity/gravityformszapier": "4.2",
 
         "wp-api/rest-filter": "1.0",
@@ -505,23 +505,23 @@
         "wpackagist-plugin/user-switching": "1.7.2",
 
         "wpackagist-plugin/disable-comments": "2.4.5",
-        "wpackagist-plugin/wordpress-seo": "21.8",
+        "wpackagist-plugin/wordpress-seo": "21.9",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
         "wpackagist-plugin/safe-redirect-manager": "2.1.1",
         "wpackagist-plugin/iframe": "4.9",
         "wpackagist-plugin/say-what": "2.1.6",
-        "wpackagist-plugin/wp-mail-smtp": "3.11.0",
+        "wpackagist-plugin/wp-mail-smtp": "3.11.1",
         "wpackagist-plugin/edit-flow": "0.9.7",
         "wpackagist-plugin/wp-sitemap-page": "1.9.3",
         "wpackagist-plugin/default-featured-image": "1.7.3",
-        "wpackagist-plugin/google-site-kit": "1.116.0",
+        "wpackagist-plugin/google-site-kit": "1.118.0",
 
         "wpackagist-plugin/classic-editor": "1.6.3",
         "wpackagist-plugin/classic-widgets": "0.3",
-        "wpackagist-plugin/siteorigin-panels": "2.29.3",
-        "wpackagist-plugin/so-widgets-bundle": "1.57.0",
+        "wpackagist-plugin/siteorigin-panels": "2.29.4",
+        "wpackagist-plugin/so-widgets-bundle": "1.58.0",
         "wpackagist-plugin/gtranslate": "3.0.5",
 
         "wpackagist-plugin/simple-staff-list": "2.2.5",
@@ -538,7 +538,7 @@
 
         "wpackagist-plugin/elasticpress": "2.8.2",
 
-        "wpackagist-plugin/wp-stateless": "3.3.0",
+        "wpackagist-plugin/wp-stateless": "3.4.0",
 
 
         "proudcity/mce-table-buttons": "dev-master",
@@ -550,7 +550,7 @@
         "proudcity/proudcity-quick-menu": "2023.09.26.1052",
         "proudcity/wp-proud-core": "2024.01.09.0634",
         "proudcity/wp-proud-agency": "1.134.0",
-        "proudcity/wp-proud-search": "2023.11.15.1138",
+        "proudcity/wp-proud-search": "2024.01.21.0000",
         "proudcity/wp-proud-search-elastic": "1.134.0",
         "proudcity/wp-proud-payment": "1.134.0",
         "proudcity/wp-proud-document": "2023.08.30.0725",

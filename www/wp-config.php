@@ -104,6 +104,8 @@ if ( getenv( 'ELASTICSEARCH_DOCS_HOST' ) ) {
   define('EP_HELPER_HOST', 'http://' . getenv( 'ELASTICSEARCH_DOCS_HOST' ) . '/send-attachments');
 }
 
+define( 'DISALLOW_FILE_EDIT', true );
+define( 'DISALLOW_FILE_MODS', true );
 
 /**
  * WordPress Database Table prefix.
