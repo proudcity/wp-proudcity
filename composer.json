@@ -130,19 +130,6 @@
         {
             "type": "package",
             "package": {
-                "name": "proudcity/gravityformsmailchimp",
-                "type": "wordpress-plugin",
-                "version": "5.2.0",
-                "source": {
-                    "type": "git",
-                    "url": "git@github.com:/proudcity/gravityformsmailchimp.git",
-                    "reference": "5.2.0"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "proudcity/gravityforms",
                 "type": "wordpress-plugin",
                 "version": "2.8.2",
@@ -492,7 +479,6 @@
 
 
 		"proudcity/gravityforms": "2.8.2",
-		"proudcity/gravityformsmailchimp": "5.2.0",
 		"proudcity/gravityformssignature": "4.3",
 		"proudcity/gravityformsstripe": "5.4.0",
 		"proudcity/gravityformssurvey": "4.0.0",
