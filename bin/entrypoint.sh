@@ -97,6 +97,20 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
 
 fi
 
+# creating dynamic robots.txt file
+robots=/app/wordpress/robots.txt
+if [[ $HOST ]]; then
+	cd /app/wordpress
+	echo "# START YOAST BLOCK" >> $robots
+	echo "# ----" >> $robots
+	echo "User-agent: *" >> $robots
+	echo "Disallow:" >> $robots
+	echo "Sitemap: https://${HOST}/sitemap_index.xml" >> $robots
+	echo "# ----" >> $robots
+	echo "# END YOAST BLOCK" >> $robots
+fi
+
+
 # Set up php.ini config defaults
 export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"128M"}
 export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
