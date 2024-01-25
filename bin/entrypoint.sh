@@ -104,6 +104,7 @@ if [[ $HOST ]]; then
 	echo "# START YOAST BLOCK" >> $robots
 	echo "# ----" >> $robots
 	echo "User-agent: *" >> $robots
+	echo " " >> $robots
 	echo "Disallow:" >> $robots
 	echo "Sitemap: https://${HOST}/sitemap_index.xml" >> $robots
 	echo "# ----" >> $robots
