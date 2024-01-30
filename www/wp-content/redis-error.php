@@ -16,7 +16,7 @@
 </script>
 
 <?php
-	$slack_key = getenv( 'PROUD_SLACK_KEY' );
+	$slack_key = getenv( 'PROUD_REDIS_SLACK_KEY' );
 	$url = $_SERVER['HTTP_HOST'];
 
 	$message_content = 'Redis issue on ' . $url . ' at' . date( 'F d Y G:H:s e' );
