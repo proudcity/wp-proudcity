@@ -7,14 +7,14 @@ services:
       - db
       # Uncomment for elasticsearch
       - elasticsearch
-      # - elasticdocapi
+      - elasticdocapi
     # Uncomment for elasticsearch
     links:
       - 'elasticsearch:elasticsearchdocs.elasticsearch'
-    #   - 'elasticdocapi:docsapi.elasticsearch'
+      - 'elasticdocapi:docsapi.elasticsearch'
     command: ['apache2-foreground']
     entrypoint: /app/bin/entrypoint.sh
-    image: gcr.io/proudcity-1184/wp-proudcity:staging-4d359a863c029f44f59649b0b28846747f081441
+    image: gcr.io/proudcity-1184/wp-proudcity:staging-771560f14403116e7c685eecd5229f1aa1c27c7e
     # build:
     #   context: .
     #   dockerfile: Dockerfile
@@ -69,8 +69,8 @@ services:
       # ELASTICSEARCH_HOST:
       ELASTICSEARCH_HOST: 'elasticsearchdocs.elasticsearch'
       # Uncomment for elasticsearch
-      ELASTICSEARCH_DOCS_HOST:
-      # ELASTICSEARCH_DOCS_HOST: 'docsapi.elasticsearch'
+      # ELASTICSEARCH_DOCS_HOST:
+      ELASTICSEARCH_DOCS_HOST: 'docsapi.elasticsearch'
       UPLOAD_MAX_FILESIZE: 25M
       # GOOGLE_GIT_TOKEN: # set this to download private repos and $WORDPRESS_PLUGINS in entrypoint.sh
       # WORDPRESSORG_PLUGINS:  # These plugins (csv of slugs) will be downloaded on container start (requires $GOOGLE_GIT_TOKEN)
@@ -93,54 +93,67 @@ services:
       MYSQL_PASSWORD: wordpress
     ports:
       - 3306:3306
-  # # Uncomment for elasticsearch
-  # redis:
-  #   image: redis
-  #   restart: always
-  #   networks:
-  #     - es-net
-  #   ports:
-  #     - 6379:6379
-  # # Uncomment for elasticsearch
-  # elasticdocapi:
-  #   build: ./proud-elastic-doc-api
-  #   restart: always
-  #   ports:
-  #     - 8085:80
-  #   depends_on:
-  #     - redis
-  #   links:
-  #     - 'redis:elasticdocsapiredis.elasticsearch'
-  #     - 'elasticsearch:elasticsearchdocs.elasticsearch'
-  #   networks:
-  #     - es-net
-  #   environment:
-  #     PORT: 80
-  #     ELASTIC: 'elasticsearchdocs.elasticsearch'
-  #     REDIS: 'elasticdocsapiredis.elasticsearch'
-  #     REDISPORT: 6379
-  # # Uncomment for elasticsearch
+  # Uncomment for elasticsearch
   elasticsearch:
+    platform: linux/amd64 # added
     container_name: elasticsearch
-    build: ./services/docker-elasticsearch-new
+    # build: ./services/docker-elasticsearch-test
     # image: gcr.io/proudcity-1184/docker-elasticsearch-kubernetes:5.3.2
+    # image: elastic/elasticsearch:5.3.2
+    image: bitnami/elasticsearch:5.6.4-r0
     environment:
+      - ELASTICSEARCH_PLUGINS=ingest-attachment
+      - ELASTICSEARCH_SKIP_TRANSPORT_TLS=true
+      - ELASTICSEARCH_LOCK_ALL_MEMORY=true
+      - ELASTICSEARCH_IS_DEDICATED_NODE=true
+      - ELASTICSEARCH_NODE_TYPE=master
       - node.name=elasticsearch
       - cluster.name=es-docker-cluster
       # - discovery.seed_hosts=es02,es03
       - cluster.initial_master_nodes=elasticsearch
       - bootstrap.memory_lock=true
       - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+      - discovery.type=single-node
+      # - es.enforce.bootstrap.checks=false
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
       - data01:/usr/share/elasticsearch/data
+      # - data01:/bitnami/elasticsearch/data
+      - ./services/docker-elasticsearch/config/elasticsearch.yml:/bitnami/elasticsearch/conf/elasticsearch_custom.yml
     ports:
       - 9200:9200
     networks:
       - es-net
+  # Uncomment for elasticsearch
+  redis:
+    image: redis
+    restart: always
+    networks:
+      - es-net
+    ports:
+      - 6379:6379
+  # Uncomment for elasticsearch
+  elasticdocapi:
+    # build: ./services/proudcity-elastic-docs-api
+    image: gcr.io/proudcity-1184/proud-elastic-doc-api:kubernetes.6
+    restart: always
+    ports:
+      - 8085:80
+    depends_on:
+      - redis
+    links:
+      - 'redis:elasticdocsapiredis.elasticsearch'
+      - 'elasticsearch:elasticsearchdocs.elasticsearch'
+    networks:
+      - es-net
+    environment:
+      PORT: 80
+      ELASTIC: 'elasticsearchdocs.elasticsearch'
+      REDIS: 'elasticdocsapiredis.elasticsearch'
+      REDISPORT: 6379
 
 # Uncomment for elasticsearch
 networks:
