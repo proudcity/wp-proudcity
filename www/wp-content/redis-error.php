@@ -1,3 +1,9 @@
+<?php
+	// defining variables
+	$slack_key = getenv( 'PROUD_REDIS_SLACK_KEY' );
+	$url = $_SERVER['HTTP_HOST'];
+?>
+
 <h2>An error was encountered</h2>
 
 <p>Looks like we've encountered a minor hiccup.</p>
@@ -9,15 +15,13 @@
 <script type="text/javascript">
 (function countdown(remaining) {
     if(remaining <= 0)
-        location.reload(true);
+        window.location.replace( window.location.protocol + '//' + window.location.hostname );
     document.getElementById('countdown').innerHTML = remaining;
     setTimeout(function(){ countdown(remaining - 1); }, 1000);
 })(5); // 5 seconds
 </script>
 
 <?php
-	$slack_key = getenv( 'PROUD_REDIS_SLACK_KEY' );
-	$url = $_SERVER['HTTP_HOST'];
 
 	$message_content = 'Redis issue on ' . $url . ' at' . date( 'F d Y G:H:s e' );
 
