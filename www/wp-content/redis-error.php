@@ -23,7 +23,7 @@
 
 <?php
 
-	$message_content = 'Redis issue on ' . $url . ' at' . date( 'F d Y G:H:s e' );
+	$message_content = 'Redis issue on ' . $url . ' at ' . date( 'F d Y G:H:s e' );
 
 	$curl = curl_init( $slack_key );
 
