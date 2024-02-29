@@ -145,11 +145,11 @@
             "package": {
                 "name": "proudcity/wp-rocket",
                 "type": "wordpress-plugin",
-                "version": "3.13.2",
+                "version": "3.15.9",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/wp-rocket.git",
-                    "reference": "3.13.2"
+                    "reference": "3.15.9"
                 }
             }
         },
@@ -474,7 +474,7 @@
         "proudcity/auth0": "1.149.0",
         "proudcity/wp-media-folder": "5.8.2",
         "proudcity/broken-link-checker": "1.11.21",
-        "proudcity/wp-rocket": "3.13.2",
+        "proudcity/wp-rocket": "3.15.9",
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
 
 
