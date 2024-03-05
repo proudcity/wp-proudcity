@@ -488,26 +488,26 @@
 
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",
 
-        "wpackagist-plugin/user-switching": "1.7.2",
+        "wpackagist-plugin/user-switching": "1.7.3",
 
         "wpackagist-plugin/disable-comments": "2.4.5",
-        "wpackagist-plugin/wordpress-seo": "22.1",
+        "wpackagist-plugin/wordpress-seo": "22.2",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
         "wpackagist-plugin/safe-redirect-manager": "2.1.1",
         "wpackagist-plugin/iframe": "5.0",
-        "wpackagist-plugin/say-what": "2.1.8",
-        "wpackagist-plugin/wp-mail-smtp": "3.11.1",
+        "wpackagist-plugin/say-what": "2.1.9",
+        "wpackagist-plugin/wp-mail-smtp": "4.0.1",
         "wpackagist-plugin/edit-flow": "0.9.7",
         "wpackagist-plugin/wp-sitemap-page": "1.9.3",
         "wpackagist-plugin/default-featured-image": "1.7.3",
-        "wpackagist-plugin/google-site-kit": "1.120.0",
+        "wpackagist-plugin/google-site-kit": "1.121.0",
 
         "wpackagist-plugin/classic-editor": "1.6.3",
         "wpackagist-plugin/classic-widgets": "0.3",
         "wpackagist-plugin/siteorigin-panels": "2.29.5",
-        "wpackagist-plugin/so-widgets-bundle": "1.58.6",
+        "wpackagist-plugin/so-widgets-bundle": "1.58.9",
         "wpackagist-plugin/gtranslate": "3.0.5",
 
         "wpackagist-plugin/simple-staff-list": "2.2.5",
@@ -516,10 +516,10 @@
         "wpackagist-plugin/wp-job-manager": "2.2.2",
         "wpackagist-plugin/wp-sweep": "1.1.8",
         "wpackagist-plugin/duplicate-post": "4.5",
-        "wpackagist-plugin/post-expirator": "3.2.0",
+        "wpackagist-plugin/post-expirator": "3.3.0",
         "wpackagist-plugin/font-awesome": "4.4.0",
         "wpackagist-plugin/wordpress-faq-manager": "2.0.2",
-        "wpackagist-plugin/redis-cache": "2.5.0",
+        "wpackagist-plugin/redis-cache": "2.5.1",
 
         "wpackagist-plugin/elasticpress": "2.8.2",
 
