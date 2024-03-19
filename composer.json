@@ -80,11 +80,11 @@
             "package": {
                 "name": "proudcity/wp-proud-admin-menu",
                 "type": "wordpress-plugin",
-                "version": "2023.09.19.0715",
+                "version": "2024.03.19.1158",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/wp-proud-admin-menu.git",
-                    "reference": "2023.09.19.0715"
+                    "reference": "2024.03.19.1158"
                 }
             }
         },
@@ -546,7 +546,7 @@
         "proudcity/wp-proud-social-app": "1.134.0",
         "proudcity/wp-proud-actions-app": "2023.08.30.0940",
         "proudcity/wp-proud-admin": "2023.12.21.1346",
-        "proudcity/wp-proud-admin-menu": "2023.09.19.0715",
+        "proudcity/wp-proud-admin-menu": "2024.03.19.1158",
         "proudcity/wp-proud-seeclickfix": "1.134.0",
         "proudcity/wp-proud-dashboard": "2024.01.03.0933",
         "proudcity/wp-proud-subsite": "1.134.0",
