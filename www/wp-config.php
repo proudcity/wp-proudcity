@@ -52,7 +52,7 @@ else {
 // wp-stateless
 define( 'WP_STATELESS_MEDIA_BUCKET', getenv('STATELESS_MEDIA_BUCKET'));
 define( 'WP_STATELESS_MEDIA_MODE', 'ephemeral');
-define( 'WP_STATELESS_MEDIA_ROOT_DIR', getenv('APP') . '/%date_year/date_month%/');
+define( 'WP_STATELESS_MEDIA_ROOT_DIR', getenv('WORDPRESS_DB_NAME') . '/%date_year/date_month%/');
 define( 'WP_STATELESS_MEDIA_REWRITE_BODY_CONTENT_URL', 1);
 define( 'WP_STATELESS_COMPATIBILITY_GF', 1);
 define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', getenv('STATELESS_MEDIA_CACHE_BUSTING') ?? false);
