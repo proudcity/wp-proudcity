@@ -184,11 +184,11 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "2024.03.07.0926",
+                "version": "2024.03.27.0957",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
-                    "reference": "2024.03.07.0926"
+                    "reference": "2024.03.27.0957"
                 }
             }
         },
@@ -210,11 +210,11 @@
             "package": {
                 "name": "proudcity/wp-proud-search",
                 "type": "wordpress-plugin",
-                "version": "2024.03.26.1344",
+                "version": "2024.03.27.1000",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search.git",
-                    "reference": "2024.03.26.1344"
+                    "reference": "2024.03.27.1000"
                 }
             }
         },
@@ -223,11 +223,11 @@
             "package": {
                 "name": "proudcity/wp-proud-search-elastic",
                 "type": "wordpress-plugin",
-                "version": "1.134.0",
+                "version": "2024.03.27.0955",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search-elastic.git",
-                    "reference": "1.134.0"
+                    "reference": "2024.03.27.0955"
                 }
             }
         },
@@ -533,10 +533,10 @@
         "wpackagist-plugin/wp-fullcalendar": "1.5",
         "proudcity/intuitive-custom-post-order": "2023.12.15.0923",
         "proudcity/proudcity-quick-menu": "2023.09.26.1052",
-        "proudcity/wp-proud-core": "2024.03.07.0926",
+        "proudcity/wp-proud-core": "2024.03.27.0957",
         "proudcity/wp-proud-agency": "1.134.0",
-        "proudcity/wp-proud-search": "2024.03.26.1344",
-        "proudcity/wp-proud-search-elastic": "1.134.0",
+        "proudcity/wp-proud-search": "2024.03.27.1000",
+        "proudcity/wp-proud-search-elastic": "2024.03.27.0955",
         "proudcity/wp-proud-payment": "1.134.0",
         "proudcity/wp-proud-document": "2023.08.30.0725",
         "proudcity/wp-proud-location": "2023.11.28.1151",
