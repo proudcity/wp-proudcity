@@ -91,7 +91,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
 
   # deny URLS
 	if [[ $BLOCK_LOGIN ]]; then
-		echo "RewriteRule ^wp-login.php$ - [F]"
+		echo "RewriteRule ^wp-login.php$ - [F]" >> $htaccess
 	fi
 
   #if [$TLS == "true" ]; then
