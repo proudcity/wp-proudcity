@@ -44,6 +44,7 @@ services:
       SMTP_HOST:
       SMTP_PASS:
       SMTP_USER:
+      BLOCK_LOGIN:
       WP_REDIS_BACKEND_HOST:
       WP_REDIS_BACKEND_AUTH:
       ELASTICSEARCH_DOCS_HOST:
