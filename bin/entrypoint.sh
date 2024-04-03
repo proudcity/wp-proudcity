@@ -89,6 +89,11 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     done < /tmp/redirects.csv
   fi
 
+  # deny URLS
+	if [[ $BLOCK_LOGIN ]]; then
+		echo "RewriteRule ^wp-login.php$ - [F]"
+	fi
+
   #if [$TLS == "true" ]; then
   #  echo 'Adding TLS REDIRECT .htaccess rule'
   #  echo "RewriteCond %{HTTP_HOST} ^${HOST}\.com [NC]"  >> $htaccess
