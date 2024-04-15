@@ -144,6 +144,12 @@ RewriteRule .* "/wp-content/cache/wp-rocket/%{HTTP_HOST}%{REQUEST_URI}/index%{EN
 </IfModule>
 # END WP Rocket
 
+# Block WordPress xmlrpc.php requests
+<Files xmlrpc.php>
+order deny,allow
+ deny from all
+</Files>
+
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
