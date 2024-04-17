@@ -90,9 +90,12 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   fi
 
   # deny URLS
-#	if [[ $BLOCK_LOGIN ]]; then
-#		echo "RewriteRule ^wp-login.php$ - [F]" >> $htaccess
-#	fi
+	if [[ $BLOCK_LOGIN ]]; then
+		echo "%{REQUEST_URI} ^/wp-login\.php$ [NC]" >> $htaccess
+		echo "%{QUERY_STRING} !action=(logout|postpass) [NC]" >> $htaccess
+		echo "%{QUERY_STRING} !loggedout=true [NC]" >> $htaccess
+		echo "RewriteRule ^(.*)$ - [F,L]" >> $htaccess
+	fi
 
   #if [$TLS == "true" ]; then
   #  echo 'Adding TLS REDIRECT .htaccess rule'
