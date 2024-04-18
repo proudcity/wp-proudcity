@@ -91,9 +91,9 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
 
   # deny URLS
 	if [[ $BLOCK_LOGIN ]]; then
-		echo "%{REQUEST_URI} ^/wp-login\.php$ [NC]" >> $htaccess
-		echo "%{QUERY_STRING} !action=(logout|postpass) [NC]" >> $htaccess
-		echo "%{QUERY_STRING} !loggedout=true [NC]" >> $htaccess
+		echo "RewriteCond %{REQUEST_URI} ^/wp-login\.php$ [NC]" >> $htaccess
+		echo "RewriteCond %{QUERY_STRING} !action=(logout|postpass) [NC]" >> $htaccess
+		echo "RewriteCond %{QUERY_STRING} !loggedout=true [NC]" >> $htaccess
 		echo "RewriteRule ^(.*)$ - [F,L]" >> $htaccess
 	fi
 
