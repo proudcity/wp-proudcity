@@ -132,11 +132,11 @@
             "package": {
                 "name": "proudcity/gravityforms",
                 "type": "wordpress-plugin",
-                "version": "2.8.6.1",
+                "version": "2.8.7.1",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityforms.git",
-                    "reference": "2.8.6.1"
+                    "reference": "2.8.7.1"
                 }
             }
         },
@@ -469,7 +469,7 @@
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "6.4.3",
+        "johnpbloch/wordpress": "6.5.2",
 
         "proudcity/auth0": "1.149.0",
         "proudcity/wp-media-folder": "5.8.3",
@@ -478,7 +478,7 @@
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
 
 
-		"proudcity/gravityforms": "2.8.6.1",
+		"proudcity/gravityforms": "2.8.7.1",
 		"proudcity/gravityformssignature": "4.3",
 		"proudcity/gravityformsstripe": "5.5.0",
 		"proudcity/gravityformssurvey": "4.0.0",
@@ -491,7 +491,7 @@
         "wpackagist-plugin/user-switching": "1.7.3",
 
         "wpackagist-plugin/disable-comments": "2.4.6",
-        "wpackagist-plugin/wordpress-seo": "22.3",
+        "wpackagist-plugin/wordpress-seo": "22.4",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
@@ -499,16 +499,16 @@
         "wpackagist-plugin/iframe": "5.0",
         "wpackagist-plugin/say-what": "2.2.2",
         "wpackagist-plugin/wp-mail-smtp": "4.0.1",
-        "wpackagist-plugin/edit-flow": "0.9.7",
+        "wpackagist-plugin/edit-flow": "0.9.8",
         "wpackagist-plugin/wp-sitemap-page": "1.9.3",
         "wpackagist-plugin/default-featured-image": "1.7.3",
-        "wpackagist-plugin/google-site-kit": "1.123.1",
+        "wpackagist-plugin/google-site-kit": "1.124.0",
 
         "wpackagist-plugin/classic-editor": "1.6.3",
         "wpackagist-plugin/classic-widgets": "0.3",
         "wpackagist-plugin/siteorigin-panels": "2.29.11",
-        "wpackagist-plugin/so-widgets-bundle": "1.58.12",
-        "wpackagist-plugin/gtranslate": "3.0.5",
+        "wpackagist-plugin/so-widgets-bundle": "1.59.0",
+        "wpackagist-plugin/gtranslate": "3.0.6",
 
         "wpackagist-plugin/simple-staff-list": "2.2.5",
 
@@ -523,7 +523,7 @@
 
         "wpackagist-plugin/elasticpress": "2.8.2",
 
-        "wpackagist-plugin/wp-stateless": "3.4.1",
+        "wpackagist-plugin/wp-stateless": "4.0.2",
 
 
         "proudcity/mce-table-buttons": "dev-master",
