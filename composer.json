@@ -65,6 +65,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/simple-staff-list",
+                "type": "wordpress-plugin",
+                "version": "2.2.5",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/simple-staff-list.git",
+                    "reference": "2.2.5"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/gravityformssignature",
                 "type": "wordpress-plugin",
                 "version": "4.3",
@@ -510,7 +523,7 @@
         "wpackagist-plugin/so-widgets-bundle": "1.59.0",
         "wpackagist-plugin/gtranslate": "3.0.6",
 
-        "wpackagist-plugin/simple-staff-list": "2.2.5",
+        "proudcity/simple-staff-list": "2.2.5",
 
         "proudcity/events-manager":  "2023.12.19.1124",
         "wpackagist-plugin/wp-job-manager": "2.2.2",
