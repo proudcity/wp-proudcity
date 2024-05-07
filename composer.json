@@ -537,7 +537,7 @@
         "wpackagist-plugin/elasticpress": "2.8.2",
 
         "wpackagist-plugin/wp-stateless": "4.0.3",
-
+		"wpackagist-plugin/fix-alt-text": "1.7.0",
 
         "proudcity/mce-table-buttons": "dev-master",
 
