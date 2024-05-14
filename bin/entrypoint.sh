@@ -94,6 +94,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
 		echo "RewriteCond %{REQUEST_URI} ^/wp-login\.php$ [NC]" >> $htaccess
 		echo "RewriteCond %{QUERY_STRING} !action=(logout|postpass) [NC]" >> $htaccess
 		echo "RewriteCond %{QUERY_STRING} !loggedout=true [NC]" >> $htaccess
+		echo "RewriteCond %{QUERY_STRING} !redirect_to=.* [NC]" >> $htaccess
 		echo "RewriteRule ^(.*)$ - [F,L]" >> $htaccess
 	fi
 
