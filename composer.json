@@ -106,11 +106,11 @@
             "package": {
                 "name": "proudcity/wp-proud-admin-theme",
                 "type": "wordpress-plugin",
-                "version": "PCD4.2024.05.15.1445",
+                "version": "4.2024.05.15.1445",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/wp-proud-admin-theme.git",
-                    "reference": "PCD4.2024.05.15.1445"
+                    "reference": "4.2024.05.15.1445"
                 }
             }
         },
@@ -444,11 +444,11 @@
             "package": {
                 "name": "proudcity/wp-proud-dashboard",
                 "type": "wordpress-plugin",
-                "version": "PCD4.2024.05.15.1445",
+                "version": "4.2024.05.15.1445",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-dashboard.git",
-                    "reference": "PCD4.2024.05.15.1445"
+                    "reference": "4.2024.05.15.1445"
                 }
             }
         },
@@ -573,9 +573,9 @@
         "proudcity/wp-proud-actions-app": "2023.08.30.0940",
         "proudcity/wp-proud-admin": "2023.12.21.1346",
         "proudcity/wp-proud-admin-menu": "2024.03.19.1158",
-        "proudcity/wp-proud-admin-theme": "PCD4.2024.05.15.1445",
+        "proudcity/wp-proud-admin-theme": "4.2024.05.15.1445",
         "proudcity/wp-proud-seeclickfix": "1.134.0",
-        "proudcity/wp-proud-dashboard": "PCD4.2024.05.15.1445",
+        "proudcity/wp-proud-dashboard": "4.2024.05.15.1445",
         "proudcity/wp-proud-subsite": "1.134.0",
         "proudcity/wp-proud-theme": "2024.04.25.0857",
         "proudcity/wp-proud-ip-block": "2022.11.08.1334"
