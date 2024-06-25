@@ -495,7 +495,7 @@
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "6.5.4",
+        "johnpbloch/wordpress": "6.5.5",
 
         "proudcity/auth0": "1.149.0",
         "proudcity/wp-media-folder": "5.8.5",
