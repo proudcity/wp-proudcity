@@ -495,7 +495,7 @@
     "require": {
         "php": ">=5.4",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "6.5.5",
+        "johnpbloch/wordpress": "6.6",
 
         "proudcity/auth0": "1.149.0",
         "proudcity/wp-media-folder": "5.8.7",
@@ -524,7 +524,7 @@
         "wpackagist-plugin/safe-redirect-manager": "2.1.2",
         "wpackagist-plugin/iframe": "5.1",
         "wpackagist-plugin/say-what": "2.2.3",
-        "wpackagist-plugin/wp-mail-smtp": "4.0.1",
+        "wpackagist-plugin/wp-mail-smtp": "4.1.0",
         "wpackagist-plugin/edit-flow": "0.9.9",
         "wpackagist-plugin/wp-sitemap-page": "1.9.4",
         "wpackagist-plugin/default-featured-image": "1.7.3",
