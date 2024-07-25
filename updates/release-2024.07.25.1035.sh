@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wp user update info@proudcity.com --role=administrator
+wp user update info@proudcity.com --role=administrator --allow-root
 
 wp eval-file --user=info@proudcity.com /app/updates/release-2024-07-25-1035.php --allow-root
 
