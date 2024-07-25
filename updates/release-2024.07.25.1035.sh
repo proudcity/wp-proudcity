@@ -1,6 +1,8 @@
 #!/bin/bash
 
-wp eval-file /app/updates/release-2024-07-25-1035.php --allow-root
+wp user update info@proudcity.com --role=administrator
+
+wp eval-file --user=info@proudcity.com /app/updates/release-2024-07-25-1035.php --allow-root
 
 # updating FA to 6.6.0
 wp option update font-awesome '{
