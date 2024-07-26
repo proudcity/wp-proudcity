@@ -2,6 +2,7 @@
 
 wp user update info@proudcity.com --role=administrator --allow-root
 
+wp evail "echo 'print file';" --allow-root
 wp eval-file --user=info@proudcity.com /app/updates/release-2024-07-25-1035.php --allow-root
 
 # updating FA to 6.6.0
