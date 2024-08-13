@@ -4,7 +4,6 @@ etc/ENV
 etc-kube
 docker-compose.yml
 composer.lock
-wordpress
 .DS_Store
 .docker-sync
 .idea

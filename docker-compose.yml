@@ -95,12 +95,13 @@ services:
       - 3306:3306
   # Uncomment for elasticsearch
   elasticsearch:
-    platform: linux/amd64 # added
+    platform: linux/x86_64 # added
     container_name: elasticsearch
     # build: ./services/docker-elasticsearch-test
     # image: gcr.io/proudcity-1184/docker-elasticsearch-kubernetes:5.3.2
     # image: elastic/elasticsearch:5.3.2
-    image: bitnami/elasticsearch:5.6.4-r0
+    # image: bitnami/elasticsearch:5.6.4-r0
+    image: bitnami/elasticsearch:6.8.23-debian-10-r77
     environment:
       - ELASTICSEARCH_PLUGINS=ingest-attachment
       - ELASTICSEARCH_SKIP_TRANSPORT_TLS=true
