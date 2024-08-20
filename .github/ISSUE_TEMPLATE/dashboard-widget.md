@@ -9,7 +9,7 @@ assignees: ''
 
 - [ ] Title: 
 - [ ] Description: 
-- [ ] Icon: 
+- [ ] Icon: `ICON CODE`
 - [ ] Color (reference): 
 - [ ] Button text: 
 - [ ] Button link: 
