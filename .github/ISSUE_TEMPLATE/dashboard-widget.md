@@ -8,9 +8,9 @@ assignees: ''
 ---
 
 - [ ] Title: 
-- [ ] Description: 
-- [ ] Icon: `ICON CODE`
-- [ ] Color (reference): 
+- [ ] Description (6 words min.): 
+- [ ] Icon ([reference](https://fontawesome.com/search?o=r&m=free): `ICON CODE`
+- [ ] Color ([reference](https://designsystem.digital.gov/design-tokens/color/system-tokens/)): 
 - [ ] Button text: 
 - [ ] Button link: 
 - [ ] Location:
