@@ -249,11 +249,11 @@
       "package": {
         "name": "proudcity/wp-proud-search-elastic",
         "type": "wordpress-plugin",
-        "version": "2024.03.27.0955",
+        "version": "2024.09.13.0001",
         "source": {
           "type": "git",
           "url": "https://github.com/proudcity/wp-proud-search-elastic.git",
-          "reference": "2024.03.27.0955"
+          "reference": "2024.09.13.0001"
         }
       }
     },
@@ -536,7 +536,7 @@
     "wpackagist-plugin/font-awesome": "4.5.0",
     "wpackagist-plugin/wordpress-faq-manager": "2.0.2",
     "wpackagist-plugin/redis-cache": "2.5.3",
-    "wpackagist-plugin/elasticpress": "2.8.2",
+    "wpackagist-plugin/elasticpress": "5.1.3",
     "wpackagist-plugin/wp-stateless": "4.0.4",
     "wpackagist-plugin/fix-alt-text": "1.9.0",
     "proudcity/mce-table-buttons": "dev-master",
@@ -547,7 +547,7 @@
     "proudcity/wp-proud-core": "2024.09.04.1019",
     "proudcity/wp-proud-agency": "2024.08.19.1443",
     "proudcity/wp-proud-search": "2024.03.27.1000",
-    "proudcity/wp-proud-search-elastic": "2024.03.27.0955",
+    "proudcity/wp-proud-search-elastic": "2024.09.13.0001",
     "proudcity/wp-proud-payment": "1.134.0",
     "proudcity/wp-proud-document": "2023.08.30.0725",
     "proudcity/wp-proud-location": "2023.11.28.1151",
