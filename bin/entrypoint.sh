@@ -136,9 +136,6 @@ export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 echo "Importing WP Rocket configuration"
 wp rocket import --allow-root /app/bin/wp-rocket.json
 
-# optimizing WP Stateless
-wp stateless migrate auto --allow-root
-
 # enable redis requires the Redis Cache plugin to be active
 echo "Enabling Redis"
 wp redis enable --allow-root
