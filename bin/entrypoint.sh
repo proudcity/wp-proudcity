@@ -8,7 +8,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   set +e
 
   # Add gcloud
-  echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >> $HOME/.netrc
+  echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >>$HOME/.netrc
 
   # making sure google repositories exist
   #until $( curl --output /dev/null --silent --head --fail https://source.developers.google.com ); do
@@ -43,7 +43,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     for s in $WORDPRESS_THEMES; do
       cmd="git clone ${s}"
       eval $cmd
-      echo "Adding theme repo: ${s} in `pwd`"
+      echo "Adding theme repo: ${s} in $(pwd)"
     done
   fi
 
@@ -54,7 +54,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     for s in $WORDPRESS_PLUGINS; do
       cmd="git clone ${s}"
       eval $cmd
-      echo "Adding plugin repo: ${s} in `pwd`"
+      echo "Adding plugin repo: ${s} in $(pwd)"
     done
   fi
 
@@ -65,7 +65,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     for s in $WORDPRESSORG_PLUGINS; do
       cmd="curl -O -L http://downloads.wordpress.org/plugin/${s}.zip && unzip ${s}.zip && rm ${s}.zip"
       eval $cmd
-      echo "Adding WP.org plugin: ${s} in `pwd`"
+      echo "Adding WP.org plugin: ${s} in $(pwd)"
     done
   fi
 
@@ -81,22 +81,22 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   # Add domain redirects to .htaccess as CSV (from, to) with newlines between each redirect
   if [[ $REDIRECTS ]]; then
     export IFS=","
-    echo "${REDIRECTS}" > /tmp/redirects.csv
+    echo "${REDIRECTS}" >/tmp/redirects.csv
     while read from to; do
-      echo "RewriteCond %{HTTP_HOST} ^${from}$ [NC]" >> $htaccess
-      echo "RewriteRule ^(.*)$ ${to} [R=301,L]" >> $htaccess
+      echo "RewriteCond %{HTTP_HOST} ^${from}$ [NC]" >>$htaccess
+      echo "RewriteRule ^(.*)$ ${to} [R=301,L]" >>$htaccess
       echo "Adding redirect from ${from} to ${to}"
-    done < /tmp/redirects.csv
+    done </tmp/redirects.csv
   fi
 
   # deny URLS
-	if [[ $BLOCK_LOGIN ]]; then
-		echo "RewriteCond %{REQUEST_URI} ^/wp-login\.php$ [NC]" >> $htaccess
-		echo "RewriteCond %{QUERY_STRING} !action=(logout|postpass) [NC]" >> $htaccess
-		echo "RewriteCond %{QUERY_STRING} !loggedout=true [NC]" >> $htaccess
-		echo "RewriteCond %{QUERY_STRING} !redirect_to=.* [NC]" >> $htaccess
-		echo "RewriteRule ^(.*)$ - [F,L]" >> $htaccess
-	fi
+  if [[ $BLOCK_LOGIN ]]; then
+    echo "RewriteCond %{REQUEST_URI} ^/wp-login\.php$ [NC]" >>$htaccess
+    echo "RewriteCond %{QUERY_STRING} !action=(logout|postpass) [NC]" >>$htaccess
+    echo "RewriteCond %{QUERY_STRING} !loggedout=true [NC]" >>$htaccess
+    echo "RewriteCond %{QUERY_STRING} !redirect_to=.* [NC]" >>$htaccess
+    echo "RewriteRule ^(.*)$ - [F,L]" >>$htaccess
+  fi
 
   #if [$TLS == "true" ]; then
   #  echo 'Adding TLS REDIRECT .htaccess rule'
@@ -109,17 +109,16 @@ fi
 # creating dynamic robots.txt file
 robots=/app/wordpress/robots.txt
 if [[ $HOST ]]; then
-	cd /app/wordpress
-	echo "# START YOAST BLOCK" >> $robots
-	echo "# ----" >> $robots
-	echo "User-agent: *" >> $robots
-	echo "Disallow: /wp-content/redis-error.php" >> $robots
-	echo " " >> $robots
-	echo "Sitemap: https://${HOST}/sitemap_index.xml" >> $robots
-	echo "# ----" >> $robots
-	echo "# END YOAST BLOCK" >> $robots
+  cd /app/wordpress
+  echo "# START YOAST BLOCK" >>$robots
+  echo "# ----" >>$robots
+  echo "User-agent: *" >>$robots
+  echo "Disallow: /wp-content/redis-error.php" >>$robots
+  echo " " >>$robots
+  echo "Sitemap: https://${HOST}/sitemap_index.xml" >>$robots
+  echo "# ----" >>$robots
+  echo "# END YOAST BLOCK" >>$robots
 fi
-
 
 # Set up php.ini config defaults
 export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"128M"}
@@ -136,6 +135,9 @@ export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 # Ensure that we have the latest wp-rocket con
 echo "Importing WP Rocket configuration"
 wp rocket import --allow-root /app/bin/wp-rocket.json
+
+# optimizing WP Stateless
+wp stateless migrate auto --allow-root
 
 # enable redis requires the Redis Cache plugin to be active
 echo "Enabling Redis"
