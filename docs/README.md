@@ -8,6 +8,7 @@ Documentation sections
 * Overview
 * [Installing](install.md)
 * [Developing](develop.md)
+* [Elasticpress](elasticpress.md)
 * [Docker](docker.md)
 
 
