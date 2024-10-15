@@ -8,3 +8,4 @@ wordpress
 .DS_Store
 .docker-sync
 .idea
+.php-cs-fixer-cache
