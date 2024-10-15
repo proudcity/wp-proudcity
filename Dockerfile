@@ -8,9 +8,6 @@ RUN mkdir -p /root/.ssh \
 COPY etc/known_hosts.github /root/.ssh/known_hosts
 RUN ls /root/.ssh && cat /root/.ssh/id_rsa
 
-RUN mkdir -p /app/wordpress/.well-known
-COPY /etc/security.txt /app/wordpress/.well-known/security.txt
-
 # install the PHP extensions we need
 RUN apt-get update \
   && apt-get -y upgrade \
@@ -76,6 +73,9 @@ COPY bin/entrypoint.sh /entrypoint.sh
 COPY bin /app/bin/
 COPY updates /app/updates/
 COPY www/ /app/wordpress
+
+RUN mkdir -p .well-known
+COPY /etc/security.txt /app/wordpress/.well-known/security.txt
 
 RUN chmod -R +x /app/bin
 RUN chmod 755 /app/wordpress/wp-content

@@ -78,6 +78,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
   fi
 
   # adding the proper domain to our security.txt file
+  echo "Fixing security.txt domain"
   sed -i "s/URL/$HOST/g" "/app/wordpress/.well-known/security.txt"
 
   htaccess=/app/wordpress/.htaccess
