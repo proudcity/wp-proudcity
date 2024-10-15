@@ -9,7 +9,7 @@ COPY etc/known_hosts.github /root/.ssh/known_hosts
 RUN ls /root/.ssh && cat /root/.ssh/id_rsa
 
 RUN mkdir -p /app/wordpress/.well-known
-COPY etc/security.txt /app/wordpress/.well-known/security.txt
+COPY /etc/security.txt /app/wordpress/.well-known/security.txt
 
 # install the PHP extensions we need
 RUN apt-get update \
