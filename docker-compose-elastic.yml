@@ -1,0 +1,85 @@
+version: '2'
+
+services:
+  # Uncomment for elasticsearch
+  elasticsearch:
+    # platform: linux/x86_64 # added
+    container_name: proud-elasticsearch
+    # build: ./services/docker-elasticsearch-test
+    # image: gcr.io/proudcity-1184/docker-elasticsearch-kubernetes:5.3.2
+    # image: elastic/elasticsearch:5.3.2
+    # image: bitnami/elasticsearch:5.6.4-r0
+    # image: bitnami/elasticsearch:6.8.23-debian-10-r77
+    image: elasticsearch:7.17.0
+    user: elasticsearch
+    command: >
+      /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment 
+      || ./bin/elasticsearch-plugin install --batch ingest-attachment;
+      /usr/local/bin/docker-entrypoint.sh"
+    # command: bash -c "ls /usr/share/elasticsearch/plugins/ingest-attachment" || "bin/elasticsearch-plugin install --batch ingest-attachment"
+    environment:
+      # - ELASTICSEARCH_PLUGINS=ingest-attachment
+      # - ELASTICSEARCH_SKIP_TRANSPORT_TLS=true
+      # - ELASTICSEARCH_LOCK_ALL_MEMORY=true
+      # - ELASTICSEARCH_IS_DEDICATED_NODE=true
+      # - ELASTICSEARCH_NODE_TYPE=master
+      - node.name=elasticsearch
+      - cluster.name=es-docker-cluster
+      # - discovery.seed_hosts=es02,es03
+      # - cluster.initial_master_nodes=elasticsearch
+      - bootstrap.memory_lock=true
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      # - es.enforce.bootstrap.checks=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data02:/usr/share/elasticsearch/data
+      # - data02:/bitnami/elasticsearch/data
+      # - ./services/docker-elasticsearch/config/elasticsearch.yml:/bitnami/elasticsearch/conf/elasticsearch_custom.yml
+    ports:
+      - 9200:9200
+    networks:
+      - es-net
+
+  redis:
+    container_name: proud-elasticsearch-redis
+    image: redis
+    restart: always
+    networks:
+      - es-net
+    ports:
+      - 6379:6379
+
+  elasticdocapi:
+    container_name: proud-elasticdocapi
+    # build: ./services/proudcity-elastic-docs-api
+    image: gcr.io/proudcity-1184/github.com/proudcity/proudcity-elastic-docs-api:d3b59c87467cebe3ef1d671ddca0d8759c18a4ca
+    restart: always
+    ports:
+      - 8085:8085
+    depends_on:
+      - redis
+    links:
+      - 'redis:elasticdocsapiredis.elasticsearch'
+      - 'elasticsearch:elasticsearchdocs.elasticsearch'
+    networks:
+      - es-net
+    environment:
+      PORT: 8085
+      ELASTIC: 'elasticsearchdocs.elasticsearch'
+      REDIS: 'elasticdocsapiredis.elasticsearch'
+      REDISPORT: 6379
+
+networks:
+  default:
+    driver: bridge
+  es-net:
+    driver: bridge
+
+volumes:
+  data02:
+    driver: local

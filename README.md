@@ -10,6 +10,7 @@ Documentation
 
 * [Installing](docs/install.md)
 * [Developing](docs/develop.md)
+* [Elasticpress](docs/elasticpress.md)
 * [Docker](docs/docker.md)
 * [Kubernetes](docs/kubernetes.md)
 
