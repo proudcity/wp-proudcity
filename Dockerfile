@@ -3,38 +3,41 @@ FROM php:8.0-apache
 # Add Github private repo key
 ARG SSH_KEY
 RUN mkdir -p /root/.ssh \
-	&& echo "${SSH_KEY}" >> /root/.ssh/id_rsa \
-    && chmod 400 /root/.ssh/id_rsa
+  && echo "${SSH_KEY}" >> /root/.ssh/id_rsa \
+  && chmod 400 /root/.ssh/id_rsa
 COPY etc/known_hosts.github /root/.ssh/known_hosts
 RUN ls /root/.ssh && cat /root/.ssh/id_rsa
 
+RUN mkdir -p /app/wordpress/.well-known
+COPY etc/security.txt /app/wordpress/.well-known/security.txt
+
 # install the PHP extensions we need
 RUN apt-get update \
-    && apt-get -y upgrade \
-	&& apt-get install -y --no-install-recommends vim libpng-dev libjpeg-dev mariadb-client unzip openssh-client git libcurl4-openssl-dev libmcrypt-dev \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& docker-php-ext-configure gd --with-jpeg \
-	&& docker-php-ext-install gd mysqli opcache bcmath \
-	&& a2enmod rewrite expires
+  && apt-get -y upgrade \
+  && apt-get install -y --no-install-recommends vim libpng-dev libjpeg-dev mariadb-client unzip openssh-client git libcurl4-openssl-dev libmcrypt-dev \
+  && rm -rf /var/lib/apt/lists/* \
+  && docker-php-ext-configure gd --with-jpeg \
+  && docker-php-ext-install gd mysqli opcache bcmath \
+  && a2enmod rewrite expires
 
 RUN pecl install mcrypt-1.0.4
 
 # install phpredis extension
 # From http://stackoverflow.com/questions/31369867/how-to-install-php-redis-extension-using-the-official-php-docker-image-approach
 RUN pecl install -o -f redis \
-	&&  rm -rf /tmp/pear \
-	&&  echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
+  &&  rm -rf /tmp/pear \
+  &&  echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
 RUN { \
-		echo 'opcache.memory_consumption=128'; \
-		echo 'opcache.interned_strings_buffer=8'; \
-		echo 'opcache.max_accelerated_files=4000'; \
-		echo 'opcache.revalidate_freq=60'; \
-		echo 'opcache.fast_shutdown=1'; \
-		echo 'opcache.enable_cli=1'; \
-	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
+  echo 'opcache.memory_consumption=128'; \
+  echo 'opcache.interned_strings_buffer=8'; \
+  echo 'opcache.max_accelerated_files=4000'; \
+  echo 'opcache.revalidate_freq=60'; \
+  echo 'opcache.fast_shutdown=1'; \
+  echo 'opcache.enable_cli=1'; \
+  } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 COPY etc/apache-vhost.conf /etc/apache2/sites-enabled/000-default.conf
 COPY etc/php.ini /usr/local/etc/php/php.ini

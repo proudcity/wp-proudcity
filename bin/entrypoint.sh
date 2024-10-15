@@ -77,6 +77,9 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     rm -r /app/wordpress/wp-content/plugins/business-directory
   fi
 
+  # adding the proper domain to our security.txt file
+  sed -i "s/URL/$HOST/g" "/app/wordpress/.well-known/security.txt"
+
   htaccess=/app/wordpress/.htaccess
   # Add domain redirects to .htaccess as CSV (from, to) with newlines between each redirect
   if [[ $REDIRECTS ]]; then

@@ -6,8 +6,8 @@
  * Class Pc
  * //@package Bin
  */
-class Pc extends Bin {
-
+class Pc extends Bin
+{
     private $group;
     private $action;
     private $arg1;
@@ -17,7 +17,8 @@ class Pc extends Bin {
     /**
      * EcsDeploy constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         /**
@@ -48,7 +49,8 @@ class Pc extends Bin {
      *
      * @return void
      */
-    public function run() {
+    public function run()
+    {
 
         if (empty($this->group)) {
             return $this->pcHelp();
@@ -73,7 +75,8 @@ class Pc extends Bin {
      * @param $options
      * @param string $mask
      */
-    private function help($options, $mask = "  %-15s %-70s\n") {
+    private function help($options, $mask = "  %-15s %-70s\n")
+    {
 
         foreach ($options as $line) {
             echo vsprintf($mask, $line);
@@ -85,7 +88,8 @@ class Pc extends Bin {
      *
      * @param string $method
      */
-    private function err($method) {
+    private function err($method)
+    {
 
         $this->printLine();
         $this->printLine("pc $this->group $this->action is not a valid command :(", red);
@@ -93,8 +97,7 @@ class Pc extends Bin {
         if (method_exists($this, $method)) {
             $this->action = null;
             return $this->{$method}();
-        }
-        else {
+        } else {
             return $this->pcHelp();
         }
     }
@@ -103,7 +106,8 @@ class Pc extends Bin {
     /**
      * Dipclay a list of commands if this is run without any arguments
      */
-    public function pcHelp() {
+    public function pcHelp()
+    {
         $this->printLine('Available commands:');
         $this->help([
             ['pc dev <action>', 'Start/stop Docker. Connect to Docker.'],
@@ -123,7 +127,8 @@ class Pc extends Bin {
      *
      * List dev commands.
      */
-    public function dev() {
+    public function dev()
+    {
 
         $this->printLine('Available commands:');
         $this->help([
@@ -147,7 +152,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev up
      */
-    public function devUp() {
+    public function devUp()
+    {
 
         $file = !empty($this->arg1) ? $this->arg1 : $this->dir . 'docker-compose.yml';
         passthru("docker-compose -f $file up -d");
@@ -160,7 +166,8 @@ class Pc extends Bin {
     /**
      * Alias for: pc dev up
      */
-    public function devStart() {
+    public function devStart()
+    {
 
         return $this->devUp();
     }
@@ -168,7 +175,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev stop
      */
-    public function devStop() {
+    public function devStop()
+    {
 
         $file = !empty($this->arg1) ? $this->arg1 : $this->dir . 'docker-compose.yml';
         passthru("docker-compose -f $file stop");
@@ -177,7 +185,8 @@ class Pc extends Bin {
     /**
      * Alias for: pc dev up
      */
-    public function devDown() {
+    public function devDown()
+    {
 
         return $this->devStop();
     }
@@ -185,7 +194,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev restart
      */
-    public function devRestart() {
+    public function devRestart()
+    {
 
         $this->devStop();
         return $this->devUp();
@@ -195,7 +205,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev status
      */
-    public function devStatus() {
+    public function devStatus()
+    {
 
         passthru('docker ps');
     }
@@ -203,7 +214,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev logs
      */
-    public function devLogs() {
+    public function devLogs()
+    {
 
         $cmd = 'docker logs $(docker ps -aq --filter="name=wpproudcity_wordpress_1") --tail 1000';
         passthru($cmd);
@@ -213,7 +225,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev ssh
      */
-    public function devSsh() {
+    public function devSsh()
+    {
 
         $cmd = 'docker exec -it $(docker ps -aq --filter="name=wpproudcity_wordpress_1") bash';
         $this->printLine("$cmd", 'blue');
@@ -223,7 +236,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev db
      */
-    public function devDb() {
+    public function devDb()
+    {
 
         passthru('docker exec -it $(docker ps -aq --filter="name=wpproudcity_wordpress_1") mysql -uwordpress -pwordpress wordpress');
     }
@@ -231,7 +245,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev cmd
      */
-    public function devCmd() {
+    public function devCmd()
+    {
         chdir($this->dir . '/wordpress');
         $args = $_SERVER['argv'];
         $args = array_slice($args, 3);
@@ -252,7 +267,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev wp
      */
-    public function devWp() {
+    public function devWp()
+    {
         $args = $_SERVER['argv'];
         $args = array_slice($args, 3);
         passthru('docker exec -it $(docker ps -aq --filter="name=wpproudcity_wordpress_1") wp --allow-root ' . implode(' ', $args));
@@ -261,7 +277,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev install
      */
-    public function devInstall() {
+    public function devInstall()
+    {
 
         chdir($this->dir);
         passthru('
@@ -275,7 +292,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev update
      */
-    public function devUpdate() {
+    public function devUpdate()
+    {
 
         chdir($this->dir);
         passthru('composer clearcache && composer update');
@@ -284,7 +302,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev import
      */
-    public function devImport() {
+    public function devImport()
+    {
 
         $this->printLine('Importing ' . $this->arg1, 'yellow');
         $this->pc('dev wp db import ' . $this->arg1);
@@ -295,28 +314,30 @@ class Pc extends Bin {
     }
 
 
-  /**
-   * Action: pc dev import-mamp
-   */
-  public function devImportMamp() {
-    if (!empty($this->arg1)) {
-        $this->printLine('Importing ' . $this->arg1, 'yellow');
-        passthru('wp db import ' . $this->arg1);
+    /**
+     * Action: pc dev import-mamp
+     */
+    public function devImportMamp()
+    {
+        if (!empty($this->arg1)) {
+            $this->printLine('Importing ' . $this->arg1, 'yellow');
+            passthru('wp db import ' . $this->arg1);
+        }
+
+        $newurl = 'http://localhost:8888';
+        $oldurl = trim(shell_exec('wp option get siteurl'));
+        passthru('wp search-replace "'. $oldurl .'" "'. $newurl .'"');
+        passthru('wp plugin uninstall --deactivate w3-total-cache elasticpress');
+        passthru('wp user update 1 --user_pass=test');
+        passthru('open http://localhost:8888/wp-admin');
     }
 
-    $newurl = 'http://localhost:8888';
-    $oldurl = trim(shell_exec('wp option get siteurl'));
-    passthru('wp search-replace "'. $oldurl .'" "'. $newurl .'"');
-    passthru('wp plugin uninstall --deactivate w3-total-cache elasticpress');
-    passthru('wp user update 1 --user_pass=test');
-    passthru('open http://localhost:8888/wp-admin');
-  }
 
-
-  /**
-     * Action: pc dev docs
-     */
-    public function devDocs() {
+    /**
+       * Action: pc dev docs
+       */
+    public function devDocs()
+    {
 
         passthru("open 'https://github.com/proudcity/wp-proudcity/blob/master/README.md'");
     }
@@ -325,7 +346,8 @@ class Pc extends Bin {
     /**
      * Action: pc dev repo
      */
-    public function devRepo() {
+    public function devRepo()
+    {
 
         passthru("open 'https://github.com/proudcity/wp-proudcity/'");
     }
@@ -333,15 +355,15 @@ class Pc extends Bin {
     /**
      * Helper function  calls this script
      */
-    public function pc($rawCmd, $return = false) {
+    public function pc($rawCmd, $return = false)
+    {
 
         $cmd = $this->dir . '/bin/pc ' . $rawCmd;
         if ($return) {
             return shell_exec($cmd);
-        }
-        else {
-          $this->printLine("pc $rawCmd", 'blue');
-          passthru($cmd);
+        } else {
+            $this->printLine("pc $rawCmd", 'blue');
+            passthru($cmd);
         }
 
     }
@@ -353,7 +375,8 @@ class Pc extends Bin {
      *
      * @param $handle
      */
-    public function watch() {
+    public function watch()
+    {
 
         $handle = $this->action;
 
@@ -370,9 +393,8 @@ class Pc extends Bin {
             $this->printLine("Replacing index.html with index.dev.html", 'yellow');
             passthru('rm proudcity-dashboard/app/index.html && cp -f proudcity-dashboard/app/index.dev.html proudcity-dashboard/app/index.html');
             $cmd = $cmds['proudcity-api'] . ' & ' . $cmds['proudcity-dashboard'] .' & wait';
-        }
-        else {
-          $cmd = $cmds[$handle];
+        } else {
+            $cmd = $cmds[$handle];
         }
 
         $this->printLine("$cmd", 'blue');
@@ -385,7 +407,8 @@ class Pc extends Bin {
      *
      * @param $handle
      */
-    public function publish() {
+    public function publish()
+    {
 
         $handle = $this->action;
 
@@ -398,7 +421,7 @@ class Pc extends Bin {
         ];
 
         if (empty($handle)) {
-            $this->error('You must specify a handle. Options:'."\r".implode( "\r", array_keys($cmds)) );
+            $this->error('You must specify a handle. Options:'."\r".implode("\r", array_keys($cmds)));
             die();
         }
 
@@ -418,10 +441,11 @@ class Pc extends Bin {
      *
      * Wraps Kubernetes helpers
      */
-    public function kube() {
+    public function kube()
+    {
         $kube = getenv('PC_KUBERNETES');
         if (empty($kube)) {
-          return;
+            return;
         }
         $_SERVER['argv'][0] = 'pc';
         $cmd = implode(' ', $_SERVER['argv']);
@@ -500,7 +524,9 @@ abstract class Bin
      */
     public function getArg($name)
     {
-        if (isset($this->args[$name])) return $this->args[$name];
+        if (isset($this->args[$name])) {
+            return $this->args[$name];
+        }
 
         return false;
     }
@@ -524,10 +550,18 @@ abstract class Bin
      */
     public function printLine($string = '', $color = '')
     {
-        if ($color == 'red') $string = "\e[91m" . $string . "\033[0m";
-        if ($color == 'green') $string = "\e[92m" . $string . "\033[0m";
-        if ($color == 'yellow') $string = "\e[33m" . $string . "\033[0m";
-        if ($color == 'blue') $string = "\e[96m" . $string . "\033[0m";
+        if ($color == 'red') {
+            $string = "\e[91m" . $string . "\033[0m";
+        }
+        if ($color == 'green') {
+            $string = "\e[92m" . $string . "\033[0m";
+        }
+        if ($color == 'yellow') {
+            $string = "\e[33m" . $string . "\033[0m";
+        }
+        if ($color == 'blue') {
+            $string = "\e[96m" . $string . "\033[0m";
+        }
 
         print $string . PHP_EOL;
     }
@@ -574,7 +608,7 @@ abstract class Bin
             } else {
                 if ($current) {
                     $this->args[$current] = $arg;
-                } else if (preg_match('#^([\w\d_]{1,})$#', $arg, $match)) {
+                } elseif (preg_match('#^([\w\d_]{1,})$#', $arg, $match)) {
                     $this->args[$match[1]] = true;
                 }
             }

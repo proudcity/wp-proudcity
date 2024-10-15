@@ -1,0 +1,4 @@
+Contact: https://proudcity.com/report-vulnerability
+Canonical: https://URL/.well-known/security.txt
+Expires: 2030-01-01T20:00:00.000Z
+Preferred-Languages: en
