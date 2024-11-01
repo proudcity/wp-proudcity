@@ -275,11 +275,11 @@
       "package": {
         "name": "proudcity/wp-proud-document",
         "type": "wordpress-plugin",
-        "version": "2023.08.30.0725",
+        "version": "2024.11.01.0952",
         "source": {
           "type": "git",
           "url": "https://github.com/proudcity/wp-proud-document.git",
-          "reference": "2023.08.30.0725"
+          "reference": "2024.11.01.0952"
         }
       }
     },
@@ -549,7 +549,7 @@
     "proudcity/wp-proud-search": "2024.03.27.1000",
     "proudcity/wp-proud-search-elastic": "2024.09.24.0651",
     "proudcity/wp-proud-payment": "1.134.0",
-    "proudcity/wp-proud-document": "2023.08.30.0725",
+    "proudcity/wp-proud-document": "2024.11.01.0952",
     "proudcity/wp-proud-location": "2023.11.28.1151",
     "proudcity/wp-proud-issue": "2023.08.30.0736",
     "proudcity/wp-proud-meeting": "2023.11.28.1036",
