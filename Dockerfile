@@ -17,7 +17,7 @@ RUN apt-get update \
   && docker-php-ext-install gd mysqli opcache bcmath \
   && a2enmod rewrite expires
 
-RUN pecl install mcrypt-1.0.4
+RUN pecl install mcrypt-1.0.6
 
 # install phpredis extension
 # From http://stackoverflow.com/questions/31369867/how-to-install-php-redis-extension-using-the-official-php-docker-image-approach
