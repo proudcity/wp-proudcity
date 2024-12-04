@@ -49,6 +49,11 @@ else {
     define( 'COOKIE_LIFETIME', 1209600 ); // Default: 14 days
 }
 
+// JWT token
+if ( ! empty( getenv('JWT_KEY'))){
+  define( 'JWT_AUTH_SECRET_KEY', getenv( 'JWT_KEY'))
+}
+
 // wp-stateless
 define( 'WP_STATELESS_MEDIA_BUCKET', getenv('STATELESS_MEDIA_BUCKET'));
 define( 'WP_STATELESS_MEDIA_MODE', 'ephemeral');
