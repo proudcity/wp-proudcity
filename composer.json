@@ -552,6 +552,7 @@
     "wpackagist-plugin/redis-cache": "2.5.4",
     "wpackagist-plugin/elasticpress": "5.1.4",
     "wpackagist-plugin/wp-stateless": "4.0.4",
+    "wpackagist-plugin/wp-stateless-gravity-forms-addon": "0.0.2",
     "wpackagist-plugin/fix-alt-text": "1.9.0",
     "proudcity/mce-table-buttons": "dev-master",
     "proudcity/wp-proud-analytics": "2024.11.25.1358",
