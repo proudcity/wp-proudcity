@@ -11,7 +11,7 @@ RUN ls /root/.ssh && cat /root/.ssh/id_rsa
 # setup cgroupv2
 RUN mkdir -p /etc/sysctl.d/
 COPY etc/99-cgroup.conf /etc/sysctl.d/99-cgroup.conf
-RUN cat /etc/sysctl.d/99-sysctl.con
+RUN cat /etc/sysctl.d/99-cgroup.conf
 
 # install the PHP extensions we need
 RUN apt-get update \
