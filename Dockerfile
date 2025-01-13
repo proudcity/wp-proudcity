@@ -1,5 +1,10 @@
 FROM php:8.1-apache-bookworm
 
+# setup cgroupv2
+RUN mkdir -p /etc/sysctl.d/
+COPY etc/99-cgroup.conf /etc/sysctl.d/99-cgroup.conf
+RUN cat /etc/sysctl.d/99-sysctl.conf
+
 # Add Github private repo key
 ARG SSH_KEY
 RUN mkdir -p /root/.ssh \
