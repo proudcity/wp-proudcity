@@ -327,7 +327,7 @@
       "package": {
         "name": "proudcity/wp-proud-meeting",
         "type": "wordpress-plugin",
-        "version": "2025.02.07.1125",
+        "version": "2025.02.07.1254",
         "source": {
           "type": "git",
           "url": "https://github.com/proudcity/wp-proud-meeting.git",
