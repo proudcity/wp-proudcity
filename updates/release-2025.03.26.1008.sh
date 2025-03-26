@@ -1,2 +1,2 @@
 #!/bin/bash
-wp eval-file --user=1 /app/updates/release-2023-07-25-1402.php --allow-root
+wp eval-file --user=1 /app/updates/release-2025-03-26-1008.php --allow-root
