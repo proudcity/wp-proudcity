@@ -508,7 +508,7 @@
   "require": {
     "php": ">=8.0",
     "composer/installers": "1.*",
-    "johnpbloch/wordpress": "6.7.2",
+    "johnpbloch/wordpress": "6.8.0",
     "proudcity/auth0": "3.4.1",
     "proudcity/wp-media-folder": "6.0.4",
     "proudcity/broken-link-checker": "1.11.21",
