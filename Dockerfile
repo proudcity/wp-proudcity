@@ -1,4 +1,4 @@
-FROM php:8.1-apache-bookworm
+FROM php:8.2-apache-bookworm
 
 # Add Github private repo key
 ARG SSH_KEY
