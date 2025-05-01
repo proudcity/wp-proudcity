@@ -44,6 +44,9 @@ RUN { \
 COPY etc/apache-vhost.conf /etc/apache2/sites-enabled/000-default.conf
 COPY etc/php.ini /usr/local/etc/php/php.ini
 
+RUN echo "ServerTokens Prod\nServerSignature Off" >> /etc/apache2/conf-available/harden.conf && \
+  a2enconf harden
+
 RUN mkdir -p /app
 COPY composer.json /app/
 WORKDIR /app
