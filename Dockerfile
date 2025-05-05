@@ -44,8 +44,13 @@ RUN { \
 COPY etc/apache-vhost.conf /etc/apache2/sites-enabled/000-default.conf
 COPY etc/php.ini /usr/local/etc/php/php.ini
 
-RUN echo "ServerTokens Prod\nServerSignature Off" >> /etc/apache2/conf-available/harden.conf && \
-  a2enconf harden
+# For PCI scans this disables all our Apache information no matter how the scanner tries
+# to scan stuff, and trust me they do weird stuff I had to dig for to make it work.
+# See this for more information: https://github.com/proudcity/pc-dev-issues/issues/125
+RUN echo "ServerTokens Prod\nServerSignature Off" > /etc/apache2/conf-available/harden.conf && \
+  a2enconf harden && \
+  a2disconf security
+
 
 RUN mkdir -p /app
 COPY composer.json /app/
