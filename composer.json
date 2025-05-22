@@ -549,7 +549,7 @@
     "wpackagist-plugin/font-awesome": "5.0.1",
     "wpackagist-plugin/wordpress-faq-manager": "2.0.2",
     "wpackagist-plugin/redis-cache": "2.5.4",
-    "wpackagist-plugin/elasticpress": "5.1.4",
+    "wpackagist-plugin/elasticpress": "5.2.0",
     "wpackagist-plugin/wp-stateless": "4.1.3",
     "wpackagist-plugin/wp-stateless-gravity-forms-addon": "0.0.2",
     "wpackagist-plugin/fix-alt-text": "1.9.0",
