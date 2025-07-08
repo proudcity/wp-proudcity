@@ -11,7 +11,7 @@ assignees: curtismchale
 ### Gravity Forms Stripe
 
 - we [updated the plugin to handle connected account transfers](https://github.com/proudcity/gravityformsstripe/commit/10ed1155c74b7811e0b7b75bedb6f4fdfd42089e)
-- [ ] check for [updates](https://docs.gravityforms.com/stripe-change-log/) above 5.9.1 as we're currently running a "hacked" version of it and need to update
+- [ ] check for [updates](https://docs.gravityforms.com/stripe-change-log/) above 2.9.10 as we're currently running a "hacked" version of it and need to update
 - [ ] if updated check the [changes we made](https://github.com/proudcity/gravityformsstripe/commit/10ed1155c74b7811e0b7b75bedb6f4fdfd42089e) to see if anything needs to be updated to keep them or if we have a new hook
 
 ### Elasticspress
