@@ -18,11 +18,6 @@ assignees: curtismchale
 
 - [2651](https://github.com/proudcity/wp-proudcity/issues/2651) needs to be fixed before we can update
 
-### Events Manager Cache fixes
-
-- [Forum post on caching](https://wordpress.org/support/topic/redis-caching-issue-with-saving-colour-on-event-categories-2/)
-   If not we need to change `class/em-taxonomy-admin.php` [line 172](https://github.com/proudcity/events-manager/blob/d1a0385b5b587ca51f67d98e0e4add919151b16d/classes/em-taxonomy-admin.php#L172) so that `wp_cache_flush` clears the taxonomy
-
 ### Inuitive CPT caching
 
 - check to see if [our PR](https://github.com/hijiriworld/intuitive-custom-post-order/pull/64) was accepted if not modify our plugin again
