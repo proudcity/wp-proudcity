@@ -486,6 +486,7 @@
         "proudcity/auth0": "3.4.1",
         "proudcity/wp-media-folder": "6.1.0",
         "wpackagist-plugin/broken-link-checker": "2.4.6",
+        "wpackagist-plugin/broken-link-checker-seo": "1.2.5",
         "proudcity/wp-rocket": "3.16.4",
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
         "proudcity/gravityforms": "2.9.13.1",
