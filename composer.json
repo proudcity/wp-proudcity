@@ -26,6 +26,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/proudcity-link-scanner",
+                "type": "wordpress-plugin",
+                "version": "1.0",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/proudcity-link-scanner.git",
+                    "reference": "1.0"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/intuitive-custom-post-order",
                 "type": "wordpress-plugin",
                 "version": "2023.12.15.0923",
@@ -485,7 +498,7 @@
         "johnpbloch/wordpress": "6.8.2",
         "proudcity/auth0": "3.4.1",
         "proudcity/wp-media-folder": "6.1.2",
-        "proudcity/broken-link-checker": "1.11.21",
+        "proudcity/proudcity-link-scanner": "1.0",
         "proudcity/wp-rocket": "3.16.4",
         "proudcity/wp-rocket-cache-rest-api": "1.149.0",
         "proudcity/gravityforms": "2.9.14.1",
