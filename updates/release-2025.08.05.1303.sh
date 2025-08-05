@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # set widget order for all users
-wp plugin activate proud-link-scanner --allow-root
+wp plugin activate proudcity-link-scanner --allow-root
