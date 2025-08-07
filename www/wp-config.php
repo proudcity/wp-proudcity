@@ -90,6 +90,7 @@ define('WP_CACHE_KEY_SALT', getenv("HOST"));
 // batcache
 define('BATCACHE_ENABLED', true);
 define('BATCACHE_MAX_AGE', 300); // 5 minutes
+define('BATCACHE_DEBUG', true);
 
 //WP_REDIS_BACKEND_PORT
 //WP_REDIS_BACKEND_D
