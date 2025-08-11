@@ -63,7 +63,6 @@ define('WP_STATELESS_MEDIA_CACHE_BUSTING', getenv('STATELESS_MEDIA_CACHE_BUSTING
 define('WP_STATELESS_MEDIA_BODY_REWRITE', 'false');
 
 
-
 // For ProudCity, to fix issues related to migration
 define('PROUD_WP_STATELESS_FORCE', getenv('PROUD_WP_STATELESS_FORCE'));
 
@@ -146,6 +145,10 @@ if (! empty(getenv('ENV_TYPE'))) {
     $environment_type = getenv('ENV_TYPE');
 }
 define('WP_ENVIRONMENT_TYPE', (string) $environment_type);
+
+define('FORCE_SSL_ADMIN', true);
+@ini_set('session.cookie_secure', '1');
+@ini_set('session.cookie_samesite', 'Lax');
 
 
 $url = (getenv('TLS') === 'true' ? 'https' : 'http') . '://' . getenv('HOST');
