@@ -429,6 +429,32 @@
         {
             "type": "package",
             "package": {
+                "name": "automattic/batcache",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/Automattic/batcache",
+                    "reference": "ed0e6b2d9bcbab3924c49a6c3247646fb87a0957"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "pressable/pressable-cache-management",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/pressable/pressable-cache-management",
+                    "reference": "8e119ee84e5718d61a3255c3d3b17d63cbbeb228"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-analytics",
                 "type": "wordpress-plugin",
                 "version": "2024.11.25.1358",
@@ -540,6 +566,8 @@
         "wpackagist-plugin/wp-stateless": "4.1.3",
         "wpackagist-plugin/wp-stateless-gravity-forms-addon": "0.0.2",
         "wpackagist-plugin/fix-alt-text": "1.9.1",
+        "pressable/pressable-cache-management": "dev-master",
+        "automattic/batcache": "dev-master",
         "proudcity/mce-table-buttons": "dev-master",
         "proudcity/wp-proud-analytics": "2024.11.25.1358",
         "wpackagist-plugin/wp-fullcalendar": "1.6",
