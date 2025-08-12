@@ -429,7 +429,7 @@
         {
             "type": "package",
             "package": {
-                "name": "Automattic/batcache",
+                "name": "automattic/batcache",
                 "type": "wordpress-plugin",
                 "version": "dev-master",
                 "source": {
