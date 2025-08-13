@@ -83,7 +83,7 @@ define('WPMS_SMTP_USER', getenv('SMTP_USER')); // SMTP authentication username, 
 define('WPMS_SMTP_PASS', getenv('SMTP_PASS')); // SMTP authentication password, only used if WPMS_SMTP_AUTH is true
 
 // Varnish settings
-define('WP_CACHE', getenv("WP_CACHE"));
+define('WP_CACHE', true);
 define('WP_CACHE_KEY_SALT', getenv("HOST"));
 
 // batcache
