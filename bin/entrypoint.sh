@@ -28,6 +28,22 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     #echo "Adding JoomUnited plugins"
     #git clone https://source.developers.google.com/p/proudcity-1184/r/wp-media-folder /app/wordpress/wp-content/plugins/wp-media-folder
 
+<<<<<<< HEAD
+    # Install other non-free plugins
+    echo "Adding non-free plugins"
+    cd /app/wordpress/wp-content/plugins
+
+    # Add custom themes, comma separated. Ensure that we fail silently.
+    if [[ $WORDPRESS_THEMES ]]; then
+        cd /app/wordpress/wp-content/themes
+        export IFS=","
+        for s in $WORDPRESS_THEMES; do
+            cmd="git clone ${s}"
+            eval $cmd
+            echo "Adding theme repo: ${s} in $(pwd)"
+        done
+    fi
+
     # Install other non-free plugins
     echo "Adding non-free plugins"
     cd /app/wordpress/wp-content/plugins
@@ -114,6 +130,16 @@ if [[ $HOST ]]; then
     echo "# ----" >>$robots
     echo "User-agent: *" >>$robots
     echo "Disallow: /wp-content/redis-error.php" >>$robots
+    echo "User-agent: ShapBot" >>$robots
+    echo "Disallow: /" >>$robots
+    echo "User-agent: Amazonbot" >>$robots
+    echo "Disallow: /" >>$robots
+    echo "User-agent: rogerbot" >>$robots
+    echo "Disallow: /" >>$robots
+    echo "User-agent: dotbot" >>$robots
+    echo "Disallow: /" >>$robots
+    echo "User-agent: MJ12bot" >>$robots
+    echo "Disallow: /" >>$robots
     echo " " >>$robots
     echo "Sitemap: https://${HOST}/sitemap_index.xml" >>$robots
     echo "# ----" >>$robots
@@ -123,23 +149,6 @@ fi
 # Set up php.ini config defaults
 export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"128M"}
 export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
-
-# Set up redis session configuration
-# Note: Sep 2022: we no longer do anything with REDIS
-# if [[ $REDIS_SESSION == "1" ]]; then
-#   redisfile=/usr/local/etc/php/conf.d/redissessions.ini
-#   echo "session.save_handler = redis" > $redisfile
-#   echo "session.save_path = ${WORDPRESS_DB_NAME}redis:6379" >> $redisfile
-# fi
-
-# @todo remove if batcache works
-# Ensure that we have the latest wp-rocket con
-# echo "Importing WP Rocket configuration"
-# wp rocket import --allow-root /app/bin/wp-rocket.json
-
-# @todo remove if batcache works
-# preload cache files
-# wp rocket preload --allow-root
 
 # enable redis requires the Redis Cache plugin to be active
 echo "Enabling Redis"
