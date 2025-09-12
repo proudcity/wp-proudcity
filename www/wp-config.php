@@ -86,10 +86,6 @@ define('WPMS_SMTP_PASS', getenv('SMTP_PASS')); // SMTP authentication password, 
 define('WP_CACHE', getenv('WP_CACHE'));
 define('WP_CACHE_KEY_SALT', getenv("HOST"));
 
-//WP_REDIS_BACKEND_PORT
-//WP_REDIS_BACKEND_D
-//WP_REDIS_SERIALIZER
-
 // Sets up our Redis configuration
 // The WP plugin is required: https://en-ca.wordpress.org/plugins/redis-cache/
 if (getenv('WP_REDIS_HOST')) {
