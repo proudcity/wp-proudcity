@@ -39,6 +39,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/elasticpress",
+                "type": "wordpress-plugin",
+                "version": "5.1.4",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/elasticpress.git",
+                    "reference": "5.1.4"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/intuitive-custom-post-order",
                 "type": "wordpress-plugin",
                 "version": "2023.12.15.0923",
@@ -508,7 +521,7 @@
         "wpackagist-plugin/font-awesome": "5.1.0",
         "wpackagist-plugin/wordpress-faq-manager": "2.0.2",
         "wpackagist-plugin/redis-cache": "2.6.5",
-        "wpackagist-plugin/elasticpress": "5.1.4",
+        "proudcity/elasticpress": "5.1.4",
         "wpackagist-plugin/wp-stateless": "4.2.0",
         "wpackagist-plugin/wp-stateless-gravity-forms-addon": "0.0.3",
         "wpackagist-plugin/fix-alt-text": "1.9.1",
