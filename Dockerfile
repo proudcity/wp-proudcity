@@ -3,41 +3,54 @@ FROM php:8.2-apache-bookworm
 # Add Github private repo key
 ARG SSH_KEY
 RUN mkdir -p /root/.ssh \
-  && echo "${SSH_KEY}" >> /root/.ssh/id_rsa \
-  && chmod 400 /root/.ssh/id_rsa
+    && echo "${SSH_KEY}" >> /root/.ssh/id_rsa \
+    && chmod 400 /root/.ssh/id_rsa
 COPY etc/known_hosts.github /root/.ssh/known_hosts
 RUN ls /root/.ssh && cat /root/.ssh/id_rsa
 
+# setup cgroupv2
+RUN mkdir -p /etc/sysctl.d/
+COPY etc/99-cgroup.conf /etc/sysctl.d/99-cgroup.conf
+RUN cat /etc/sysctl.d/99-cgroup.conf
+
 # install the PHP extensions we need
 RUN apt-get update \
-  && apt-get -y upgrade \
-  && apt-get install -y --no-install-recommends vim libpng-dev libjpeg-dev mariadb-client unzip openssh-client git libcurl4-openssl-dev libmcrypt-dev \
-  && rm -rf /var/lib/apt/lists/* \
-  && docker-php-ext-configure gd --with-jpeg \
-  && docker-php-ext-install gd mysqli opcache bcmath \
-  && a2enmod rewrite expires
+    && apt-get -y upgrade \
+    && apt-get install -y --no-install-recommends vim libpng-dev libjpeg-dev mariadb-client unzip openssh-client git libcurl4-openssl-dev libmcrypt-dev \
+    && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-configure gd --with-jpeg \
+    && docker-php-ext-install gd mysqli opcache bcmath \
+    && a2enmod rewrite expires
 
 RUN pecl install mcrypt-1.0.6
 
 # install phpredis extension
 # From http://stackoverflow.com/questions/31369867/how-to-install-php-redis-extension-using-the-official-php-docker-image-approach
 RUN pecl install -o -f redis \
-  &&  rm -rf /tmp/pear \
-  &&  echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
+    &&  rm -rf /tmp/pear \
+    &&  echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
 RUN { \
-  echo 'opcache.memory_consumption=128'; \
-  echo 'opcache.interned_strings_buffer=8'; \
-  echo 'opcache.max_accelerated_files=4000'; \
-  echo 'opcache.revalidate_freq=60'; \
-  echo 'opcache.fast_shutdown=1'; \
-  echo 'opcache.enable_cli=1'; \
-  } > /usr/local/etc/php/conf.d/opcache-recommended.ini
+    echo 'opcache.memory_consumption=128'; \
+    echo 'opcache.interned_strings_buffer=8'; \
+    echo 'opcache.max_accelerated_files=4000'; \
+    echo 'opcache.revalidate_freq=60'; \
+    echo 'opcache.fast_shutdown=1'; \
+    echo 'opcache.enable_cli=1'; \
+    } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 COPY etc/apache-vhost.conf /etc/apache2/sites-enabled/000-default.conf
 COPY etc/php.ini /usr/local/etc/php/php.ini
+
+# For PCI scans this disables all our Apache information no matter how the scanner tries
+# to scan stuff, and trust me they do weird stuff I had to dig for to make it work.
+# See this for more information: https://github.com/proudcity/pc-dev-issues/issues/125
+RUN echo "ServerTokens Prod\nServerSignature Off" > /etc/apache2/conf-available/harden.conf && \
+    a2enconf harden && \
+    a2disconf security
+
 
 RUN mkdir -p /app
 COPY composer.json /app/
@@ -45,7 +58,7 @@ WORKDIR /app
 
 # Install composer.json file
 RUN curl -k -o /tmp/composer.phar https://getcomposer.org/download/2.8.3/composer.phar \
-  && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
+    && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 RUN php -dmemory_limit=128M /usr/local/bin/composer install
 
 # Explode out the gravityforms plugins in modules/*
@@ -59,8 +72,7 @@ RUN php -dmemory_limit=128M /usr/local/bin/composer install
 
 RUN curl -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN cd /tmp && chmod +x wp-cli.phar \
-  && mv wp-cli.phar /usr/local/bin/wp \
-  && php -dmemory_limit=128M /usr/local/bin/wp package install wp-media/wp-rocket-cli:trunk --allow-root
+    && mv wp-cli.phar /usr/local/bin/wp
 
 # COPY etc/.htaccess_extra .htaccess_extra
 # RUN cat .htaccess_extra >> .htaccess && rm .htaccess_extra && cat .htaccess

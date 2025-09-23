@@ -1,8 +1,8 @@
 <?php
 
-define('WP_DEBUG', 		getenv( "WP_DEBUG") );
-define( 'WP_DEBUG_LOG', getenv( "WP_DEBUG" ) );
-define('SAVEQUERIES', 	getenv( "WP_DEBUG" ) );
+define('WP_DEBUG', getenv("WP_DEBUG"));
+define('WP_DEBUG_LOG', getenv("WP_DEBUG"));
+define('SAVEQUERIES', getenv("WP_DEBUG"));
 
 /**
  * The base configurations of the WordPress.
@@ -32,38 +32,41 @@ define('DB_COLLATE', '');
 
 // Auth keys and salts
 // https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service
-define( 'AUTH_KEY',         getenv('WORDPRESS_AUTH_KEY'));
-define( 'SECURE_AUTH_KEY',  getenv('WORDPRESS_SECURE_AUTH_KEY'));
-define( 'LOGGED_IN_KEY',    getenv('WORDPRESS_LOGGED_IN_KEY'));
-define( 'NONCE_KEY',        getenv('WORDPRESS_NONCE_KEY'));
-define( 'AUTH_SALT',        getenv('WORDPRESS_AUTH_SALT'));
-define( 'SECURE_AUTH_SALT', getenv('WORDPRESS_SECURE_AUTH_SALT'));
-define( 'LOGGED_IN_SALT',   getenv('WORDPRESS_LOGGED_IN_SALT'));
-define( 'NONCE_SALT',       getenv('WORDPRESS_NONCE_SALT'));
+define('AUTH_KEY', getenv('WORDPRESS_AUTH_KEY'));
+define('SECURE_AUTH_KEY', getenv('WORDPRESS_SECURE_AUTH_KEY'));
+define('LOGGED_IN_KEY', getenv('WORDPRESS_LOGGED_IN_KEY'));
+define('NONCE_KEY', getenv('WORDPRESS_NONCE_KEY'));
+define('AUTH_SALT', getenv('WORDPRESS_AUTH_SALT'));
+define('SECURE_AUTH_SALT', getenv('WORDPRESS_SECURE_AUTH_SALT'));
+define('LOGGED_IN_SALT', getenv('WORDPRESS_LOGGED_IN_SALT'));
+define('NONCE_SALT', getenv('WORDPRESS_NONCE_SALT'));
 
 // Set the cookie lifetime, default to 14 days
-if ( !empty(getenv("COOKIE_LIFETIME")) ) {
-    define( 'COOKIE_LIFETIME', getenv("COOKIE_LIFETIME") );
+if (!empty(getenv("COOKIE_LIFETIME"))) {
+    define('COOKIE_LIFETIME', getenv("COOKIE_LIFETIME"));
+} else {
+    define('COOKIE_LIFETIME', 1209600); // Default: 14 days
 }
-else {
-    define( 'COOKIE_LIFETIME', 1209600 ); // Default: 14 days
+
+// JWT token
+if (! empty(getenv('JWT_KEY'))) {
+    define('JWT_AUTH_SECRET_KEY', getenv('JWT_KEY'));
 }
 
 // wp-stateless
-define( 'WP_STATELESS_MEDIA_BUCKET', getenv('STATELESS_MEDIA_BUCKET'));
-define( 'WP_STATELESS_MEDIA_MODE', 'ephemeral');
-define( 'WP_STATELESS_MEDIA_ROOT_DIR', getenv('WORDPRESS_DB_NAME') . '/%date_year/date_month%/');
-define( 'WP_STATELESS_MEDIA_REWRITE_BODY_CONTENT_URL', 1);
-define( 'WP_STATELESS_COMPATIBILITY_GF', 1);
-define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', getenv('STATELESS_MEDIA_CACHE_BUSTING') ?? false);
-define( 'WP_STATELESS_MEDIA_BODY_REWRITE', 'false');
-
+define('WP_STATELESS_MEDIA_BUCKET', getenv('STATELESS_MEDIA_BUCKET'));
+define('WP_STATELESS_MEDIA_MODE', 'ephemeral');
+define('WP_STATELESS_MEDIA_ROOT_DIR', getenv('WORDPRESS_DB_NAME') . '/%date_year/date_month%/');
+define('WP_STATELESS_MEDIA_REWRITE_BODY_CONTENT_URL', 1);
+define('WP_STATELESS_COMPATIBILITY_GF', 1);
+define('WP_STATELESS_MEDIA_CACHE_BUSTING', getenv('STATELESS_MEDIA_CACHE_BUSTING') ?? false);
+define('WP_STATELESS_MEDIA_BODY_REWRITE', 'false');
 
 
 // For ProudCity, to fix issues related to migration
-define( 'PROUD_WP_STATELESS_FORCE', getenv('PROUD_WP_STATELESS_FORCE'));
+define('PROUD_WP_STATELESS_FORCE', getenv('PROUD_WP_STATELESS_FORCE'));
 
-define( 'WP_STATELESS_MEDIA_KEY_FILE_PATH', getenv('STATELESS_MEDIA_KEY_FILE_PATH'));
+define('WP_STATELESS_MEDIA_KEY_FILE_PATH', getenv('STATELESS_MEDIA_KEY_FILE_PATH'));
 //define( 'WP_STATELESS_MEDIA_SERVICE_ACCOUNT', 	getenv('STATELESS_MEDIA_SERVICE_ACCOUNT')); // @todo: this is only referenced in readme, not in the actual wp-stateless code
 
 // wp-mail-smtp settings
@@ -80,32 +83,29 @@ define('WPMS_SMTP_USER', getenv('SMTP_USER')); // SMTP authentication username, 
 define('WPMS_SMTP_PASS', getenv('SMTP_PASS')); // SMTP authentication password, only used if WPMS_SMTP_AUTH is true
 
 // Varnish settings
-define('WP_CACHE', getenv("WP_CACHE"));
+define('WP_CACHE', true);
 define('WP_CACHE_KEY_SALT', getenv("HOST"));
-//WP_REDIS_BACKEND_PORT
-//WP_REDIS_BACKEND_D
-//WP_REDIS_SERIALIZER
 
 // Sets up our Redis configuration
 // The WP plugin is required: https://en-ca.wordpress.org/plugins/redis-cache/
-if ( getenv( 'WP_REDIS_HOST' ) ){
-	define( 'WP_REDIS_PREFIX', getenv('HOST') );
-	define( 'WP_REDIS_HOST', getenv('WP_REDIS_HOST') );
-	define( 'WP_REDIS_TIMEOUT', 2 );
-	define( 'WP_REDIS_READ_TIMEOUT', 2 );
-	define( 'WP_REDIS_DATABASE', getenv( 'WP_REDIS_DATABASE' ) ); // two sites shouldn't share the same value here
+if (getenv('WP_REDIS_HOST')) {
+    define('WP_REDIS_PREFIX', getenv('HOST'));
+    define('WP_REDIS_HOST', getenv('WP_REDIS_HOST'));
+    define('WP_REDIS_TIMEOUT', 2);
+    define('WP_REDIS_READ_TIMEOUT', 2);
+    define('WP_REDIS_DATABASE', getenv('WP_REDIS_DATABASE')); // two sites shouldn't share the same value here
 }
 
 // Elasticpress / search settings
-if ( getenv( 'ELASTICSEARCH_HOST' ) ) {
-  define( 'EP_HOST', 'http://' . getenv('ELASTICSEARCH_HOST'). ':9200' );
+if (getenv('ELASTICSEARCH_HOST')) {
+    define('EP_HOST', 'http://' . getenv('ELASTICSEARCH_HOST'). ':9200');
 }
-if ( getenv( 'ELASTICSEARCH_DOCS_HOST' ) ) {
-  define('EP_HELPER_HOST', 'http://' . getenv( 'ELASTICSEARCH_DOCS_HOST' ) . '/send-attachments');
+if (getenv('ELASTICSEARCH_DOCS_HOST')) {
+    define('EP_HELPER_HOST', 'http://' . getenv('ELASTICSEARCH_DOCS_HOST') . '/send-attachments');
 }
 
-define( 'DISALLOW_FILE_EDIT', true );
-define( 'DISALLOW_FILE_MODS', true );
+define('DISALLOW_FILE_EDIT', true);
+define('DISALLOW_FILE_MODS', true);
 
 /**
  * WordPress Database Table prefix.
@@ -132,10 +132,14 @@ $table_prefix  = 'wp_';
  * https://make.wordpress.org/core/2020/08/27/wordpress-environment-types/
  */
 $environment_type = 'production';
-if ( ! empty( getenv( 'ENV_TYPE' ) ) ){
-    $environment_type = getenv( 'ENV_TYPE' );
+if (! empty(getenv('ENV_TYPE'))) {
+    $environment_type = getenv('ENV_TYPE');
 }
-define( 'WP_ENVIRONMENT_TYPE', (string) $environment_type );
+define('WP_ENVIRONMENT_TYPE', (string) $environment_type);
+
+define('FORCE_SSL_ADMIN', true);
+@ini_set('session.cookie_secure', '1');
+@ini_set('session.cookie_samesite', 'Lax');
 
 
 $url = (getenv('TLS') === 'true' ? 'https' : 'http') . '://' . getenv('HOST');
@@ -144,15 +148,15 @@ define('WP_HOME', $url);
 
 
 if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] === 'GoogleHC/1.0') {
-  echo 'OK';
-  exit;
+    echo 'OK';
+    exit;
 }
 
-if (getenv('TLS') === 'true'){
+if (getenv('TLS') === 'true') {
     $_SERVER['HTTPS'] = 'on';
     if (
         isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] === 'http' ||
-        ( !empty($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] != getenv('HOST') )
+        (!empty($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] != getenv('HOST'))
     ) {
         $redirect = 'https://' . getenv('HOST') . $_SERVER['REQUEST_URI'];
         header('HTTP/1.1 302 Moved Temporarily');
