@@ -14,10 +14,6 @@ assignees: curtismchale
 - [ ] check for [updates](https://docs.gravityforms.com/stripe-change-log/) above 5.9.1 as we're currently running a "hacked" version of it and need to update
 - [ ] if updated check the [changes we made](https://github.com/proudcity/gravityformsstripe/commit/10ed1155c74b7811e0b7b75bedb6f4fdfd42089e) to see if anything needs to be updated to keep them or if we have a new hook
 
-### Elasticspress
-
-- [2651](https://github.com/proudcity/wp-proudcity/issues/2651) needs to be fixed before we can update
-
 ### Inuitive CPT caching
 
 - check to see if [our PR](https://github.com/hijiriworld/intuitive-custom-post-order/pull/64) was accepted if not modify our plugin again
