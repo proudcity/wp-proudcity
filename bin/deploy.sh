@@ -8,8 +8,11 @@ fi
 echo "Clearing transient options in wp_options"
 wp --allow-root db query "DELETE from wp_options where option_name like '%transient%';"
 
+echo "updating core WP DB"
 wp core update-db --allow-root
+echo "flushing rewrites"
 wp rewrite flush --allow-root
+echo "flushing WP cache"
 wp cache flush --allow-root
 
 # enable redis requires the Redis Cache plugin to be active
