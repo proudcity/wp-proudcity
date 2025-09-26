@@ -65,6 +65,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/gtranslate",
+                "type": "wordpress-plugin",
+                "version": "2025.09.26.1049",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/gtranslate.git",
+                    "reference": "2025.09.26.1049"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/simple-staff-list",
                 "type": "wordpress-plugin",
                 "version": "2.2.5.1",
@@ -511,7 +524,7 @@
         "wpackagist-plugin/classic-widgets": "0.3",
         "wpackagist-plugin/siteorigin-panels": "2.33.2",
         "wpackagist-plugin/so-widgets-bundle": "1.69.3",
-        "wpackagist-plugin/gtranslate": "3.0.9",
+        "proudcity/gtranslate": "2025.09.26.1049",
         "proudcity/simple-staff-list": "2.2.5.1",
         "wpackagist-plugin/events-manager": "7.1.7",
         "wpackagist-plugin/wp-job-manager": "2.4.0",
