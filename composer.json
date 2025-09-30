@@ -416,6 +416,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/events-manager",
+                "type": "wordpress-plugin",
+                "version": "dev-master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/events-manager",
+                    "reference": "48a71bb40014369a79d40bd4199707c9bbd0e031"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-analytics",
                 "type": "wordpress-plugin",
                 "version": "2024.11.25.1358",
@@ -513,7 +526,7 @@
         "wpackagist-plugin/so-widgets-bundle": "1.69.3",
         "wpackagist-plugin/gtranslate": "3.0.9",
         "proudcity/simple-staff-list": "2.2.5.1",
-        "wpackagist-plugin/events-manager": "7.2.1",
+        "proudcity/events-manager": "dev-master",
         "wpackagist-plugin/wp-job-manager": "2.4.0",
         "wpackagist-plugin/wp-sweep": "1.1.8",
         "wpackagist-plugin/duplicate-post": "4.5",
