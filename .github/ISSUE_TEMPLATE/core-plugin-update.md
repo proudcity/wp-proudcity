@@ -8,6 +8,12 @@ assignees: curtismchale
 ---
 ## Notes
 
+### Events Manager
+
+- after #2691 we found there is a bug where Events Manager gets over zealous with modifying post type content. [This forum thread](https://wordpress.org/support/topic/wpml-issue-with-eventsmanager/) provided a fix to stop EM from messing with post titles that it doesn't own.
+- [ ] Check `em-event-post.php` line `49` to make sure it excludes posts that are not events
+  - should be this code: `$is_post_type = (Archetypes::is_repeating( $post_type ) ? Archetypes::get_repeating_archetype( $post_type ) : ($post_type == "event")) ? $post_type : false;`
+
 ### Gravity Forms Stripe
 
 - we [updated the plugin to handle connected account transfers](https://github.com/proudcity/gravityformsstripe/commit/10ed1155c74b7811e0b7b75bedb6f4fdfd42089e)
