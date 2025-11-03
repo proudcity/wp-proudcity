@@ -98,7 +98,12 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
         echo "RewriteRule ^(.*)$ - [F,L]" >>$htaccess
     fi
 
-    #if [$TLS == "true" ]; then
+    # Blocking headless Chrome bots that kill us
+    echo "" >>$htaccess
+    echo "# Block HeadlessChrome bot" >>$htaccess
+    echo "RewriteCond %{HTTP_USER_AGENT} HeadlessChrome [NC]" >>$htaccess
+    echo "RewriteRule ^ - [F,L]" >>$htaccess #if [$TLS == "true" ]; then
+
     #  echo 'Adding TLS REDIRECT .htaccess rule'
     #  echo "RewriteCond %{HTTP_HOST} ^${HOST}\.com [NC]"  >> $htaccess
     #  echo "RewriteRule ^(.*)$ https://${HOST}/$1 [R,L]"  >> $htaccess
