@@ -65,6 +65,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/gtranslate",
+                "type": "wordpress-plugin",
+                "version": "2.2.5.1",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:/proudcity/gtranslate.git",
+                    "reference": "2025.09.29.1334"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/simple-staff-list",
                 "type": "wordpress-plugin",
                 "version": "2.2.5.1",
