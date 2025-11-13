@@ -210,11 +210,11 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "2025.11.03.1137",
+                "version": "2025.11.13.1012",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
-                    "reference": "2025.11.03.1137"
+                    "reference": "2025.11.13.1012"
                 }
             }
         },
@@ -537,7 +537,7 @@
         "wpackagist-plugin/classic-widgets": "0.3",
         "wpackagist-plugin/siteorigin-panels": "2.33.3",
         "wpackagist-plugin/so-widgets-bundle": "1.70.1",
-        "proudcity/gtranslate": "2025.09.29.1334",
+        "wpackagist-plugin/gtranslate": "3.0.8",
         "proudcity/simple-staff-list": "2.2.5.1",
         "proudcity/events-manager": "dev-master",
         "wpackagist-plugin/wp-job-manager": "2.4.0",
@@ -556,7 +556,7 @@
         "wpackagist-plugin/wp-fullcalendar": "1.6",
         "proudcity/intuitive-custom-post-order": "2023.12.15.0923",
         "proudcity/proudcity-quick-menu": "2023.09.26.1052",
-        "proudcity/wp-proud-core": "2025.11.03.1137",
+        "proudcity/wp-proud-core": "2025.11.13.1012",
         "proudcity/wp-proud-agency": "2025.07.11.1223",
         "proudcity/wp-proud-search": "2025.10.30.1256",
         "proudcity/wp-proud-search-elastic": "2025.09.23.1317",
