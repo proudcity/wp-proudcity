@@ -129,6 +129,8 @@ if [[ $HOST ]]; then
     echo "Disallow: /" >>$robots
     echo "User-agent: MJ12bot" >>$robots
     echo "Disallow: /" >>$robots
+    echo "User-agent: RecordedFuture-ASI" >>$robots
+    echo "Disallow: /" >>$robots
     echo " " >>$robots
     echo "Sitemap: https://${HOST}/sitemap_index.xml" >>$robots
     echo "# ----" >>$robots
