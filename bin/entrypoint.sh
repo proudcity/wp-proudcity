@@ -104,6 +104,13 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     echo "RewriteCond %{HTTP_USER_AGENT} HeadlessChrome [NC]" >>$htaccess
     echo "RewriteRule ^ - [F,L]" >>$htaccess #if [$TLS == "true" ]; then
 
+    # Blocking Recorded Future more aggressively because it ignores robots.txt
+    # Block RecordedFuture-ASI bot
+    echo "" >>"$htaccess"
+    echo "# Block RecordedFuture-ASI bot" >>"$htaccess"
+    echo "RewriteCond %{HTTP_USER_AGENT} RecordedFuture-ASI [NC]" >>"$htaccess"
+    echo "RewriteRule ^ - [F,L]" >>"$htaccess"
+
     #  echo 'Adding TLS REDIRECT .htaccess rule'
     #  echo "RewriteCond %{HTTP_HOST} ^${HOST}\.com [NC]"  >> $htaccess
     #  echo "RewriteRule ^(.*)$ https://${HOST}/$1 [R,L]"  >> $htaccess
@@ -128,6 +135,8 @@ if [[ $HOST ]]; then
     echo "User-agent: dotbot" >>$robots
     echo "Disallow: /" >>$robots
     echo "User-agent: MJ12bot" >>$robots
+    echo "Disallow: /" >>$robots
+    echo "User-agent: RecordedFuture-ASI" >>$robots
     echo "Disallow: /" >>$robots
     echo " " >>$robots
     echo "Sitemap: https://${HOST}/sitemap_index.xml" >>$robots
