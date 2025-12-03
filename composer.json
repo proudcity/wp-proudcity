@@ -262,11 +262,11 @@
             "package": {
                 "name": "proudcity/wp-proud-location",
                 "type": "wordpress-plugin",
-                "version": "2023.11.28.1151",
+                "version": "2025.12.03.1119",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-location.git",
-                    "reference": "2023.11.28.1151"
+                    "reference": "2025.12.03.1119"
                 }
             }
         },
@@ -536,7 +536,7 @@
         "proudcity/wp-proud-search-elastic": "2025.09.23.1317",
         "proudcity/wp-proud-payment": "1.134.0",
         "proudcity/wp-proud-document": "2025.12.03.1118",
-        "proudcity/wp-proud-location": "2023.11.28.1151",
+        "proudcity/wp-proud-location": "2025.12.03.1119",
         "proudcity/wp-proud-issue": "2025.12.03.1127",
         "proudcity/wp-proud-meeting": "2025.10.24.1300",
         "proudcity/wp-proud-map-app": "1.134.0",
