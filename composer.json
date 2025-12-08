@@ -15,11 +15,11 @@
             "package": {
                 "name": "proudcity/wp-media-folder",
                 "type": "wordpress-plugin",
-                "version": "6.1.7",
+                "version": "6.1.8",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/wp-media-folder.git",
-                    "reference": "6.1.7"
+                    "reference": "6.1.8"
                 }
             }
         },
@@ -67,11 +67,11 @@
             "package": {
                 "name": "proudcity/gravityformsrecaptcha",
                 "type": "wordpress-plugin",
-                "version": "2.0.0",
+                "version": "2.1.0",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityformsrecaptcha.git",
-                    "reference": "2.0.0"
+                    "reference": "2.1.0"
                 }
             }
         },
@@ -158,11 +158,11 @@
             "package": {
                 "name": "proudcity/gravityforms",
                 "type": "wordpress-plugin",
-                "version": "2.9.23",
+                "version": "2.9.23.2",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityforms.git",
-                    "reference": "2.9.23"
+                    "reference": "2.9.23.2"
                 }
             }
         },
@@ -390,19 +390,6 @@
         {
             "type": "package",
             "package": {
-                "name": "proudcity/events-manager",
-                "type": "wordpress-plugin",
-                "version": "dev-master",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/proudcity/events-manager",
-                    "reference": "5d8dfd2e30fa88590a610e2c546ad5098f6c4737"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "proudcity/mce-table-buttons",
                 "type": "wordpress-plugin",
                 "version": "dev-master",
@@ -482,20 +469,20 @@
     "require": {
         "php": ">=8.0",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "6.8.3",
+        "johnpbloch/wordpress": "6.9",
         "proudcity/auth0": "3.4.1",
-        "proudcity/wp-media-folder": "6.1.7",
+        "proudcity/wp-media-folder": "6.1.8",
         "proudcity/proudcity-link-scanner": "1.0",
-        "proudcity/gravityforms": "2.9.23",
-        "proudcity/gravityformsrecaptcha": "2.0.0",
+        "proudcity/gravityforms": "2.9.23.2",
+        "proudcity/gravityformsrecaptcha": "2.1.0",
         "proudcity/gravityformssignature": "4.3",
         "proudcity/gravityformsstripe": "2025.11.27.0949",
         "proudcity/gravityformssurvey": "4.2.1",
         "proudcity/gravityformszapier": "4.2",
         "wp-api/rest-filter": "1.0",
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",
-        "wpackagist-plugin/disable-comments": "2.6.0",
-        "wpackagist-plugin/wordpress-seo": "26.4",
+        "wpackagist-plugin/disable-comments": "2.6.1",
+        "wpackagist-plugin/wordpress-seo": "26.5",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
@@ -506,14 +493,14 @@
         "wpackagist-plugin/edit-flow": "0.9.9",
         "wpackagist-plugin/wp-sitemap-page": "1.9.5",
         "wpackagist-plugin/default-featured-image": "1.8.2",
-        "wpackagist-plugin/google-site-kit": "1.166.0",
+        "wpackagist-plugin/google-site-kit": "1.167.0",
         "wpackagist-plugin/classic-editor": "1.6.7",
         "wpackagist-plugin/classic-widgets": "0.3",
-        "wpackagist-plugin/siteorigin-panels": "2.33.3",
-        "wpackagist-plugin/so-widgets-bundle": "1.70.2",
+        "wpackagist-plugin/siteorigin-panels": "2.33.4",
+        "wpackagist-plugin/so-widgets-bundle": "1.70.3",
         "wpackagist-plugin/gtranslate": "3.0.9",
         "proudcity/simple-staff-list": "2.2.5.1",
-        "proudcity/events-manager": "dev-master",
+        "wpackagist-plugin/events-manager": "7.2.3",
         "wpackagist-plugin/wp-job-manager": "2.4.0",
         "wpackagist-plugin/wp-sweep": "1.1.8",
         "wpackagist-plugin/duplicate-post": "4.5",
