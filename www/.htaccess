@@ -1,3 +1,17 @@
+# Block Recorded Future scanner
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_USER_AGENT} "RecordedFuture-ASI" [NC]
+    RewriteRule ^ - [F,L]
+</IfModule>
+
+# Block Recorded Future scanner
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_USER_AGENT} "HeadlessChrome" [NC]
+    RewriteRule ^ - [F,L]
+</IfModule>
+
 # BEGIN WP Rocket v3.10.9
 # Use UTF-8 encoding for anything served text/plain or text/html
 AddDefaultCharset UTF-8
