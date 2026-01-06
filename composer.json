@@ -65,7 +65,7 @@
         {
             "type": "package",
             "package": {
-                "name": "curtismchale/worpdress-faq-manager",
+                "name": "curtismchale/wordpress-faq-manager",
                 "type": "wordpress-plugin",
                 "version": "2.0.2",
                 "source": {
