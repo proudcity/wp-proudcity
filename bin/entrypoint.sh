@@ -78,6 +78,62 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     sed -i "s/URL/$HOST/g" "/app/wordpress/.well-known/security.txt"
 
     htaccess=/app/wordpress/.htaccess
+    bots_csv=/app/wordpress/bots.csv
+
+    # Block bots at the top of .htaccess (bots.csv: one regex fragment per line; blank lines and # comments allowed)
+    if [[ -f "$bots_csv" ]]; then
+        tmp_htaccess="$(mktemp)"
+        tmp_block="$(mktemp)"
+
+        # Remove any previous managed block to avoid duplicates on restart
+        sed '/^# BEGIN Managed: Blocked Bots$/,/^# END Managed: Blocked Bots$/d' "$htaccess" >"$tmp_htaccess"
+        mv "$tmp_htaccess" "$htaccess"
+
+        # Build the block in a temp file
+        echo "# BEGIN Managed: Blocked Bots" >>"$tmp_block"
+        echo "<IfModule mod_rewrite.c>" >>"$tmp_block"
+        echo "RewriteEngine On" >>"$tmp_block"
+
+        have_any=0
+        last_line_is_or=0
+
+        while IFS= read -r bot || [[ -n "$bot" ]]; do
+            # Strip leading/trailing whitespace
+            bot="$(echo "$bot" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+
+            # Skip blank lines and comments
+            [[ -z "$bot" ]] && continue
+            [[ "$bot" =~ ^# ]] && continue
+
+            echo "RewriteCond %{HTTP_USER_AGENT} ${bot} [NC,OR]" >>"$tmp_block"
+            have_any=1
+            last_line_is_or=1
+        done <"$bots_csv"
+
+        # Only add rule if we actually wrote at least one condition
+        if [[ $have_any -eq 1 ]]; then
+            # Remove trailing OR on the last RewriteCond
+            sed -i '$ s/ \[NC,OR\]$/ [NC]/' "$tmp_block"
+
+            echo "RewriteRule ^ - [F,L]" >>"$tmp_block"
+            echo "</IfModule>" >>"$tmp_block"
+            echo "# END Managed: Blocked Bots" >>"$tmp_block"
+            echo "" >>"$tmp_block"
+
+            # Prepend the block to the htaccess file
+            cat "$tmp_block" "$htaccess" >"$tmp_htaccess"
+            mv "$tmp_htaccess" "$htaccess"
+
+            echo "Added blocked bot rules (from ${bots_csv}) to top of ${htaccess}"
+        else
+            # No bots found; do not modify htaccess further (beyond removing old block above)
+            echo "No bot entries found in ${bots_csv}; skipping bot block insert"
+        fi
+
+        rm -f "$tmp_block"
+    fi
+
+    htaccess=/app/wordpress/.htaccess
     # Add domain redirects to .htaccess as CSV (from, to) with newlines between each redirect
     if [[ $REDIRECTS ]]; then
         export IFS=","
