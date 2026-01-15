@@ -1,0 +1,81 @@
+# SEO crawlers
+AhrefsBot
+SemrushBot
+MJ12bot
+DataForSeoBot
+ecoresearchCrawler
+
+# Amazon
+Amzn-SearchBot
+Amazonbot
+Amzn-User
+
+# OpenAI
+GPTBot
+ChatGPT-User
+
+# Anthropic
+ClaudeBot
+anthropic-ai
+
+# Google
+Google-Extended
+GoogleOther
+Google-InspectionTool
+
+# Meta
+Meta-ExternalAgent
+Meta-ExternalFetcher
+
+# Microsoft
+bingbot
+BingPreview
+
+# Apple
+Applebot-Extended
+Applebot
+
+# Perplexity
+PerplexityBot
+
+# Common Crawl (used by many AI companies)
+CCBot
+
+# ByteDance / TikTok
+Bytespider
+
+# Huawei
+PetalBot
+
+# Baidu
+Baiduspider
+
+# Yandex
+YandexBot
+
+# Cohere
+cohere-ai
+
+# xAI (Grok)
+GrokBot
+xAI-Bot
+
+# Stability / image models
+StabilityBot
+DiffusionBot
+
+# You.com
+YouBot
+
+# AI2 (Allen Institute)
+AI2Bot
+
+# Open source / misc training scrapers
+OAI-SearchBot
+OmniExplorer_Bot
+
+# Random
+RecordedFuture-ASI
+HeadlessChrome
+ultimate_sitemap_parser
+undici
