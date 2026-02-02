@@ -158,11 +158,11 @@
             "package": {
                 "name": "proudcity/gravityforms",
                 "type": "wordpress-plugin",
-                "version": "2.9.25.1",
+                "version": "2.9.26",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityforms.git",
-                    "reference": "2.9.25.1"
+                    "reference": "2.9.26"
                 }
             }
         },
@@ -473,7 +473,7 @@
         "proudcity/auth0": "3.4.1",
         "proudcity/wp-media-folder": "6.1.9",
         "proudcity/proudcity-link-scanner": "1.0",
-        "proudcity/gravityforms": "2.9.25.1",
+        "proudcity/gravityforms": "2.9.26",
         "proudcity/gravityformsrecaptcha": "2.1.0",
         "proudcity/gravityformssignature": "4.3",
         "proudcity/gravityformsstripe": "6.0.2.1",
@@ -493,7 +493,7 @@
         "wpackagist-plugin/edit-flow": "0.10.3",
         "wpackagist-plugin/wp-sitemap-page": "1.9.5",
         "wpackagist-plugin/default-featured-image": "1.8.2",
-        "wpackagist-plugin/google-site-kit": "1.170.0",
+        "wpackagist-plugin/google-site-kit": "1.171.0",
         "wpackagist-plugin/classic-editor": "1.6.7",
         "wpackagist-plugin/classic-widgets": "0.3",
         "wpackagist-plugin/siteorigin-panels": "2.33.5",
