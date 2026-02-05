@@ -14,8 +14,6 @@ assignees: curtismchale
 - [ ] Check `em-event-post.php` line `49` to make sure it excludes posts that are not events
   - should be this code: `$is_post_type = (Archetypes::is_repeating( $post_type ) ? Archetypes::get_repeating_archetype( $post_type ) : ($post_type == "event")) ? $post_type : false;`
 - also see #2694 which had issues with the UI for recurring events and [forum](https://wordpress.org/support/topic/events-manager-recurring-events-error/) [threads](https://wordpress.org/support/topic/unable-to-create-recurring-events/#post-18671937) from others stating that recurring events were broken on 7.2.1
-- [ ] added RSS feeds to the main /events page
-    - see [changes here](https://github.com/proudcity/events-manager/commit/18b16ed3c7bf36876be99c694559009c587873ae) for #2685
 
 ### Gravity Forms Stripe
 
