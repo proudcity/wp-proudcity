@@ -26,19 +26,6 @@
         {
             "type": "package",
             "package": {
-                "name": "proudcity/events-manager",
-                "type": "wordpress-plugin",
-                "version": "7.2.3.1",
-                "source": {
-                    "type": "git",
-                    "url": "git@github.com:/proudcity/events-manager.git",
-                    "reference": "7.2.3.1"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "proudcity/proudcity-link-scanner",
                 "type": "wordpress-plugin",
                 "version": "1.0",
@@ -513,7 +500,7 @@
         "wpackagist-plugin/so-widgets-bundle": "1.70.4",
         "wpackagist-plugin/gtranslate": "3.0.9",
         "proudcity/simple-staff-list": "2.2.5.1",
-        "proudcity/events-manager": "7.2.3.1",
+        "wpackagist-plugin/events-manager": "7.2.3.1",
         "wpackagist-plugin/wp-job-manager": "2.4.0",
         "wpackagist-plugin/wp-sweep": "1.1.8",
         "wpackagist-plugin/duplicate-post": "4.5",
