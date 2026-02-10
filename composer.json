@@ -106,11 +106,11 @@
             "package": {
                 "name": "proudcity/wp-proud-admin-menu",
                 "type": "wordpress-plugin",
-                "version": "2025.12.04.1114",
+                "version": "2026.02.10.1501",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/wp-proud-admin-menu.git",
-                    "reference": "2025.12.04.1114"
+                    "reference": "2026.02.10.1501"
                 }
             }
         },
@@ -314,11 +314,11 @@
             "package": {
                 "name": "proudcity/wp-proud-admin",
                 "type": "wordpress-plugin",
-                "version": "2026.02.09.1156",
+                "version": "2026.02.10.1448",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-admin.git",
-                    "reference": "2026.02.09.1156"
+                    "reference": "2026.02.10.1448"
                 }
             }
         },
@@ -470,11 +470,11 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "2026.02.09.1018",
+                "version": "2026.02.10.0951",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
-                   "reference": "2026.02.09.1018"
+                   "reference": "2026.02.10.0951"
                 }
             }
         }
@@ -542,13 +542,13 @@
         "proudcity/wp-proud-map-app": "1.134.0",
         "proudcity/wp-proud-social-app": "1.134.0",
         "proudcity/wp-proud-actions-app": "2026.01.13.1549",
-        "proudcity/wp-proud-admin": "2026.02.09.1156",
-        "proudcity/wp-proud-admin-menu": "2025.12.04.1114",
+        "proudcity/wp-proud-admin": "2026.02.10.1448",
+        "proudcity/wp-proud-admin-menu": "2026.02.10.1501",
         "proudcity/wp-proud-admin-theme": "2024.11.14.1330",
         "proudcity/wp-proud-seeclickfix": "1.134.0",
         "proudcity/wp-proud-dashboard": "2025.05.13.1151",
         "proudcity/wp-proud-subsite": "1.134.0",
-        "proudcity/wp-proud-theme": "2026.02.09.1018",
+        "proudcity/wp-proud-theme": "2026.02.10.0951",
         "proudcity/wp-proud-ip-block": "2022.11.08.1334"
     },
     "require-dev": {
