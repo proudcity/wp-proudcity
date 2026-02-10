@@ -10,8 +10,6 @@ assignees: curtismchale
 
 ### Events Manager
 
-**Staying on 7.1.7 because 7.2.1 is broken in multiple ways**
-
 - after #2691 we found there is a bug where Events Manager gets over zealous with modifying post type content. [This forum thread](https://wordpress.org/support/topic/wpml-issue-with-eventsmanager/) provided a fix to stop EM from messing with post titles that it doesn't own.
 - [ ] Check `em-event-post.php` line `49` to make sure it excludes posts that are not events
   - should be this code: `$is_post_type = (Archetypes::is_repeating( $post_type ) ? Archetypes::get_repeating_archetype( $post_type ) : ($post_type == "event")) ? $post_type : false;`

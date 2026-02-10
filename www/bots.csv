@@ -48,7 +48,7 @@ Bytespider
 PetalBot
 
 # Baidu
-Baiduspider
+Baidu
 
 # Yandex
 YandexBot
@@ -79,3 +79,7 @@ RecordedFuture-ASI
 HeadlessChrome
 ultimate_sitemap_parser
 undici
+BacklinksExtendedBot
+
+# Hugging face
+FinepdfsBot
