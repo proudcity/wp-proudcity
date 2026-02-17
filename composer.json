@@ -15,11 +15,11 @@
             "package": {
                 "name": "proudcity/wp-media-folder",
                 "type": "wordpress-plugin",
-                "version": "6.1.9",
+                "version": "6.1.11",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/wp-media-folder.git",
-                    "reference": "6.1.9"
+                    "reference": "6.1.11"
                 }
             }
         },
@@ -158,11 +158,11 @@
             "package": {
                 "name": "proudcity/gravityformsstripe",
                 "type": "wordpress-plugin",
-                "version": "6.0.2.1",
+                "version": "6.0.3",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityformsstripe.git",
-                    "reference": "6.0.2.1"
+                    "reference": "6.0.3"
                 }
             }
         },
@@ -171,11 +171,11 @@
             "package": {
                 "name": "proudcity/gravityforms",
                 "type": "wordpress-plugin",
-                "version": "2.9.26",
+                "version": "2.9.27",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityforms.git",
-                    "reference": "2.9.26"
+                    "reference": "2.9.27"
                 }
             }
         },
@@ -482,20 +482,20 @@
     "require": {
         "php": ">=8.0",
         "composer/installers": "1.*",
-        "johnpbloch/wordpress": "6.9",
+        "johnpbloch/wordpress": "6.9.1",
         "proudcity/auth0": "3.4.1",
-        "proudcity/wp-media-folder": "6.1.9",
+        "proudcity/wp-media-folder": "6.1.11",
         "proudcity/proudcity-link-scanner": "1.0",
-        "proudcity/gravityforms": "2.9.26",
+        "proudcity/gravityforms": "2.9.27",
         "proudcity/gravityformsrecaptcha": "2.1.0",
         "proudcity/gravityformssignature": "4.3",
-        "proudcity/gravityformsstripe": "6.0.2.1",
+        "proudcity/gravityformsstripe": "6.0.3",
         "proudcity/gravityformssurvey": "4.2.1",
         "proudcity/gravityformszapier": "4.2",
         "wp-api/rest-filter": "1.0",
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",
         "wpackagist-plugin/disable-comments": "2.6.2",
-        "wpackagist-plugin/wordpress-seo": "26.8",
+        "wpackagist-plugin/wordpress-seo": "27.0",
         "wpackagist-plugin/gravitate-encryption": "1.0.4",
         "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
         "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
@@ -506,11 +506,11 @@
         "wpackagist-plugin/edit-flow": "0.10.3",
         "wpackagist-plugin/wp-sitemap-page": "1.9.5",
         "wpackagist-plugin/default-featured-image": "1.8.2",
-        "wpackagist-plugin/google-site-kit": "1.171.0",
+        "wpackagist-plugin/google-site-kit": "1.172.0",
         "wpackagist-plugin/classic-editor": "1.6.7",
         "wpackagist-plugin/classic-widgets": "0.3",
         "wpackagist-plugin/siteorigin-panels": "2.33.5",
-        "wpackagist-plugin/so-widgets-bundle": "1.70.4",
+        "wpackagist-plugin/so-widgets-bundle": "1.71.0",
         "wpackagist-plugin/gtranslate": "3.0.9",
         "proudcity/simple-staff-list": "2.2.5.1",
         "wpackagist-plugin/events-manager": "7.2.3.1",
