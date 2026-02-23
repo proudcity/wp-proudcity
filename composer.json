@@ -403,6 +403,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-proud-service-list",
+                "type": "wordpress-plugin",
+                "version": "2026.02.09.1018",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-proud-service-list.git",
+                    "reference": "2026.02.09.1018"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-analytics",
                 "type": "wordpress-plugin",
                 "version": "2024.11.25.1358",
@@ -513,6 +526,7 @@
         "wpackagist-plugin/fix-alt-text": "1.9.1",
         "proudcity/mce-table-buttons": "dev-master",
         "proudcity/wp-proud-analytics": "2024.11.25.1358",
+        "proudcity/wp-proud-service-list": "2026.02.09.1018",
         "wpackagist-plugin/wp-fullcalendar": "1.6",
         "proudcity/intuitive-custom-post-order": "2023.12.15.0923",
         "proudcity/proudcity-quick-menu": "2023.09.26.1052",
