@@ -197,11 +197,11 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "2026.03.24.1601",
+                "version": "2026.03.25.1601",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
-                    "reference": "2026.03.24.1601"
+                    "reference": "2026.03.25.1601"
                 }
             }
         },
@@ -314,11 +314,11 @@
             "package": {
                 "name": "proudcity/wp-proud-topic",
                 "type": "wordpress-plugin",
-                "version": "2026.03.25.1142",
+                "version": "2026.03.25.1600",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-topic.git",
-                    "reference": "2026.03.25.1142"
+                    "reference": "2026.03.25.1600"
                 }
             }
         },
@@ -496,11 +496,11 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "2026.03.24.1554",
+                "version": "2026.03.25.1603",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
-                    "reference": "2026.03.24.1554"
+                    "reference": "2026.03.25.1603"
                 }
             }
         }
@@ -556,7 +556,7 @@
         "wpackagist-plugin/wp-fullcalendar": "1.6",
         "proudcity/intuitive-custom-post-order": "2023.12.15.0923",
         "proudcity/proudcity-quick-menu": "2023.09.26.1052",
-        "proudcity/wp-proud-core": "2026.03.24.1601",
+        "proudcity/wp-proud-core": "2026.03.25.1601",
         "proudcity/wp-proud-agency": "2026.02.02.1542",
         "proudcity/wp-proud-search": "2025.10.30.1256",
         "proudcity/wp-proud-search-elastic": "2025.12.17.0700",
@@ -568,14 +568,14 @@
         "proudcity/wp-proud-map-app": "1.134.0",
         "proudcity/wp-proud-social-app": "1.134.0",
         "proudcity/wp-proud-actions-app": "2026.01.13.1549",
-        "proudcity/wp-proud-admin": "2026.03.06.1546",
-        "proudcity/wp-proud-topic": "2026.03.25.1142",
+        "proudcity/wp-proud-topic": "2026.03.25.1600",
+        "proudcity/wp-proud-admin": "2026.03.05.1750",
         "proudcity/wp-proud-admin-menu": "2026.03.18.0902",
         "proudcity/wp-proud-admin-theme": "2024.11.14.1330",
         "proudcity/wp-proud-seeclickfix": "1.134.0",
         "proudcity/wp-proud-dashboard": "2025.05.13.1151",
         "proudcity/wp-proud-subsite": "1.134.0",
-        "proudcity/wp-proud-theme": "2026.03.24.1554",
+        "proudcity/wp-proud-theme": "2026.03.25.1603",
         "proudcity/wp-proud-ip-block": "2022.11.08.1334"
     },
     "require-dev": {
