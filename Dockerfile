@@ -20,7 +20,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd --with-jpeg \
     && docker-php-ext-install gd mysqli opcache bcmath \
-    && a2enmod rewrite expires
+    && a2enmod rewrite expires headers
 
 RUN pecl install mcrypt-1.0.6
 
