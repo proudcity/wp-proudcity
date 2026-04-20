@@ -52,19 +52,6 @@
         {
             "type": "package",
             "package": {
-                "name": "proudcity/gtranslate",
-                "type": "wordpress-plugin",
-                "version": "2025.09.29.1334",
-                "source": {
-                    "type": "git",
-                    "url": "git@github.com:/proudcity/gtranslate.git",
-                    "reference": "2025.09.29.1334"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "proudcity/simple-staff-list",
                 "type": "wordpress-plugin",
                 "version": "2.2.5.1",
@@ -577,12 +564,6 @@
         "proudcity/wp-proud-subsite": "1.134.0",
         "proudcity/wp-proud-theme": "2026.04.20.1110",
         "proudcity/wp-proud-ip-block": "2022.11.08.1334"
-    },
-    "require-dev": {
-        "wpackagist-plugin/debug-bar": "*",
-        "wpackagist-plugin/debug-bar-slow-actions": "*",
-        "wpackagist-plugin/user-role-editor": "*",
-        "wpackagist-plugin/debug-bar-console": "*"
     },
     "extra": {
         "installer-paths": {
