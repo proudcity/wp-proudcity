@@ -1,12 +1,8 @@
+# syntax=docker/dockerfile:1
 FROM php:8.2-apache-bookworm
 
-# Add Github private repo key
-ARG SSH_KEY
-RUN mkdir -p /root/.ssh \
-    && echo "${SSH_KEY}" >> /root/.ssh/id_rsa \
-    && chmod 400 /root/.ssh/id_rsa
+RUN mkdir -p /root/.ssh
 COPY etc/known_hosts.github /root/.ssh/known_hosts
-RUN ls /root/.ssh && cat /root/.ssh/id_rsa
 
 # setup cgroupv2
 RUN mkdir -p /etc/sysctl.d/
@@ -59,7 +55,7 @@ WORKDIR /app
 # Install composer.json file
 RUN curl -k -o /tmp/composer.phar https://getcomposer.org/download/2.8.3/composer.phar \
     && mv /tmp/composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
-RUN php -dmemory_limit=128M /usr/local/bin/composer install
+RUN --mount=type=ssh php -dmemory_limit=128M /usr/local/bin/composer install
 
 # Explode out the gravityforms plugins in modules/*
 #RUN   cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins && rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
