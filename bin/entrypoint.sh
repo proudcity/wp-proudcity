@@ -7,6 +7,13 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     # Fail silently if a git repo fails to clone
     set +e
 
+    # Write SSH key so git can clone private GitHub repos
+    if [[ $GITHUB_SSH_KEY ]]; then
+        mkdir -p /root/.ssh
+        printf '%s\n' "${GITHUB_SSH_KEY}" >/root/.ssh/id_rsa
+        chmod 600 /root/.ssh/id_rsa
+    fi
+
     # Add gcloud
     echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >>$HOME/.netrc
 
@@ -44,6 +51,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     fi
 
     # Add custom plugins, comma separated. Ensure that we fail silently.
+    # just need to trigger a full new build
     if [[ $WORDPRESS_PLUGINS ]]; then
         cd /app/wordpress/wp-content/plugins
         export IFS=","

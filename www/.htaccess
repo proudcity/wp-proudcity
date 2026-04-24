@@ -5,7 +5,7 @@
     RewriteRule ^ - [F,L]
 </IfModule>
 
-# Block Recorded Future scanner
+# Block HeadlessChrome
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{HTTP_USER_AGENT} "HeadlessChrome" [NC]

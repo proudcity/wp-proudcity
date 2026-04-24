@@ -27,6 +27,7 @@ Google-InspectionTool
 # Meta
 Meta-ExternalAgent
 Meta-ExternalFetcher
+meta-webindexer
 
 # Microsoft
 bingbot
