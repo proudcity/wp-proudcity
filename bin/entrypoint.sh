@@ -10,7 +10,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     # Write SSH key so git can clone private GitHub repos
     if [[ $GITHUB_SSH_KEY ]]; then
         mkdir -p /root/.ssh
-        echo "${GITHUB_SSH_KEY}" > /root/.ssh/id_rsa
+        printf '%s\n' "${GITHUB_SSH_KEY}" > /root/.ssh/id_rsa
         chmod 600 /root/.ssh/id_rsa
     fi
 
