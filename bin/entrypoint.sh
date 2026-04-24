@@ -7,6 +7,13 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     # Fail silently if a git repo fails to clone
     set +e
 
+    # Write SSH key so git can clone private GitHub repos
+    if [[ $GITHUB_SSH_KEY ]]; then
+        mkdir -p /root/.ssh
+        echo "${GITHUB_SSH_KEY}" > /root/.ssh/id_rsa
+        chmod 600 /root/.ssh/id_rsa
+    fi
+
     # Add gcloud
     echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >>$HOME/.netrc
 
