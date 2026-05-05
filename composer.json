@@ -15,11 +15,11 @@
             "package": {
                 "name": "filetoweb/filetoweb-integration",
                 "type": "wordpress-plugin",
-                "version": "0.1.1",
+                "version": "0.1.2",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/FileToWeb/filetoweb-integration.git",
-                    "reference": "0.1.1"
+                    "reference": "0.1.2"
                 }
             }
         },
@@ -508,7 +508,7 @@
     "require": {
         "php": ">=8.0",
         "composer/installers": "1.*",
-        "filetoweb/filetoweb-integration": "0.1.1",
+        "filetoweb/filetoweb-integration": "0.1.2",
         "johnpbloch/wordpress": "6.9.4",
         "proudcity/auth0": "3.4.1",
         "proudcity/wp-media-folder": "6.2.2",
