@@ -13,6 +13,19 @@
         {
             "type": "package",
             "package": {
+                "name": "filetoweb/filetoweb-integration",
+                "type": "wordpress-plugin",
+                "version": "0.1.4",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/FileToWeb/filetoweb-integration.git",
+                    "reference": "0.1.4"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-media-folder",
                 "type": "wordpress-plugin",
                 "version": "6.2.2",
@@ -495,6 +508,7 @@
     "require": {
         "php": ">=8.0",
         "composer/installers": "1.*",
+        "filetoweb/filetoweb-integration": "0.1.4",
         "johnpbloch/wordpress": "6.9.4",
         "proudcity/auth0": "3.4.2",
         "proudcity/wp-media-folder": "6.2.2",
