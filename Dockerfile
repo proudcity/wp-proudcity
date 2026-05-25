@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM php:8.2-apache-bookworm
+FROM php:8.3-apache-bookworm
 
 RUN mkdir -p /root/.ssh
 COPY etc/known_hosts.github /root/.ssh/known_hosts
@@ -18,7 +18,7 @@ RUN apt-get update \
     && docker-php-ext-install gd mysqli opcache bcmath \
     && a2enmod rewrite expires headers
 
-RUN pecl install mcrypt-1.0.6
+RUN pecl install mcrypt-1.0.7
 
 # install phpredis extension
 # From http://stackoverflow.com/questions/31369867/how-to-install-php-redis-extension-using-the-official-php-docker-image-approach
