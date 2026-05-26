@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM php:8.3-apache-bookworm
+FROM php:8.3-apache-trixie
 
 RUN mkdir -p /root/.ssh
 COPY etc/known_hosts.github /root/.ssh/known_hosts
