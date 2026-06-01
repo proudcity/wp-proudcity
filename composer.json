@@ -223,11 +223,11 @@
             "package": {
                 "name": "proudcity/wp-proud-search-elastic",
                 "type": "wordpress-plugin",
-                "version": "2026.05.04.1644",
+                "version": "2026.06.01.1513",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-search-elastic.git",
-                    "reference": "2026.05.04.1644"
+                    "reference": "2026.06.01.1513"
                 }
             }
         },
