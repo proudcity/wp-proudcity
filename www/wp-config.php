@@ -103,6 +103,9 @@ if (getenv('ELASTICSEARCH_HOST')) {
 if (getenv('ELASTICSEARCH_DOCS_HOST')) {
     define('EP_HELPER_HOST', 'http://' . getenv('ELASTICSEARCH_DOCS_HOST') . '/send-attachments');
 }
+if (getenv('ELASTICSEARCH_DOCS_AUTH_HOST')) {
+    define('EP_HELPER_AUTH_HOST', 'http://' . getenv('ELASTICSEARCH_DOCS_AUTH_HOST') . '/send-attachments-auth');
+}
 if (getenv('ELASTICSEARCH_DOCS_USER')) {
     define('EP_HELPER_USER', getenv('ELASTICSEARCH_DOCS_USER'));
 }
