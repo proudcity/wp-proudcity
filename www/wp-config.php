@@ -103,6 +103,12 @@ if (getenv('ELASTICSEARCH_HOST')) {
 if (getenv('ELASTICSEARCH_DOCS_HOST')) {
     define('EP_HELPER_HOST', 'http://' . getenv('ELASTICSEARCH_DOCS_HOST') . '/send-attachments');
 }
+if (getenv('ELASTICSEARCH_DOCS_USER')) {
+    define('EP_HELPER_USER', getenv('ELASTICSEARCH_DOCS_USER'));
+}
+if (getenv('ELASTICSEARCH_DOCS_PASS')) {
+    define('EP_HELPER_PASS', getenv('ELASTICSEARCH_DOCS_PASS'));
+}
 
 define('DISALLOW_FILE_EDIT', true);
 define('DISALLOW_FILE_MODS', true);
