@@ -416,6 +416,19 @@
         {
             "type": "package",
             "package": {
+                "name": "proudcity/wp-stateless-gravity-forms-addon",
+                "type": "wordpress-plugin",
+                "version": "dev-latest",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/proudcity/wp-stateless-gravity-forms-addon.git",
+                    "reference": "1870d7e233fc4bf7a9341dbb4227469c2cf198c7"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "proudcity/wp-proud-service-list",
                 "type": "wordpress-plugin",
                 "version": "2026.03.31.1116",
@@ -535,7 +548,7 @@
         "wpackagist-plugin/redis-cache": "2.8.0",
         "wpackagist-plugin/elasticpress": "5.3.3",
         "wpackagist-plugin/wp-stateless": "4.4.1",
-        "wpackagist-plugin/wp-stateless-gravity-forms-addon": "0.0.3",
+        "proudcity/wp-stateless-gravity-forms-addon": "dev-latest",
         "wpackagist-plugin/fix-alt-text": "1.9.1",
         "proudcity/mce-table-buttons": "dev-master",
         "proudcity/wp-proud-analytics": "2026.05.12.0953",
