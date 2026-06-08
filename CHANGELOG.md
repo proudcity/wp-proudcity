@@ -1,3 +1,10 @@
+## 2026-06-03
+
+- Switched `wp-stateless-gravity-forms-addon` from wpackagist to the `proudcity/wp-stateless-gravity-forms-addon` fork (composer.json, commits 90907fb and d13bd8b) to pull in the GF 2.10 JSON storage fix. The fork's `fix/gf-2.10-json-storage` branch (v0.0.4) detects the actual value shape rather than relying on `$field->multipleFiles`, so single-file fields now sync to GCS correctly under GF 2.10+. Also fixes a latent `modify_db()` bug that silently dropped Sync-tab URL rewrites. Upstream PR filed at udx/wp-stateless-gravity-forms-addon#16. Switch back to wpackagist once upstream ships a release > 0.0.3 with the fix (checklist in `.github/ISSUE_TEMPLATE/core-plugin-update.md`).
+- Added "WP-Stateless Gravity Forms Addon" section to `.github/ISSUE_TEMPLATE/core-plugin-update.md` documenting fork-pull steps and a reminder checkbox to revert to wpackagist once upstream merges.
+
+References: https://github.com/proudcity/wp-proudcity/issues/2831
+
 ## 2026-06-01
 
 - Added `disable-gf-stripe-rate-limit.php` mu-plugin (b32acb4) to immediately disable the GF Stripe per-IP rate limiter via `gform_stripe_enable_rate_limits`, preventing shared internal k8s node IPs from tripping a platform-wide lockout. Stripe Radar server-side fraud checks remain active.

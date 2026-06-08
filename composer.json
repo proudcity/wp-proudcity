@@ -422,7 +422,7 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-stateless-gravity-forms-addon.git",
-                    "reference": "1870d7e233fc4bf7a9341dbb4227469c2cf198c7"
+                    "reference": "68f7bee91664a472f14cc505eff544a55a1f46da"
                 }
             }
         },
