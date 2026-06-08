@@ -17,4 +17,5 @@ wp cache flush --allow-root
 
 # enable redis requires the Redis Cache plugin to be active
 echo "Enabling Redis"
+wp plugin activate redis-cache --allow-root
 wp redis enable --allow-root
