@@ -42,10 +42,9 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     # Add custom themes, comma separated. Ensure that we fail silently.
     if [[ $WORDPRESS_THEMES ]]; then
         cd /app/wordpress/wp-content/themes
-        export IFS=","
-        for s in $WORDPRESS_THEMES; do
-            cmd="git clone ${s}"
-            eval $cmd
+        IFS=',' read -ra themes <<< "$WORDPRESS_THEMES"
+        for s in "${themes[@]}"; do
+            git clone -- "$s"
             echo "Adding theme repo: ${s} in $(pwd)"
         done
     fi
@@ -54,10 +53,9 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     # just need to trigger a full new build
     if [[ $WORDPRESS_PLUGINS ]]; then
         cd /app/wordpress/wp-content/plugins
-        export IFS=","
-        for s in $WORDPRESS_PLUGINS; do
-            cmd="git clone ${s}"
-            eval $cmd
+        IFS=',' read -ra plugins <<< "$WORDPRESS_PLUGINS"
+        for s in "${plugins[@]}"; do
+            git clone -- "$s"
             echo "Adding plugin repo: ${s} in $(pwd)"
         done
     fi
@@ -65,10 +63,9 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     # Add wordpress.org plugins, comma separated
     if [[ $WORDPRESSORG_PLUGINS ]]; then
         cd /app/wordpress/wp-content/plugins
-        export IFS=","
-        for s in $WORDPRESSORG_PLUGINS; do
-            cmd="curl -O -L http://downloads.wordpress.org/plugin/${s}.zip && unzip ${s}.zip && rm ${s}.zip"
-            eval $cmd
+        IFS=',' read -ra org_plugins <<< "$WORDPRESSORG_PLUGINS"
+        for s in "${org_plugins[@]}"; do
+            curl -O -L "http://downloads.wordpress.org/plugin/${s}.zip" && unzip "${s}.zip" && rm "${s}.zip"
             echo "Adding WP.org plugin: ${s} in $(pwd)"
         done
     fi
