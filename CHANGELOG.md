@@ -1,3 +1,15 @@
+## 2026-06-11
+
+- Removed the plaintext `.netrc` credential write from `bin/entrypoint.sh` (the `echo "machine source.developers.google.com ..."` line) along with ~18 lines of dead commented-out Google Cloud Source Repos clone code (gravity forms, wp-media-folder, the polling `until` loop). The credential was written to support a `gravityview` clone on `solanocountyca`, but that plugin is no longer installed anywhere. Eliminating the write removes a plaintext token that previously sat on `/root/.netrc` for the lifetime of every WP pod — readable by any in-container process, compounded by the container running as root (PCD186).
+
+References: https://github.com/proudcity/pc-dev-issues/issues/191
+
+## 2026-06-11
+
+- Removed `eval` from three loops in `bin/entrypoint.sh` that built shell commands from the `WORDPRESS_THEMES`, `WORDPRESS_PLUGINS`, and `WORDPRESSORG_PLUGINS` env vars. Replaced the `IFS=","` + `for s in $VAR` + `eval $cmd` pattern with `IFS=',' read -ra arr <<< "$VAR"; for s in "${arr[@]}"` (scopes IFS to the read, quotes the iteration variable) and direct command execution: `git clone -- "$s"` (the `--` defends against argument injection per CVE-2018-17456) and the curl/unzip/rm chain with all `${s}` references quoted. Eliminates a root-level RCE primitive — anyone who could write those env vars via a k8s ConfigMap could previously inject arbitrary shell commands. (commit `ca548bc`)
+
+References: https://github.com/proudcity/pc-dev-issues/issues/188
+
 ## 2026-06-01
 
 - PCD269: wired `EP_HELPER_USER` and `EP_HELPER_PASS` env-to-constant glue in `wp-config.php` so the WP plugin can send HTTP Basic Auth to the docsapi (commits `dbfb595`, `5ac25ec`, `43e1448`). Required bumping `wp-proud-search-elastic` in all three places in composer.json (top-level `require`, `repositories[].package.version`, and `repositories[].package.source.reference`) to plugin tag `2026.06.01.1513`.

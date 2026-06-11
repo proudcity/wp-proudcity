@@ -1,8 +1,9 @@
 # syntax=docker/dockerfile:1
 FROM php:8.3-apache-trixie
 
-RUN mkdir -p /root/.ssh
-COPY etc/known_hosts.github /root/.ssh/known_hosts
+RUN mkdir -p /var/www/.ssh
+COPY etc/known_hosts.github /var/www/.ssh/known_hosts
+RUN chown -R www-data:www-data /var/www/.ssh && chmod 700 /var/www/.ssh && chmod 644 /var/www/.ssh/known_hosts
 
 # setup cgroupv2
 RUN mkdir -p /etc/sysctl.d/
@@ -39,6 +40,9 @@ RUN { \
 
 COPY etc/apache-vhost.conf /etc/apache2/sites-enabled/000-default.conf
 COPY etc/php.ini /usr/local/etc/php/php.ini
+
+# Apache must listen on an unprivileged port so the container can run as non-root (PCD186).
+RUN sed -i 's/^Listen 80$/Listen 8080/' /etc/apache2/ports.conf
 
 # For PCI scans this disables all our Apache information no matter how the scanner tries
 # to scan stuff, and trust me they do weird stuff I had to dig for to make it work.
@@ -96,9 +100,14 @@ RUN chmod 777 /app/wordpress/wp-content/cache
 
 RUN chmod -R a+rX /app/wordpress
 RUN chown -R www-data:www-data /app/wordpress
+RUN chown -R www-data:www-data /var/www
 
 # VOLUME /app/wordpress/wp-content/cache
-EXPOSE 80
+EXPOSE 8080
+
+ENV HOME=/var/www
+
+USER www-data
 
 # grr, ENTRYPOINT resets CMD now
 ENTRYPOINT ["/entrypoint.sh"]

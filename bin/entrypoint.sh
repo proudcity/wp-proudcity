@@ -9,31 +9,10 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
 
     # Write SSH key so git can clone private GitHub repos
     if [[ $GITHUB_SSH_KEY ]]; then
-        mkdir -p /root/.ssh
-        printf '%s\n' "${GITHUB_SSH_KEY}" >/root/.ssh/id_rsa
-        chmod 600 /root/.ssh/id_rsa
+        mkdir -p "$HOME/.ssh"
+        printf '%s\n' "${GITHUB_SSH_KEY}" >"$HOME/.ssh/id_rsa"
+        chmod 600 "$HOME/.ssh/id_rsa"
     fi
-
-    # Add gcloud
-    echo "machine source.developers.google.com login jeff@proudcity.com password ${GOOGLE_GIT_TOKEN}" >>$HOME/.netrc
-
-    # making sure google repositories exist
-    #until $( curl --output /dev/null --silent --head --fail https://source.developers.google.com ); do
-    #  echo 'Google repository not available'
-    #  sleep 5
-    #done
-
-    #echo 'Google repository available'
-
-    # Install Gravity Forms
-    #echo "Exploding Gravity Forms"
-    #git clone https://source.developers.google.com/p/proudcity-1184/r/gravityforms /app/wordpress/wp-content/plugins/gravityforms
-    # @todo: `mv` doesn't work because of a Docker FS bug: https://github.com/docker/docker/issues/4570
-    #cp -r /app/wordpress/wp-content/plugins/gravityforms/modules/* /app/wordpress/wp-content/plugins
-    #rm -r /app/wordpress/wp-content/plugins/gravityforms/modules
-
-    #echo "Adding JoomUnited plugins"
-    #git clone https://source.developers.google.com/p/proudcity-1184/r/wp-media-folder /app/wordpress/wp-content/plugins/wp-media-folder
 
     # Install other non-free plugins
     echo "Adding non-free plugins"
@@ -198,7 +177,7 @@ export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 
 # enable redis requires the Redis Cache plugin to be active
 echo "Enabling Redis"
-wp plugin activate redis-cache --allow-root
-wp redis enable --allow-root
+wp plugin activate redis-cache
+wp redis enable
 
 exec "$@"
