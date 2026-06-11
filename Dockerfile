@@ -1,6 +1,14 @@
 # syntax=docker/dockerfile:1
 FROM php:8.3-apache-trixie
 
+# known_hosts at /root/.ssh is needed during build for the composer install step,
+# which runs as root with --mount=type=ssh and clones private repos over SSH.
+RUN mkdir -p /root/.ssh
+COPY etc/known_hosts.github /root/.ssh/known_hosts
+
+# At runtime the entrypoint runs as www-data (PCD186) and writes id_rsa to
+# $HOME/.ssh; mirror known_hosts there so private-plugin clones still validate
+# the github.com host key.
 RUN mkdir -p /var/www/.ssh
 COPY etc/known_hosts.github /var/www/.ssh/known_hosts
 RUN chown -R www-data:www-data /var/www/.ssh && chmod 700 /var/www/.ssh && chmod 644 /var/www/.ssh/known_hosts
