@@ -1,6 +1,11 @@
 RELEASE=${1}
 
-bash /app/updates/release-${RELEASE}.sh
+if [[ ! "$RELEASE" =~ ^[0-9]{4}\.[0-9]{2}\.[0-9]{2}\.[0-9]{4}$ ]]; then
+    echo "Invalid release format" >&2
+    exit 1
+fi
+
+bash "/app/updates/release-${RELEASE}.sh"
 if [ -z "$RELEASE" ]; then
     wp option update proud_release $RELEASE --allow-root
 fi
