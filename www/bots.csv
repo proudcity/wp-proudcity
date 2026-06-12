@@ -91,3 +91,7 @@ Brightbot
 
 # AlertMedia
 rss-monitor
+
+# Stale-UA content scrapers (Chrome 30 was released in 2013 — effectively zero
+# legitimate users on it; observed hammering sonomaca news pages 2026-06-12)
+Chrome/30\.
