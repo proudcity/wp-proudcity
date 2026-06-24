@@ -117,6 +117,30 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
         rm -f "$tmp_block"
     fi
 
+    # Route /robots.txt through WordPress so the proud-robots.php mu-plugin owns the output (wp-proudcity#2846)
+    tmp_htaccess="$(mktemp)"
+    tmp_block="$(mktemp)"
+
+    # Remove any previous managed block to avoid duplicates on restart
+    sed '/^# BEGIN Managed: Dynamic robots.txt$/,/^# END Managed: Dynamic robots.txt$/d' "$htaccess" >"$tmp_htaccess"
+    mv "$tmp_htaccess" "$htaccess"
+
+    {
+        echo "# BEGIN Managed: Dynamic robots.txt"
+        echo "<IfModule mod_rewrite.c>"
+        echo "RewriteEngine On"
+        echo "RewriteRule ^robots\\.txt\$ /index.php [L]"
+        echo "</IfModule>"
+        echo "# END Managed: Dynamic robots.txt"
+        echo ""
+    } >"$tmp_block"
+
+    cat "$tmp_block" "$htaccess" >"$tmp_htaccess"
+    mv "$tmp_htaccess" "$htaccess"
+    rm -f "$tmp_block"
+
+    echo "Added dynamic robots.txt rewrite to top of ${htaccess}"
+
     htaccess=/app/wordpress/.htaccess
     # Add domain redirects to .htaccess as CSV (from, to) with newlines between each redirect
     if [[ $REDIRECTS ]]; then
@@ -145,31 +169,10 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
 
 fi
 
-# creating dynamic robots.txt file
-robots=/app/wordpress/robots.txt
-if [[ $HOST ]]; then
-    cd /app/wordpress
-    echo "# START YOAST BLOCK" >>$robots
-    echo "# ----" >>$robots
-    echo "User-agent: *" >>$robots
-    echo "Disallow: /wp-content/redis-error.php" >>$robots
-    echo "User-agent: ShapBot" >>$robots
-    echo "Disallow: /" >>$robots
-    echo "User-agent: Amazonbot" >>$robots
-    echo "Disallow: /" >>$robots
-    echo "User-agent: rogerbot" >>$robots
-    echo "Disallow: /" >>$robots
-    echo "User-agent: dotbot" >>$robots
-    echo "Disallow: /" >>$robots
-    echo "User-agent: MJ12bot" >>$robots
-    echo "Disallow: /" >>$robots
-    echo "User-agent: RecordedFuture-ASI" >>$robots
-    echo "Disallow: /" >>$robots
-    echo " " >>$robots
-    echo "Sitemap: https://${HOST}/sitemap_index.xml" >>$robots
-    echo "# ----" >>$robots
-    echo "# END YOAST BLOCK" >>$robots
-fi
+# robots.txt is owned by the proud-robots.php mu-plugin via WordPress's robots_txt filter
+# (wp-proudcity#2846). Remove any leftover physical file so Apache doesn't serve it
+# before WP gets the request.
+rm -f /app/wordpress/robots.txt
 
 # Set up php.ini config defaults
 export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"128M"}
