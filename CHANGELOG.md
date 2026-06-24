@@ -1,3 +1,10 @@
+## 2026-06-24
+
+- Added `proud-robots.php` mu-plugin to append expensive-path `Disallow` rules to every tenant's `robots.txt` via the `robots_txt` filter (priority 10, before Yoast's priority-99999 sitemap append). A generic `User-agent: *` block covers Googlebot and any other compliant crawler; named blocks for Applebot, Bingbot, YandexBot, and DuckDuckBot add `Crawl-delay: 10` plus the same path list. Initial disallow set: `/search-site`, `/search-site/*`, `/*?pager=`, `/*?s=`, `/page/*/?s=`, `/events/page/*/`, `/locations/page/*/`, `/documents/page/*/`. Googlebot obeys the `*` block but gets no `Crawl-delay` (Google ignores it). Applebot and Bingbot are currently hard-blocked via `bots.csv` before they can fetch `robots.txt`; this rule is belt-and-suspenders and effective for any future state where that block is relaxed. Server-side ingress enforcement is tracked as pc-dev-issues#297.
+
+References: https://github.com/proudcity/wp-proudcity/issues/2846
+References: https://github.com/proudcity/pc-dev-issues/issues/297
+
 ## 2026-06-11
 
 - Removed the plaintext `.netrc` credential write from `bin/entrypoint.sh` (the `echo "machine source.developers.google.com ..."` line) along with ~18 lines of dead commented-out Google Cloud Source Repos clone code (gravity forms, wp-media-folder, the polling `until` loop). The credential was written to support a `gravityview` clone on `solanocountyca`, but that plugin is no longer installed anywhere. Eliminating the write removes a plaintext token that previously sat on `/root/.netrc` for the lifetime of every WP pod — readable by any in-container process, compounded by the container running as root (PCD186).
