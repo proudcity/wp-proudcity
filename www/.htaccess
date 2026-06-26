@@ -12,6 +12,17 @@
     RewriteRule ^ - [F,L]
 </IfModule>
 
+# Block backdoor/webshell scanner probes for non-existent root-level scripts (issue #2847).
+# Real WP entry points (index/wp-login/wp-cron/xmlrpc.php) exist on disk, so the !-f guard lets them pass.
+# Root-level single-segment paths only (^[^/]+\.) — cannot match /wp-admin/*.php or /wp-includes/*.php.
+# Must live here (not the vhost <Directory> block): this .htaccess defines its own rewrite
+# context, which overrides the vhost rewrite rules, so a vhost-placed rule never fires.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^[^/]+\.(php|phtml|php[0-9]?|asp|aspx|jsp|cgi|pl)$ - [F,L]
+</IfModule>
+
 # BEGIN WP Rocket v3.10.9
 # Use UTF-8 encoding for anything served text/plain or text/html
 AddDefaultCharset UTF-8
