@@ -41,11 +41,11 @@
             "package": {
                 "name": "proudcity/intuitive-custom-post-order",
                 "type": "wordpress-plugin",
-                "version": "2023.12.15.0923",
+                "version": "3.2.0",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/intuitive-custom-post-order.git",
-                    "reference": "2023.12.15.0923"
+                    "reference": "3.2.0"
                 }
             }
         },
@@ -554,7 +554,7 @@
         "proudcity/wp-proud-analytics": "2026.05.12.0953",
         "proudcity/wp-proud-service-list": "2026.03.31.1116",
         "wpackagist-plugin/wp-fullcalendar": "1.6",
-        "proudcity/intuitive-custom-post-order": "2023.12.15.0923",
+        "proudcity/intuitive-custom-post-order": "3.2.0",
         "proudcity/proudcity-quick-menu": "2026.06.25.1157",
         "proudcity/wp-proud-core": "2026.06.23.1455",
         "proudcity/wp-proud-agency": "2026.02.02.1542",
