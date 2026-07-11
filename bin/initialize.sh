@@ -22,16 +22,16 @@ echo "-------------"
 bash $thisdir/change-url.sh "$URL"
 
 cd /app/wordpress
-wp core update-db --allow-root
-#wp option update proud_stage $STAGE --allow-root
+wp core update-db
+#wp option update proud_stage $STAGE
 if [ "$initialize" == "true" ]; then
-    wp option delete google_analytics_key --allow-root
-    wp user delete demo@proudcity.com --reassign=admin --allow-root
-    echo "truncate table wp_rg_form_view;" | wp db cli --allow-root
+    wp option delete google_analytics_key
+    wp user delete demo@proudcity.com --reassign=admin
+    echo "truncate table wp_rg_form_view;" | wp db cli
 fi
 
 # Get blogname, location, images, service center settings from ProudCity City API.
 if  [[ !  -z  $LOCATION  ]]; then
-  wp plugin activate wp-proud-dashboard --allow-root
-  wp proudcity phonehome "$LOCATION" --allow-root
+  wp plugin activate wp-proud-dashboard
+  wp proudcity phonehome "$LOCATION"
 fi
