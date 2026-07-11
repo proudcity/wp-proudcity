@@ -9,9 +9,9 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
 
     # Write SSH key so git can clone private GitHub repos
     if [[ $GITHUB_SSH_KEY ]]; then
-        mkdir -p /root/.ssh
-        printf '%s\n' "${GITHUB_SSH_KEY}" >/root/.ssh/id_rsa
-        chmod 600 /root/.ssh/id_rsa
+        mkdir -p "$HOME/.ssh"
+        printf '%s\n' "${GITHUB_SSH_KEY}" >"$HOME/.ssh/id_rsa"
+        chmod 600 "$HOME/.ssh/id_rsa"
     fi
 
     # Install other non-free plugins
@@ -180,7 +180,7 @@ export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 
 # enable redis requires the Redis Cache plugin to be active
 echo "Enabling Redis"
-wp plugin activate redis-cache --allow-root
-wp redis enable --allow-root
+wp plugin activate redis-cache
+wp redis enable
 
 exec "$@"
