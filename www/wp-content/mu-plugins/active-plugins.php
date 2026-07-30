@@ -147,11 +147,11 @@ function proud_plugins_not_active(){
 		$missing[] = 'WP Media Folder';
 	}
 
-	// Auth0 is force-added to active_plugins by proud_force_auth0_active(), so an
-	// in_array() check would always pass. class_exists() catches the real failure
-	// mode: the plugin didn't load (files missing or fatal on include). Colma is
-	// excluded — Auth0 is intentionally off there, so don't alert.
-	if ( ! proud_is_colma() && ! class_exists( 'WP_Auth0' ) ) {
+	// Check active_plugins membership, same as the plugins above — reliable no
+	// matter when the class loads. proud_force_auth0_active() adds auth0 to this
+	// list when its files exist, so this trips only when the plugin is genuinely
+	// missing. Colma is excluded — Auth0 is intentionally off there.
+	if ( ! proud_is_colma() && ! in_array( 'auth0/WP_Auth0.php', $active_plugins ) ) {
 		$missing[] = 'Auth0 SSO';
 	}
 
