@@ -86,6 +86,12 @@ function proud_force_auth0_active( $plugins ){
 		$plugins = array();
 	}
 
+	// Colma (www.colma.ca.gov) has never had a working Auth0 integration, so
+	// don't force it on there — leave the active list untouched.
+	if ( proud_is_colma() ) {
+		return $plugins;
+	}
+
 	// Only add it if the plugin files are actually present, otherwise WP would
 	// try to include a missing file.
 	if ( ! in_array( $auth0, $plugins, true ) && file_exists( WP_PLUGIN_DIR . '/' . $auth0 ) ) {
@@ -95,6 +101,18 @@ function proud_force_auth0_active( $plugins ){
 	return $plugins;
 
 } // proud_force_auth0_active
+
+/**
+ * True when this site is Colma (www.colma.ca.gov).
+ *
+ * Colma has never had a working Auth0 setup, so it's excluded from both the
+ * force-active filter and the not-active Slack alert. Matches on the site's own
+ * home host rather than the request host so it holds on web, cron and WP-CLI.
+ */
+function proud_is_colma(){
+	$host = parse_url( home_url(), PHP_URL_HOST );
+	return ( 'www.colma.ca.gov' === $host || 'colma.ca.gov' === $host );
+} // proud_is_colma
 
 function test_email(){
     update_option( 'sfn_test','emailed'. time() );
@@ -131,8 +149,9 @@ function proud_plugins_not_active(){
 
 	// Auth0 is force-added to active_plugins by proud_force_auth0_active(), so an
 	// in_array() check would always pass. class_exists() catches the real failure
-	// mode: the plugin didn't load (files missing or fatal on include).
-	if ( ! class_exists( 'WP_Auth0' ) ) {
+	// mode: the plugin didn't load (files missing or fatal on include). Colma is
+	// excluded — Auth0 is intentionally off there, so don't alert.
+	if ( ! proud_is_colma() && ! class_exists( 'WP_Auth0' ) ) {
 		$missing[] = 'Auth0 SSO';
 	}
 
