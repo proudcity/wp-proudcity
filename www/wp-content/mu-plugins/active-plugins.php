@@ -61,7 +61,58 @@ function sfn_config_staging(){
  */
 function sfn_config_production(){
 	add_action( 'shutdown', 'proud_plugins_not_active', 999 );
+	add_filter( 'option_active_plugins', 'proud_force_auth0_active' );
 }
+
+/**
+ * Force the Auth0 SSO plugin to load on production, every request.
+ *
+ * A `pckube db-import` overwrites active_plugins with the source dump's list,
+ * and on affected sites a plain `wp plugin activate auth0` reported success but
+ * did not stick (non-persisting option write / stale object cache). With auth0
+ * inactive the ?auth0=1 callback has no handler, so SSO logins silently land on
+ * the homepage. Injecting the plugin into the active list at read time via the
+ * option_active_plugins filter guarantees it loads without depending on a DB
+ * write, so it survives both the import and any cache staleness.
+ *
+ * Production only (registered from sfn_config_production) — local/dev keep auth0
+ * deactivated on purpose via load-site.sh.
+ */
+function proud_force_auth0_active( $plugins ){
+
+	$auth0 = 'auth0/WP_Auth0.php';
+
+	if ( ! is_array( $plugins ) ) {
+		$plugins = array();
+	}
+
+	// Colma (www.colma.ca.gov) has never had a working Auth0 integration, so
+	// don't force it on there — leave the active list untouched.
+	if ( proud_is_colma() ) {
+		return $plugins;
+	}
+
+	// Only add it if the plugin files are actually present, otherwise WP would
+	// try to include a missing file.
+	if ( ! in_array( $auth0, $plugins, true ) && file_exists( WP_PLUGIN_DIR . '/' . $auth0 ) ) {
+		$plugins[] = $auth0;
+	}
+
+	return $plugins;
+
+} // proud_force_auth0_active
+
+/**
+ * True when this site is Colma (www.colma.ca.gov).
+ *
+ * Colma has never had a working Auth0 setup, so it's excluded from both the
+ * force-active filter and the not-active Slack alert. Matches on the site's own
+ * home host rather than the request host so it holds on web, cron and WP-CLI.
+ */
+function proud_is_colma(){
+	$host = parse_url( home_url(), PHP_URL_HOST );
+	return ( 'www.colma.ca.gov' === $host || 'colma.ca.gov' === $host );
+} // proud_is_colma
 
 function test_email(){
     update_option( 'sfn_test','emailed'. time() );
@@ -86,7 +137,25 @@ function proud_plugins_not_active(){
 
 	$active_plugins = get_option( 'active_plugins' );
 
-	if ( ! in_array( 'gravityforms/gravityforms.php', $active_plugins ) || ! in_array( 'wp-media-folder/wp-media-folder.php', $active_plugins ) ) {
+	$missing = array();
+
+	if ( ! in_array( 'gravityforms/gravityforms.php', $active_plugins ) ) {
+		$missing[] = 'Gravity Forms';
+	}
+
+	if ( ! in_array( 'wp-media-folder/wp-media-folder.php', $active_plugins ) ) {
+		$missing[] = 'WP Media Folder';
+	}
+
+	// Check active_plugins membership, same as the plugins above — reliable no
+	// matter when the class loads. proud_force_auth0_active() adds auth0 to this
+	// list when its files exist, so this trips only when the plugin is genuinely
+	// missing. Colma is excluded — Auth0 is intentionally off there.
+	if ( ! proud_is_colma() && ! in_array( 'auth0/WP_Auth0.php', $active_plugins ) ) {
+		$missing[] = 'Auth0 SSO';
+	}
+
+	if ( ! empty( $missing ) ) {
 
 		// need to
 		$emailed = get_transient( 'proud_admin_notified' );
@@ -97,7 +166,7 @@ function proud_plugins_not_active(){
 
             $curl = curl_init( $slack_key );
 
-            $m = 'Gravity Forms or WP Media Folder is not active on ' . get_bloginfo( 'name' ) .'! Link: ' . site_url();
+            $m = implode( ', ', $missing ) . ' not active on ' . get_bloginfo( 'name' ) .'! Link: ' . site_url();
 
             $message = array( 'payload' => json_encode( array( 'text' => $m ) ) );
 
