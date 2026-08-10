@@ -94,6 +94,13 @@ if (getenv('WP_REDIS_HOST')) {
     define('WP_REDIS_TIMEOUT', 2);
     define('WP_REDIS_READ_TIMEOUT', 2);
     define('WP_REDIS_DATABASE', getenv('WP_REDIS_DATABASE')); // two sites shouldn't share the same value here
+
+    // Only define this when the env is actually set. Pods on an unauthenticated
+    // Redis have no WP_REDIS_PASSWORD, and defining it empty makes the client
+    // send an AUTH the server will reject.
+    if (getenv('WP_REDIS_PASSWORD')) {
+        define('WP_REDIS_PASSWORD', getenv('WP_REDIS_PASSWORD'));
+    }
 }
 
 // Elasticpress / search settings
