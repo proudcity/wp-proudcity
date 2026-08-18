@@ -522,8 +522,6 @@
         "wpackagist-plugin/disable-xml-rpc": "1.0.1",
         "wpackagist-plugin/disable-comments": "2.8.0",
         "wpackagist-plugin/wordpress-seo": "28.2",
-        "wpackagist-plugin/gravity-forms-bootstrap-3-style": "0.3",
-        "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
         "wpackagist-plugin/safe-redirect-manager": "2.2.2",
         "wpackagist-plugin/iframe": "6.0",
         "wpackagist-plugin/say-what": "2.2.6",
