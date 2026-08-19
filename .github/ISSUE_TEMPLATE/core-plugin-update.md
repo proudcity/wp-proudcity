@@ -25,6 +25,20 @@ assignees: curtismchale
 
 - we [fixed magic vars](https://github.com/proudcity/simple-staff-list/commit/ac9f49753a87dd6952cc1f86068e1d236d9d15b6) which cause PHP errors
 
+### WP Media Folder
+
+- WPMF 6.2.6's "Upload folder" bulk uploader (`wp_ajax_wpmf_upload_folder` -> `WpmfMediaFolder::uploadFolder()`) bypasses `wp_handle_upload()` and only calls `wp_update_attachment_metadata()` for image/video/audio. WP Stateless offloads solely on that filter, so **every document uploaded through it stays on the pod's local disk and is destroyed on the next restart.** Duchesne County lost 338 meeting documents this way — see #2887
+- we disable the uploader in `wp-proud-core/plugin_override/wp-media-folder/proud-wp-media-folder.php`: the AJAX action is refused with a 403 and the injected "Upload folder" button is hidden with CSS. Covered by `wp-proud-core/tests/WpMediaFolderFolderUploadTest.php`
+- upstream report: TODO — add JoomUnited ticket URL
+- [ ] check whether the new release fixes all three defects in `class/class-main.php`. **All three must be fixed before re-enabling** — the metadata gate causes the data loss, but the other two cause silent overwrites and leave rejected files in a public directory:
+  1. **Metadata gate** — search for `$is_generate_metadata`. The fix is `wp_update_attachment_metadata()` being called unconditionally, the way core does at `wp-admin/includes/media.php:446`. If the `preg_match('!^image/!', ...)` / `wp_attachment_is('video'|'audio')` branches still gate it, the data-loss bug is still there
+  2. **Filename handling** — in `createFileFromChunks()`, the destination name must go through `sanitize_file_name()` and `wp_unique_filename()`. Unfixed, uploads keep raw spaces, skip our `stateless_skip_cache_busting` suffix, and silently overwrite a same-named file while creating a duplicate attachment row
+  3. **Rejected file types** — the `wp_check_filetype_and_ext()` failure path must `unlink()` the assembled file (or validate before writing). Unfixed, a disallowed file stays in `wp-content/uploads/YYYY/MM/` under an attacker-chosen name
+- [ ] if all three are fixed, delete the two guard functions plus `proudcity_wpmf_seize_folder_upload_action()` from the override, drop `WpMediaFolderFolderUploadTest.php`, and remove the `require_once` from `wp-proud-core/tests/bootstrap.php`
+- [ ] if only some are fixed, leave the block in place and update this note with what still fails
+- **also check on every release, whether or not you re-enable:** our block registers at priority 1 *and* seizes the hook on `admin_init`. If WPMF adds a second registration or a new entry point into `uploadFolder()` (a REST route, an `admin_post_` action, a nopriv variant), the `admin_init` seize may not cover it. Grep for `uploadFolder` and `wpmf_upload_folder` and confirm the count is still one registration
+- verification, on a WP Stateless site with our override **temporarily disabled** (the block will otherwise mask the test): upload a PDF through the "Upload folder" button, then confirm the attachment has non-empty `sm_cloud` post meta and that `wp_get_attachment_url()` returns a `storage.googleapis.com` URL. If it returns a `/wp-content/uploads/` URL, the bug is still present
+
 ### WP-Stateless Gravity Forms Addon
 
 - after #2831 (Gravity Forms 2.10 broke File Upload sync to GCS) we forked the plugin and patched it for the new JSON storage format. `composer.json` is currently pulling from [proudcity/wp-stateless-gravity-forms-addon](https://github.com/proudcity/wp-stateless-gravity-forms-addon) on `dev-latest` instead of wpackagist.
