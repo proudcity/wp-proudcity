@@ -1,3 +1,15 @@
+## 2026-08-19
+
+- Added `www/wp-content/mu-plugins/restore-cache-addition.php`. `fix-alt-text` 1.9.1 calls `wp_suspend_cache_addition( true )` at the top of its save/scan handlers (priority 999 on `save_post`, `attachment_updated`, `add_attachment`, `saved_term`, `delete_term`) and never restores it, so every request that saves a post runs the rest of its lifecycle with cache priming disabled — `update_meta_cache()` and `_prime_post_caches()` silently no-op and every later meta lookup re-queries. The mu-plugin hooks the same five actions at priority 1000 and calls `wp_suspend_cache_addition( false )`. Guarded, so it is a no-op if nothing suspended the flag. `fix-alt-text` itself is untouched and stays a stock wpackagist dependency. Verified locally: `wp_suspend_cache_addition()` after a `wp_insert_post()` was `true` before, `false` after. Reported upstream; 1.9.1 is still the current wordpress.org release.
+- Paired quick-menu fixes shipped separately in `proudcity/ProudCity-Quick-Menu` 2026.08.19.1030: replaced the metabox N+1 that made Add New Page a 90s render on large menu sets (24,968 queries down to single digits), added object-type and per-object capability checks to five paths that passed client-supplied post IDs into `wp_delete_post()` / `wp_update_post()`, and aligned the handler gate from `manage_categories` to `edit_theme_options`.
+- Disabled WP Media Folder's "Upload folder" bulk uploader in `wp-proud-core` 2026.08.19.1042. WPMF 6.2.6 runs that button through its own upload pipeline and only calls `wp_update_attachment_metadata()` for image, video and audio — the filter WP Stateless offloads on — so documents uploaded that way never reached GCS and were destroyed when the pod recycled. Duchesne County lost 338 meeting documents to it. The AJAX action now returns a 403 and the button is hidden; the standard "Add New" uploader is unaffected. Three defects reported upstream to JoomUnited.
+- Added a "WP Media Folder" section to `.github/ISSUE_TEMPLATE/core-plugin-update.md` recording why the uploader is disabled, the three defects to check for in each new WPMF release, and how to verify a fix before re-enabling — same pattern as the existing Intuitive CPT and WP-Stateless GF Addon notes.
+
+References: https://github.com/proudcity/wp-proudcity/issues/2886
+References: https://github.com/proudcity/wp-proudcity/issues/2885
+References: https://github.com/proudcity/wp-proudcity/issues/2888
+References: https://github.com/proudcity/wp-proudcity/issues/2887
+
 ## 2026-07-11
 
 - Shipped PCD186 Phase 3: merged `issue/pcd186` to master (`6eb2dd8`), built image `gcr.io/proudcity-1184/wp-proudcity:master-6eb2dd8b1415f68325abd071f0eecdd84b5d0947`. All 103 prod tenants rolled to the non-root image (Apache listens on 8080 as www-data, uid=33). Per-tenant rollout order: set image + add tcpSocket:8080 readiness probe, wait for new pod Ready, then flip Service targetPort 80→8080. Canary was wwwproudcity. Per-site downtime measured at ~1 dropped request (<2s). Fleet-wide zero-ready monitor: 0 outages.
