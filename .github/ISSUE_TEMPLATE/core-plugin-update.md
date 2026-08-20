@@ -8,6 +8,15 @@ assignees: curtismchale
 ---
 ## Notes
 
+### Fix Alt Text
+
+- fix-alt-text 1.9.1 calls `wp_suspend_cache_addition( true )` at the top of its `save_post`, `attachment_updated`, `add_attachment`, `saved_term` and `delete_term` handlers (all priority 999) and never restores it, so everything after the first save in a request runs with cache priming disabled — see #2886
+- we restore it in `www/wp-content/mu-plugins/restore-cache-addition.php`, hooking the same five actions at priority 1000. It only acts when the flag is actually set, so it is already a no-op if upstream fixes this
+- upstream report: [wordpress.org support topic](https://wordpress.org/support/topic/wp_suspend_cache_addition-true-is-never-restored-degrading-the-object-cache/) — full writeup in [this gist](https://gist.github.com/curtismchale/04070858f1cf20d9211d3ad89b3112cb)
+- [ ] check whether a release above 1.9.1 restores the flag — grep the new version for `wp_suspend_cache_addition`. Two calls (one `true`, one `false`), or a `try`/`finally` around the scan, means it is fixed and `restore-cache-addition.php` can be deleted
+- [ ] **check this even if the flag bug is unfixed:** confirm the five `add_action` calls in `inc/Scan.php` are still priority 999. If any moved above 1000, our restore now runs *before* their suspend and silently stops working
+- verification: `wp eval 'wp_insert_post(["post_type"=>"page","post_title"=>"t","post_status"=>"draft"]); var_dump( wp_suspend_cache_addition() );'` — must print `bool(false)`
+
 ### Gravity Forms Stripe
 
 - we [updated the plugin to handle connected account transfers](https://github.com/proudcity/gravityformsstripe/commit/10ed1155c74b7811e0b7b75bedb6f4fdfd42089e)
@@ -38,6 +47,17 @@ assignees: curtismchale
 - [ ] if only some are fixed, leave the block in place and update this note with what still fails
 - **also check on every release, whether or not you re-enable:** our block registers at priority 1 *and* seizes the hook on `admin_init`. If WPMF adds a second registration or a new entry point into `uploadFolder()` (a REST route, an `admin_post_` action, a nopriv variant), the `admin_init` seize may not cover it. Grep for `uploadFolder` and `wpmf_upload_folder` and confirm the count is still one registration
 - verification, on a WP Stateless site with our override **temporarily disabled** (the block will otherwise mask the test): upload a PDF through the "Upload folder" button, then confirm the attachment has non-empty `sm_cloud` post meta and that `wp_get_attachment_url()` returns a `storage.googleapis.com` URL. If it returns a `/wp-content/uploads/` URL, the bug is still present
+
+### WP-Stateless
+
+- pinned to an exact version in `composer.json` (`wpackagist-plugin/wp-stateless`, currently 4.4.1), so a bump is always a deliberate edit — run these checks every time that pin moves
+- the plugin ships data migrations as files in `static/migrations/`. A new file there means every site needs a migration pass after the release, or sites show the "your data still needs to be updated using this new method" nag and keep reading the legacy storage format. Known migrations as of 4.4.1: `20240219175240` (Update data for Google Cloud files), `20240423174109` (Optimize Compatibility Files) — see #2889
+- [ ] diff `static/migrations/` between the old and new version. Any new file means a platform-wide migration pass is required
+- [ ] check whether `DB::DB_VERSION` in `lib/classes/class-db.php` changed (4.4.1 is `1.2`). A bump means a schema change on top of the data migration
+- [ ] if either changed, schedule the migration pass as its own off-hours release. `wp stateless migrate` lists status, `wp stateless migrate auto --yes` runs everything still pending (a no-op on an already-current site). Wrap it in `timeout` — `_auto_migrate()` polls the migration state option in an unbounded `while(true)` and will hang the deploy forever if the background process stalls
+- **do not put this in `bin/entrypoint.sh`.** Batches are not processed in-process: `Migrator::start_migration()` queues the batch and calls `dispatch()`, a non-blocking loopback POST to `admin-ajax.php`. Entrypoint runs before `exec "$@"` starts `apache2-foreground`, so nothing is listening and the migration registers as started and then sits. Entrypoint also runs on every pod restart and scale-up, not just deploys. `sm_batch_process_cron` is not a fallback — `handle_cron_healthcheck()` also only calls `dispatch()`
+- migrations are insert-only (no `DELETE`, no `DROP`, legacy `sm_cloud` postmeta left intact) and each attachment is processed in a transaction against unique keys, so a concurrent upload cannot corrupt data. Still run off-hours: `20240423174109` makes a live GCS API call per row, and edits/deletes of existing media mid-run are the untested path
+- verification: after the release, `wp stateless migrate` on a site should list every migration as finished and the upgrade nag should be gone from wp-admin
 
 ### WP-Stateless Gravity Forms Addon
 
