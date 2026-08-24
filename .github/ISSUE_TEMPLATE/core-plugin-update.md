@@ -6,6 +6,26 @@ labels: core/plugin
 assignees: curtismchale
 
 ---
+## Migration check
+
+Runs on **every** update, not just the plugins listed under Notes. A plugin with no migrations today can add one in any release, and a migration that silently fails on a subset of sites is invisible without checking. That is exactly what happened with WP-Stateless (#2889): migrations shipped, ran on 111 sites, silently did not finish on 41 others, and nobody noticed for about two years.
+
+- [ ] `git diff composer.json` on the update branch to list which plugins actually moved and from/to what. 62 of 64 are exact-pinned and `composer.lock` is gitignored, so `composer.json` **is** the version record
+- [ ] For each plugin that moved, check whether the new version ships a data migration or a schema-version bump. Look for a `migrations/` directory, a `*_db_version` / `*_DB_VERSION` constant, or use of `WP_Background_Process`. If the plugin is in `~/Sites/proudtest/wp-content/plugins/` after `composer update`, diff it there
+- [ ] If anything moved, note it here so the post-release check below has something to compare against
+
+After the release has rolled out:
+
+- [ ] Run the fleet audit and confirm no new drift:
+  ```bash
+  bash ~/Workspace/proudcity/proudcity-kubernetes/bin/check-migrations.sh
+  ```
+  Exit `0` clean, `1` drift found. It compares every site's migration and schema-version options against the fleet consensus, so it catches migrations that failed on a subset without needing to know which plugins have migrations. See proudcity-kubernetes#migration-watcher.
+- [ ] Anything it flags: **investigate before running anything.** Of the first five options triaged this way (#2892), exactly one was a migration that needed running — the rest were orphaned options from uninstalled plugins, an inactive plugin, and a plugin version mismatch. Read the owning plugin's upgrade code first
+- [ ] Known-benign outliers go in `proudcity-kubernetes/bin/check-migrations.exclude` **with the reason**
+
+The `migration-watcher` CronJob runs this weekly and files a `migration-drift` issue on its own, so this step is a faster feedback loop rather than the only safety net.
+
 ## Notes
 
 ### Fix Alt Text
@@ -59,7 +79,8 @@ assignees: curtismchale
 - [ ] if either changed, schedule the migration pass as its own off-hours release. `wp stateless migrate` lists status, `wp stateless migrate auto --yes` runs everything still pending (a no-op on an already-current site). Wrap it in `timeout` — `_auto_migrate()` polls the migration state option in an unbounded `while(true)` and will hang the deploy forever if the background process stalls
 - **do not put this in `bin/entrypoint.sh`.** Batches are not processed in-process: `Migrator::start_migration()` queues the batch and calls `dispatch()`, a non-blocking loopback POST to `admin-ajax.php`. Entrypoint runs before `exec "$@"` starts `apache2-foreground`, so nothing is listening and the migration registers as started and then sits. Entrypoint also runs on every pod restart and scale-up, not just deploys. `sm_batch_process_cron` is not a fallback — `handle_cron_healthcheck()` also only calls `dispatch()`
 - migrations are insert-only (no `DELETE`, no `DROP`, legacy `sm_cloud` postmeta left intact) and each attachment is processed in a transaction against unique keys, so a concurrent upload cannot corrupt data. Still run off-hours: `20240423174109` makes a live GCS API call per row, and edits/deletes of existing media mid-run are the untested path
-- verification: after the release, `wp stateless migrate` on a site should list every migration as finished and the upgrade nag should be gone from wp-admin
+- verification: after the release, `wp stateless migrate` on a site should list every migration as finished and the upgrade nag should be gone from wp-admin. The fleet-wide version of this is the Migration check at the top of this template
+- the 2026-08 pass (#2889) is the worked example of all of the above. Two things it turned up that are not obvious from the code: sites behind the `AUTH_REQUIRED` Basic Auth wall 401 their own loopback, which stops the background processor dead until the `loopback-basic-auth` mu-plugin attaches credentials; and a migration recorded as `skipped` is as finished as one recorded as `finished` — it means `should_run()` returned false for that site
 
 ### WP-Stateless Gravity Forms Addon
 
