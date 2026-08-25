@@ -28,6 +28,19 @@ The `migration-watcher` CronJob runs this weekly and files a `migration-drift` i
 
 ## Notes
 
+### Events Manager
+
+- `Recurrence_Set::save_recurrences()` loads the recurring event's template post row once *before* the occurrence loop, then writes each occurrence's date-suffixed slug back into that same `$post_fields` array inside the loop. Iteration N reads what iteration N-1 wrote, so occurrence twelve carries all twelve dates in its URL — see #2893. `sanitize_recurrence_slug()` does not catch it; it only truncates past 200 characters, which caps the runaway rather than preventing it
+- we fix it in `wp-proud-core/modules/events-manager-recurrence-slug.php`, hooking `em_event_save_events_slug` (the last filter on both the create path, `classes/recurrences/recurrence-set.php:1017`, and the update path, `:1341`) and rebuilding the slug from the recurring template's own `post_name` plus the trailing date. Covered by `wp-proud-core/tests/EventsManagerRecurrenceSlugTest.php`
+- one-off repair for already-broken slugs is `wp proud fix-em-slugs` (`wp-proud-core/bin/wp-cli.php`) — `--dry-run` to preview, `--yes` for unattended fleet runs. It rewrites slugs in place and files a 301 in the Safe Redirect Manager `redirect_rule` CPT for each one. Full writeup and the fleet-wide commands are in `~/Documents/developers/Github Issue Notes/2893 - Recurring Event URL Slug Accumulation.md`
+- [ ] once the fleet-wide repair has run and been verified, delete the `fix_em_slugs` command — it is a one-off, not per-release maintenance, and does not belong in `bin/deploy.sh`
+- upstream report: [wordpress.org support topic](https://wordpress.org/support/topic/recurring-event-slugs-accumulate-every-previous-occurrence-date/), filed 2026-08-25 — full writeup in [#2893](https://github.com/proudcity/wp-proudcity/issues/2893) ([investigation](https://github.com/proudcity/wp-proudcity/issues/2893#issuecomment-5413574788)). Broken as of 7.4.2, no upstream fix
+- [ ] **check the [forum topic](https://wordpress.org/support/topic/recurring-event-slugs-accumulate-every-previous-occurrence-date/) for a maintainer reply.** If a fix has landed, test it and reply in the topic with whether it works
+- [ ] **check whether the new version fixes the accumulation.** Grep `classes/recurrences/recurrence-set.php` for `$post_fields['post_name'] =` — if the assignment inside `foreach ( $matching_days as $day )` is gone, or the slug is built from a base captured before the loop, it is fixed and our module plus its test can be deleted
+- [ ] **check this even if the bug is unfixed:** confirm the `em_event_save_events_slug` filter still fires on both call sites and still passes `$EM_Event` as its fifth argument. If the signature changed or the filter was dropped, our module silently stops working and slugs start growing again
+- [ ] if the accumulation is fixed upstream but old slugs were not migrated, run the repair script once more before deleting it
+- verification: on a test site, create a recurring event with 12 monthly occurrences, publish, then `wp db query "SELECT event_start_date, event_slug FROM wp_em_events WHERE recurrence_set_id = <id> ORDER BY event_start_date;"`. Every slug must be `base-YYYY-MM-DD` with exactly one date. Re-save the event and check again — the update path regressed separately from the create path
+
 ### Fix Alt Text
 
 - fix-alt-text 1.9.1 calls `wp_suspend_cache_addition( true )` at the top of its `save_post`, `attachment_updated`, `add_attachment`, `saved_term` and `delete_term` handlers (all priority 999) and never restores it, so everything after the first save in a request runs with cache priming disabled — see #2886
