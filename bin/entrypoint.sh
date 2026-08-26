@@ -14,6 +14,48 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
         chmod 600 "$HOME/.ssh/id_rsa"
     fi
 
+    # Clone one entry from WORDPRESS_PLUGINS or WORDPRESS_THEMES.
+    #
+    # An entry may pin a version by appending #<tag-or-branch> to the repo URL:
+    #   git@github.com:FileToWeb/filetoweb-integration.git#0.1.48
+    #
+    # Entries with no #<ref> keep the previous behaviour and track default-branch
+    # HEAD, so every pod start picks up whatever upstream last pushed. Pinning
+    # exists because that made an upstream release able to reach production
+    # without a deploy on our side (wp-proudcity#2902).
+    #
+    # A pin that cannot be resolved leaves the repo uninstalled rather than
+    # falling back to HEAD -- silently installing an unintended version is the
+    # exact failure the pin is meant to prevent.
+    clone_repo_entry() {
+        local entry="$1"
+        local label="$2"
+        local repo="${entry%%#*}"
+        local ref=""
+
+        [[ "$entry" == *"#"* ]] && ref="${entry#*#}"
+
+        if [[ -z "$repo" ]]; then
+            return
+        fi
+
+        if [[ -z "$ref" ]]; then
+            git clone -- "$repo"
+            echo "Adding ${label} repo: ${repo} in $(pwd) (unpinned, default branch)"
+            return
+        fi
+
+        # Options stay ahead of `--` so the repo URL can still never be read as
+        # an option (argument injection, CVE-2018-17456 -- see commit ca548bc).
+        # A pinned clone always lands on a detached HEAD; the advice block that
+        # git prints for that is a page of noise per plugin in the pod logs.
+        if git -c advice.detachedHead=false clone --depth 1 --branch "$ref" -- "$repo"; then
+            echo "Adding ${label} repo: ${repo} in $(pwd) pinned at ${ref}"
+        else
+            echo "WARNING: could not clone ${repo} at ref ${ref}; ${label} not installed"
+        fi
+    }
+
     # Install other non-free plugins
     echo "Adding non-free plugins"
     cd /app/wordpress/wp-content/plugins
@@ -23,8 +65,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
         cd /app/wordpress/wp-content/themes
         IFS=',' read -ra themes <<< "$WORDPRESS_THEMES"
         for s in "${themes[@]}"; do
-            git clone -- "$s"
-            echo "Adding theme repo: ${s} in $(pwd)"
+            clone_repo_entry "$s" "theme"
         done
     fi
 
@@ -34,8 +75,7 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
         cd /app/wordpress/wp-content/plugins
         IFS=',' read -ra plugins <<< "$WORDPRESS_PLUGINS"
         for s in "${plugins[@]}"; do
-            git clone -- "$s"
-            echo "Adding plugin repo: ${s} in $(pwd)"
+            clone_repo_entry "$s" "plugin"
         done
     fi
 
