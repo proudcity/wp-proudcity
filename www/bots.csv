@@ -95,3 +95,10 @@ rss-monitor
 # Stale-UA content scrapers (Chrome 30 was released in 2013 — effectively zero
 # legitimate users on it; observed hammering sonomaca news pages 2026-06-12)
 Chrome/30\.
+
+# Node's built-in fetch, which sends the bare UA "node" — the sibling of the
+# `undici` entry above (fetch is undici). Observed scraping every Yoast sitemap
+# on montgomeryoh at ~17/sec on 2026-08-27, OOM-killing all four pods.
+# Anchored: unanchored `node` would also match NodePing and other uptime
+# monitors that cities run against their own sites.
+^node$
