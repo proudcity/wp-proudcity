@@ -61,6 +61,8 @@ define('WP_STATELESS_MEDIA_REWRITE_BODY_CONTENT_URL', 1);
 define('WP_STATELESS_COMPATIBILITY_GF', 1);
 define('WP_STATELESS_MEDIA_CACHE_BUSTING', getenv('STATELESS_MEDIA_CACHE_BUSTING') ?? false);
 define('WP_STATELESS_MEDIA_BODY_REWRITE', 'false');
+// lets files get deleted if they are deleted in the media gallery
+define('WP_STATELESS_MEDIA_DELETE_REMOTE', 'true');
 
 
 // For ProudCity, to fix issues related to migration
@@ -105,7 +107,7 @@ if (getenv('WP_REDIS_HOST')) {
 
 // Elasticpress / search settings
 if (getenv('ELASTICSEARCH_HOST')) {
-    define('EP_HOST', 'http://' . getenv('ELASTICSEARCH_HOST'). ':9200');
+    define('EP_HOST', 'http://' . getenv('ELASTICSEARCH_HOST') . ':9200');
 }
 if (getenv('ELASTICSEARCH_DOCS_HOST')) {
     define('EP_HELPER_HOST', 'http://' . getenv('ELASTICSEARCH_DOCS_HOST') . '/send-attachments');
@@ -159,7 +161,7 @@ define('FORCE_SSL_ADMIN', true);
 
 
 $url = (getenv('TLS') === 'true' ? 'https' : 'http') . '://' . getenv('HOST');
-define("WP_SITEURL", $url.'/');
+define("WP_SITEURL", $url . '/');
 define('WP_HOME', $url);
 
 
