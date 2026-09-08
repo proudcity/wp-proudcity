@@ -447,9 +447,20 @@ class Pc extends Bin
         if (empty($kube)) {
             return;
         }
-        $_SERVER['argv'][0] = 'pc';
-        $cmd = implode(' ', $_SERVER['argv']);
-        $cmd = str_replace('pc kube', 'php ' . $kube, $cmd);
+        /**
+         * argv is `pc kube <rest…>`; everything after `kube` is handed to
+         * pc-kube untouched.
+         *
+         * Each argument is escaped on its own rather than imploded into one
+         * string: passthru() runs the result through a shell, and a joined
+         * string lets that shell re-split any argument containing a space,
+         * and choke on quotes or parens inside it. That is what made
+         * `pc kube cmd <ns> <app> wp eval '…'` unusable (#2921).
+         */
+        $cmd = 'php ' . escapeshellarg($kube);
+        foreach (array_slice($_SERVER['argv'], 2) as $arg) {
+            $cmd .= ' ' . escapeshellarg($arg);
+        }
         //$this->printLine("$cmd", 'blue');
         passthru($cmd);
     }
