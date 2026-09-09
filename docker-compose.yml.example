@@ -1,3 +1,16 @@
+# Template for local development. Copy to docker-compose.yml before use:
+#
+#   cp docker-compose.yml.example docker-compose.yml
+#
+# docker-compose.yml is gitignored so each developer keeps their own copy and
+# no local credentials or tokens are ever committed. This file is never used to
+# build or deploy anything -- pods get their environment from the Kubernetes
+# deployment and the "proudcity" secret, not from here.
+#
+# Passwords fall back to "wordpress" so the stack runs with no further setup.
+# To override, either edit your copy directly or put the variables in a .env
+# file in this directory, which docker-compose reads automatically.
+
 version: '2'
 
 services:
@@ -5,6 +18,8 @@ services:
     container_name: wpproudcity_wordpress_1
     depends_on:
       - db
+    # This pin goes stale.  Check for a current tag before you start work:
+    #   gcloud container images list-tags gcr.io/proudcity-1184/wp-proudcity --limit 10
     image: gcr.io/proudcity-1184/wp-proudcity:master-73e8c4ea20c9c7e52325d8ad659f209932fc155e
     volumes:
       #- wp-proudcity-sync:/app/wordpress:nocopy # nocopy is important
@@ -22,7 +37,7 @@ services:
       AUTH_PASSWORD:
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-wordpress}
       WORDPRESS_DB_HOST: db
       #WORDPRESS_DB_PORT: "**LinkMe**"
       HOST: localhost:8000
@@ -62,12 +77,12 @@ services:
   db:
     image: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-wordpress}
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-wordpress}
     ports:
-      - 3306:3306
+      - 127.0.0.1:3306:3306
 #volumes:
 #  wp-proudcity-sync:
 #    external: true

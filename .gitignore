@@ -1,7 +1,9 @@
 vendor
 env.list
+.env
 etc/ENV
 etc-kube
+# local copy: cp docker-compose.yml.example docker-compose.yml
 docker-compose.yml
 composer.lock
 wordpress

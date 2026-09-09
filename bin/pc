@@ -150,12 +150,41 @@ class Pc extends Bin
     }
 
     /**
+     * Returns the docker-compose file to operate on, seeding it from the tracked
+     * example on first run.  docker-compose.yml is gitignored so that each
+     * developer keeps their own copy and no local credentials are committed.
+     *
+     * @return string
+     */
+    private function composeFile()
+    {
+        if (!empty($this->arg1)) {
+            return $this->arg1;
+        }
+
+        $file = $this->dir . 'docker-compose.yml';
+        $example = $this->dir . 'docker-compose.yml.example';
+
+        if (!file_exists($file)) {
+            if (!file_exists($example)) {
+                $this->error("No docker-compose.yml or docker-compose.yml.example found in {$this->dir}");
+            }
+            if (!copy($example, $file)) {
+                $this->error("Could not create $file from $example");
+            }
+            $this->printLine('Created docker-compose.yml from docker-compose.yml.example', 'green');
+        }
+
+        return $file;
+    }
+
+    /**
      * Action: pc dev up
      */
     public function devUp()
     {
 
-        $file = !empty($this->arg1) ? $this->arg1 : $this->dir . 'docker-compose.yml';
+        $file = $this->composeFile();
         passthru("docker-compose -f $file up -d");
 
         sleep(3);
@@ -178,7 +207,7 @@ class Pc extends Bin
     public function devStop()
     {
 
-        $file = !empty($this->arg1) ? $this->arg1 : $this->dir . 'docker-compose.yml';
+        $file = $this->composeFile();
         passthru("docker-compose -f $file stop");
     }
 
@@ -286,7 +315,7 @@ class Pc extends Bin
             ./bin/pc dev cmd git checkout master
             cp www/wp-config.php wordpress
         ');
-        $this->printLine("In docker-compose.yml, set your GOOGLE_GIT_TOKEN, add additional WordPress plugins to WORDPRESSORG_PLUGINS, and run `pc dev up`.  Then unset GOOGLE_GIT_TOKEN to avoid future errors.");
+        $this->printLine("Copy docker-compose.yml.example to docker-compose.yml, then in that copy set your GOOGLE_GIT_TOKEN, add additional WordPress plugins to WORDPRESSORG_PLUGINS, and run `pc dev up`.  Then unset GOOGLE_GIT_TOKEN to avoid future errors.");
     }
 
     /**
