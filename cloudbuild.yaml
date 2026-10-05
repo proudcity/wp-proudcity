@@ -22,6 +22,12 @@ steps:
       DOCKER_BUILDKIT=1 docker build --ssh default=/tmp/github_key -t gcr.io/proudcity-1184/wp-proudcity:$BRANCH_NAME-$COMMIT_SHA .
 images: ['gcr.io/proudcity-1184/wp-proudcity:$BRANCH_NAME-$COMMIT_SHA']
 
+# Opt in to the regular worker release (Docker 29 / Debian 13) ahead of it
+# becoming the default on 2027-03-28. Remove this to fall back to legacy.
+# https://docs.cloud.google.com/build/docs/release-channels
+options:
+  workerRelease: regular
+
 availableSecrets:
   secretManager:
   - versionName: projects/694192538187/secrets/github-ssh-key/versions/latest
