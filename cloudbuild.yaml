@@ -5,18 +5,21 @@ steps:
 # Relevant docs:
 #  https://medium.com/google-cloud/using-cloud-build-with-a-multi-stage-docker-build-file-and-a-private-repo-82d15da3461a
 #  https://stackoverflow.com/questions/65302542/how-do-i-use-google-secrets-manager-to-create-a-docker-arg-in-google-cloud-build/65302992#65302992
+# The key file is passed straight to --ssh instead of going through ssh-agent:
+# the cloud-builders/docker image cached on newer worker releases (regular
+# channel, default from 2027-03-28) has no ssh-agent/ssh-add. Works on both the
+# legacy and regular releases. See proudcity/pc-dev-issues#385.
 - name: 'gcr.io/cloud-builders/docker'
   secretEnv: ['SSH_KEY']
   entrypoint: 'bash'
   args:
     - "-c"
     - |
-      eval "$(ssh-agent -s)"
+      set -euo pipefail
+      trap 'rm -f /tmp/github_key' EXIT
+      install -m 600 /dev/null /tmp/github_key
       echo "$$SSH_KEY" > /tmp/github_key
-      chmod 600 /tmp/github_key
-      ssh-add /tmp/github_key
-      rm /tmp/github_key
-      DOCKER_BUILDKIT=1 docker build --ssh default -t gcr.io/proudcity-1184/wp-proudcity:$BRANCH_NAME-$COMMIT_SHA .
+      DOCKER_BUILDKIT=1 docker build --ssh default=/tmp/github_key -t gcr.io/proudcity-1184/wp-proudcity:$BRANCH_NAME-$COMMIT_SHA .
 images: ['gcr.io/proudcity-1184/wp-proudcity:$BRANCH_NAME-$COMMIT_SHA']
 
 availableSecrets:
