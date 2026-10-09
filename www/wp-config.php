@@ -155,6 +155,19 @@ if (! empty(getenv('ENV_TYPE'))) {
 }
 define('WP_ENVIRONMENT_TYPE', (string) $environment_type);
 
+/**
+ * Turns off page-load wp-cron where the k8s cron runner covers the site
+ * (wp-proudcity#2961). An explicit DISABLE_WP_CRON env var always wins, as a
+ * per-site override. Otherwise page-load cron is off only in the prod
+ * namespace, read from the pod's service-account namespace file. If that file
+ * is missing (local dev) page-load cron stays on.
+ */
+$proud_disable_wp_cron = (getenv('DISABLE_WP_CRON') !== false)
+    ? (getenv('DISABLE_WP_CRON') === 'true')
+    : (trim((string) @file_get_contents('/var/run/secrets/kubernetes.io/serviceaccount/namespace')) === 'prod');
+define('DISABLE_WP_CRON', $proud_disable_wp_cron);
+unset($proud_disable_wp_cron);
+
 define('FORCE_SSL_ADMIN', true);
 @ini_set('session.cookie_secure', '1');
 @ini_set('session.cookie_samesite', 'Lax');

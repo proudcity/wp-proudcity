@@ -1,0 +1,12 @@
+{
+    "name": "proudcity/wp-proudcity-tests",
+    "description": "PHPUnit + Brain Monkey test harness for wp-proudcity mu-plugins. Kept out of the root composer.json so the Dockerfile's `composer install` never pulls dev dependencies into the image.",
+    "require-dev": {
+        "php": ">=8.0",
+        "phpunit/phpunit": "^11.0",
+        "brain/monkey": "^2.6"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
