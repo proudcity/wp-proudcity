@@ -18,11 +18,15 @@ OAI-SearchBot
 # Anthropic
 ClaudeBot
 anthropic-ai
+Claude-User
+Claude-SearchBot
 
-# Google
-Google-Extended
+# Google — Googlebot (search) is intentionally allowed. GoogleOther is Google's
+# R&D/non-search crawler. Google-Extended is a robots.txt-only token (never in a
+# UA header), so its opt-out lives in mu-plugins/proud-robots.php instead.
+# Google-InspectionTool is NOT blocked: it's Search Console's URL Inspection /
+# Rich Results tester and blocking it breaks search diagnostics.
 GoogleOther
-Google-InspectionTool
 
 # Meta
 Meta-ExternalAgent
@@ -88,6 +92,11 @@ FinepdfsBot
 
 # Brightbot
 Brightbot
+
+# ShapBot — no robots.txt fetch, ~87k requests to sanrafael.gov on
+# 2026-10-13 walking every translated (/es/ /vi/ /tl/ /ru/ /ko/) page,
+# driving ~$3.9k/day of Cloud Translation spend (pc-dev-issues#391)
+ShapBot
 
 # AlertMedia
 rss-monitor

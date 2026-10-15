@@ -53,6 +53,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 			}
 		}
 
+		// AI opt-out tokens. These never appear in a User-Agent header, so bots.csv
+		// can't block them — robots.txt is the only place they're honored. Googlebot
+		// and Applebot still crawl for search; this opts out of Gemini / Apple
+		// Intelligence training and grounding (pc-dev-issues#391).
+		foreach ( array( 'Google-Extended', 'Applebot-Extended' ) as $ua ) {
+			$lines[] = '';
+			$lines[] = 'User-agent: ' . $ua;
+			$lines[] = 'Disallow: /';
+		}
+
 		return $output . implode( "\n", $lines ) . "\n";
 	} );
 } )();
