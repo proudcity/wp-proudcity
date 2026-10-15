@@ -105,6 +105,13 @@ ShapBot
 # AlertMedia
 rss-monitor
 
+# Headless-browser crawler sending a full Chrome build number. Real Chrome has
+# reported "Chrome/NNN.0.0.0" since UA reduction, so a full build like this is
+# automation. Hit the fleet from 2026-10-15 05:00 UTC (300k+ requests across
+# lowellnc, munfordtn, newbuffalomi, holyokema, ...) and, because it executes
+# page JS, burned Google Maps loads toward the daily cap (pc-dev-issues#391).
+Chrome/145\.0\.7632\.6
+
 # Stale-UA content scrapers (Chrome 30 was released in 2013 — effectively zero
 # legitimate users on it; observed hammering sonomaca news pages 2026-06-12)
 Chrome/30\.
