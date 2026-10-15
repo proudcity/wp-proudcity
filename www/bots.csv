@@ -44,6 +44,10 @@ Applebot
 # Perplexity
 PerplexityBot
 
+# Keenable — AI search index/API crawler (keenable.ai); ~1.3k requests to
+# sanrafael.gov translated pages Oct 2026 (pc-dev-issues#391)
+KeenableBot
+
 # Common Crawl (used by many AI companies)
 CCBot
 
