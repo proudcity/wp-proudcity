@@ -48,6 +48,10 @@ PerplexityBot
 # sanrafael.gov translated pages Oct 2026 (pc-dev-issues#391)
 KeenableBot
 
+# Talarion — self-described "research" search crawler (talarion.tech); 211
+# requests to colmaca during the 2026-10-18 crawl (pc-dev-issues#391)
+TalarionSearchBot
+
 # Common Crawl (used by many AI companies)
 CCBot
 
@@ -115,6 +119,13 @@ Chrome/145\.0\.7632\.6
 # Stale-UA content scrapers (Chrome 30 was released in 2013 — effectively zero
 # legitimate users on it; observed hammering sonomaca news pages 2026-06-12)
 Chrome/30\.
+
+# Rendering crawler pinned to Chrome 131 (Nov 2024, ~2 years stale; current is
+# 154/155). Mac Chrome/131.0.0.0 rendered ~1,700 colmaca pages (~68k requests)
+# 2026-10-18 10:15-10:45 UTC; a Windows Chrome/131.0.0.0 scraper hit the dead
+# jackson-ms host 2026-10-16. Blocks every Chrome 131 visitor — accepted
+# tradeoff until per-IP limits land (pc-dev-issues#287).
+Chrome/131\.0\.0\.0
 
 # Node's built-in fetch, which sends the bare UA "node" — the sibling of the
 # `undici` entry above (fetch is undici). Observed scraping every Yoast sitemap
