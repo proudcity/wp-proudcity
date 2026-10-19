@@ -52,6 +52,17 @@ COPY etc/php.ini /usr/local/etc/php/php.ini
 # Apache must listen on an unprivileged port so the container can run as non-root (PCD186).
 RUN sed -i 's/^Listen 80$/Listen 8080/' /etc/apache2/ports.conf
 
+# Fallback for APACHE_MAX_REQUEST_WORKERS (etc/apache-vhost.conf, wp-proudcity#2980).
+# `apache2-foreground` and `apache2ctl` both source envvars; `:=` only sets the
+# var if it's unset, so it never overrides the value bin/entrypoint.sh already
+# exported. This just keeps `apache2ctl -t`/`-V` from a bare `kubectl exec`
+# shell (which doesn't inherit the entrypoint's environment) from seeing an
+# undefined variable.
+RUN { \
+    echo ': ${APACHE_MAX_REQUEST_WORKERS:=14}'; \
+    echo 'export APACHE_MAX_REQUEST_WORKERS'; \
+    } >> /etc/apache2/envvars
+
 # For PCI scans this disables all our Apache information no matter how the scanner tries
 # to scan stuff, and trust me they do weird stuff I had to dig for to make it work.
 # See this for more information: https://github.com/proudcity/pc-dev-issues/issues/125
