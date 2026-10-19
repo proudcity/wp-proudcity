@@ -218,6 +218,10 @@ rm -f /app/wordpress/robots.txt
 export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"128M"}
 export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 
+# Size Apache's prefork MaxRequestWorkers to the pod's cgroup memory limit (wp-proudcity#2980)
+source /app/bin/apache-workers.sh
+apache_workers_compute
+
 # enable redis requires the Redis Cache plugin to be active
 echo "Enabling Redis"
 wp plugin activate redis-cache
