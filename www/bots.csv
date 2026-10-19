@@ -127,6 +127,22 @@ Chrome/30\.
 # tradeoff until per-IP limits land (pc-dev-issues#287).
 Chrome/131\.0\.0\.0
 
+# Fake DuckDuckBot: the UA is wrapped in literal single quotes
+# ('DuckDuckBot-Https/1.1; (+https://duckduckgo.com/duckduckbot)'), which the
+# real crawler never sends. Part of the plugin-enumeration scan that knocked
+# belmontnc over 2026-10-17 12:10 UTC. Anchored on the leading quote so the
+# genuine DuckDuckBot (allowed) is unaffected. The ^ keeps Apache from treating
+# the leading ' as an argument quote when entrypoint.sh writes the RewriteCond.
+^'DuckDuckBot
+
+# Fake ancient Mac Chrome (OS X 10.11 El Capitan + Chrome 53, both 2016): same
+# plugin-enumeration scan as the fake DuckDuckBot (belmontnc 676 reqs
+# 2026-10-17 12:10 UTC) and probing /RSSFeed.aspx/ on johnsoncitytx (796 reqs
+# 2026-10-17 08:15 UTC). Exact build, so no modern visitor matches.
+# NO SPACES in any pattern: entrypoint.sh writes each line unquoted into a
+# RewriteCond, so a space splits it into extra args and breaks .htaccess (500s).
+10_11_6\).*Chrome/53\.0\.2785\.143
+
 # Node's built-in fetch, which sends the bare UA "node" — the sibling of the
 # `undici` entry above (fetch is undici). Observed scraping every Yoast sitemap
 # on montgomeryoh at ~17/sec on 2026-08-27, OOM-killing all four pods.
