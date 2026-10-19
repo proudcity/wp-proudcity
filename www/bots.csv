@@ -18,11 +18,15 @@ OAI-SearchBot
 # Anthropic
 ClaudeBot
 anthropic-ai
+Claude-User
+Claude-SearchBot
 
-# Google
-Google-Extended
+# Google — Googlebot (search) is intentionally allowed. GoogleOther is Google's
+# R&D/non-search crawler. Google-Extended is a robots.txt-only token (never in a
+# UA header), so its opt-out lives in mu-plugins/proud-robots.php instead.
+# Google-InspectionTool is NOT blocked: it's Search Console's URL Inspection /
+# Rich Results tester and blocking it breaks search diagnostics.
 GoogleOther
-Google-InspectionTool
 
 # Meta
 Meta-ExternalAgent
@@ -39,6 +43,14 @@ Applebot
 
 # Perplexity
 PerplexityBot
+
+# Keenable — AI search index/API crawler (keenable.ai); ~1.3k requests to
+# sanrafael.gov translated pages Oct 2026 (pc-dev-issues#391)
+KeenableBot
+
+# Talarion — self-described "research" search crawler (talarion.tech); 211
+# requests to colmaca during the 2026-10-18 crawl (pc-dev-issues#391)
+TalarionSearchBot
 
 # Common Crawl (used by many AI companies)
 CCBot
@@ -89,12 +101,52 @@ FinepdfsBot
 # Brightbot
 Brightbot
 
+# ShapBot — no robots.txt fetch, ~87k requests to sanrafael.gov on
+# 2026-10-13 walking every translated (/es/ /vi/ /tl/ /ru/ /ko/) page,
+# driving ~$3.9k/day of Cloud Translation spend (pc-dev-issues#391)
+ShapBot
+
 # AlertMedia
 rss-monitor
+
+# Headless-browser crawler sending a full Chrome build number. Real Chrome has
+# reported "Chrome/NNN.0.0.0" since UA reduction, so a full build like this is
+# automation. Hit the fleet from 2026-10-15 05:00 UTC (300k+ requests across
+# lowellnc, munfordtn, newbuffalomi, holyokema, ...) and, because it executes
+# page JS, burned Google Maps loads toward the daily cap (pc-dev-issues#391).
+Chrome/145\.0\.7632\.6
 
 # Stale-UA content scrapers (Chrome 30 was released in 2013 — effectively zero
 # legitimate users on it; observed hammering sonomaca news pages 2026-06-12)
 Chrome/30\.
+
+# Rendering crawler pinned to Chrome 131 (Nov 2024, ~2 years stale; current is
+# 154/155). Mac Chrome/131.0.0.0 rendered ~1,700 colmaca pages (~68k requests)
+# 2026-10-18 10:15-10:45 UTC; a Windows Chrome/131.0.0.0 scraper hit the dead
+# jackson-ms host 2026-10-16. Blocks every Chrome 131 visitor — accepted
+# tradeoff until per-IP limits land (pc-dev-issues#287).
+Chrome/131\.0\.0\.0
+
+# Windows crawler sending a full Chrome 130 build number (Oct 2024; real Chrome
+# reports Chrome/NNN.0.0.0). 365 requests to / in one minute OOMKilled both
+# ketteringoh pods 2026-10-19 06:57 UTC (244 x 502, tripped the #2969 5xx alert).
+Chrome/130\.0\.6723\.70
+
+# Fake DuckDuckBot: the UA is wrapped in literal single quotes
+# ('DuckDuckBot-Https/1.1; (+https://duckduckgo.com/duckduckbot)'), which the
+# real crawler never sends. Part of the plugin-enumeration scan that knocked
+# belmontnc over 2026-10-17 12:10 UTC. Anchored on the leading quote so the
+# genuine DuckDuckBot (allowed) is unaffected. The ^ keeps Apache from treating
+# the leading ' as an argument quote when entrypoint.sh writes the RewriteCond.
+^'DuckDuckBot
+
+# Fake ancient Mac Chrome (OS X 10.11 El Capitan + Chrome 53, both 2016): same
+# plugin-enumeration scan as the fake DuckDuckBot (belmontnc 676 reqs
+# 2026-10-17 12:10 UTC) and probing /RSSFeed.aspx/ on johnsoncitytx (796 reqs
+# 2026-10-17 08:15 UTC). Exact build, so no modern visitor matches.
+# NO SPACES in any pattern: entrypoint.sh writes each line unquoted into a
+# RewriteCond, so a space splits it into extra args and breaks .htaccess (500s).
+10_11_6\).*Chrome/53\.0\.2785\.143
 
 # Node's built-in fetch, which sends the bare UA "node" — the sibling of the
 # `undici` entry above (fetch is undici). Observed scraping every Yoast sitemap

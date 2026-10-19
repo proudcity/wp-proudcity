@@ -93,9 +93,13 @@ define('WP_CACHE_KEY_SALT', getenv("HOST"));
 if (getenv('WP_REDIS_HOST')) {
     define('WP_REDIS_PREFIX', getenv('HOST'));
     define('WP_REDIS_HOST', getenv('WP_REDIS_HOST'));
-    define('WP_REDIS_TIMEOUT', 2);
-    define('WP_REDIS_READ_TIMEOUT', 2);
+    // In-cluster Redis answers in milliseconds; keep these short so an outage costs ~1s per request in graceful mode
+    define('WP_REDIS_TIMEOUT', 1);
+    define('WP_REDIS_READ_TIMEOUT', 1);
     define('WP_REDIS_DATABASE', getenv('WP_REDIS_DATABASE')); // two sites shouldn't share the same value here
+    // Fall back to an uncached request if Redis is down or still loading instead of the Redis error page
+    define('WP_REDIS_GRACEFUL', true);
+    define('WP_REDIS_MAXTTL', 604800); // 7 days, so keys without an expiry still age out
 
     // Only define this when the env is actually set. Pods on an unauthenticated
     // Redis have no WP_REDIS_PASSWORD, and defining it empty makes the client

@@ -221,6 +221,13 @@ export UPLOAD_MAX_FILESIZE=${UPLOAD_MAX_FILESIZE:-"25M"}
 # enable redis requires the Redis Cache plugin to be active
 echo "Enabling Redis"
 wp plugin activate redis-cache
-wp redis enable
+
+# Install the object-cache.php drop-in directly instead of `wp redis enable`,
+# which flushes the site's Redis database every time the container starts
+# (wp-proudcity#2971). Sites without WP_REDIS_HOST (most of the test namespace)
+# get no drop-in, same as before when `wp redis enable` failed to connect.
+if [[ -n $WP_REDIS_HOST ]]; then
+    cp -f /app/wordpress/wp-content/plugins/redis-cache/includes/object-cache.php /app/wordpress/wp-content/object-cache.php
+fi
 
 exec "$@"

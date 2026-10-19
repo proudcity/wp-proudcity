@@ -1,3 +1,10 @@
+## 2026-10-15
+
+- Stopped the Redis object cache from being flushed on every WP container start (#2971). `bin/entrypoint.sh` previously ran `wp redis enable` on each boot, and because `wp-content` is ephemeral and the drop-in isn't baked into the image, that command always took the branch that flushes the site's Redis database before installing `object-cache.php` — so every pod restart, OOM-kill, or fleet deploy wiped the cache for every site. `entrypoint.sh` now installs the drop-in with a plain `cp` from `wp-content/plugins/redis-cache/includes/object-cache.php`, only when `WP_REDIS_HOST` is set (sites without Redis, mostly in the test namespace, still get no drop-in, same as before).
+- `www/wp-config.php`: added `WP_REDIS_GRACEFUL true`, so a Redis that's down or still `LOADING` serves an uncached page instead of the Redis error page; added `WP_REDIS_MAXTTL 604800` (7 days), so keys with no expiry still age out now that restarts no longer clear them; lowered `WP_REDIS_TIMEOUT` and `WP_REDIS_READ_TIMEOUT` from 2 to 1, so an outage in graceful mode costs about a second per request instead of two.
+
+References: https://github.com/proudcity/wp-proudcity/issues/2971
+
 ## 2026-10-13
 
 - Fixed scheduled posts silently losing their publish event (#2961, reported via customer ticket ZD8069: a Somerville editor's post scheduled for 2026-09-25 never published). Root cause: `_get_cron_array()` reads the autoloaded `cron` option out of the in-request `alloptions` cache, so core `wp-cron.php` and WP-CLI's `wp cron event run` both reschedule/unschedule using whatever copy of the cron array they loaded when the process started. Any long-running hook (e.g. `blc_cron_check_links`) that holds a process open while another request schedules or clears an event causes that process to overwrite the DB with its stale copy on exit, silently erasing the newer event. Reproduced locally 3/3 with two overlapping `wp eval-file` processes and no object cache at all, then verified fixed on beta with real Redis across two separate pods — neither multiple pods nor a persistent cache is required to trigger it, they only widen the exposure under load.
