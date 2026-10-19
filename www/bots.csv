@@ -127,6 +127,11 @@ Chrome/30\.
 # tradeoff until per-IP limits land (pc-dev-issues#287).
 Chrome/131\.0\.0\.0
 
+# Windows crawler sending a full Chrome 130 build number (Oct 2024; real Chrome
+# reports Chrome/NNN.0.0.0). 365 requests to / in one minute OOMKilled both
+# ketteringoh pods 2026-10-19 06:57 UTC (244 x 502, tripped the #2969 5xx alert).
+Chrome/130\.0\.6723\.70
+
 # Fake DuckDuckBot: the UA is wrapped in literal single quotes
 # ('DuckDuckBot-Https/1.1; (+https://duckduckgo.com/duckduckbot)'), which the
 # real crawler never sends. Part of the plugin-enumeration scan that knocked
