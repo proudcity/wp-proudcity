@@ -154,3 +154,11 @@ Chrome/130\.0\.6723\.70
 # Anchored: unanchored `node` would also match NodePing and other uptime
 # monitors that cities run against their own sites.
 ^node$
+
+# Sofya (sofya.co) and Reflection AI (reflection.ai) crawlers. They walked
+# sanrafael.gov translated pages 2026-10-20 (SofyaBot 277, Reflectionbot 188
+# views in 5.5h), helping exhaust the 2M chars/day Cloud Translation cap
+# by 5 AM PT so real visitors got English for the rest of the day
+# (pc-dev-issues#391).
+SofyaBot
+Reflectionbot
