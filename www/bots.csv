@@ -162,3 +162,8 @@ Chrome/130\.0\.6723\.70
 # (pc-dev-issues#391).
 SofyaBot
 Reflectionbot
+
+# Qlyze (qlyze.io) SEO crawler. 443 requests to cityofstreetsboro.com from
+# 46.4.94.214 (Hetzner) in one hour on 2026-10-21, during a rendering-crawler
+# flood that pushed p95 response time to 21s (wp-proudcity#2969 alert).
+QlyzeBot
