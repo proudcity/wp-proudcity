@@ -25,6 +25,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		'/events/page/*/',
 		'/locations/page/*/',
 		'/documents/page/*/',
+		// Legacy All-in-One Event Calendar views (action~month, action~week, ...).
+		// No tenant runs AI1EC any more; the ingress returns 403 for these
+		// (pc-dev-issues#297), and this lets Googlebot drop its indexed copies.
+		'/events/action~',
 	);
 
 	$crawlers = array(

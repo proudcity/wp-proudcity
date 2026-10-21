@@ -1,3 +1,23 @@
+## 2026-10-21
+
+- Upgraded PHP from 8.3.35 to **8.3.36** for php.net's 2026-10-21 critical security release (pc-dev-issues#418). It fixes two CVSS v4.0 9.2 remote code execution bugs:
+  - **CVE-2026-109618:** out-of-memory handling can interrupt PHP while request data is half-initialized, and cleanup then trusts it.
+  - **CVE-2026-109619:** request state can outlive its freed memory and be reused by the next request on the same worker.
+
+  php.net rates Apache with mod_php, which is what every tenant pod runs, as the highest-risk setup, with unauthenticated exploits that trigger before any application code runs. The `Dockerfile` base is now pinned to `php:8.3.36-apache-trixie` instead of the floating `8.3-apache-trixie`, so the security fix shows in the diff and a build can't quietly reuse a stale tag. The pin can go back to floating once the fleet is on the fixed version.
+- `etc/php.ini`: set `session.upload_progress.enabled = Off`. Nothing in our stack uses upload progress, and php.net lists turning it off as a (partial) mitigation for CVE-2026-109619. It's kept as defense in depth alongside the version fix. The other listed mitigations, `memory_limit=-1` and a lower `post_max_size`, were deliberately not applied:
+  - `memory_limit=-1` would remove the per-site PHP ceiling the #2980 worker sizing relies on, so every runaway request would go straight to a cgroup OOM kill.
+  - `post_max_size` already follows each site's `UPLOAD_MAX_FILESIZE`.
+
+References: https://github.com/proudcity/pc-dev-issues/issues/418, https://www.php.net/archive/2026.php#2026-10-21-2
+
+## 2026-10-20
+
+- Added `SofyaBot` and `Reflectionbot` to `www/bots.csv`. Both crawlers walked sanrafael.gov's translated pages on 2026-10-20: 277 and 188 views in the 5.5 hours after the daily quota reset. Every translated view is a paid Cloud Translation call, and along with one Paperspace-hosted headless Chrome they used up the site's 2M characters/day cap by 5 AM PT. After that, real visitors got English for the rest of the day.
+- `proud-robots.php`: added `/events/action~` to the `Disallow` list for every crawler block. These are legacy All-in-One Event Calendar view URLs (`action~month`, `action~week`, `action~oneday`, `action~agenda`). No tenant runs AI1EC any more, but Google still has them indexed. Since 2026-10-19 a residential-proxy botnet has been crawling them on sanrafaelminibetaca at 50–100k requests an hour from about 13k distinct IPs. Each request either 404s through a full WordPress boot or 302s on the redirect hosts, which pushed the HPA from 3 to 14 pods. The botnet ignores robots.txt; this entry is so compliant crawlers drop the URLs. The ingress now returns 403 for the path fleet-wide (pc-dev-issues#297).
+
+References: https://github.com/proudcity/pc-dev-issues/issues/391, https://github.com/proudcity/pc-dev-issues/issues/297
+
 ## 2026-10-19
 
 - Sized Apache prefork's `MaxRequestWorkers` to each pod's cgroup memory limit instead of a fixed 1500 for every tenant regardless of memory (#2980). Under a crawler or scanner burst, prefork kept forking PHP workers until the container passed its cgroup limit and the kernel OOM-killed it, taking every in-flight request on that pod down with it — sanrafael.gov, sonomaca, ketteringoh and kalamazoomi all hit this in October. New `bin/apache-workers.sh`, sourced by `bin/entrypoint.sh`, reads `/sys/fs/cgroup/memory.max` (cgroup v2, falling back to v1's `memory.limit_in_bytes`) and computes `floor((limit_Mi - 300) / 64)`, clamped to 5-64, exporting the result as `APACHE_MAX_REQUEST_WORKERS`. No limit (or an unreadable one) is treated as the 1200Mi tier (14 workers), where most of the fleet sits. A per-deployment `APACHE_MAX_REQUEST_WORKERS` env var wins if it's a positive integer up to 256; anything else logs a warning and falls back to the computed value, so nothing odd ever reaches the Apache config.

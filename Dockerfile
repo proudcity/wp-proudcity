@@ -1,5 +1,8 @@
 # syntax=docker/dockerfile:1
-FROM php:8.3-apache-trixie
+# Pinned to the patch release for CVE-2026-109618 / CVE-2026-109619 (critical
+# mod_php RCEs, 2026-10-21) so the build can't pick up a stale floating tag
+# (pc-dev-issues#418).
+FROM php:8.3.36-apache-trixie
 
 # known_hosts at /root/.ssh is needed during build for the composer install step,
 # which runs as root with --mount=type=ssh and clones private repos over SSH.
