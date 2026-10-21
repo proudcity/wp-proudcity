@@ -1,3 +1,16 @@
+## 2026-10-21
+
+- Upgraded PHP from 8.3.35 to **8.3.36** for php.net's 2026-10-21 critical security release (pc-dev-issues#418). It fixes two CVSS v4.0 9.2 remote code execution bugs:
+  - **CVE-2026-109618:** out-of-memory handling can interrupt PHP while request data is half-initialized, and cleanup then trusts it.
+  - **CVE-2026-109619:** request state can outlive its freed memory and be reused by the next request on the same worker.
+
+  php.net rates Apache with mod_php, which is what every tenant pod runs, as the highest-risk setup, with unauthenticated exploits that trigger before any application code runs. The `Dockerfile` base is now pinned to `php:8.3.36-apache-trixie` instead of the floating `8.3-apache-trixie`, so the security fix shows in the diff and a build can't quietly reuse a stale tag. The pin can go back to floating once the fleet is on the fixed version.
+- `etc/php.ini`: set `session.upload_progress.enabled = Off`. Nothing in our stack uses upload progress, and php.net lists turning it off as a (partial) mitigation for CVE-2026-109619. It's kept as defense in depth alongside the version fix. The other listed mitigations, `memory_limit=-1` and a lower `post_max_size`, were deliberately not applied:
+  - `memory_limit=-1` would remove the per-site PHP ceiling the #2980 worker sizing relies on, so every runaway request would go straight to a cgroup OOM kill.
+  - `post_max_size` already follows each site's `UPLOAD_MAX_FILESIZE`.
+
+References: https://github.com/proudcity/pc-dev-issues/issues/418, https://www.php.net/archive/2026.php#2026-10-21-2
+
 ## 2026-10-20
 
 - Added `SofyaBot` and `Reflectionbot` to `www/bots.csv`. Both crawlers walked sanrafael.gov's translated pages on 2026-10-20: 277 and 188 views in the 5.5 hours after the daily quota reset. Every translated view is a paid Cloud Translation call, and along with one Paperspace-hosted headless Chrome they used up the site's 2M characters/day cap by 5 AM PT. After that, real visitors got English for the rest of the day.
