@@ -52,3 +52,9 @@ define( 'PROUD_CRON_INTEGRITY_PLUGIN', dirname( __DIR__ ) . '/www/wp-content/mu-
 if ( file_exists( PROUD_CRON_INTEGRITY_PLUGIN ) ) {
 	require_once PROUD_CRON_INTEGRITY_PLUGIN;
 }
+
+define( 'PROUD_BLOCK_PASSWORD_LOGIN_PLUGIN', dirname( __DIR__ ) . '/www/wp-content/mu-plugins/proud-block-password-login.php' );
+
+if ( file_exists( PROUD_BLOCK_PASSWORD_LOGIN_PLUGIN ) ) {
+	require_once PROUD_BLOCK_PASSWORD_LOGIN_PLUGIN;
+}
