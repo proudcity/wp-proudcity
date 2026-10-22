@@ -59,7 +59,20 @@ define('WP_STATELESS_MEDIA_MODE', 'ephemeral');
 define('WP_STATELESS_MEDIA_ROOT_DIR', getenv('WORDPRESS_DB_NAME') . '/%date_year/date_month%/');
 define('WP_STATELESS_MEDIA_REWRITE_BODY_CONTENT_URL', 1);
 define('WP_STATELESS_COMPATIBILITY_GF', 1);
-define('WP_STATELESS_MEDIA_CACHE_BUSTING', getenv('STATELESS_MEDIA_CACHE_BUSTING') ?? false);
+// Cache-busting (hashed file names) is on unless a site explicitly sets
+// STATELESS_MEDIA_CACHE_BUSTING to a false value (false/0/no/off). In
+// ephemeral mode two uploads with the same name would otherwise overwrite
+// the same GCS object. getenv() returns false when unset, so the old
+// `?? false` default turned it off and overrode WP-Stateless's own
+// ephemeral-mode default of on. Unset, empty or unrecognised values stay on.
+// filter_var() maps unset (false) and '' to false, so those are handled
+// before parsing.
+$pc_cache_busting = getenv('STATELESS_MEDIA_CACHE_BUSTING');
+$pc_cache_busting = ($pc_cache_busting === false || trim($pc_cache_busting) === '')
+    ? null
+    : filter_var($pc_cache_busting, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+define('WP_STATELESS_MEDIA_CACHE_BUSTING', $pc_cache_busting ?? true);
+unset($pc_cache_busting);
 define('WP_STATELESS_MEDIA_BODY_REWRITE', 'false');
 // lets files get deleted if they are deleted in the media gallery
 define('WP_STATELESS_MEDIA_DELETE_REMOTE', 'true');
