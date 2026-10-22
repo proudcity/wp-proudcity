@@ -59,7 +59,20 @@ define('WP_STATELESS_MEDIA_MODE', 'ephemeral');
 define('WP_STATELESS_MEDIA_ROOT_DIR', getenv('WORDPRESS_DB_NAME') . '/%date_year/date_month%/');
 define('WP_STATELESS_MEDIA_REWRITE_BODY_CONTENT_URL', 1);
 define('WP_STATELESS_COMPATIBILITY_GF', 1);
-define('WP_STATELESS_MEDIA_CACHE_BUSTING', getenv('STATELESS_MEDIA_CACHE_BUSTING') ?? false);
+// Cache-busting (hashed file names) is on unless a site explicitly sets
+// STATELESS_MEDIA_CACHE_BUSTING to a false value (false/0/no/off). In
+// ephemeral mode two uploads with the same name would otherwise overwrite
+// the same GCS object. getenv() returns false when unset, so the old
+// `?? false` default turned it off and overrode WP-Stateless's own
+// ephemeral-mode default of on. Unset, empty or unrecognised values stay on.
+// filter_var() maps unset (false) and '' to false, so those are handled
+// before parsing.
+$pc_cache_busting = getenv('STATELESS_MEDIA_CACHE_BUSTING');
+$pc_cache_busting = ($pc_cache_busting === false || trim($pc_cache_busting) === '')
+    ? null
+    : filter_var($pc_cache_busting, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+define('WP_STATELESS_MEDIA_CACHE_BUSTING', $pc_cache_busting ?? true);
+unset($pc_cache_busting);
 define('WP_STATELESS_MEDIA_BODY_REWRITE', 'false');
 // lets files get deleted if they are deleted in the media gallery
 define('WP_STATELESS_MEDIA_DELETE_REMOTE', 'true');
@@ -163,14 +176,20 @@ define('WP_ENVIRONMENT_TYPE', (string) $environment_type);
  * Turns off page-load wp-cron where the k8s cron runner covers the site
  * (wp-proudcity#2961). An explicit DISABLE_WP_CRON env var always wins, as a
  * per-site override. Otherwise page-load cron is off only in the prod
- * namespace, read from the pod's service-account namespace file. If that file
- * is missing (local dev) page-load cron stays on.
+ * namespace. The namespace comes from POD_NAMESPACE, a downward-API env var
+ * (fieldRef metadata.namespace), because WP pods no longer mount a
+ * service-account token (pc-dev-issues#419). The service-account namespace
+ * file is kept as a fallback for pods that still have it. With neither
+ * (local dev) page-load cron stays on.
  */
+$proud_pod_namespace = (getenv('POD_NAMESPACE') !== false)
+    ? getenv('POD_NAMESPACE')
+    : (string) @file_get_contents('/var/run/secrets/kubernetes.io/serviceaccount/namespace');
 $proud_disable_wp_cron = (getenv('DISABLE_WP_CRON') !== false)
     ? (getenv('DISABLE_WP_CRON') === 'true')
-    : (trim((string) @file_get_contents('/var/run/secrets/kubernetes.io/serviceaccount/namespace')) === 'prod');
+    : (trim($proud_pod_namespace) === 'prod');
 define('DISABLE_WP_CRON', $proud_disable_wp_cron);
-unset($proud_disable_wp_cron);
+unset($proud_disable_wp_cron, $proud_pod_namespace);
 
 define('FORCE_SSL_ADMIN', true);
 @ini_set('session.cookie_secure', '1');

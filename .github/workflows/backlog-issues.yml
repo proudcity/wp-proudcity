@@ -12,9 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Backlog to project board
-        uses: rachmari/actions-add-new-issue-to-column@1a459ef92308ba7c9c9dc2fcdd72f232495574a9
+      - name: Add to project board
+        uses: actions/add-to-project@5afcf98fcd03f1c2f92c3c83f58ae24323cc57fd # v2.0.0
         with:
-          action-token: ${{ secrets.GITHUB_TOKEN }}
-          project-url: 'https://github.com/proudcity/wp-proudcity/projects/3'
-          column-name: 'Backlog'
+          project-url: https://github.com/orgs/proudcity/projects/3
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
