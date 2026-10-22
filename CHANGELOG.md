@@ -1,3 +1,7 @@
+## 2026-10-22
+
+- Added `TLM-Audit-Scanner` to `www/bots.csv`. This self-identified vulnerability scanner (93.123.109.247, TECHOFF SRV LIMITED) swept at least 10 tenants between 2026-10-21 ~22:50 and 2026-10-22 08:39 UTC, about 2,528 requests each, probing for `.env`, `.aws/credentials` and `.git` files (including URL-encoded variants that fall through to a full WordPress 404). Nothing was exposed. It also reaches Cloudflare-proxied tenants through Cloudflare edge IPs, where the pc-dev-issues#16 IP banner can't apply, so the UA rule is what stops it there. Found while checking the #2969 traffic alert on sanrafaelca.
+
 ## 2026-10-21
 
 - `www/wp-config.php`: page-load cron is turned off in prod again. pc-dev-issues#419 stopped mounting service-account tokens into WordPress pods, and that also removed `/var/run/secrets/kubernetes.io/serviceaccount/namespace`, which was the file wp-config read to detect the prod namespace. Without it, `DISABLE_WP_CRON` became false on every prod site, so page-load cron ran alongside the #2961 cron runner. On Cloudflare-challenged sites this caused a livelock: each blocked loopback refreshed `doing_cron`, and the runner skipped the site every tick (petalumaca, wp-proudcity#2992). wp-config now reads the namespace from a `POD_NAMESPACE` downward-API env var (`fieldRef: metadata.namespace`), which doesn't need a token. The file is still used as a fallback, and an explicit `DISABLE_WP_CRON` env var still wins. Takes effect only once deployments carry `POD_NAMESPACE`; until then behaviour is unchanged.

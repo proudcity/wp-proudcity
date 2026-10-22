@@ -167,3 +167,11 @@ Reflectionbot
 # 46.4.94.214 (Hetzner) in one hour on 2026-10-21, during a rendering-crawler
 # flood that pushed p95 response time to 21s (wp-proudcity#2969 alert).
 QlyzeBot
+
+# TLM-Audit-Scanner vulnerability scanner (no vendor URL in the UA). Swept the
+# fleet 2026-10-21 ~22:50 to 2026-10-22 08:39 UTC from 93.123.109.247 (TECHOFF
+# SRV LIMITED), ~2,528 requests per tenant on 10+ tenants (montgomeryoh,
+# marinrecoversca, kalamazoomi, sanrafaelca, ...), probing /.env, /.aws/credentials,
+# /.git and URL-encoded variants. Reaches Cloudflare-proxied tenants through
+# Cloudflare edge IPs, where IP bans can't apply, so block it by UA.
+TLM-Audit-Scanner
