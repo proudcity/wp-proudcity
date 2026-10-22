@@ -18,9 +18,18 @@ if ( ! defined( 'ABSPATH' ) ) {
  * fallbacks exist only so that one-time `require` below does not fatal; the
  * hook *dispatch* itself is never under test, only the callbacks it points at,
  * which tests call directly.
+ *
+ * `add_filter()` also records every call into $GLOBALS['proud_test_added_filters']
+ * so a test can assert *which* filters a function registered without Brain Monkey:
+ * Patchwork can't redefine a function this file already defined outside its own
+ * interception (it throws DefinedTooEarly), so `Functions\when('add_filter')` isn't
+ * available the way it is for functions, like `remove_filter()`, that core itself
+ * would otherwise provide and that are left undefined here.
  */
 if ( ! function_exists( 'add_filter' ) ) {
 	function add_filter( $hook, $callback, $priority = 10, $accepted_args = 1 ) {
+		$GLOBALS['proud_test_added_filters'][] = array( $hook, $callback, $priority, $accepted_args );
+
 		return true;
 	}
 }
@@ -44,6 +53,63 @@ if ( ! function_exists( 'maybe_unserialize' ) ) {
 		}
 
 		return $data;
+	}
+}
+
+if ( ! function_exists( '__' ) ) {
+	function __( $text, $domain = 'default' ) {
+		return $text;
+	}
+}
+
+/*
+ * Minimal stand-ins for the two core classes proud-block-password-login.php's
+ * `authenticate` callbacks check with `instanceof`/`is_wp_error()`. Only the bits
+ * those callbacks and their tests actually use are implemented.
+ */
+if ( ! class_exists( 'WP_Error' ) ) {
+	class WP_Error {
+		protected $errors = array();
+
+		public function __construct( $code = '', $message = '' ) {
+			if ( '' !== $code ) {
+				$this->add( $code, $message );
+			}
+		}
+
+		public function add( $code, $message ) {
+			$this->errors[ $code ][] = $message;
+		}
+
+		public function get_error_codes() {
+			return array_keys( $this->errors );
+		}
+
+		public function get_error_code() {
+			$codes = $this->get_error_codes();
+
+			return $codes ? $codes[0] : '';
+		}
+
+		public function has_errors() {
+			return (bool) $this->errors;
+		}
+	}
+}
+
+if ( ! function_exists( 'is_wp_error' ) ) {
+	function is_wp_error( $thing ) {
+		return $thing instanceof WP_Error;
+	}
+}
+
+if ( ! class_exists( 'WP_User' ) ) {
+	class WP_User {
+		public $ID;
+
+		public function __construct( $id = 0 ) {
+			$this->ID = $id;
+		}
 	}
 }
 
