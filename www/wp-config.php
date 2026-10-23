@@ -56,7 +56,19 @@ if (! empty(getenv('JWT_KEY'))) {
 // wp-stateless
 define('WP_STATELESS_MEDIA_BUCKET', getenv('STATELESS_MEDIA_BUCKET'));
 define('WP_STATELESS_MEDIA_MODE', 'ephemeral');
-define('WP_STATELESS_MEDIA_ROOT_DIR', getenv('WORDPRESS_DB_NAME') . '/%date_year/date_month%/');
+// Uploads go to <folder>/YYYY/MM/ in the shared bucket. The folder is the
+// database name unless STATELESS_MEDIA_ROOT overrides it, e.g. after a site
+// is renamed and its media moved to a new folder (PCD178: sanrafaelminibetaca
+// -> sanrafael). Not STATELESS_MEDIA_DIRECTORY: that older env var is set on
+// many sites with a different layout (<x>/uploads/) and nothing reads it, so
+// reusing it would move their uploads. Unset, empty or anything other than a
+// single lowercase folder name falls back to the database name.
+$pc_media_root = trim((string) getenv('STATELESS_MEDIA_ROOT'));
+if (!preg_match('/^[a-z0-9_-]+$/', $pc_media_root)) {
+    $pc_media_root = getenv('WORDPRESS_DB_NAME');
+}
+define('WP_STATELESS_MEDIA_ROOT_DIR', $pc_media_root . '/%date_year/date_month%/');
+unset($pc_media_root);
 define('WP_STATELESS_MEDIA_REWRITE_BODY_CONTENT_URL', 1);
 define('WP_STATELESS_COMPATIBILITY_GF', 1);
 // Cache-busting (hashed file names) is on unless a site explicitly sets
