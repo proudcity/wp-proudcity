@@ -24,19 +24,26 @@ RUN cat /etc/sysctl.d/99-cgroup.conf
 # install the PHP extensions we need
 RUN apt-get update \
     && apt-get -y upgrade \
-    && apt-get install -y --no-install-recommends vim libpng-dev libjpeg-dev mariadb-client unzip openssh-client git libcurl4-openssl-dev libmcrypt-dev \
+    && apt-get install -y --no-install-recommends vim libpng-dev libjpeg-dev mariadb-client unzip openssh-client git libcurl4-openssl-dev \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd --with-jpeg \
     && docker-php-ext-install gd mysqli opcache bcmath \
     && a2enmod rewrite expires headers
 
-RUN pecl install mcrypt-1.0.7
-
-# install phpredis extension
-# From http://stackoverflow.com/questions/31369867/how-to-install-php-redis-extension-using-the-official-php-docker-image-approach
-RUN pecl install -o -f redis \
-    &&  rm -rf /tmp/pear \
-    &&  echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
+# install phpredis extension from its pinned, checksummed GitHub release rather
+# than pecl.php.net, whose outages failed both master builds during
+# pc-dev-issues#418 (#2986). Upgrading phpredis = change both ARGs.
+ARG PHPREDIS_VERSION=6.3.0
+ARG PHPREDIS_SHA256=cb8f81df1a275599e4f8ddcfec7e1f65ed1953e6f5673649149fd680ebff4cad
+RUN curl -fsSL -o /tmp/phpredis.tar.gz \
+        "https://github.com/phpredis/phpredis/archive/refs/tags/${PHPREDIS_VERSION}.tar.gz" \
+    && echo "${PHPREDIS_SHA256}  /tmp/phpredis.tar.gz" | sha256sum -c - \
+    && docker-php-source extract \
+    && mkdir -p /usr/src/php/ext/redis \
+    && tar -xzf /tmp/phpredis.tar.gz --strip-components=1 -C /usr/src/php/ext/redis \
+    && docker-php-ext-install redis \
+    && docker-php-source delete \
+    && rm -f /tmp/phpredis.tar.gz
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
