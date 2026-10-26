@@ -106,6 +106,11 @@ Brightbot
 # driving ~$3.9k/day of Cloud Translation spend (pc-dev-issues#391)
 ShapBot
 
+# Shap-User — same Shap crawler family, different UA token, so the ShapBot
+# line above never matched it. ~41k requests to santaanaca on 2026-10-25
+# from Google Cloud IPs during a 590k-request scrape
+Shap-User
+
 # AlertMedia
 rss-monitor
 

@@ -1,3 +1,7 @@
+## 2026-10-26
+
+- Added `Shap-User` to `www/bots.csv`. It is the same Shap crawler family as `ShapBot` (pc-dev-issues#391) but sends `Shap-User/0.1.0`, which the existing `ShapBot` entry never matched. It sent about 41,000 requests to santaanaca on 2026-10-25 from Google Cloud IPs, part of a 590,000-request scrape that fired the #2969 traffic alert. The rest of that scrape came from headless Chrome on a few Hetzner (Finland), Orange (Spain) and AWS (Frankfurt) IPs with ordinary browser user agents, which is a network-level pattern for pc-dev-issues#16 rather than a bots.csv entry.
+
 ## 2026-10-22
 
 - `www/wp-config.php`: WP-Stateless cache-busting (hashed upload file names) now defaults to **on**. The old `getenv('STATELESS_MEDIA_CACHE_BUSTING') ?? false` defined the constant as `false` on any site without the env var (`getenv()` returns `false`, not `null`), and a defined constant overrides WP-Stateless's own ephemeral-mode default of on, so those sites could overwrite a GCS object by uploading a file with the same name. 5 prod sites (including sanrafaelminibetaca) and 37 test sites were affected; the prod ones and `agencytemplate` got `STATELESS_MEDIA_CACHE_BUSTING=true` set directly on 2026-10-22. Unset, empty or unrecognised values now mean on; only an explicit false value (`false`/`0`/`no`/`off`) turns it off. Only new uploads change name; existing files and URLs are untouched (#3002).
