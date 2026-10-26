@@ -184,11 +184,11 @@
             "package": {
                 "name": "proudcity/wp-proud-core",
                 "type": "wordpress-plugin",
-                "version": "2026.10.06.1125",
+                "version": "2026.10.26.1425",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-core.git",
-                    "reference": "2026.10.06.1125"
+                    "reference": "2026.10.26.1425"
                 }
             }
         },
@@ -197,11 +197,11 @@
             "package": {
                 "name": "proudcity/wp-proud-agency",
                 "type": "wordpress-plugin",
-                "version": "2026.10.19.1044",
+                "version": "2026.10.26.1425",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-agency.git",
-                    "reference": "2026.10.19.1044"
+                    "reference": "2026.10.26.1425"
                 }
             }
         },
@@ -249,11 +249,11 @@
             "package": {
                 "name": "proudcity/wp-proud-document",
                 "type": "wordpress-plugin",
-                "version": "2026.04.28.0912",
+                "version": "2026.10.26.1425",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-document.git",
-                    "reference": "2026.04.28.0912"
+                    "reference": "2026.10.26.1425"
                 }
             }
         },
@@ -353,11 +353,11 @@
             "package": {
                 "name": "proudcity/wp-proud-actions-app",
                 "type": "wordpress-plugin",
-                "version": "2026.10.08.1115",
+                "version": "2026.10.26.1425",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-actions-app.git",
-                    "reference": "2026.10.08.1115"
+                    "reference": "2026.10.26.1425"
                 }
             }
         },
@@ -496,11 +496,11 @@
             "package": {
                 "name": "proudcity/wp-proud-theme",
                 "type": "wordpress-theme",
-                "version": "2026.10.09.1240",
+                "version": "2026.10.26.1425",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-proud-theme.git",
-                    "reference": "2026.10.09.1240"
+                    "reference": "2026.10.26.1425"
                 }
             }
         }
@@ -554,18 +554,18 @@
         "wpackagist-plugin/wp-fullcalendar": "1.6.1",
         "proudcity/intuitive-custom-post-order": "3.2.0",
         "proudcity/proudcity-quick-menu": "2026.08.19.1030",
-        "proudcity/wp-proud-core": "2026.10.06.1125",
-        "proudcity/wp-proud-agency": "2026.10.19.1044",
+        "proudcity/wp-proud-core": "2026.10.26.1425",
+        "proudcity/wp-proud-agency": "2026.10.26.1425",
         "proudcity/wp-proud-search": "2026.10.07.1307",
         "proudcity/wp-proud-search-elastic": "2026.09.10.1655",
         "proudcity/wp-proud-payment": "2026.04.21.0952",
-        "proudcity/wp-proud-document": "2026.04.28.0912",
+        "proudcity/wp-proud-document": "2026.10.26.1425",
         "proudcity/wp-proud-location": "2026.06.12.1050",
         "proudcity/wp-proud-issue": "2025.12.03.1127",
         "proudcity/wp-proud-meeting": "2026.01.19.1156",
         "proudcity/wp-proud-map-app": "2026.04.01.1208",
         "proudcity/wp-proud-social-app": "1.134.0",
-        "proudcity/wp-proud-actions-app": "2026.10.08.1115",
+        "proudcity/wp-proud-actions-app": "2026.10.26.1425",
         "proudcity/wp-proud-topic": "2026.09.16.1356",
         "proudcity/wp-proud-admin": "2026.09.22.1146",
         "proudcity/wp-proud-admin-menu": "2026.03.18.0902",
@@ -573,7 +573,7 @@
         "proudcity/wp-proud-seeclickfix": "1.134.0",
         "proudcity/wp-proud-dashboard": "2025.05.13.1151",
         "proudcity/wp-proud-subsite": "1.134.0",
-        "proudcity/wp-proud-theme": "2026.10.09.1240",
+        "proudcity/wp-proud-theme": "2026.10.26.1425",
         "proudcity/wp-proud-ip-block": "2022.11.08.1334"
     },
     "extra": {
