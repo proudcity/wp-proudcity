@@ -1,3 +1,7 @@
+## 2026-10-27
+
+- Bumped `proudcity-link-scanner` to `2026.10.27.1304`. Fixing a page builder link from Tools → Broken Links could roll the whole page back to an old version. The scanner indexed `panels_data` on every revision as well as the live page, and fixing a link on a revision row read that revision's old layout and saved it with `update_post_meta()`, which WordPress redirects from a revision to its parent. The page lost every edit made since that revision, and the editor who clicked the fix was credited with the change. On sanrafael.gov this rolled `/major-development-projects` back a month (Zendesk #8109) and silently reverted a second page. The scanner now skips revisions, refuses to write through a revision, and a one-time migration on each site deletes the existing revision rows. On 2026-10-27 those rows (23,177) were deleted by hand on sanrafael as a stopgap. Security review passed; plugin tests pass (67) (#3010).
+
 ## 2026-10-26
 
 - Bumped `wp-proud-core`, `wp-proud-agency`, `wp-proud-document`, `wp-proud-actions-app` and `wp-proud-theme` to `2026.10.26.1425`. Each release only fixes PHP 8 warnings from ProudCity code, which became visible in Cloud Logging once #2997 sent PHP errors to stderr: about 4,900 warnings an hour fleet-wide, most from `teaser-meeting-table.php` and `wp-proud-actions-app.php`. Rendered output is unchanged. Security review passed; the plugin test suites pass (wp-proud-core 435, wp-proud-agency 86, wp-proud-document 9; the theme and actions-app have no suites) (#3006).

@@ -28,11 +28,11 @@
             "package": {
                 "name": "proudcity/proudcity-link-scanner",
                 "type": "wordpress-plugin",
-                "version": "2026.08.11.1010",
+                "version": "2026.10.27.1304",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/proudcity-link-scanner.git",
-                    "reference": "2026.08.11.1010"
+                    "reference": "2026.10.27.1304"
                 }
             }
         },
@@ -511,7 +511,7 @@
         "johnpbloch/wordpress": "7.1.3",
         "proudcity/auth0": "2026.10.14.1028",
         "proudcity/wp-media-folder": "6.3.0",
-        "proudcity/proudcity-link-scanner": "2026.08.11.1010",
+        "proudcity/proudcity-link-scanner": "2026.10.27.1304",
         "proudcity/gravityforms": "3.2.0.1",
         "proudcity/gravityformsrecaptcha": "2.2.2",
         "proudcity/gravityformssignature": "4.10.0",
