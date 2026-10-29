@@ -1,3 +1,7 @@
+## 2026-10-29
+
+- Added `NaiveBot` to `www/bots.csv`. NaiveBot (`spider-feedback@naive.ai`) sent 41,278 requests to santaanaca in 85 seconds starting 04:03 UTC on 2026-10-29, from 43.155.0.87 (Tencent Cloud), and never fetched robots.txt. Every santaanaca pod failed its readiness probe and about 27,500 requests got 503s for roughly 90 seconds, which fired the #2969 5xx alert; the pods recovered without restarts. The IP went on the HAProxy blocklist (proudcity-kubernetes `haproxy-ingress/blocklist.txt`) the same day; this entry catches the crawler from any other IP.
+
 ## 2026-10-28
 
 - Recorded the fix for **CVE-2026-111497**, a buffer overflow in the Brotli decoder (Brotli 1.0.3 through 1.2.0). CISA added it to the Known Exploited Vulnerabilities catalog on 2026-10-27. The `php:8.3.36-apache-trixie` base shipped `libbrotli1` 1.1.0-2, which is vulnerable. Trixie-security has `1.1.0-2+deb13u1` (DSA-6582-1), and the `Dockerfile` already runs `apt-get -y upgrade`, so the 2026-10-27 `master-b63fa9e` build (the `proudcity-link-scanner` bump) had already installed it with no other change, and that deploy put it on prod. Checked on 2026-10-28: all 383 prod pods and beta report `1.1.0-2+deb13u1`. The vulnerable path is decompression, so the exposure was libcurl decoding `Content-Encoding: br` responses on outbound fetches (oEmbed, RSS, plugin and API calls). Apache only compresses responses, which is not affected ([pc-dev-issues#440](https://github.com/proudcity/pc-dev-issues/issues/440)).

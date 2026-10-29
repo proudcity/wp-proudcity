@@ -186,3 +186,9 @@ TLM-Audit-Scanner
 # an hour on 2026-10-22, walking /documents/ and /meetings/ on launch day
 # (wp-proudcity#2969 alert on sanrafaelminibetaca).
 SERankingBacklinksBot
+
+# NaiveBot (naive.ai). 41,278 requests to santaanaca in 85 seconds on
+# 2026-10-29 from 43.155.0.87 (Tencent Cloud), never fetched robots.txt; every
+# santaanaca pod failed readiness and ~27k requests got 503s (wp-proudcity#2969
+# 5xx alert). The IP is also on the HAProxy blocklist; this catches other IPs.
+NaiveBot
