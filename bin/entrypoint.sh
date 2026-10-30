@@ -193,15 +193,6 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
         done </tmp/redirects.csv
     fi
 
-    # deny URLS
-    if [[ $BLOCK_LOGIN ]]; then
-        echo "RewriteCond %{REQUEST_URI} ^/wp-login\.php$ [NC]" >>$htaccess
-        echo "RewriteCond %{QUERY_STRING} !action=(logout|postpass) [NC]" >>$htaccess
-        echo "RewriteCond %{QUERY_STRING} !loggedout=true [NC]" >>$htaccess
-        echo "RewriteCond %{QUERY_STRING} !redirect_to=.* [NC]" >>$htaccess
-        echo "RewriteRule ^(.*)$ - [F,L]" >>$htaccess
-    fi
-
     #  echo 'Adding TLS REDIRECT .htaccess rule'
     #  echo "RewriteCond %{HTTP_HOST} ^${HOST}\.com [NC]"  >> $htaccess
     #  echo "RewriteRule ^(.*)$ https://${HOST}/$1 [R,L]"  >> $htaccess
