@@ -192,3 +192,11 @@ SERankingBacklinksBot
 # santaanaca pod failed readiness and ~27k requests got 503s (wp-proudcity#2969
 # 5xx alert). The IP is also on the HAProxy blocklist; this catches other IPs.
 NaiveBot
+
+# Python HTTP client default UAs. ~14k requests (nearly all 200) to
+# deserthotspringsca on election night 2026-11-03 22:40-00:30 UTC from ~31 AWS
+# us-west-2 IPs (44.255.x, 44.246.x, 52.89.x, 34.212.x, 54.187.x), the same
+# operator whose HeadlessChrome requests were already 403'd (wp-proudcity#2969
+# alert, 60k/hr). No ProudCity service sends these UAs.
+Python-urllib
+python-httpx
