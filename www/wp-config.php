@@ -88,6 +88,10 @@ unset($pc_cache_busting);
 define('WP_STATELESS_MEDIA_BODY_REWRITE', 'false');
 // lets files get deleted if they are deleted in the media gallery
 define('WP_STATELESS_MEDIA_DELETE_REMOTE', 'true');
+// Hide the setup assistant / Stateless Connect (4.5.0+). Credentials come from
+// the env-pinned bucket + key file above; nobody should sign in with Google here
+// (it would store a cloud-platform refresh token in the tenant DB). See #3025.
+define('WP_STATELESS_MEDIA_HIDE_SETUP_ASSISTANT', true);
 
 
 // For ProudCity, to fix issues related to migration
