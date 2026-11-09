@@ -158,11 +158,11 @@
             "package": {
                 "name": "proudcity/auth0",
                 "type": "wordpress-plugin",
-                "version": "2026.10.14.1028",
+                "version": "2026.11.09.1106",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/proudcity/wp-auth0-legacy.git",
-                    "reference": "2026.10.14.1028"
+                    "reference": "2026.11.09.1106"
                 }
             }
         },
@@ -496,7 +496,7 @@
         "php": ">=8.0",
         "composer/installers": "1.*",
         "johnpbloch/wordpress": "7.1.4",
-        "proudcity/auth0": "2026.10.14.1028",
+        "proudcity/auth0": "2026.11.09.1106",
         "proudcity/wp-media-folder": "6.3.0",
         "proudcity/proudcity-link-scanner": "2026.10.27.1304",
         "proudcity/gravityforms": "3.2.2",
