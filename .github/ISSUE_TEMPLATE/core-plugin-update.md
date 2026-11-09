@@ -78,16 +78,12 @@ The `migration-watcher` CronJob runs this weekly and files a `migration-drift` i
 - [ ] if upstream shipped a new release that does **not** include cache flushing, merge it into [our fork](https://github.com/proudcity/intuitive-custom-post-order) and reapply the `wp_cache_flush()` calls in the three AJAX order-save handlers (`update-menu-order`, `update-menu-order-tags`, `update-menu-order-sites`), then tag and bump the composer pin
 - verification: `diff` the fork's `intuitive-custom-post-order.php` against a pristine upstream copy; the result should show only the three `wp_cache_flush()` lines and their comments
 
-### Simple Staff List
-
-- we [fixed magic vars](https://github.com/proudcity/simple-staff-list/commit/ac9f49753a87dd6952cc1f86068e1d236d9d15b6) which cause PHP errors
-
 ### WP-Stateless
 
-- pinned to an exact version in `composer.json` (`wpackagist-plugin/wp-stateless`, currently 4.4.1), so a bump is always a deliberate edit — run these checks every time that pin moves
-- the plugin ships data migrations as files in `static/migrations/`. A new file there means every site needs a migration pass after the release, or sites show the "your data still needs to be updated using this new method" nag and keep reading the legacy storage format. Known migrations as of 4.4.1: `20240219175240` (Update data for Google Cloud files), `20240423174109` (Optimize Compatibility Files) — see #2889
+- pinned to an exact version in `composer.json` (`wpackagist-plugin/wp-stateless`, currently 4.5.0), so a bump is always a deliberate edit — run these checks every time that pin moves
+- the plugin ships data migrations as files in `static/migrations/`. A new file there means every site needs a migration pass after the release, or sites show the "your data still needs to be updated using this new method" nag and keep reading the legacy storage format. Known migrations as of 4.5.0 (unchanged since 4.4.1): `20240219175240` (Update data for Google Cloud files), `20240423174109` (Optimize Compatibility Files) — see #2889
 - [ ] diff `static/migrations/` between the old and new version. Any new file means a platform-wide migration pass is required
-- [ ] check whether `DB::DB_VERSION` in `lib/classes/class-db.php` changed (4.4.1 is `1.2`). A bump means a schema change on top of the data migration
+- [ ] check whether `DB::DB_VERSION` in `lib/classes/class-db.php` changed (still `1.2` in 4.5.0). A bump means a schema change on top of the data migration
 - [ ] if either changed, schedule the migration pass as its own off-hours release. `wp stateless migrate` lists status, `wp stateless migrate auto --yes` runs everything still pending (a no-op on an already-current site). Wrap it in `timeout` — `_auto_migrate()` polls the migration state option in an unbounded `while(true)` and will hang the deploy forever if the background process stalls
 - **do not put this in `bin/entrypoint.sh`.** Batches are not processed in-process: `Migrator::start_migration()` queues the batch and calls `dispatch()`, a non-blocking loopback POST to `admin-ajax.php`. Entrypoint runs before `exec "$@"` starts `apache2-foreground`, so nothing is listening and the migration registers as started and then sits. Entrypoint also runs on every pod restart and scale-up, not just deploys. `sm_batch_process_cron` is not a fallback — `handle_cron_healthcheck()` also only calls `dispatch()`
 - migrations are insert-only (no `DELETE`, no `DROP`, legacy `sm_cloud` postmeta left intact) and each attachment is processed in a transaction against unique keys, so a concurrent upload cannot corrupt data. Still run off-hours: `20240423174109` makes a live GCS API call per row, and edits/deletes of existing media mid-run are the untested path
