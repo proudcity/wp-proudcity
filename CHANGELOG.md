@@ -1,3 +1,7 @@
+## 2026-11-13
+
+- `www/wp-config.php`: the redirect to a site's main domain now returns **301 Moved Permanently** instead of 302. It fires when the Host header isn't the site's `HOST` (an alias domain like `publicworks.marincounty.org` -> `publicworks.marincounty.gov`) or when `X-Forwarded-Proto` is `http`, and it keeps the path and query string. With a 302, Google treated every alias domain's redirect as temporary and never moved the old URLs' ranking to the main domain; Marin County Public Works reported old `.org` results still showing in search (Zendesk 8137). Same condition and target as before, only the status changes. Browsers cache a 301, so if a site's main `HOST` changes later, visitors who already got the redirect keep going to the old target until their cache clears (pc-dev-issues#484).
+
 ## 2026-11-12
 
 - Bumped `proudcity/auth0` to `2026.11.12.1133` (composer bump commit `53b5cfc`, image `master-53b5cfc`). When the Auth0 user-profile lookup failed (a non-200 response or a malformed body), login showed the misleading "This account does not have an email associated". It now shows "We could not load your account details from Auth0. Please wait a minute and try logging in again." with a 400. The failure is logged to the Auth0 error log (`init_auth0_userinfo`) and to `error_log` with the rate-limit headers. The admin Auth0 Error Log page now escapes its output. Deployed to beta, test, and prod (106 sites) on 2026-11-12. This is Phase 1; Phase 2 (build the profile from ID-token claims) is still open (Refs #3004).
