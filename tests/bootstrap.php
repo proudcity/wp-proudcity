@@ -36,6 +36,8 @@ if ( ! function_exists( 'add_filter' ) ) {
 
 if ( ! function_exists( 'add_action' ) ) {
 	function add_action( $hook, $callback, $priority = 10, $accepted_args = 1 ) {
+		$GLOBALS['proud_test_added_actions'][] = array( $hook, $callback, $priority, $accepted_args );
+
 		return true;
 	}
 }
@@ -123,4 +125,10 @@ define( 'PROUD_BLOCK_PASSWORD_LOGIN_PLUGIN', dirname( __DIR__ ) . '/www/wp-conte
 
 if ( file_exists( PROUD_BLOCK_PASSWORD_LOGIN_PLUGIN ) ) {
 	require_once PROUD_BLOCK_PASSWORD_LOGIN_PLUGIN;
+}
+
+define( 'PROUD_BLOCK_ANON_POST_PLUGIN', dirname( __DIR__ ) . '/www/wp-content/mu-plugins/proud-block-anon-post.php' );
+
+if ( file_exists( PROUD_BLOCK_ANON_POST_PLUGIN ) ) {
+	require_once PROUD_BLOCK_ANON_POST_PLUGIN;
 }
