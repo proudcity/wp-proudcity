@@ -27,7 +27,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends vim libpng-dev libjpeg-dev mariadb-client unzip openssh-client git libcurl4-openssl-dev \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd --with-jpeg \
-    && docker-php-ext-install gd mysqli opcache bcmath \
+    && docker-php-ext-install gd exif mysqli opcache bcmath \
     && a2enmod rewrite expires headers
 
 # install phpredis extension from its pinned, checksummed GitHub release rather
