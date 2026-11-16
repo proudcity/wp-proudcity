@@ -199,7 +199,7 @@ final class BlockAnonPostTest extends TestCase {
 		$logged = array();
 		proud_anon_post_check_early( 'apache2handler', array( 'log' => function ( $l ) use ( &$logged ) { $logged[] = $l; } ) );
 		$this->assertSame( array(), $logged );
-		$this->assertSame( array( array( 'plugins_loaded', 'proud_anon_post_check_cookie', PHP_INT_MIN, 1 ) ), $GLOBALS['proud_test_added_actions'] );
+		$this->assertSame( array( array( 'plugins_loaded', 'proud_anon_post_check_cookie', PHP_INT_MIN, 0 ) ), $GLOBALS['proud_test_added_actions'] );
 	}
 
 	public function test_stage_two_valid_cookie_allows(): void {
@@ -327,5 +327,29 @@ final class BlockAnonPostTest extends TestCase {
 		);
 		$this->assertLessThan( 1024, strlen( $line ) + 1 );
 		$this->assertStringContainsString( 'path="/' . str_repeat( 'x', 199 ) . '"', $line );
+	}
+
+	public function test_empty_or_array_rest_route_is_not_allowed(): void {
+		$this->assertSame( 'block:no_cookie', $this->decide( array(), array( 'rest_route' => '' ) ) );
+		$this->assertSame( 'block:no_cookie', $this->decide( array(), array( 'rest_route' => array( 'x' ) ) ) );
+	}
+
+	public function test_hooks_registered_with_zero_accepted_args(): void {
+		$this->assertSame( 0, ( new ReflectionFunction( 'proud_anon_post_check_cookie' ) )->getNumberOfRequiredParameters() );
+		$this->assertSame( 0, ( new ReflectionFunction( 'proud_anon_post_check_early' ) )->getNumberOfRequiredParameters() );
+	}
+
+	public function test_callbacks_survive_core_empty_string_argument(): void {
+		// do_action() with no args passes '' to the callback.
+		Functions\when( 'wp_validate_auth_cookie' )->justReturn( 5 );
+		call_user_func_array( 'proud_anon_post_check_cookie', array( '' ) );
+
+		// Anonymous POST in log mode: '' as $sapi must be treated as null (PHP_SAPI = cli => allowed, no log).
+		$_SERVER = array_merge( $_SERVER, $this->server() );
+		$logged  = array();
+		call_user_func_array( 'proud_anon_post_check_early', array( '', array( 'log' => function ( $l ) use ( &$logged ) { $logged[] = $l; } ) ) );
+		$this->assertSame( array(), $logged, 'CLI guard must still use PHP_SAPI' );
+		call_user_func_array( 'proud_anon_post_check_early', array( '' ) );
+		$this->assertTrue( true );
 	}
 }

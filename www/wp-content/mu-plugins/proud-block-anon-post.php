@@ -168,7 +168,7 @@ function proud_anon_post_decide( array $server, array $get, array $post, array $
 
 	$path = proud_anon_post_request_path( $server );
 
-	if ( '/wp-json' === $path || 0 === strpos( $path, '/wp-json/' ) || isset( $get['rest_route'] ) ) {
+	if ( '/wp-json' === $path || 0 === strpos( $path, '/wp-json/' ) || ( isset( $get['rest_route'] ) && is_string( $get['rest_route'] ) && '' !== $get['rest_route'] ) ) {
 		return 'allow:rest';
 	}
 
@@ -379,10 +379,16 @@ function proud_anon_post_refuse( $mode, $reason, array $io = array() ) {
 /**
  * Stage 1, on `muplugins_loaded`: allowlist and no-cookie check.
  *
+ * Registered with accepted_args 0: do_action() passes '' when a hook has no args, so
+ * the parameters are also normalized defensively.
+ *
  * @param string|null $sapi Optional PHP_SAPI override for tests.
  * @param array       $io   Optional 'log' and 'respond' callables, for tests.
  */
-function proud_anon_post_check_early( $sapi = null, array $io = array() ) {
+function proud_anon_post_check_early( $sapi = null, $io = array() ) {
+	$sapi = ( is_string( $sapi ) && '' !== $sapi ) ? $sapi : null;
+	$io   = is_array( $io ) ? $io : array();
+
 	if ( proud_anon_post_disabled() ) {
 		return;
 	}
@@ -398,7 +404,7 @@ function proud_anon_post_check_early( $sapi = null, array $io = array() ) {
 	$result = proud_anon_post_decide( $_SERVER, $get, is_array( $_POST ) ? $_POST : array(), is_array( $_COOKIE ) ? $_COOKIE : array(), ABSPATH, $slug, $sapi );
 
 	if ( 'defer' === $result ) {
-		add_action( 'plugins_loaded', 'proud_anon_post_check_cookie', PHP_INT_MIN );
+		add_action( 'plugins_loaded', 'proud_anon_post_check_cookie', PHP_INT_MIN, 0 );
 		return;
 	}
 
@@ -416,7 +422,9 @@ function proud_anon_post_check_early( $sapi = null, array $io = array() ) {
  *
  * @param array $io Optional 'log' and 'respond' callables, for tests.
  */
-function proud_anon_post_check_cookie( array $io = array() ) {
+function proud_anon_post_check_cookie( $io = array() ) {
+	$io = is_array( $io ) ? $io : array();
+
 	if ( wp_validate_auth_cookie( '', 'logged_in' ) ) {
 		return;
 	}
@@ -424,4 +432,4 @@ function proud_anon_post_check_cookie( array $io = array() ) {
 	proud_anon_post_refuse( proud_anon_post_mode(), 'invalid_cookie', $io );
 }
 
-add_action( 'muplugins_loaded', 'proud_anon_post_check_early' );
+add_action( 'muplugins_loaded', 'proud_anon_post_check_early', 10, 0 );
