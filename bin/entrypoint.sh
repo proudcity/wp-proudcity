@@ -104,6 +104,34 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
     htaccess=/app/wordpress/.htaccess
     bots_csv=/app/wordpress/bots.csv
 
+    # Route /robots.txt through WordPress so the proud-robots.php mu-plugin owns the output (wp-proudcity#2846)
+    tmp_htaccess="$(mktemp)"
+    tmp_block="$(mktemp)"
+
+    # Remove any previous managed block to avoid duplicates on restart
+    sed '/^# BEGIN Managed: Dynamic robots.txt$/,/^# END Managed: Dynamic robots.txt$/d' "$htaccess" >"$tmp_htaccess"
+    mv "$tmp_htaccess" "$htaccess"
+
+    {
+        echo "# BEGIN Managed: Dynamic robots.txt"
+        echo "<IfModule mod_rewrite.c>"
+        echo "RewriteEngine On"
+        echo "RewriteRule ^robots\\.txt\$ /index.php [L]"
+        echo "</IfModule>"
+        echo "# END Managed: Dynamic robots.txt"
+        echo ""
+    } >"$tmp_block"
+
+    cat "$tmp_block" "$htaccess" >"$tmp_htaccess"
+    mv "$tmp_htaccess" "$htaccess"
+    rm -f "$tmp_block"
+
+    echo "Added dynamic robots.txt rewrite to top of ${htaccess}"
+
+    # Domain redirects (REDIRECTS / REDIRECTS_KEEP_PATH) sit above the WordPress rules and the robots rewrite (wp-proudcity#3000)
+    source /app/bin/htaccess-redirects.sh
+    htaccess_redirects_apply "$htaccess"
+
     # Block bots at the top of .htaccess (bots.csv: one regex fragment per line; blank lines and # comments allowed)
     if [[ -f "$bots_csv" ]]; then
         tmp_htaccess="$(mktemp)"
@@ -156,47 +184,6 @@ if [[ $GOOGLE_GIT_TOKEN ]]; then
 
         rm -f "$tmp_block"
     fi
-
-    # Route /robots.txt through WordPress so the proud-robots.php mu-plugin owns the output (wp-proudcity#2846)
-    tmp_htaccess="$(mktemp)"
-    tmp_block="$(mktemp)"
-
-    # Remove any previous managed block to avoid duplicates on restart
-    sed '/^# BEGIN Managed: Dynamic robots.txt$/,/^# END Managed: Dynamic robots.txt$/d' "$htaccess" >"$tmp_htaccess"
-    mv "$tmp_htaccess" "$htaccess"
-
-    {
-        echo "# BEGIN Managed: Dynamic robots.txt"
-        echo "<IfModule mod_rewrite.c>"
-        echo "RewriteEngine On"
-        echo "RewriteRule ^robots\\.txt\$ /index.php [L]"
-        echo "</IfModule>"
-        echo "# END Managed: Dynamic robots.txt"
-        echo ""
-    } >"$tmp_block"
-
-    cat "$tmp_block" "$htaccess" >"$tmp_htaccess"
-    mv "$tmp_htaccess" "$htaccess"
-    rm -f "$tmp_block"
-
-    echo "Added dynamic robots.txt rewrite to top of ${htaccess}"
-
-    htaccess=/app/wordpress/.htaccess
-    # Add domain redirects to .htaccess as CSV (from, to) with newlines between each redirect
-    if [[ $REDIRECTS ]]; then
-        export IFS=","
-        echo "${REDIRECTS}" >/tmp/redirects.csv
-        while read from to; do
-            echo "RewriteCond %{HTTP_HOST} ^${from}$ [NC]" >>$htaccess
-            echo "RewriteRule ^(.*)$ ${to} [R=301,L]" >>$htaccess
-            echo "Adding redirect from ${from} to ${to}"
-        done </tmp/redirects.csv
-    fi
-
-    #  echo 'Adding TLS REDIRECT .htaccess rule'
-    #  echo "RewriteCond %{HTTP_HOST} ^${HOST}\.com [NC]"  >> $htaccess
-    #  echo "RewriteRule ^(.*)$ https://${HOST}/$1 [R,L]"  >> $htaccess
-    #fi
 
 fi
 
