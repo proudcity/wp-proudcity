@@ -41,7 +41,7 @@ htaccess_redirects_log() {
 # Lowercase host name: dot-separated labels of [a-z0-9-], no leading/trailing
 # hyphen, at least one dot, at most 253 characters.
 htaccess_redirects_valid_host() {
-    local host="$1"
+    local LC_ALL=C host="$1"
     local label='[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?'
 
     [[ ${#host} -le 253 ]] || return 1
@@ -51,7 +51,9 @@ htaccess_redirects_valid_host() {
 # htaccess_redirects_target <to> <mode>
 # mode "fixed" or "keep". Prints the normalized target, or returns 1.
 htaccess_redirects_target() {
-    local to="$1" mode="$2" host
+    local LC_ALL=C to="$1" mode="$2" host
+
+    [[ ${#to} -le 2000 ]] || return 1
 
     if [[ "$mode" == "keep" ]]; then
         [[ "$to" =~ ^https://([A-Za-z0-9.-]+)/?$ ]] || return 1
@@ -80,7 +82,7 @@ htaccess_redirects_target() {
 # Host part of a normalized target, lowercased.
 htaccess_redirects_target_host() {
     local rest="${1#*://}"
-    echo "${rest%%/*}" | tr 'A-Z' 'a-z'
+    echo "${rest%%/*}" | tr '[:upper:]' '[:lower:]'
 }
 
 # Prints the full managed block on stdout (nothing if no entry is valid).
@@ -172,28 +174,35 @@ htaccess_redirects_block() {
 # Strips any previous managed block, then prepends the current one. Always
 # returns 0 (see header).
 htaccess_redirects_apply() {
-    local htaccess="$1" block tmp
+    local htaccess="$1" block tmp="" tmp2="" begins ends
 
     if [[ ! -f "$htaccess" ]]; then
         htaccess_redirects_log "WARNING ${htaccess} not found; skipping"
         return 0
     fi
 
-    block="$(htaccess_redirects_block)" || block=""
-    tmp="$(mktemp)" || return 0
-
-    {
-        sed "/^${HTACCESS_REDIRECTS_BEGIN}\$/,/^${HTACCESS_REDIRECTS_END}\$/d" "$htaccess" >"$tmp"
-        if [[ -n "$block" ]]; then
-            printf '%s\n' "$block" | cat - "$tmp" >"${tmp}.new" && mv "${tmp}.new" "$tmp"
-        fi
-        cat "$tmp" >"$htaccess"
-    } || htaccess_redirects_log "WARNING could not update ${htaccess}"
-
-    rm -f "$tmp" "${tmp}.new"
-
-    if [[ -n "$block" ]]; then
-        echo "Added domain redirects to top of ${htaccess}"
+    # Never strip on an unbalanced marker pair: the range delete would run to
+    # end of file and take the WordPress block with it.
+    begins="$(grep -c "^${HTACCESS_REDIRECTS_BEGIN}\$" "$htaccess")" || true
+    ends="$(grep -c "^${HTACCESS_REDIRECTS_END}\$" "$htaccess")" || true
+    if [[ "$begins" != "$ends" ]]; then
+        htaccess_redirects_log "WARNING unbalanced Domain Redirects markers in ${htaccess} (${begins} BEGIN, ${ends} END); leaving the file untouched"
+        return 0
     fi
+
+    block="$(htaccess_redirects_block)" || block=""
+    tmp="$(mktemp)" && tmp2="$(mktemp)" || { rm -f "$tmp" "$tmp2"; return 0; }
+
+    # Write back only after the new content is fully built; `cat >` keeps the
+    # file's ownership and mode.
+    if sed "/^${HTACCESS_REDIRECTS_BEGIN}\$/,/^${HTACCESS_REDIRECTS_END}\$/d" "$htaccess" >"$tmp" \
+        && { [[ -z "$block" ]] || { printf '%s\n' "$block" | cat - "$tmp" >"$tmp2" && cat "$tmp2" >"$tmp"; }; } \
+        && cat "$tmp" >"$htaccess"; then
+        [[ -z "$block" ]] || echo "Added domain redirects to top of ${htaccess}"
+    else
+        htaccess_redirects_log "WARNING could not update ${htaccess}"
+    fi
+
+    rm -f "$tmp" "$tmp2"
     return 0
 }

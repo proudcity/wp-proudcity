@@ -354,3 +354,55 @@ apply() {
     [[ "$output" != *placeholder* ]]
     [ "$(grep -c '^RewriteCond' <<<"$output")" -eq 9 ]
 }
+
+# --- hardening ---
+
+@test "overlong target is skipped with a warning; other lines still written" {
+    long="https://x.gov/$(printf 'a%.0s' $(seq 1 9000))"
+    export REDIRECTS=$'a.example.org,'"$long"$'\nb.example.org,https://ok.gov/'
+    block
+    [[ "$output" == *'^b\.example\.org$'* ]]
+    [[ "$output" != *'a.example.org'* ]]
+    [ "$(wc -L <<<"$output")" -lt 500 ]
+    block_with_logs
+    [[ "$output" == *"WARNING skipping"* ]]
+}
+
+@test "apply with overlong target still writes the valid lines" {
+    fixture
+    export WORK
+    long="https://x.gov/$(printf 'a%.0s' $(seq 1 9000))"
+    export REDIRECTS=$'a.example.org,'"$long"$'\nb.example.org,https://ok.gov/'
+    apply
+    grep -q 'b\\.example\\.org' "$WORK/.htaccess"
+    [ "$(wc -L <"$WORK/.htaccess")" -lt 500 ]
+}
+
+@test "stray BEGIN without END: file untouched, WordPress block kept" {
+    export WORK
+    printf '# BEGIN Managed: Domain Redirects\nstale\n\n# BEGIN WordPress\nRewriteRule . /index.php [L]\n# END WordPress\n' >"$WORK/.htaccess"
+    cp "$WORK/.htaccess" "$WORK/orig"
+    export REDIRECTS='srfd.org,https://sanrafael.gov/'
+    apply
+    [[ "$output" == *"rc=0"* ]]
+    grep -q '^# BEGIN WordPress$' "$WORK/.htaccess"
+    grep -q '^# END WordPress$' "$WORK/.htaccess"
+    cmp "$WORK/.htaccess" "$WORK/orig"
+}
+
+@test "stray END without BEGIN: file untouched" {
+    export WORK
+    printf '# END Managed: Domain Redirects\n# BEGIN WordPress\n# END WordPress\n' >"$WORK/.htaccess"
+    cp "$WORK/.htaccess" "$WORK/orig"
+    export REDIRECTS='srfd.org,https://sanrafael.gov/'
+    apply
+    cmp "$WORK/.htaccess" "$WORK/orig"
+}
+
+@test "non-ASCII host is rejected under a UTF-8 locale" {
+    locale -a | grep -qi '^en_US\.utf-\?8$' || skip "en_US.UTF-8 not available"
+    LC_ALL=en_US.UTF-8 REDIRECTS='é.com,https://x.gov/' block
+    assert_no_block
+    LC_ALL=en_US.UTF-8 REDIRECTS='a.example.org,https://é.gov/' block
+    assert_no_block
+}
