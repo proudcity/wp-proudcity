@@ -1,5 +1,14 @@
 ## 2026-11-17
 
+- Dashboard domain redirects (`REDIRECTS`) now apply to every path on a redirect domain, not only the homepage (commits `8fc9087`, `6f202f5`, `9987697`). Before, `bin/entrypoint.sh` appended the rules after the WordPress catch-all, so `srfd.org/x` went to `sanrafael.gov/x` instead of the configured fire page (Refs #3000):
+  - New `bin/htaccess-redirects.sh` writes a `# BEGIN/END Managed: Domain Redirects` block above the robots and WordPress rules (final order: blocked bots, redirects, robots, WordPress). Query strings are still appended. Relative targets (`/pfhy`) become `https://$HOST/pfhy`, which fixes pfhy.org's broken `http://pfhy.org:8080/pfhy` redirect.
+  - New `REDIRECTS_KEEP_PATH` env var (same `from,to` line format, set with `kubectl set env` only, never the dashboard): a path-preserving 301 to an origin, e.g. `hellamtownship.com,https://www.hellamtownship.gov`. The API still rejects `$` in targets.
+  - Every line is validated: strict hostnames with escaped dots, targets limited to the API's character set and 2000 characters, origin-only keep-path targets. Self-loops, the site's own `HOST`, duplicates and `placeholder` lines are skipped with a warning. A bad value is skipped and never stops the pod from starting. The leaked `export IFS=","` is gone. Tests: `tests/htaccess-redirects.bats` (64 bats tests in all).
+  - Behavior change: real files on redirect domains (e.g. `/wp-content/...`) now redirect instead of returning 200.
+  - hellamtownshippa: its `REDIRECTS` line (`hellamtownship.com` to the old `.com` origin) was replaced with `REDIRECTS_KEEP_PATH=hellamtownship.com,https://www.hellamtownship.gov` before the fleet deploy, so its deep links keep their path.
+  - Test first: image `staging-edf2641`, release `2026.11.17.1442`. Beta was checked through a port-forward on all 37 redirect hosts, plus a temporary keep-path entry and a rejected `$1` entry. Then all 49 test sites: 0 failed, no drift. The 48 db-update failures were all the expected Redis step.
+  - Image `master-9987697`, release `2026.11.17.1733`. Prod on 2026-11-17: sanrafaelminibetaca went first (16:10-16:26 MST, 57/57 redirect checks), then all of prod (17:33-18:05 MST): 103 sites, 0 failed, no drift, db updates clean. A fleet check of all 65 routed redirect URLs across 8 sites passed, and no pod logged a redirect warning.
+
 - Bumped `proudcity/wp-proud-core` to 2026.11.17.1056 (commit `ad85161`). Hero unit slideshows now have a visible pause/play button (WCAG 2.2.2, Pause, Stop, Hide):
   - The button sits in the bottom-left, is the first tab stop in the carousel, and its label switches between "Pause slideshow" and "Play slideshow". Pausing holds through indicator clicks, prev/next and hover.
   - The slideshow pauses while keyboard focus is inside it. Pressing Play resumes it even while the button has focus.
