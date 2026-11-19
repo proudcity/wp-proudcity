@@ -1,8 +1,9 @@
 # syntax=docker/dockerfile:1
-# Pinned to the patch release for CVE-2026-109618 / CVE-2026-109619 (critical
-# mod_php RCEs, 2026-10-21) so the build can't pick up a stale floating tag
-# (pc-dev-issues#418).
-FROM php:8.3.36-apache-trixie
+# Pinned to an exact patch release so the build can't pick up a stale floating
+# tag. 8.3.37 = the 2026-11-19 security release (13 CVEs incl. CVE-2026-129496
+# timezone-cache RCE and the session RCEs CVE-2026-126714 / CVE-2026-115560 /
+# CVE-2026-129481; pc-dev-issues#503). Previous pin 8.3.36 = #418.
+FROM php:8.3.37-apache-trixie
 
 # known_hosts at /root/.ssh is needed during build for the composer install step,
 # which runs as root with --mount=type=ssh and clones private repos over SSH.
