@@ -78,6 +78,25 @@ The `migration-watcher` CronJob runs this weekly and files a `migration-drift` i
 - [ ] if upstream shipped a new release that does **not** include cache flushing, merge it into [our fork](https://github.com/proudcity/intuitive-custom-post-order) and reapply the `wp_cache_flush()` calls in the three AJAX order-save handlers (`update-menu-order`, `update-menu-order-tags`, `update-menu-order-sites`), then tag and bump the composer pin
 - verification: `diff` the fork's `intuitive-custom-post-order.php` against a pristine upstream copy; the result should show only the three `wp_cache_flush()` lines and their comments
 
+### WP Media Folder
+
+- WPMF 6.3.0 added `sanitizeGalleryAttributes()` to `class/class-display-gallery.php`. It runs `explode( ',', (string) $attrs[$key] )` on `include`/`exclude`. The core Media Gallery widget passes `include` as an array, so the cast gives `"Array"`, every ID is lost, and WPMF falls back to the images attached to the current post. Galleries silently dropped any image uploaded to a different page — see #3033 (Palmview's City Council page showed 2 of 5 photos)
+- we fix it in `wp-proud-core/modules/media-gallery-ids.php`, a `shortcode_atts_gallery` filter that joins array `include`/`exclude` into a comma-separated string. It works because WPMF's own `gallery()` calls `shortcode_atts( ..., 'gallery' )` right before `sanitizeGalleryAttributes()`. Core's `post_gallery` filter (where WPMF hooks in, priority 11) runs *before* core's own `shortcode_atts()`, so that call is not what makes the fix work. Covered by `wp-proud-core/tests/MediaGalleryIdsTest.php`. Already a no-op if upstream fixes this
+- upstream report: [JoomUnited support ticket 19722](https://www.joomunited.com/component/uvdeskwebkul/viewticket/19722), filed 2026-11-20 (needs the JoomUnited account login). Report text is in `~/Documents/developers/Github Issue Notes/3033 - WP Media Folder Gallery Widget Drops Images.md`
+- [ ] **check [ticket 19722](https://www.joomunited.com/component/uvdeskwebkul/viewticket/19722) for a reply or a fix version.** If they ship one, test it and reply on the ticket with whether it works
+- [ ] **check whether the new version fixes the cast.** Grep `class/class-display-gallery.php` in `sanitizeGalleryAttributes()` for `(string) $attrs[$key]`. If arrays are now handled first (an `is_array()` check, or `implode` before the `explode`), it is fixed and our module plus its test can be deleted (remove the `require_once` from `wp-proud-core.php` and `tests/bootstrap.php` too)
+- [ ] **check this even if the bug is unfixed:** confirm `gallery()` still builds `$attrs` with `shortcode_atts( ..., $attr, 'gallery' )` (third argument `'gallery'`) *before* `sanitizeGalleryAttributes()`. If WPMF switches to `wp_parse_args()`/`array_merge()`, drops the `'gallery'` shortcode name, or sanitizes before `shortcode_atts()`, our filter stops running and galleries start dropping images again
+- [ ] if WPMF moves its sanitizing onto a different path (e.g. a new `[wpmf_gallery]` handler or a block render callback that also casts), check that path takes arrays too
+- verification on beta after the update reaches it: render page 8717's Media Gallery widget (5 images attached to 8717) in the context of a different page. It must print `5`:
+  ```bash
+  wp eval 'global $post; $post = get_post( get_option( "page_on_front" ) ); setup_postdata( $post );
+    $pd = get_post_meta( 8717, "panels_data", true );
+    foreach ( $pd["widgets"] as $w ) { if ( ( $w["panels_info"]["class"] ?? "" ) === "WP_Widget_Media_Gallery" ) {
+      ob_start(); the_widget( "WP_Widget_Media_Gallery", $w ); echo substr_count( ob_get_clean(), "<img" ), "\n"; break; } }' \
+    --allow-root --path=/app/wordpress
+  ```
+  `0` (or only the front page's own attached images) means the bug is back
+
 ### WP-Stateless
 
 - pinned to an exact version in `composer.json` (`wpackagist-plugin/wp-stateless`, currently 4.5.0), so a bump is always a deliberate edit — run these checks every time that pin moves
