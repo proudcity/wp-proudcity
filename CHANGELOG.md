@@ -1,3 +1,10 @@
+## 2026-11-20
+
+- Bumped `proudcity/wp-proud-core` to 2026.11.19.1714 (commit `ab893b5`). Media Gallery widgets show every selected image again. Since WP Media Folder 6.3.0, a Media Gallery widget only showed images uploaded to the page it sits on: WPMF now casts the gallery's `include` IDs to a string, the core widget passes them as an array, so the list came out empty and WPMF fell back to the page's attached images. A `shortcode_atts_gallery` filter now joins array `include`/`exclude` IDs into a comma-separated string before WPMF reads them, keeping the order. String IDs from `[gallery]` shortcodes and blocks are unchanged (Refs #3033).
+  - Test first: image `staging-1b24b22`, release `2026.11.20.0855`. Beta: a private test page (15020) with a Media Gallery widget whose 5 images are attached to page 8717 showed all 5 in Chrome. In the pod, the same widget rendered 5 images with the filter and 0 with it removed. Page 8717 (images attached locally) still showed 5. Then all 49 test sites: 0 failed, no drift. The 48 db-update failures were all the expected Redis step.
+  - Image `master-ab893b5`, release `2026.11.20.0916`. Prod on 2026-11-20, 09:16-10:02 MST: williamscountynd and wwwproudcity went first (wp-proud-core 2026.11.19.1714, no PHP errors, pages 200), then all of prod: 103 sites, 0 failed, no drift, db updates clean.
+  - Palmview (Zendesk 8145): the City Council page shows all 5 council photos again, in their saved order.
+
 ## 2026-11-19
 
 - Bumped `proudcity/wp-proud-topic`, `proudcity/wp-proud-core` and `proudcity/wp-proud-agency` to 2026.11.18.1220 (commit `c5606f9`):
