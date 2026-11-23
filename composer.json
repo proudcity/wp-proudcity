@@ -132,11 +132,11 @@
             "package": {
                 "name": "proudcity/gravityformsstripe",
                 "type": "wordpress-plugin",
-                "version": "7.0.0.1",
+                "version": "7.0.1",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:/proudcity/gravityformsstripe.git",
-                    "reference": "7.0.0.1"
+                    "reference": "7.0.1"
                 }
             }
         },
@@ -502,7 +502,7 @@
         "proudcity/gravityforms": "3.2.2",
         "proudcity/gravityformsrecaptcha": "2.2.3",
         "proudcity/gravityformssignature": "4.10.0",
-        "proudcity/gravityformsstripe": "7.0.0.1",
+        "proudcity/gravityformsstripe": "7.0.1",
         "proudcity/gravityformssurvey": "4.2.3",
         "proudcity/gravityformszapier": "4.5.1",
         "wp-api/rest-filter": "1.0",
