@@ -1,3 +1,11 @@
+## 2026-11-24
+
+- `proud-block-anon-post.php` 1.1.0 (still log-only, Refs #2998):
+  - **Login redirect instead of a 403 in enforce mode.** A refused POST to a script under `wp-admin/` with no login cookie, and any refusal with a `wordpress_logged_in_*` cookie that fails validation (`reason=invalid_cookie`), now gets a 302 to `wp_login_url( $target, true )` with `X-Proud-Anon-Post: login-redirect`, like core's `auth_redirect()`. An admin whose session expired (tamcsd.org, Tools -> Broken Links bulk action, 2026-11-21) logs in again instead of seeing a bare 403. Every other refused POST keeps the 403. `$target` is the `HTTP_REFERER` when it is on the site's own host and under `/wp-admin/`, otherwise the POSTed address. The redirect uses no pluggable function, builds the target from the `home_url()` origin (never `HTTP_HOST`), and checks the final `Location` host against `home_url()`; any mismatch falls back to the 403. In log mode the redirect URL is never built.
+  - **New `resp=302|403` field** at the end of every `proud-anon-post:` line, in both modes: the response enforce mode would send (or did).
+  - **Events Manager anonymous event submissions are allowed.** POST body `action=event_save` with a non-empty `_wpnonce` and an empty or missing `event_id` (new submissions only; markers from EM 7.6 `templates/forms/event-editor.php:141-143`). Three `/add-event/` POSTs (rutherfordtonnc, belmontnc, holyokema) and one on deserthotspringsca showed up as would-block lines in the last 8 days, so enforce mode would have refused real submissions. EM checks the nonce itself. Re-check those field names on EM upgrades.
+  - Tests: `tests/Unit/BlockAnonPostTest.php`, 89 tests on PHP 8.4 and 8.3.36. Not deployed yet (Refs #2998).
+
 ## 2026-11-23
 
 - Core/plugin update, released as `2026.11.23.1047` and `2026.11.23.1224` (Refs #3034):

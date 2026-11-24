@@ -24,7 +24,7 @@ final class BlockAnonPostTest extends TestCase {
 		putenv( 'PC_ALLOW_ANON_POST' );
 		putenv( 'PC_ANON_POST_MODE' );
 		unset( $GLOBALS['proud_test_added_actions'] );
-		$_SERVER = array_diff_key( $_SERVER, array_flip( array( 'REQUEST_METHOD', 'SCRIPT_FILENAME', 'REQUEST_URI', 'HTTP_HOST', 'REMOTE_ADDR', 'HTTP_USER_AGENT' ) ) );
+		$_SERVER = array_diff_key( $_SERVER, array_flip( array( 'REQUEST_METHOD', 'SCRIPT_FILENAME', 'REQUEST_URI', 'HTTP_HOST', 'REMOTE_ADDR', 'HTTP_USER_AGENT', 'HTTP_REFERER' ) ) );
 		$_GET    = array();
 		$_POST   = array();
 		$_COOKIE = array();
@@ -43,6 +43,22 @@ final class BlockAnonPostTest extends TestCase {
 				'HTTP_USER_AGENT' => 'Mozilla/5.0',
 			),
 			$over
+		);
+	}
+
+	private function stubLogin(): void {
+		Functions\when( 'home_url' )->justReturn( 'https://example.gov/' );
+		Functions\when( 'wp_login_url' )->alias(
+			function ( $redirect = '', $force_reauth = false ) {
+				$url = 'https://example.gov/wp-login.php';
+				if ( '' !== $redirect ) {
+					$url .= '?redirect_to=' . urlencode( $redirect );
+				}
+				if ( $force_reauth ) {
+					$url .= ( false === strpos( $url, '?' ) ? '?' : '&' ) . 'reauth=1';
+				}
+				return $url;
+			}
 		);
 	}
 
@@ -211,6 +227,7 @@ final class BlockAnonPostTest extends TestCase {
 
 	public function test_stage_two_invalid_cookie_refused(): void {
 		putenv( 'PC_ANON_POST_MODE=enforce' );
+		$this->stubLogin();
 		Functions\when( 'wp_validate_auth_cookie' )->justReturn( false );
 		$_SERVER = array_merge( $_SERVER, $this->server() );
 		$logged  = array();
@@ -259,7 +276,7 @@ final class BlockAnonPostTest extends TestCase {
 		);
 		$this->assertStringNotContainsString( 'SECRETVALUE', $line );
 		$this->assertSame(
-			'proud-anon-post: would_block host=example.gov ip=203.0.113.7 reason=no_cookie path="/library/" qkeys=token fields=log,pwd ct=application/x-www-form-urlencoded ref=same ua="Mozilla/5.0"',
+			'proud-anon-post: would_block host=example.gov ip=203.0.113.7 reason=no_cookie path="/library/" qkeys=token fields=log,pwd ct=application/x-www-form-urlencoded ref=same ua="Mozilla/5.0" resp=403',
 			$line
 		);
 	}
@@ -351,5 +368,246 @@ final class BlockAnonPostTest extends TestCase {
 		$this->assertSame( array(), $logged, 'CLI guard must still use PHP_SAPI' );
 		call_user_func_array( 'proud_anon_post_check_early', array( '' ) );
 		$this->assertTrue( true );
+	}
+
+	private function respond_capture( array &$calls, array &$logged, string $abspath = self::ABS ): array {
+		return array(
+			'abspath' => $abspath,
+			'log'     => function ( $l ) use ( &$logged ) { $logged[] = $l; },
+			'respond' => function ( $resp, $location ) use ( &$calls ) { $calls[] = array( $resp, $location ); },
+		);
+	}
+
+	public function test_response_rule(): void {
+		$wp = fn( $f ) => $this->server( array( 'SCRIPT_FILENAME' => self::ABS . $f ) );
+		$this->assertSame( '302', proud_anon_post_response( 'invalid_cookie', $this->server(), self::ABS ) );
+		foreach ( array( 'wp-admin/tools.php', 'wp-admin/post.php', 'wp-admin/options.php' ) as $f ) {
+			$this->assertSame( '302', proud_anon_post_response( 'no_cookie', $wp( $f ), self::ABS ) );
+		}
+		$this->assertSame( '403', proud_anon_post_response( 'no_cookie', $wp( 'index.php' ), self::ABS ) );
+		$this->assertSame( '403', proud_anon_post_response( 'no_cookie', $wp( 'xmlrpc.php' ), self::ABS ) );
+		$this->assertSame( '403', proud_anon_post_response( 'no_cookie', $this->server( array( 'REQUEST_URI' => '/wp-admin/x' ) ), self::ABS ) );
+		$this->assertSame( '403', proud_anon_post_response( 'no_cookie', $this->server( array( 'SCRIPT_FILENAME' => '/elsewhere/wp-admin/tools.php' ) ), self::ABS ) );
+	}
+
+	public function test_redirect_target_uses_posted_address(): void {
+		$home = 'https://example.gov/';
+		$this->assertSame(
+			'https://example.gov/wp-admin/tools.php?page=view-broken-links&filter_id=3',
+			proud_anon_post_redirect_target( array( 'REQUEST_URI' => '/wp-admin/tools.php?page=view-broken-links&filter_id=3' ), $home )
+		);
+		$this->assertSame( '', proud_anon_post_redirect_target( array(), $home ) );
+		$this->assertSame( '', proud_anon_post_redirect_target( array( 'REQUEST_URI' => array( '/x' ) ), $home ) );
+		$this->assertSame( '', proud_anon_post_redirect_target( array( 'REQUEST_URI' => '/x' ), 'not a url' ) );
+	}
+
+	public function test_redirect_target_prefers_same_host_wp_admin_referer(): void {
+		$home   = 'https://example.gov/';
+		$server = array( 'REQUEST_URI' => '/wp-admin/options.php', 'HTTP_REFERER' => 'https://EXAMPLE.gov/wp-admin/options-general.php?page=x#frag' );
+		$this->assertSame( 'https://example.gov/wp-admin/options-general.php?page=x', proud_anon_post_redirect_target( $server, $home ) );
+
+		$fallback = 'https://example.gov/wp-admin/options.php';
+		foreach ( array( 'https://evil.example/wp-admin/x.php', 'https://example.gov/library/', 'https://example.gov.evil.example/wp-admin/x', '/wp-admin/x.php', 'http:///wp-admin/', 'garbage' ) as $ref ) {
+			$server['HTTP_REFERER'] = $ref;
+			$this->assertSame( $fallback, proud_anon_post_redirect_target( $server, $home ), $ref );
+		}
+		$server['HTTP_REFERER'] = array( 'x' );
+		$this->assertSame( $fallback, proud_anon_post_redirect_target( $server, $home ) );
+	}
+
+	public function test_redirect_target_hostile_request_uri_stays_on_home_host(): void {
+		$home = 'https://example.gov/';
+		$uris = array( '//evil.example/x', '///evil.example', '/\\evil.example', '/%2F%2Fevil.example', "/a\r\nLocation: https://evil.example", "/a\x00b", "/caf\xc3\xa9", '/x#frag', '/@evil.example', '/x?u=//evil.example' );
+		foreach ( $uris as $uri ) {
+			$result = proud_anon_post_redirect_target( array( 'REQUEST_URI' => $uri ), $home );
+			$this->assertNotSame( '', $result, $uri );
+			$this->assertSame( 'example.gov', parse_url( $result, PHP_URL_HOST ), $uri );
+			$this->assertSame( 1, preg_match( '/^[\x21-\x7e]+$/', $result ), $uri );
+		}
+		$this->assertSame( 'https://example.gov/evil.example/x', proud_anon_post_redirect_target( array( 'REQUEST_URI' => '//evil.example/x' ), $home ) );
+		$this->assertSame( 'https://example.gov/aLocation:https://evil.example', proud_anon_post_redirect_target( array( 'REQUEST_URI' => "/a\r\nLocation: https://evil.example" ), $home ) );
+		$this->assertSame( 'https://example.gov/x', proud_anon_post_redirect_target( array( 'REQUEST_URI' => '/x#frag' ), $home ) );
+		foreach ( array( 'https://evil.example/x', 'evil.example', '' ) as $uri ) {
+			$this->assertSame( '', proud_anon_post_redirect_target( array( 'REQUEST_URI' => $uri ), $home ), $uri );
+		}
+	}
+
+	public function test_redirect_target_ignores_http_host_and_keeps_port(): void {
+		$this->assertSame(
+			'https://example.gov:8443/x',
+			proud_anon_post_redirect_target( array( 'REQUEST_URI' => '/x', 'HTTP_HOST' => 'evil.example' ), 'https://example.gov:8443/' )
+		);
+	}
+
+	public function test_redirect_target_length_caps(): void {
+		$home = 'https://example.gov/';
+		$this->assertSame( 'https://example.gov/p', proud_anon_post_redirect_target( array( 'REQUEST_URI' => '/p?' . str_repeat( 'a', 2500 ) ), $home ) );
+		$this->assertSame( '', proud_anon_post_redirect_target( array( 'REQUEST_URI' => '/' . str_repeat( 'a', 2500 ) ), $home ) );
+	}
+
+	public function test_login_location_matches_core_shape(): void {
+		$this->stubLogin();
+		$this->assertSame(
+			'https://example.gov/wp-login.php?redirect_to=https%3A%2F%2Fexample.gov%2Fwp-admin%2Ftools.php%3Fpage%3Dview-broken-links&reauth=1',
+			proud_anon_post_login_location( array( 'REQUEST_URI' => '/wp-admin/tools.php?page=view-broken-links' ) )
+		);
+	}
+
+	public function test_login_location_foreign_host_retries_then_falls_back(): void {
+		Functions\when( 'home_url' )->justReturn( 'https://example.gov/' );
+		$calls = array();
+		Functions\when( 'wp_login_url' )->alias(
+			function ( $redirect = '', $reauth = false ) use ( &$calls ) {
+				$calls[] = $redirect;
+				return '' === $redirect ? 'https://example.gov/wp-login.php?reauth=1' : 'https://evil.example/wp-login.php';
+			}
+		);
+		$this->assertSame( 'https://example.gov/wp-login.php?reauth=1', proud_anon_post_login_location( array( 'REQUEST_URI' => '/wp-admin/x.php' ) ) );
+		$this->assertSame( array( 'https://example.gov/wp-admin/x.php', '' ), $calls );
+
+		Functions\when( 'wp_login_url' )->justReturn( 'https://evil.example/wp-login.php' );
+		$this->assertSame( '', proud_anon_post_login_location( array( 'REQUEST_URI' => '/wp-admin/x.php' ) ) );
+	}
+
+	public function test_login_location_rejects_bad_schemes_and_crlf(): void {
+		Functions\when( 'home_url' )->justReturn( 'https://example.gov/' );
+		foreach ( array( 'javascript:alert(1)', "https://example.gov/wp-login.php\r\nX-Evil: 1", '//example.gov/wp-login.php', 'ftp://example.gov/x', false ) as $bad ) {
+			Functions\when( 'wp_login_url' )->justReturn( $bad );
+			$this->assertSame( '', proud_anon_post_login_location( array( 'REQUEST_URI' => '/wp-admin/x.php' ) ), (string) $bad );
+		}
+	}
+
+	public function test_login_location_empty_home_fails_closed(): void {
+		Functions\when( 'home_url' )->justReturn( '' );
+		Functions\expect( 'wp_login_url' )->never();
+		$this->assertSame( '', proud_anon_post_login_location( array( 'REQUEST_URI' => '/wp-admin/x.php' ) ) );
+	}
+
+	public function test_log_mode_resp_field_and_no_redirect_built(): void {
+		Functions\expect( 'wp_login_url' )->never();
+		Functions\expect( 'home_url' )->never();
+		$_SERVER = array_merge( $_SERVER, $this->server() );
+		$calls   = array();
+		$logged  = array();
+		Functions\when( 'wp_validate_auth_cookie' )->justReturn( false );
+		proud_anon_post_check_cookie( $this->respond_capture( $calls, $logged ) );
+		$this->assertSame( array(), $calls );
+		$this->assertStringStartsWith( 'proud-anon-post: would_block ', $logged[0] );
+		$this->assertStringEndsWith( 'reason=invalid_cookie path="/library/" qkeys=none fields=none ct=none ref=none ua="Mozilla/5.0" resp=302', $logged[0] );
+
+		$logged = array();
+		proud_anon_post_check_early( 'apache2handler', $this->respond_capture( $calls, $logged ) );
+		$this->assertSame( array(), $calls );
+		$this->assertStringEndsWith( ' resp=403', $logged[0] );
+
+		$_SERVER['SCRIPT_FILENAME'] = self::ABS . 'wp-admin/tools.php';
+		$logged                     = array();
+		proud_anon_post_check_early( 'apache2handler', $this->respond_capture( $calls, $logged ) );
+		$this->assertStringEndsWith( ' resp=302', $logged[0] );
+		$this->assertSame( array(), $calls );
+	}
+
+	public function test_enforce_wp_admin_no_cookie_redirects(): void {
+		putenv( 'PC_ANON_POST_MODE=enforce' );
+		$this->stubLogin();
+		$_SERVER = array_merge( $_SERVER, $this->server( array( 'SCRIPT_FILENAME' => self::ABS . 'wp-admin/tools.php', 'REQUEST_URI' => '/wp-admin/tools.php?page=x' ) ) );
+		$_POST   = array( 'action' => 'SECRETVALUE' );
+		$calls   = array();
+		$logged  = array();
+		proud_anon_post_check_early( 'apache2handler', $this->respond_capture( $calls, $logged ) );
+		$this->assertSame( array( array( '302', 'https://example.gov/wp-login.php?redirect_to=https%3A%2F%2Fexample.gov%2Fwp-admin%2Ftools.php%3Fpage%3Dx&reauth=1' ) ), $calls );
+		$this->assertStringStartsWith( 'proud-anon-post: blocked ', $logged[0] );
+		$this->assertStringEndsWith( ' resp=302', $logged[0] );
+		$this->assertStringNotContainsString( 'SECRETVALUE', $logged[0] );
+	}
+
+	public function test_enforce_invalid_cookie_redirects_and_front_end_is_403(): void {
+		putenv( 'PC_ANON_POST_MODE=enforce' );
+		$this->stubLogin();
+		Functions\when( 'wp_validate_auth_cookie' )->justReturn( false );
+		$_SERVER = array_merge( $_SERVER, $this->server() );
+		$calls   = array();
+		$logged  = array();
+		proud_anon_post_check_cookie( $this->respond_capture( $calls, $logged ) );
+		$this->assertSame( '302', $calls[0][0] );
+		$this->assertStringStartsWith( 'https://example.gov/wp-login.php?redirect_to=', $calls[0][1] );
+		$this->assertStringEndsWith( ' resp=302', $logged[0] );
+
+		$calls  = array();
+		$logged = array();
+		proud_anon_post_check_early( 'apache2handler', $this->respond_capture( $calls, $logged ) );
+		$this->assertSame( array( array( '403', '' ) ), $calls );
+		$this->assertStringEndsWith( ' resp=403', $logged[0] );
+	}
+
+	public function test_enforce_location_failure_falls_back_to_403(): void {
+		putenv( 'PC_ANON_POST_MODE=enforce' );
+		Functions\when( 'home_url' )->justReturn( 'https://example.gov/' );
+		Functions\when( 'wp_login_url' )->justReturn( 'https://evil.example/wp-login.php' );
+		Functions\when( 'wp_validate_auth_cookie' )->justReturn( false );
+		$_SERVER = array_merge( $_SERVER, $this->server() );
+		$calls   = array();
+		$logged  = array();
+		proud_anon_post_check_cookie( $this->respond_capture( $calls, $logged ) );
+		$this->assertSame( array( array( '403', '' ) ), $calls );
+		$this->assertStringEndsWith( ' resp=403', $logged[0] );
+	}
+
+	public function test_send_login_redirect_sets_302_without_body(): void {
+		Functions\expect( 'status_header' )->once()->with( 302 );
+		Functions\expect( 'nocache_headers' )->once();
+		$this->expectOutputString( '' );
+		proud_anon_post_send_login_redirect( 'https://example.gov/wp-login.php', false );
+	}
+
+	public function test_log_resp_only_allows_302_or_403(): void {
+		$s = $this->server();
+		$this->assertStringEndsWith( ' resp=302', proud_anon_post_format_log( 'log', 'no_cookie', $s, array(), array(), '302' ) );
+		$this->assertStringEndsWith( ' resp=403', proud_anon_post_format_log( 'log', 'no_cookie', $s, array(), array(), '200' ) );
+		$this->assertStringEndsWith( ' resp=403', proud_anon_post_format_log( 'log', 'no_cookie', $s, array(), array(), "302\nx" ) );
+		$this->assertStringEndsWith( ' resp=403', proud_anon_post_format_log( 'log', 'no_cookie', $s, array(), array() ) );
+	}
+
+	public function test_em_event_save_allowed_for_new_submissions(): void {
+		$base = array( 'action' => 'event_save', '_wpnonce' => 'abc123' );
+		$this->assertSame( 'allow:em_event_save', $this->decide( array(), array(), $base + array( 'event_id' => '' ) ) );
+		$this->assertSame( 'allow:em_event_save', $this->decide( array(), array(), $base ) );
+	}
+
+	public function test_em_event_save_blocked_variants(): void {
+		$bad = array(
+			array( 'action' => 'event_save', '_wpnonce' => 'abc', 'event_id' => '12' ),
+			array( 'action' => 'event_save' ),
+			array( 'action' => 'event_save', '_wpnonce' => '' ),
+			array( 'action' => 'event_save', '_wpnonce' => array( 'abc' ) ),
+			array( 'action' => array( 'event_save' ), '_wpnonce' => 'abc' ),
+			array( 'action' => 'Event_Save', '_wpnonce' => 'abc' ),
+			array( 'action' => 'event_delete', '_wpnonce' => 'abc' ),
+			array( 'action' => 'booking_add', '_wpnonce' => 'abc' ),
+			array( 'action' => 'location_save', '_wpnonce' => 'abc' ),
+		);
+		foreach ( $bad as $post ) {
+			$this->assertSame( 'block:no_cookie', $this->decide( array(), array(), $post ), json_encode( $post ) );
+		}
+		$this->assertSame( 'block:no_cookie', $this->decide( array(), array( 'action' => 'event_save', '_wpnonce' => 'abc' ), array() ) );
+		$this->assertSame(
+			'defer',
+			$this->decide( array(), array(), array( 'action' => 'event_save', '_wpnonce' => 'abc', 'event_id' => '12' ), array( 'wordpress_logged_in_abc' => 'v' ) )
+		);
+	}
+
+	public function test_stripe_with_forged_cookie_allowed_in_enforce(): void {
+		putenv( 'PC_ANON_POST_MODE=enforce' );
+		$_SERVER = array_merge( $_SERVER, $this->server( array( 'REQUEST_URI' => '/?callback=gravityformsstripe' ) ) );
+		$_GET    = array( 'callback' => 'gravityformsstripe' );
+		$_COOKIE = array( 'wordpress_logged_in_x' => 'y' );
+		$GLOBALS['proud_test_added_actions'] = array();
+		$calls  = array();
+		$logged = array();
+		proud_anon_post_check_early( 'apache2handler', $this->respond_capture( $calls, $logged ) );
+		$this->assertSame( array(), $logged );
+		$this->assertSame( array(), $calls );
+		$this->assertSame( array(), $GLOBALS['proud_test_added_actions'] );
+		$this->assertSame( 'allow:gf_stripe', $this->decide( array(), array( 'callback' => 'gravityformsstripe' ), array(), array( 'wordpress_logged_in_x' => 'y' ) ) );
 	}
 }
