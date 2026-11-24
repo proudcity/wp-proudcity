@@ -36,8 +36,27 @@
  *              exist yet at `muplugins_loaded`: stage 1 handles the allowlist and the
  *              no-cookie case; a request carrying a `wordpress_logged_in_*` cookie is
  *              validated at `plugins_loaded` priority PHP_INT_MIN (stage 2).
+ *
+ *              Enforce-mode responses: a refused POST gets a 403, except an expired or
+ *              invalid login. A refused POST whose executed script is under wp-admin/
+ *              (no cookie) and any reason=invalid_cookie refusal get a 302 to
+ *              wp_login_url( $target, true ) with `X-Proud-Anon-Post: login-redirect`,
+ *              the same answer core's auth_redirect() gives, so an admin whose session
+ *              expired logs in again instead of seeing a bare 403. The redirect path uses
+ *              no pluggable function (wp_redirect() doesn't exist at stage 1, and at
+ *              stage 2 it would run plugin filters on a request we're discarding): the
+ *              Location is the trusted login URL plus an urlencoded redirect_to built from
+ *              the home_url() origin, never HTTP_HOST, and its host is re-checked against
+ *              home_url(); on any mismatch it falls back to the 403. redirect_to is the
+ *              same-host HTTP_REFERER when it is under /wp-admin/, otherwise the POSTed
+ *              address. The log line ends in `resp=302` or `resp=403` in both modes.
+ *
+ *              Events Manager: anonymous front-end event submissions (hidden
+ *              `action=event_save` + `_wpnonce`, empty `event_id`) are allowed. EM checks
+ *              the nonce itself; if EM renames those fields on an upgrade, re-check
+ *              templates/forms/event-editor.php and em-actions.php.
  * Author:      ProudCity
- * Version:     1.0.0
+ * Version:     1.1.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -198,6 +217,16 @@ function proud_anon_post_decide( array $server, array $get, array $post, array $
 		}
 	}
 
+	// Events Manager anonymous event submission (templates/forms/event-editor.php:141-143).
+	// EM reads $_REQUEST['event_id'] (GP), so a query-string event_id counts too.
+	// New submissions only: event_id is empty. EM verifies the nonce itself.
+	if ( isset( $post['action'] ) && 'event_save' === $post['action']
+		&& isset( $post['_wpnonce'] ) && is_string( $post['_wpnonce'] ) && '' !== $post['_wpnonce']
+		&& ( ! isset( $post['event_id'] ) || '' === $post['event_id'] )
+		&& ( ! isset( $get['event_id'] ) || '' === $get['event_id'] ) ) {
+		return 'allow:em_event_save';
+	}
+
 	if ( isset( $post['pct_translate_page'] ) && '1' === $post['pct_translate_page'] ) {
 		return 'allow:translate';
 	}
@@ -279,10 +308,11 @@ function proud_anon_post_names( array $arr, $total = 150 ) {
  * @param array  $server $_SERVER.
  * @param array  $get    $_GET.
  * @param array  $post   $_POST.
+ * @param string $resp   '302' or '403'; anything else is written as 403.
  *
  * @return string Without a trailing newline.
  */
-function proud_anon_post_format_log( $mode, $reason, array $server, array $get, array $post ) {
+function proud_anon_post_format_log( $mode, $reason, array $server, array $get, array $post, $resp = '403' ) {
 	$host = isset( $server['HTTP_HOST'] ) ? strtolower( (string) $server['HTTP_HOST'] ) : '';
 	$host = substr( preg_replace( '/[^a-z0-9.:\-]/', '', $host ), 0, 100 );
 
@@ -302,7 +332,7 @@ function proud_anon_post_format_log( $mode, $reason, array $server, array $get, 
 	$ua = isset( $server['HTTP_USER_AGENT'] ) ? proud_anon_post_clean( $server['HTTP_USER_AGENT'], 150 ) : '';
 
 	return sprintf(
-		'proud-anon-post: %s host=%s ip=%s reason=%s path="%s" qkeys=%s fields=%s ct=%s ref=%s ua="%s"',
+		'proud-anon-post: %s host=%s ip=%s reason=%s path="%s" qkeys=%s fields=%s ct=%s ref=%s ua="%s" resp=%s',
 		'enforce' === $mode ? 'blocked' : 'would_block',
 		'' === $host ? 'unknown' : $host,
 		$ip,
@@ -312,7 +342,8 @@ function proud_anon_post_format_log( $mode, $reason, array $server, array $get, 
 		proud_anon_post_names( $post ),
 		'' === $ct ? 'none' : $ct,
 		$ref,
-		$ua
+		$ua,
+		'302' === $resp ? '302' : '403'
 	);
 }
 
@@ -349,15 +380,173 @@ function proud_anon_post_send_forbidden( $terminate = true ) {
 }
 
 /**
- * Logs a refusal and, in enforce mode, answers 403. In log mode it returns and the
- * request carries on exactly as before.
+ * Which response a refusal gets in enforce mode: '302' (login redirect) for an invalid
+ * cookie or a script under wp-admin/, otherwise '403'.
+ *
+ * @param string $reason  'no_cookie' or 'invalid_cookie'.
+ * @param array  $server  $_SERVER.
+ * @param string $abspath ABSPATH.
+ *
+ * @return string '302' or '403'.
+ */
+function proud_anon_post_response( $reason, array $server, $abspath ) {
+	if ( 'invalid_cookie' === $reason || 0 === strpos( proud_anon_post_script( $server, $abspath ), 'wp-admin/' ) ) {
+		return '302';
+	}
+
+	return '403';
+}
+
+/**
+ * Cleans a request-URI-like string to a safe "/path?query" or ''. Drops the fragment,
+ * every byte outside \x21-\x7e and backslashes, requires a leading "/" (a run of leading
+ * slashes collapses to one so "//evil.example" can't become protocol-relative), and caps
+ * at 2000 bytes (query dropped first, then '' if the path alone is too long).
+ *
+ * @param mixed $uri Attacker-controlled value.
+ *
+ * @return string
+ */
+function proud_anon_post_clean_uri( $uri ) {
+	if ( ! is_string( $uri ) ) {
+		return '';
+	}
+
+	$uri = explode( '#', $uri, 2 )[0];
+	$uri = str_replace( '\\', '', preg_replace( '/[^\x21-\x7e]/', '', $uri ) );
+
+	if ( '' === $uri || '/' !== $uri[0] ) {
+		return '';
+	}
+
+	$uri = '/' . ltrim( $uri, '/' );
+
+	if ( strlen( $uri ) > 2000 ) {
+		$uri = explode( '?', $uri, 2 )[0];
+	}
+
+	return strlen( $uri ) > 2000 ? '' : $uri;
+}
+
+/**
+ * The redirect_to target: an absolute URL on $home's origin, or ''.
+ *
+ * The same-host HTTP_REFERER when its path is under /wp-admin/ (the screen that held the
+ * form), otherwise the POSTed address (REQUEST_URI). Only the origin of $home is used;
+ * HTTP_HOST never is.
+ *
+ * @param array  $server $_SERVER.
+ * @param string $home   home_url().
+ *
+ * @return string
+ */
+function proud_anon_post_redirect_target( array $server, $home ) {
+	$parts = is_string( $home ) ? parse_url( $home ) : false;
+
+	if ( ! is_array( $parts ) || empty( $parts['scheme'] ) || empty( $parts['host'] ) ) {
+		return '';
+	}
+
+	$origin = $parts['scheme'] . '://' . $parts['host'] . ( isset( $parts['port'] ) ? ':' . $parts['port'] : '' );
+	$uri    = '';
+
+	if ( isset( $server['HTTP_REFERER'] ) && is_string( $server['HTTP_REFERER'] ) ) {
+		$ref = parse_url( $server['HTTP_REFERER'] );
+
+		if ( is_array( $ref ) && isset( $ref['host'], $ref['path'] ) && is_string( $ref['host'] ) && is_string( $ref['path'] )
+			&& strtolower( $ref['host'] ) === strtolower( $parts['host'] ) && 0 === strpos( $ref['path'], '/wp-admin/' ) ) {
+			$uri = proud_anon_post_clean_uri( $ref['path'] . ( isset( $ref['query'] ) && is_string( $ref['query'] ) ? '?' . $ref['query'] : '' ) );
+		}
+	}
+
+	if ( '' === $uri ) {
+		$uri = proud_anon_post_clean_uri( isset( $server['REQUEST_URI'] ) ? $server['REQUEST_URI'] : null );
+	}
+
+	return '' === $uri ? '' : $origin . $uri;
+}
+
+/**
+ * The login-page URL to redirect to, or '' when it can't be made safely (the caller then
+ * answers 403). Uses only functions that exist at `muplugins_loaded`. The result's host
+ * must equal home_url()'s host, so a filter on login_url/site_url can't send us
+ * elsewhere. Tries with redirect_to first, then without it.
+ *
+ * @param array $server $_SERVER.
+ *
+ * @return string
+ */
+function proud_anon_post_login_location( array $server ) {
+	$home      = home_url( '/' );
+	$home_host = is_string( $home ) ? parse_url( $home, PHP_URL_HOST ) : null;
+
+	if ( ! is_string( $home_host ) || '' === $home_host ) {
+		return '';
+	}
+
+	$target  = proud_anon_post_redirect_target( $server, $home );
+	$targets = '' === $target ? array( '' ) : array( $target, '' );
+
+	foreach ( $targets as $try ) {
+		$url = wp_login_url( $try, true );
+
+		if ( ! is_string( $url ) || strlen( $url ) > 3000 || 1 === preg_match( '/[^\x21-\x7e]/', $url ) ) {
+			continue;
+		}
+
+		$parsed = parse_url( $url );
+
+		if ( is_array( $parsed ) && isset( $parsed['scheme'], $parsed['host'] )
+			&& in_array( $parsed['scheme'], array( 'http', 'https' ), true )
+			&& strtolower( $parsed['host'] ) === strtolower( $home_host ) ) {
+			return $url;
+		}
+	}
+
+	return '';
+}
+
+/**
+ * Sends the enforce-mode login redirect. No pluggable functions, raw headers.
+ *
+ * @param string $location  Validated Location URL.
+ * @param bool   $terminate Pass false in tests to skip the exit.
+ */
+function proud_anon_post_send_login_redirect( $location, $terminate = true ) {
+	status_header( 302 );
+	nocache_headers();
+
+	if ( ! headers_sent() ) {
+		header( 'Location: ' . $location, true, 302 );
+		header( 'Content-Type: text/plain; charset=utf-8' );
+		header( 'X-Proud-Anon-Post: login-redirect' );
+	}
+
+	if ( $terminate ) {
+		exit;
+	}
+}
+
+/**
+ * Logs a refusal and, in enforce mode, answers 302 (login) or 403. In log mode it
+ * returns and the request carries on exactly as before; the redirect URL isn't built.
  *
  * @param string $mode   'log' or 'enforce'.
  * @param string $reason 'no_cookie' or 'invalid_cookie'.
- * @param array  $io     Optional 'log' and 'respond' callables, for tests.
+ * @param array  $io     Optional 'log' and 'respond' callables and 'abspath', for tests.
+ *                       'respond' is called with ( $resp, $location ).
  */
 function proud_anon_post_refuse( $mode, $reason, array $io = array() ) {
-	$line = proud_anon_post_format_log( $mode, $reason, $_SERVER, $_GET, $_POST );
+	$abspath  = isset( $io['abspath'] ) ? $io['abspath'] : ABSPATH;
+	$resp     = proud_anon_post_response( $reason, $_SERVER, $abspath );
+	$location = '';
+
+	if ( 'enforce' === $mode && '302' === $resp ) {
+		$location = proud_anon_post_login_location( $_SERVER );
+		$resp     = '' === $location ? '403' : '302';
+	}
+
+	$line = proud_anon_post_format_log( $mode, $reason, $_SERVER, $_GET, $_POST, $resp );
 
 	if ( isset( $io['log'] ) ) {
 		call_user_func( $io['log'], $line );
@@ -370,7 +559,9 @@ function proud_anon_post_refuse( $mode, $reason, array $io = array() ) {
 	}
 
 	if ( isset( $io['respond'] ) ) {
-		call_user_func( $io['respond'] );
+		call_user_func( $io['respond'], $resp, $location );
+	} elseif ( '302' === $resp ) {
+		proud_anon_post_send_login_redirect( $location );
 	} else {
 		proud_anon_post_send_forbidden();
 	}
