@@ -610,4 +610,19 @@ final class BlockAnonPostTest extends TestCase {
 		$this->assertSame( array(), $GLOBALS['proud_test_added_actions'] );
 		$this->assertSame( 'allow:gf_stripe', $this->decide( array(), array( 'callback' => 'gravityformsstripe' ), array(), array( 'wordpress_logged_in_x' => 'y' ) ) );
 	}
+
+	public function test_em_event_save_query_string_event_id(): void {
+		$post = array( 'action' => 'event_save', '_wpnonce' => 'abc' );
+		$this->assertSame( 'block:no_cookie', $this->decide( array(), array( 'event_id' => '1' ), $post ) );
+		$this->assertSame( 'block:no_cookie', $this->decide( array(), array( 'event_id' => array( '1' ) ), $post ) );
+		$this->assertSame( 'allow:em_event_save', $this->decide( array(), array( 'event_id' => '' ), $post ) );
+	}
+
+	public function test_login_location_drops_redirect_to_when_url_too_long(): void {
+		$this->stubLogin();
+		$uri = '/wp-admin/x.php?q=' . str_repeat( '%', 1900 );
+		$this->assertSame( 'https://example.gov/wp-login.php?reauth=1', proud_anon_post_login_location( array( 'REQUEST_URI' => $uri ) ) );
+		Functions\when( 'wp_login_url' )->justReturn( 'https://example.gov/wp-login.php?x=' . str_repeat( 'a', 3000 ) );
+		$this->assertSame( '', proud_anon_post_login_location( array( 'REQUEST_URI' => '/wp-admin/x.php' ) ) );
+	}
 }

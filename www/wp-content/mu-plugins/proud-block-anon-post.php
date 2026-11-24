@@ -218,10 +218,12 @@ function proud_anon_post_decide( array $server, array $get, array $post, array $
 	}
 
 	// Events Manager anonymous event submission (templates/forms/event-editor.php:141-143).
+	// EM reads $_REQUEST['event_id'] (GP), so a query-string event_id counts too.
 	// New submissions only: event_id is empty. EM verifies the nonce itself.
 	if ( isset( $post['action'] ) && 'event_save' === $post['action']
 		&& isset( $post['_wpnonce'] ) && is_string( $post['_wpnonce'] ) && '' !== $post['_wpnonce']
-		&& ( ! isset( $post['event_id'] ) || '' === $post['event_id'] ) ) {
+		&& ( ! isset( $post['event_id'] ) || '' === $post['event_id'] )
+		&& ( ! isset( $get['event_id'] ) || '' === $get['event_id'] ) ) {
 		return 'allow:em_event_save';
 	}
 
@@ -488,7 +490,7 @@ function proud_anon_post_login_location( array $server ) {
 	foreach ( $targets as $try ) {
 		$url = wp_login_url( $try, true );
 
-		if ( ! is_string( $url ) || 1 === preg_match( '/[^\x21-\x7e]/', $url ) ) {
+		if ( ! is_string( $url ) || strlen( $url ) > 3000 || 1 === preg_match( '/[^\x21-\x7e]/', $url ) ) {
 			continue;
 		}
 
