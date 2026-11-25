@@ -200,3 +200,11 @@ NaiveBot
 # alert, 60k/hr). No ProudCity service sends these UAs.
 Python-urllib
 python-httpx
+
+# UpperHandBot (UA "Lightpanda/1.0 UpperHandBot/1.0"). About 22-25 req/s on
+# ketteringoh, santaanaca and watfordcitynd from 04:59 MST on 2026-11-25, from
+# 45.134.140.136 and 37.19.221.141 (Datacamp Limited, AS212238). All three sites
+# sat at HPA max with 504s. Unknown vendor, no contact. The IPs are also on the
+# HAProxy blocklist (proudcity-kubernetes 51399ee); this catches other IPs.
+# Match the bot token only: Lightpanda is a general headless browser.
+UpperHandBot
