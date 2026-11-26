@@ -190,6 +190,12 @@ function proud_plugins_not_active(){
 		$missing[] = 'Auth0 SSO';
 	}
 
+	// Same check for Custom Roles: proud_force_custom_roles_active() adds it when
+	// its files exist, so this trips only when the plugin is missing from the image.
+	if ( ! in_array( 'wp-proud-custom-roles/wp-proud-custom-roles.php', $active_plugins ) ) {
+		$missing[] = 'Custom Roles';
+	}
+
 	if ( ! empty( $missing ) ) {
 
 		// need to
