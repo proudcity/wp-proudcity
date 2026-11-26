@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Force the custom roles plugin to load in every environment (see
+ * proud_force_custom_roles_active()).
+ */
+add_filter( 'option_active_plugins', 'proud_force_custom_roles_active' );
+
+/**
  * Sets up our configuration system and functions
  */
 switch( wp_get_environment_type() ){
@@ -101,6 +107,35 @@ function proud_force_auth0_active( $plugins ){
 	return $plugins;
 
 } // proud_force_auth0_active
+
+/**
+ * Force the ProudCity Custom Roles plugin to load, every request, in every
+ * environment.
+ *
+ * The plugin grants the ProudCity Admin role its user-management caps at
+ * runtime and guards administrator / @proudcity.com accounts from it. A
+ * `pckube db-import` overwrites active_plugins with the source dump's list, and
+ * if the plugin dropped out of that list the role would lose those guards
+ * while still holding the caps stored by older versions. Injecting it at read
+ * time guarantees it loads without depending on a DB write.
+ */
+function proud_force_custom_roles_active( $plugins ){
+
+	$custom_roles = 'wp-proud-custom-roles/wp-proud-custom-roles.php';
+
+	if ( ! is_array( $plugins ) ) {
+		$plugins = array();
+	}
+
+	// Only add it if the plugin files are actually present, otherwise WP would
+	// try to include a missing file.
+	if ( ! in_array( $custom_roles, $plugins, true ) && file_exists( WP_PLUGIN_DIR . '/' . $custom_roles ) ) {
+		$plugins[] = $custom_roles;
+	}
+
+	return $plugins;
+
+} // proud_force_custom_roles_active
 
 /**
  * True when this site is Colma (www.colma.ca.gov).

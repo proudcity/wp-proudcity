@@ -1,3 +1,7 @@
+## 2026-11-26
+
+- Added `proudcity/wp-proud-custom-roles` 2026.11.26.1015 (new repository, started from the Saintra copy at `proudcity/saintra@9d6254a`) and force-activated it from `mu-plugins/active-plugins.php` in every environment, the same way as auth0 (read-time `option_active_plugins` filter, only when the plugin files exist). The ProudCity Admin role no longer stores `list_users`, `create_users`, `edit_users`, `delete_users`, `remove_users` or `promote_users`; the plugin grants them at runtime, so they are gone if it isn't loaded. A non-administrator can no longer edit, delete, remove or change the role of an administrator, a `manage_options` user or an `@proudcity.com` user, can only assign editor, author, contributor, subscriber and ProudCity Admin, and can't set a new or changed `@proudcity.com` email in wp-admin or the REST users endpoints. Checked locally with wp-cli on the proudtest install. Not released yet: no tag, test or prod deploy (Refs #3037).
+
 ## 2026-11-25
 
 - Added `UpperHandBot` to `www/bots.csv`. `Lightpanda/1.0 UpperHandBot/1.0` sent about 22-25 requests a second to ketteringoh, santaanaca and watfordcitynd from 04:59 MST on 2026-11-25, from 45.134.140.136 and 37.19.221.141 (Datacamp Limited), and held all three at their HPA maximum with 504s. Both IPs went on the HAProxy blocklist the same morning (proudcity-kubernetes `51399ee`); this entry catches the crawler from any other IP. Only the bot token is matched, since Lightpanda itself is a general headless browser (Refs proudcity/pc-dev-issues#490).
